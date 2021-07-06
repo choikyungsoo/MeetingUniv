@@ -22,10 +22,18 @@
         <action
             android:id="@+id/action_mainFragment_to_mainScreenFragment"
             app:destination="@id/mainScreenFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_shopScreenFragment"
+            app:destination="@id/shopScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
         android:name="com.example.meetinguniv.MainScreenFragment"
         android:label="fragment_main_screen"
         tools:layout="@layout/fragment_main_screen" />
+    <fragment
+        android:id="@+id/shopScreenFragment"
+        android:name="com.example.meetinguniv.ShopScreenFragment"
+        android:label="fragment_shop_screen"
+        tools:layout="@layout/fragment_shop_screen" />
 </navigation>
