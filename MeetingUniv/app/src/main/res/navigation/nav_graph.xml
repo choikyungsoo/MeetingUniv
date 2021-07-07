@@ -33,7 +33,14 @@
         android:id="@+id/mainScreenFragment"
         android:name="com.example.meetinguniv.MainScreenFragment"
         android:label="fragment_main_screen"
-        tools:layout="@layout/fragment_main_screen" />
+        tools:layout="@layout/fragment_main_screen" >
+        <action
+            android:id="@+id/action_mainScreenFragment_to_matchingContentsFragment2"
+            app:destination="@id/matchingContentsFragment2" />
+        <action
+            android:id="@+id/action_mainScreenFragment_to_currentContentsFragment"
+            app:destination="@id/currentContentsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/shopScreenFragment"
         android:name="com.example.meetinguniv.ShopScreenFragment"
@@ -43,4 +50,14 @@
         android:id="@+id/settingsScreenFragment"
         android:name="com.example.meetinguniv.SettingsScreenFragment"
         android:label="SettingsScreenFragment" />
+    <fragment
+        android:id="@+id/matchingContentsFragment2"
+        android:name="com.example.meetinguniv.MatchingContentsFragment"
+        android:label="fragment_matching_contents"
+        tools:layout="@layout/fragment_matching_contents" />
+    <fragment
+        android:id="@+id/currentContentsFragment"
+        android:name="com.example.meetinguniv.CurrentContentsFragment"
+        android:label="fragment_current_contents"
+        tools:layout="@layout/fragment_current_contents" />
 </navigation>
