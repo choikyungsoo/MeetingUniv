@@ -8,12 +8,50 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.tabs.TabLayout;
+
 public class MainScreenFragment extends Fragment {
+
+    private View view;
+    private TabLayout tabs;
+    private MatchingContentsFragment fragment1;
+    private CurrentContentsFragment fragment2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_screen, container, false);
+        view = inflater.inflate(R.layout.fragment_main_screen, container, false);
+        fragment1 = new MatchingContentsFragment();
+        fragment2 = new CurrentContentsFragment();
+
+        tabs = view.findViewById(R.id.tabs);
+
+        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
+
+        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                Fragment selected = null;
+                if (position == 0)
+                    selected = fragment1;
+                else if (position == 1)
+                    selected = fragment2;
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+
+        });
+        return view;
     }
 }
