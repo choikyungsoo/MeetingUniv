@@ -35,15 +35,15 @@ public class MatchingContentsFragment extends Fragment implements View.OnClickLi
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerView recyclerView = view.findViewById(R.id.recycler1) ;
-        CurrentAdapterRecyclerItem recyclerItemAdapter = new CurrentAdapterRecyclerItem(this.list);
-        recyclerView.setAdapter(recyclerItemAdapter) ;
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-        addRecyclerItem("~님 외 * 명 + ~ 님 외 * 명", "성공", "2020/07/14 05:10");
-        recyclerItemAdapter.notifyDataSetChanged();
+//        RecyclerView recyclerView = view.findViewById(R.id.recycler1) ;
+//        CurrentAdapterRecyclerItem recyclerItemAdapter = new CurrentAdapterRecyclerItem(this.list);
+//        recyclerView.setAdapter(recyclerItemAdapter) ;
+//
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+//        recyclerView.setLayoutManager(linearLayoutManager);
+//
+//        addRecyclerItem("~님 외 * 명 + ~ 님 외 * 명", "성공", "2020/07/14 05:10");
+//        recyclerItemAdapter.notifyDataSetChanged();
 
     }
 
