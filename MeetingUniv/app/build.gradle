@@ -50,6 +50,8 @@ dependencies {
     // Jetpack Compose Integration
     implementation "androidx.navigation:navigation-compose:2.4.0-alpha02"
 
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

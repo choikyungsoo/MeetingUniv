@@ -54,10 +54,19 @@
         android:id="@+id/matchingContentsFragment2"
         android:name="com.example.meetinguniv.MatchingContentsFragment"
         android:label="fragment_matching_contents"
-        tools:layout="@layout/fragment_matching_contents" />
+        tools:layout="@layout/fragment_matching_contents" >
+        <action
+            android:id="@+id/action_matchingContentsFragment2_to_chooseteamElementFragment"
+            app:destination="@id/chooseteamElementFragment" />
+    </fragment>
     <fragment
         android:id="@+id/currentContentsFragment"
         android:name="com.example.meetinguniv.CurrentContentsFragment"
         android:label="fragment_current_contents"
         tools:layout="@layout/fragment_current_contents" />
+    <fragment
+        android:id="@+id/chooseteamElementFragment"
+        android:name="com.example.meetinguniv.chooseteamElementFragment"
+        android:label="fragment_chooseteam_element"
+        tools:layout="@layout/fragment_chooseteam_element" />
 </navigation>
