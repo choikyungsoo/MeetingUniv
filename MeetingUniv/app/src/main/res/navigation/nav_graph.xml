@@ -76,14 +76,5 @@
         android:id="@+id/chattingScreenFragment"
         android:name="com.example.meetinguniv.ChattingScreenFragment"
         android:label="fragment_chatting_screen"
-        tools:layout="@layout/fragment_chatting_screen" >
-        <action
-            android:id="@+id/action_chattingScreenFragment_to_chattingMenuScreenFragment"
-            app:destination="@id/chattingMenuScreenFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/chattingMenuScreenFragment"
-        android:name="com.example.meetinguniv.ChattingMenuScreenFragment"
-        android:label="fragment_chatting_menu_screen"
-        tools:layout="@layout/fragment_chatting_menu_screen" />
+        tools:layout="@layout/fragment_chatting_screen" />
 </navigation>

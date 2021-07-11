@@ -23,7 +23,7 @@
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorCenter"
-            android:text="<" />
+            android:text="전" />
 
         <TextView
             android:id="@+id/textView12"
@@ -43,7 +43,7 @@
             android:textSize="12sp" />
 
         <ImageView
-            android:id="@+id/button3"
+            android:id="@+id/menuPage"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

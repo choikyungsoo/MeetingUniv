@@ -7,13 +7,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ChattingScreenFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ChattingScreenFragment extends Fragment {
+    boolean openMenu = false;
+
+    Animation translateLeftAnim;
+    LinearLayout basePage;
+    LinearLayout menuPage;
+    ImageView menubtn;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,10 +55,11 @@ public class ChattingScreenFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+       }
     }
 
     @Override
@@ -60,5 +67,29 @@ public class ChattingScreenFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_chatting_screen, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        basePage = view.findViewById(R.id.basePage);
+        menuPage = view.findViewById(R.id.menuPage);
+
+        menubtn = view.findViewById(R.id.menubtn);
+        menubtn.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                menuPage.setVisibility(View.VISIBLE);
+                openMenu = true;
+            }
+        });
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (openMenu) {
+                    menuPage.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 }
