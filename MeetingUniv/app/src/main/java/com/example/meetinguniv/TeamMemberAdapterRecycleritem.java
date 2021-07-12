@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.jetbrains.annotations.NotNull;
@@ -13,46 +14,38 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class TeamMemberAdapterRecycleritem RecyclerView.Adapter<TeamMemberAdapterRecycleritem.viewHolder> {
+public class TeamMemberAdapterRecycleritem extends RecyclerView.Adapter<TeamMemberAdapterRecycleritem.viewHolder> {
+    private ArrayList<TeamMemberRecyclerItem> mData;
 
-private ArrayList<TeamMemberRecycleritem> mData;
+    public class viewHolder extends RecyclerView.ViewHolder {
 
-public class viewHolder extends RecyclerView.ViewHolder {
+        private ImageView memProfile;
 
-    private TextView description;
-    private TextView check;
-    private TextView date;
+        public viewHolder(@NonNull @NotNull View itemView) {
+            super(itemView);
 
-    public viewHolder(@NonNull @NotNull View itemView) {
-        super(itemView);
-
-        description = itemView.findViewById(R.id.description);
-        check = itemView.findViewById(R.id.check);
-        date = itemView.findViewById(R.id.date);
-
+            memProfile = itemView.findViewById(R.id.memProfile);
+        }
     }
-}
-    CurrentAdapterRecyclerItem(ArrayList<CurrentRecycleritem> list){
+    TeamMemberAdapterRecycleritem(ArrayList<TeamMemberRecyclerItem> list){
         mData = list;
     }
 
     @Override
-    public CurrentAdapterRecyclerItem.viewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public TeamMemberAdapterRecycleritem.viewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         Context context = parent.getContext() ;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
 
-        View view = inflater.inflate(R.layout.recycleritem_current, parent, false) ;
-        CurrentAdapterRecyclerItem.viewHolder vh = new CurrentAdapterRecyclerItem.viewHolder(view) ;
+        View view = inflater.inflate(R.layout.recycleritem_members, parent, false) ;
+        TeamMemberAdapterRecycleritem.viewHolder vh = new TeamMemberAdapterRecycleritem.viewHolder(view) ;
 
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull CurrentAdapterRecyclerItem.viewHolder holder, int position) {
-        CurrentRecycleritem recyclerItem = mData.get(position) ;
-        holder.description.setText(recyclerItem.getDescription()) ;
-        holder.check.setText(recyclerItem.getCheck()) ;
-        holder.date.setText(recyclerItem.getDate()) ;
+    public void onBindViewHolder(@NonNull @NotNull viewHolder holder, int position) {
+        TeamMemberRecyclerItem recyclerItem = mData.get(position) ;
+        holder.memProfile.setImageResource(recyclerItem.getMemProfile()); ;
     }
 
     @Override

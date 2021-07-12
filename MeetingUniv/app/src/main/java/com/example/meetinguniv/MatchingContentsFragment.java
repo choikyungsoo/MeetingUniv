@@ -34,6 +34,7 @@ public class MatchingContentsFragment extends Fragment implements View.OnClickLi
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         RecyclerView recyclerView = view.findViewById(R.id.teamprofileRecycler) ;
         TeamMemberAdapterRecycleritem recyclerItemAdapter = new TeamMemberAdapterRecycleritem(this.list);
         recyclerView.setAdapter(recyclerItemAdapter) ;
@@ -42,7 +43,10 @@ public class MatchingContentsFragment extends Fragment implements View.OnClickLi
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        addRecyclerItem(123);
+//        addRecyclerItem(123);
+        for(int i=0; i<4; i++) {
+            addRecyclerItem(R.drawable.prot);
+        }
         recyclerItemAdapter.notifyDataSetChanged();
 
     }

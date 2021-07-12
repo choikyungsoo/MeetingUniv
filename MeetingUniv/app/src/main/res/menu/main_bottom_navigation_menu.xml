@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="메인화면" />
-    <item android:title="친구목록" />
-    <item android:title="채팅" />
-    <item android:title="상점" />
-    <item android:title="설정" />
+    <item
+        android:id="@+id/main"
+        android:title="메인화면" />
+    <item
+        android:id="@+id/friends"
+        android:title="친구목록" />
+    <item
+        android:id="@+id/chatting"
+        android:title="채팅" />
+    <item
+        android:id="@+id/shop"
+        android:title="상점" />
+    <item
+        android:id="@+id/setting"
+        android:title="설정" />
 </menu>
