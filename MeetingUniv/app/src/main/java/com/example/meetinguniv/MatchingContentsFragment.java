@@ -14,7 +14,6 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
-
 public class MatchingContentsFragment extends Fragment implements View.OnClickListener{
 
     private PopupFragment pfragment;
@@ -83,24 +82,56 @@ public class MatchingContentsFragment extends Fragment implements View.OnClickLi
                 break;
             case R.id.matchbtn:
                 //매칭하기 버튼
-//                AlertDialog.Builder ad = new AlertDialog.Builder(getActivity(), android.R.style.Theme_DeviceDefault_Light_Dialog);
-//                LayoutInflater inflater = requireActivity().getLayoutInflater();
-//
-//                ad.setView(inflater.inflate(R.layout.popup_match, null));
-//                ad.create();
-                Dialog();
-                break;
+                showPopUp();
+//                Dialog dialog;
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                builder.setTitle("조건 선택");
+//                builder.setItems()
+////                , android.R.style.Theme_DeviceDefault_Light_Dialog
+////                LayoutInflater inflater = requireActivity().getLayoutInflater();
+////
+////                ad.setView(inflater.inflate(R.layout.popup_match, null));
+////                ad.create();
+//                Dialog();
+//                break;
         }
     }
 
-
-    private void Dialog() {
-        pfragment = new PopupFragment(getActivity());
-        pfragment.setCancelable(true);
-        pfragment.getWindow();
-        pfragment.show();
+    private void showPopUp() {
+        Dialog dialog;
+//        CrystalRangeSeekbar rangeSeekbar = new CrystalRangeSeekbar(getContext());
+//        Spinner spinner = new Spinner(getContext());
+//        LinearLayout linearLayout = view.findViewById(R.id.popup_match);
+//        SeekBar seekBar = new SeekBar(getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
+        builder.setTitle("조건 선택");
+//        builder.setItems(seekBar);
+//        builder.setView(rangeSeekbar);
+//        builder.setView(spinner);
+        builder.setView(inflater.inflate(R.layout.popup_match, null));
+//        builder.setNegativeButton("취소하기", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//            }
+//        });
+//        builder.setPositiveButton("매칭하기", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                // 매칭하기 기능
+//            }
+//        });
+        dialog = builder.create();
+        dialog.show();
     }
 
+//    private void Dialog() {
+////        pfragment = new PopupFragment(getActivity());
+////        pfragment.setCancelable(true);
+////        pfragment.getWindow();
+////        pfragment.show();
+//    }
     private View.OnClickListener leftListener = new View.OnClickListener(){
 
         @Override
