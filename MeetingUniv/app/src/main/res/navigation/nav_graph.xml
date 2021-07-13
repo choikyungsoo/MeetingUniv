@@ -52,8 +52,7 @@
     <fragment
         android:id="@+id/settingsScreenFragment"
         android:name="com.example.meetinguniv.SettingsScreenFragment"
-        android:label="fragment_settings_screen"
-        tools:layout="@layout/fragment_settings_screen" />
+        android:label="SettingsScreenFragment" />
     <fragment
         android:id="@+id/matchingContentsFragment2"
         android:name="com.example.meetinguniv.MatchingContentsFragment"
