@@ -1,8 +1,5 @@
 package com.example.meetinguniv;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.compose.animation.core.Animation;
@@ -16,15 +13,17 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
-import android.widget.Spinner;
-
-import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 
 import java.util.ArrayList;
 
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the  factory method to
+ * create an instance of this fragment.
+ */
 public class MatchingContentsFragment extends Fragment implements View.OnClickListener{
 
+    private PopupFragment pfragment;
     private View view;
     private Button collectBtn;
     private Button matchingBtn;
@@ -93,20 +92,29 @@ public class MatchingContentsFragment extends Fragment implements View.OnClickLi
                 break;
             case R.id.matchbtn:
                 //매칭하기 버튼
-                showPopUp();
+//                AlertDialog.Builder ad = new AlertDialog.Builder(getActivity(), android.R.style.Theme_DeviceDefault_Light_Dialog);
+//                LayoutInflater inflater = requireActivity().getLayoutInflater();
+//
+//                ad.setView(inflater.inflate(R.layout.popup_match, null));
+//                ad.create();
+                Dialog();
+                break;
         }
     }
 
-    private void showPopUp() {
-        Dialog dialog;
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = requireActivity().getLayoutInflater();
-        builder.setTitle("조건 선택");
-
-        builder.setView(inflater.inflate(R.layout.popup_match, null));
-
-        dialog = builder.create();
-        dialog.show();
+    private void Dialog() {
+        pfragment = new PopupFragment(getActivity());
+        pfragment.setCancelable(true);
+        pfragment.getWindow();
+        pfragment.show();
     }
+
+    private View.OnClickListener leftListener = new View.OnClickListener(){
+
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
 }
