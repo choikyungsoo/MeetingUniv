@@ -10,17 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the  factory method to
- * create an instance of this fragment.
- */
+
 public class MatchingContentsFragment extends Fragment implements View.OnClickListener{
 
     private PopupFragment pfragment;
@@ -30,28 +24,32 @@ public class MatchingContentsFragment extends Fragment implements View.OnClickLi
     private boolean checkup;
     private Animation translateup;
     private View slideView;
-    private ArrayList<CurrentRecycleritem> list = new ArrayList<CurrentRecycleritem>();
+    private ArrayList<TeamMemberRecyclerItem> list = new ArrayList<TeamMemberRecyclerItem>();
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        RecyclerView recyclerView = view.findViewById(R.id.recycler1) ;
-//        CurrentAdapterRecyclerItem recyclerItemAdapter = new CurrentAdapterRecyclerItem(this.list);
-//        recyclerView.setAdapter(recyclerItemAdapter) ;
-//
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//
-//        addRecyclerItem("~님 외 * 명 + ~ 님 외 * 명", "성공", "2020/07/14 05:10");
-//        recyclerItemAdapter.notifyDataSetChanged();
+
+
+        RecyclerView recyclerView = view.findViewById(R.id.teamprofileRecycler) ;
+        TeamMemberAdapterRecycleritem recyclerItemAdapter = new TeamMemberAdapterRecycleritem(this.list);
+        recyclerView.setAdapter(recyclerItemAdapter) ;
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+//        addRecyclerItem(123);
+        for(int i=0; i<4; i++) {
+            addRecyclerItem(R.drawable.prot);
+        }
+        recyclerItemAdapter.notifyDataSetChanged();
 
     }
 
-    private void addRecyclerItem(String description, String check, String data){
-        CurrentRecycleritem recyclerItem = new CurrentRecycleritem();
-        recyclerItem.setDescription(description);
-        recyclerItem.setCheck(check);
-        recyclerItem.setDate(data);
+    private void addRecyclerItem(int profile){
+        TeamMemberRecyclerItem recyclerItem = new TeamMemberRecyclerItem();
+        recyclerItem.setMemProfile(profile);
         list.add(recyclerItem);
 
     }
@@ -59,8 +57,6 @@ public class MatchingContentsFragment extends Fragment implements View.OnClickLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_matching_contents, container, false);
 
-
-//
         collectBtn =  (Button)view.findViewById(R.id.teambtn);
         matchingBtn = (Button)view.findViewById(R.id.matchbtn);
 
@@ -69,11 +65,6 @@ public class MatchingContentsFragment extends Fragment implements View.OnClickLi
         collectBtn.setOnClickListener(this);
         //팝업창 구현이 필요한 버튼
         matchingBtn.setOnClickListener(this);
-
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
 
         return view;
     }

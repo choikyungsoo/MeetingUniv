@@ -30,9 +30,9 @@ public class MainScreenFragment extends Fragment {
         fragment1 = new MatchingContentsFragment();
         fragment2 = new CurrentContentsFragment();
 
-        tabs = view.findViewById(R.id.tabs);
+        tabs = view.findViewById(R.id.tabs2);
 
-        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container2, fragment1).commit();
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -43,7 +43,7 @@ public class MainScreenFragment extends Fragment {
                     selected = fragment1;
                 else if (position == 1)
                     selected = fragment2;
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container2, selected).commit();
             }
 
             @Override
