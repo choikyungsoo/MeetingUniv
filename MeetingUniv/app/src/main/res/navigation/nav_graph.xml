@@ -26,11 +26,11 @@
             android:id="@+id/action_mainFragment_to_shopScreenFragment"
             app:destination="@id/shopScreenFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_settingsScreenFragment"
-            app:destination="@id/settingsScreenFragment" />
-        <action
             android:id="@+id/action_mainFragment_to_chattingScreenFragment"
             app:destination="@id/chattingScreenFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_settingsScreenFragment2"
+            app:destination="@id/settingsScreenFragment2" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
@@ -49,10 +49,6 @@
         android:name="com.example.meetinguniv.ShopScreenFragment"
         android:label="fragment_shop_screen"
         tools:layout="@layout/fragment_shop_screen" />
-    <fragment
-        android:id="@+id/settingsScreenFragment"
-        android:name="com.example.meetinguniv.SettingsScreenFragment"
-        android:label="SettingsScreenFragment" />
     <fragment
         android:id="@+id/matchingContentsFragment2"
         android:name="com.example.meetinguniv.MatchingContentsFragment"
@@ -94,4 +90,9 @@
         android:name="com.example.meetinguniv.MatchChattingContentsFragment"
         android:label="fragment_match_chatting_contents"
         tools:layout="@layout/fragment_match_chatting_contents" />
+    <fragment
+        android:id="@+id/settingsScreenFragment2"
+        android:name="com.example.meetinguniv.SettingsScreenFragment"
+        android:label="fragment_settings_screen"
+        tools:layout="@layout/fragment_settings_screen" />
 </navigation>
