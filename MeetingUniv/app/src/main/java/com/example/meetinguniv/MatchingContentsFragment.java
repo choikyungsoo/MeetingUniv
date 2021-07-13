@@ -2,7 +2,6 @@ package com.example.meetinguniv;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.compose.animation.core.Animation;
@@ -13,13 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.SeekBar;
-import android.widget.Spinner;
-
-import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 
 import java.util.ArrayList;
 
@@ -37,28 +30,31 @@ public class MatchingContentsFragment extends Fragment implements View.OnClickLi
     private boolean checkup;
     private Animation translateup;
     private View slideView;
-    private ArrayList<CurrentRecycleritem> list = new ArrayList<CurrentRecycleritem>();
+    private ArrayList<TeamMemberRecyclerItem> list = new ArrayList<TeamMemberRecyclerItem>();
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        RecyclerView recyclerView = view.findViewById(R.id.recycler1) ;
-//        CurrentAdapterRecyclerItem recyclerItemAdapter = new CurrentAdapterRecyclerItem(this.list);
-//        recyclerView.setAdapter(recyclerItemAdapter) ;
-//
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//
-//        addRecyclerItem("~님 외 * 명 + ~ 님 외 * 명", "성공", "2020/07/14 05:10");
-//        recyclerItemAdapter.notifyDataSetChanged();
+
+        RecyclerView recyclerView = view.findViewById(R.id.teamprofileRecycler) ;
+        TeamMemberAdapterRecycleritem recyclerItemAdapter = new TeamMemberAdapterRecycleritem(this.list);
+        recyclerView.setAdapter(recyclerItemAdapter) ;
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+//        addRecyclerItem(123);
+        for(int i=0; i<4; i++) {
+            addRecyclerItem(R.drawable.prot);
+        }
+        recyclerItemAdapter.notifyDataSetChanged();
 
     }
 
-    private void addRecyclerItem(String description, String check, String data){
-        CurrentRecycleritem recyclerItem = new CurrentRecycleritem();
-        recyclerItem.setDescription(description);
-        recyclerItem.setCheck(check);
-        recyclerItem.setDate(data);
+    private void addRecyclerItem(int profile){
+        TeamMemberRecyclerItem recyclerItem = new TeamMemberRecyclerItem();
+        recyclerItem.setMemProfile(profile);
         list.add(recyclerItem);
 
     }
