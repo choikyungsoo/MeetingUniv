@@ -30,7 +30,7 @@
             app:destination="@id/settingsScreenFragment" />
         <action
             android:id="@+id/action_mainFragment_to_chattingScreenFragment"
-            app:destination="@id/chatingScreenFragment" />
+            app:destination="@id/chattingScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
@@ -79,7 +79,7 @@
         tools:layout="@layout/fragment_chatting_screen" >
         <action
             android:id="@+id/action_chattingScreenFragment_to_personalChatingContentsFragment"
-            app:destination="@id/personalChatingContentsFragment" />
+            app:destination="@id/personalChattingContentsFragment" />
         <action
             android:id="@+id/action_chattingScreenFragment_to_matchChatingContentsFragment2"
             app:destination="@id/matchChattingContentsFragment2" />
