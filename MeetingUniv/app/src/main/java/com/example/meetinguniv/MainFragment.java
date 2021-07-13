@@ -24,6 +24,7 @@ public class MainFragment extends Fragment {
     private BottomNavigationView bottomNavigationView;
 
     private MainScreenFragment mainScreenFragment;
+    private ChatingScreenFragment chatingScreenFragment;
     private ShopScreenFragment shopScreenFragment;
     private SettingsScreenFragment settingsScreenFragment;
 
@@ -39,6 +40,7 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         this.mainScreenFragment = new MainScreenFragment();
+        this.chatingScreenFragment = new ChatingScreenFragment();
         this.shopScreenFragment = new ShopScreenFragment();
         this.settingsScreenFragment = new SettingsScreenFragment();
         return inflater.inflate(R.layout.fragment_main, container, false);
@@ -53,6 +55,9 @@ public class MainFragment extends Fragment {
                 switch (menuItem.getItemId()){
                     case R.id.main:
                         setFragment(0);
+                        break;
+                    case R.id.chatting:
+                        setFragment(2);
                         break;
                     case R.id.shop:
                         setFragment(3);
@@ -72,6 +77,9 @@ public class MainFragment extends Fragment {
         switch (n){
             case 0:
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.mainScreenFragment);
+                break;
+            case 2:
+                fragmentTransaction.replace(R.id.screenfragmentContainer, this.chatingScreenFragment);
                 break;
             case 3:
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.shopScreenFragment);

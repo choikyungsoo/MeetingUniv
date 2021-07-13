@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_mainFragment_to_settingsScreenFragment"
             app:destination="@id/settingsScreenFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_chatingScreenFragment"
+            app:destination="@id/chatingScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
@@ -69,4 +72,26 @@
         android:name="com.example.meetinguniv.chooseteamElementFragment"
         android:label="fragment_chooseteam_element"
         tools:layout="@layout/fragment_chooseteam_element" />
+    <fragment
+        android:id="@+id/chatingScreenFragment"
+        android:name="com.example.meetinguniv.ChatingScreenFragment"
+        android:label="fragment_chating_screen"
+        tools:layout="@layout/fragment_chating_screen" >
+        <action
+            android:id="@+id/action_chatingScreenFragment_to_personalChatingContentsFragment"
+            app:destination="@id/personalChatingContentsFragment" />
+        <action
+            android:id="@+id/action_chatingScreenFragment_to_matchChatingContentsFragment2"
+            app:destination="@id/matchChatingContentsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalChatingContentsFragment"
+        android:name="com.example.meetinguniv.PersonalChatingContentsFragment"
+        android:label="fragment_personal_chating_contents"
+        tools:layout="@layout/fragment_personal_chating_contents" />
+    <fragment
+        android:id="@+id/matchChatingContentsFragment2"
+        android:name="com.example.meetinguniv.MatchChatingContentsFragment"
+        android:label="fragment_match_chating_contents"
+        tools:layout="@layout/fragment_match_chating_contents" />
 </navigation>

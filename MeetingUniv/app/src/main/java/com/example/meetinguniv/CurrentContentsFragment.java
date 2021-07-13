@@ -31,7 +31,6 @@ public class CurrentContentsFragment extends Fragment {
 
         addRecyclerItem("~님 외 * 명 + ~ 님 외 * 명", "성공", "2020/07/14 05:10");
         recyclerItemAdapter.notifyDataSetChanged();
-
     }
 
     @Override

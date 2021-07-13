@@ -14,11 +14,7 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the  factory method to
- * create an instance of this fragment.
- */
+
 public class MatchingContentsFragment extends Fragment implements View.OnClickListener{
 
     private PopupFragment pfragment;
