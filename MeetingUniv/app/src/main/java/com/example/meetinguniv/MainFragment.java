@@ -4,16 +4,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -25,7 +22,7 @@ public class MainFragment extends Fragment {
 
     private MainScreenFragment mainScreenFragment;
     private ShopScreenFragment shopScreenFragment;
-    private SettingsScreenFragment settingsScreenFragment;
+    private SettingsContentsFragment settingsContentsFragment;
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
@@ -40,7 +37,7 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         this.mainScreenFragment = new MainScreenFragment();
         this.shopScreenFragment = new ShopScreenFragment();
-        this.settingsScreenFragment = new SettingsScreenFragment();
+        this.settingsContentsFragment = new SettingsContentsFragment();
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
@@ -78,7 +75,7 @@ public class MainFragment extends Fragment {
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.shopScreenFragment);
                 break;
             case 4:
-                fragmentTransaction.replace(R.id.screenfragmentContainer, this.settingsScreenFragment);
+                fragmentTransaction.replace(R.id.screenfragmentContainer, this.settingsContentsFragment);
                 break;
         }
         fragmentTransaction.addToBackStack(null);

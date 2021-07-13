@@ -5,6 +5,14 @@
     app:startDestination="@id/settingsScreenFragment">
     <fragment
         android:id="@+id/settingsScreenFragment"
-        android:name="com.example.meetinguniv.SettingsScreenFragment"
-        android:label="SettingsScreenFragment" />
+        android:name="com.example.meetinguniv.SettingsContentsFragment"
+        android:label="SettingsScreenFragment" >
+        <action
+            android:id="@+id/action_settingsScreenFragment_to_alertSettingElementFragment"
+            app:destination="@id/alertSettingElementFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/alertSettingElementFragment"
+        android:name="com.example.meetinguniv.AlertSettingElementFragment"
+        android:label="AlertSettingElementFragment" />
 </navigation>
