@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainFragment">
+    tools:context=".main.MainFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -65,13 +65,15 @@
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/needmoreheartBTN"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="#FFFFFF"
-                android:text="+" />
+                android:background="@color/colorCenter"
+                android:backgroundTint="@color/white"
+                android:text="+"
+                android:textColor="@color/black" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

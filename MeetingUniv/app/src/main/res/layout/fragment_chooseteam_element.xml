@@ -7,7 +7,7 @@
     android:background="#FFFFFF"
     android:backgroundTint="#FFFFFF"
     android:orientation="vertical"
-    tools:context=".chooseteamElementFragment">
+    tools:context=".main.chooseteamElementFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

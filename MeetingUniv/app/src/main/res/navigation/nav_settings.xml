@@ -5,7 +5,7 @@
     app:startDestination="@id/settingsContentFragment">
     <fragment
         android:id="@+id/settingsContentFragment"
-        android:name="com.example.meetinguniv.SettingsContentFragment"
+        android:name="com.example.meetinguniv.main.SettingsContentFragment"
         android:label="SettingsScreenFragment" >
         <action
             android:id="@+id/action_settingsContentFragment_to_alarmSettingElementFragment"
@@ -13,6 +13,6 @@
     </fragment>
     <fragment
         android:id="@+id/alarmSettingElementFragment"
-        android:name="com.example.meetinguniv.AlertSettingElementFragment"
+        android:name="com.example.meetinguniv.main.AlertSettingElementFragment"
         android:label="AlertSettingElementFragment" />
 </navigation>

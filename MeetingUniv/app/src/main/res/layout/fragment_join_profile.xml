@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/join_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".JoinProfileFragment">
+    tools:context=".login.JoinProfileFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +44,7 @@
         android:layout_marginVertical="20dp"
         android:src="@drawable/prot" />
 
-    <TextView
+    <EditText
         android:id="@+id/textView33"
         android:layout_width="200dp"
         android:layout_height="40dp"
@@ -56,8 +55,8 @@
         android:hint="닉네임"
         android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/button3"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/go_start"
         android:layout_width="300dp"
         android:layout_height="70dp"
         android:layout_gravity="center"

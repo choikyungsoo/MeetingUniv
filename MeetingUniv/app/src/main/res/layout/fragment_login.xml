@@ -72,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login_btn"
         android:layout_width="220dp"
         android:layout_height="48dp"
@@ -100,7 +100,7 @@
         app:layout_constraintTop_toBottomOf="@+id/login_btn">
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/joinBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="회원가입"
@@ -117,7 +117,7 @@
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/FindingIDBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="아이디 찾기"
@@ -134,7 +134,7 @@
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/FindingPWBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="비밀번호 찾기"
