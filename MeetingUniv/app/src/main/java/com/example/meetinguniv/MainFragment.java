@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -24,6 +26,8 @@ public class MainFragment extends Fragment {
     private ChatingScreenFragment chatingScreenFragment;
     private ShopScreenFragment shopScreenFragment;
     private SettingsContentFragment settingsContentFragment;
+
+    private Button needmoreheart_btn;
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
@@ -40,17 +44,20 @@ public class MainFragment extends Fragment {
         this.chatingScreenFragment = new ChatingScreenFragment();
         this.shopScreenFragment = new ShopScreenFragment();
         this.settingsContentFragment = new SettingsContentFragment();
+
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.bottomNavigationView = view.findViewById(R.id.bottomNavigationView);
+        this.needmoreheart_btn = view.findViewById(R.id.needmoreheartBTN);
+
         getActivity().getSupportFragmentManager().beginTransaction().add(R.id.screenfragmentContainer, this.mainScreenFragment).commit();
-        this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        this.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
+            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+                switch (item.getItemId()){
                     case R.id.main:
                         setFragment(0);
                         break;
@@ -65,6 +72,33 @@ public class MainFragment extends Fragment {
                         break;
                 }
                 return true;
+            }
+        });
+//        this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem menuItem) {
+//                switch (menuItem.getItemId()){
+//                    case R.id.main:
+//                        setFragment(0);
+//                        break;
+//                    case R.id.chatting:
+//                        setFragment(2);
+//                        break;
+//                    case R.id.shop:
+//                        setFragment(3);
+//                        break;
+//                    case R.id.setting:
+//                        setFragment(4);
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
+
+        this.needmoreheart_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFragment(3);
             }
         });
     }
