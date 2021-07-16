@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 public class CurrentAdapterRecyclerItem  extends RecyclerView.Adapter<CurrentAdapterRecyclerItem.viewHolder> {
     private ArrayList<CurrentRecycleritem> mData;
 
@@ -32,7 +33,7 @@ public class CurrentAdapterRecyclerItem  extends RecyclerView.Adapter<CurrentAda
         }
     }
     CurrentAdapterRecyclerItem(ArrayList<CurrentRecycleritem> list){
-        mData = list;
+        this.mData = list;
     }
 
     @Override

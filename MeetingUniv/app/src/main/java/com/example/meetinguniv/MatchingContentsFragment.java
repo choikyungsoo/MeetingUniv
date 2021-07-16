@@ -23,13 +23,10 @@ import java.util.ArrayList;
  */
 public class MatchingContentsFragment extends Fragment implements View.OnClickListener{
 
-    private PopupFragment pfragment;
     private View view;
     private Button collectBtn;
     private Button matchingBtn;
-    private boolean checkup;
-    private Animation translateup;
-    private View slideView;
+
     private ArrayList<TeamMemberRecyclerItem> list = new ArrayList<TeamMemberRecyclerItem>();
 
     @Override
@@ -67,16 +64,10 @@ public class MatchingContentsFragment extends Fragment implements View.OnClickLi
         collectBtn =  (Button)view.findViewById(R.id.teambtn);
         matchingBtn = (Button)view.findViewById(R.id.matchbtn);
 
-        checkup = false;
         //슬라이딩 애니메이션이 필요한 버튼
         collectBtn.setOnClickListener(this);
         //팝업창 구현이 필요한 버튼
         matchingBtn.setOnClickListener(this);
-
-//        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-//        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        recyclerView.setLayoutManager(layoutManager);
 
         return view;
     }
