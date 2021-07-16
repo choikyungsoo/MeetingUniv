@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_mainFragment_to_settingsScreenFragment2"
             app:destination="@id/settingsScreenFragment2" />
+        <action
+            android:id="@+id/action_mainFragment_to_chatingScreenFragment"
+            app:destination="@id/chatingScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
@@ -95,4 +98,8 @@
         android:name="com.example.meetinguniv.SettingsScreenFragment"
         android:label="fragment_settings_screen"
         tools:layout="@layout/fragment_settings_screen" />
+    <fragment
+        android:id="@+id/chatingScreenFragment"
+        android:name="com.example.meetinguniv.ChatingScreenFragment"
+        android:label="ChatingScreenFragment" />
 </navigation>
