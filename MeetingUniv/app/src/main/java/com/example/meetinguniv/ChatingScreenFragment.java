@@ -15,16 +15,16 @@ public class ChatingScreenFragment extends Fragment {
 
     private View view;
     private TabLayout tabs;
-    private MatchChatingContentsFragment fragment1;
-    private PersonalChatingContentsFragment fragment2;
+    private PersonalChatingContentsFragment fragment1;
+    private MatchChatingContentsFragment fragment2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_chating_screen, container, false);
-        fragment1 = new MatchChatingContentsFragment();
-        fragment2 = new PersonalChatingContentsFragment();
+        fragment1 = new PersonalChatingContentsFragment();
+        fragment2 = new MatchChatingContentsFragment();
 
         tabs = view.findViewById(R.id.tabs2);
 

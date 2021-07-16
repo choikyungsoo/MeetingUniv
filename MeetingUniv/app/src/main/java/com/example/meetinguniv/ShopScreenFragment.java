@@ -3,62 +3,50 @@ package com.example.meetinguniv;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ShopScreenFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+
 public class ShopScreenFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ShopScreenFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ShopScreenFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ShopScreenFragment newInstance(String param1, String param2) {
-        ShopScreenFragment fragment = new ShopScreenFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    private ArrayList<ShopScreenRecycleritem> list = new ArrayList<ShopScreenRecycleritem>();
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        RecyclerView recyclerView = view.findViewById(R.id.shopitemRecycler) ;
+        ShopScreenAdatpterRecycleritem recyclerItemAdapter = new ShopScreenAdatpterRecycleritem(this.list);
+        recyclerView.setAdapter(recyclerItemAdapter) ;
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        addRecyclerItem("하트 1개", "1200원");
+        addRecyclerItem("하트 5개", "6000원");
+        addRecyclerItem("하트 10개", "10000원");
+        addRecyclerItem("하트 20개", "17000원");
+        addRecyclerItem("10일동안 매일 하트 1개씩", "8500원");
+        addRecyclerItem("30일동안 매일 하트 1개씩", "24000원");
+        recyclerItemAdapter.notifyDataSetChanged();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shop_screen, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_shop_screen, container, false);
+        return rootView;
+    }
+
+    private void addRecyclerItem(String items, String price){
+        ShopScreenRecycleritem recyclerItem = new ShopScreenRecycleritem();
+        recyclerItem.setItems(items);
+        recyclerItem.setPrice(price);
+        list.add(recyclerItem);
+
     }
 }
