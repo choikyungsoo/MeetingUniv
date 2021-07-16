@@ -26,6 +26,7 @@ public class ChattingAdapterRecycleritem extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 5;
     }
 }
+

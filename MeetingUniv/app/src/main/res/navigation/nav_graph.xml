@@ -95,4 +95,9 @@
         android:name="com.example.meetinguniv.SettingsScreenFragment"
         android:label="fragment_settings_screen"
         tools:layout="@layout/fragment_settings_screen" />
+    <fragment
+        android:id="@+id/joinProfileFragment"
+        android:name="com.example.meetinguniv.JoinProfileFragment"
+        android:label="fragment_join_profile"
+        tools:layout="@layout/fragment_join_profile" />
 </navigation>
