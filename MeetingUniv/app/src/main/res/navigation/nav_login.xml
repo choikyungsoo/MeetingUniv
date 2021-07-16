@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_login_to_join_profile"
             app:destination="@id/join_profile" />
+        <action
+            android:id="@+id/action_login_to_findIDScreenFragment"
+            app:destination="@id/findIDScreenFragment" />
+        <action
+            android:id="@+id/action_login_to_findingPWScreenFragment"
+            app:destination="@id/findingPWScreenFragment" />
     </fragment>
 
     <fragment
@@ -20,4 +26,14 @@
         android:name="com.example.meetinguniv.login.JoinProfileFragment"
         android:label="login"
         tools:layout="@layout/fragment_join_profile" />
+    <fragment
+        android:id="@+id/findIDScreenFragment"
+        android:name="com.example.meetinguniv.login.FindIDScreenFragment"
+        android:label="fragment_find_i_d_screen"
+        tools:layout="@layout/fragment_findingid_screen" />
+    <fragment
+        android:id="@+id/findingPWScreenFragment"
+        android:name="com.example.meetinguniv.login.FindingPWScreenFragment"
+        android:label="fragment_findingpw_screen"
+        tools:layout="@layout/fragment_findingpw_screen" />
 </navigation>
