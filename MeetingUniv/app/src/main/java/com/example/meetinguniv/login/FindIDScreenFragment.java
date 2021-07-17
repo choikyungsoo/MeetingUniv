@@ -2,65 +2,101 @@ package com.example.meetinguniv.login;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.meetinguniv.R;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthSettings;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
+import com.google.firebase.auth.PhoneAuthProvider;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FindIDScreenFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FindIDScreenFragment extends Fragment {
+import org.jetbrains.annotations.NotNull;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.util.concurrent.TimeUnit;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public FindIDScreenFragment() {
-        // Required empty public constructor
-    }
+public class FindIDScreenFragment extends Fragment implements View.OnClickListener{
+    private EditText phoneNum;
+    private EditText verifykey;
+    private Button verifyBTN;
+    private Button VcheckBTN;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuthSettings firebaseAuthSettings;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FindIDScreenFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FindIDScreenFragment newInstance(String param1, String param2) {
-        FindIDScreenFragment fragment = new FindIDScreenFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private String phoneNumber = "+11074051954";
+    private String smsCode = "195419";
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        this.phoneNum = view.findViewById(R.id.PhoneNum);
+        this.verifykey = view.findViewById(R.id.Verifykey);
+        this.verifyBTN = view.findViewById(R.id.VerifyBTN);
+        this.VcheckBTN = view.findViewById(R.id.VcheckBTN);
 
+        this.firebaseAuth = FirebaseAuth.getInstance();
+        this.firebaseAuthSettings  = firebaseAuth.getFirebaseAuthSettings();
+
+//        this.phoneNumber = String.valueOf(this.phoneNum);
+//        this.smsCode = String.valueOf(this.verifykey);
+
+        firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(phoneNumber, smsCode);
+
+        this.verifyBTN.setOnClickListener(this);
+
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_findingid_screen, container, false);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.VerifyBTN:
+               verfiyphone();
+               break;
+        }
+    }
+
+    private void verfiyphone() {
+        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(firebaseAuth)
+                .setPhoneNumber(String.valueOf(this.phoneNum))
+                .setTimeout(60L, TimeUnit.SECONDS)
+                .setActivity(getActivity())
+                .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                    @Override
+                    public void onVerificationCompleted(PhoneAuthCredential credential) {
+                        // Instant verification is applied and a credential is directly returned.
+                        // ...
+                        Log.d("test", "onVerificationCompleted:" + credential);
+
+                        signInWithPhoneAuthCredential(credential);
+                    }
+
+                    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+                    }
+
+                    @Override
+                    public void onVerificationFailed(@NonNull @NotNull FirebaseException e) {
+                        Toast.makeText(getContext(),"인증실패", Toast.LENGTH_SHORT).show();
+                    }
+
+                    // ...
+                })
+                .build();
+        PhoneAuthProvider.verifyPhoneNumber(options);
     }
 }

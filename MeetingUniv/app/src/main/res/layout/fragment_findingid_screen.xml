@@ -49,8 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="이름 입력하기" />
+        android:hint="이름 입력하기"
+        android:inputType="textPersonName" />
 
     <Space
         android:layout_width="match_parent"
@@ -63,15 +63,16 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/editTextPhone2"
+            android:id="@+id/PhoneNum"
             android:layout_width="210dp"
             android:layout_height="55dp"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:text="+1" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/VerifyBTN"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_weight="1"
@@ -84,11 +85,12 @@
         android:layout_height="27dp" />
 
     <EditText
-        android:id="@+id/editTextPhone3"
+        android:id="@+id/Verifykey"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:ems="10"
+        android:hint="인증번호 입력"
         android:inputType="phone" />
 
     <Space
@@ -96,7 +98,7 @@
         android:layout_height="53dp" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/VcheckBTN"
         android:layout_width="178dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

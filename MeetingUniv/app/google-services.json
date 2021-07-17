@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "332812465718",
+    "project_id": "meetinguniv-76516",
+    "storage_bucket": "meetinguniv-76516.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332812465718:android:1790295593405d97f74a97",
+        "android_client_info": {
+          "package_name": "com.example.meetinguniv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "332812465718-30tl3l2252pmulsc09p6jhsjmi82pfag.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.meetinguniv",
+            "certificate_hash": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+          }
+        },
+        {
+          "client_id": "332812465718-l331olb3f4v4jrcmkjplt4i79mkuckh9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXesVDdkbgtp28U56bMwX5sqzMXDHoluY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "332812465718-l331olb3f4v4jrcmkjplt4i79mkuckh9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
