@@ -34,6 +34,10 @@ public class ChattingScreenFragment extends Fragment {
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                ////////////////////
+                fragment1 = new PersonalChattingContentFragment();
+                fragment2 = new MatchChattingContentFragment();
+                ////////////////////
                 int position = tab.getPosition();
                 Fragment selected = null;
                 if (position == 0)
