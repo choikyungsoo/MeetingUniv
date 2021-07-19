@@ -14,11 +14,6 @@ import com.example.meetinguniv.R;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the  factory method to
- * create an instance of this fragment.
- */
 public class CurrentContentsFragment extends Fragment {
     private ArrayList<CurrentRecycleritem> list = new ArrayList<CurrentRecycleritem>();
     @Override

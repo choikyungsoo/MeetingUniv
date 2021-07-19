@@ -23,8 +23,8 @@ public class MainScreenFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_main_screen, container, false);
-        fragment1 = new MatchingContentFragment();
-        fragment2 = new CurrentContentsFragment();
+        this.fragment1 = new MatchingContentFragment();
+        this.fragment2 = new CurrentContentsFragment();
 
         tabs = view.findViewById(R.id.tabs2);
 
@@ -33,6 +33,10 @@ public class MainScreenFragment extends Fragment {
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                //////////////////////////////////
+                fragment1 = new MatchingContentFragment();
+                fragment2 = new CurrentContentsFragment();
+                //////////////////////////////////
                 int position = tab.getPosition();
                 Fragment selected = null;
                 if (position == 0)
