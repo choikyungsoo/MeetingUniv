@@ -33,16 +33,20 @@ public class MainScreenFragment extends Fragment {
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                //////////////////////////////////
-                fragment1 = new MatchingContentFragment();
-                fragment2 = new CurrentContentsFragment();
-                //////////////////////////////////
                 int position = tab.getPosition();
                 Fragment selected = null;
-                if (position == 0)
+                if (position == 0) {
+                    //////////////////////////////////
+                    fragment1 = new MatchingContentFragment();
+                    //////////////////////////////////
                     selected = fragment1;
-                else if (position == 1)
+                }
+                else if (position == 1) {
+                    //////////////////////////////////
+                    fragment2 = new CurrentContentsFragment();
+                    //////////////////////////////////
                     selected = fragment2;
+                }
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container2, selected).commit();
             }
 
