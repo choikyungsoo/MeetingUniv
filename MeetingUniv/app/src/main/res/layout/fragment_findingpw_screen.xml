@@ -44,7 +44,7 @@
         android:layout_height="40dp" />
 
     <EditText
-        android:id="@+id/IDinput"
+        android:id="@+id/newPW"
         android:layout_width="306dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -57,7 +57,7 @@
         android:layout_height="184dp" />
 
     <Button
-        android:id="@+id/IDNect_btn"
+        android:id="@+id/PW_changeBTN"
         android:layout_width="171dp"
         android:layout_height="62dp"
         android:layout_gravity="center"

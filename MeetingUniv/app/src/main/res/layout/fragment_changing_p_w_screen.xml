@@ -44,22 +44,58 @@
         android:layout_height="40dp" />
 
     <EditText
-        android:id="@+id/IDinput"
-        android:layout_width="306dp"
+        android:id="@+id/newPW"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:ems="10"
         android:hint="새 비밀번호"
-        android:inputType="textPersonName" />
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/overEight"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="· 8자 이상 입력"
+        android:textColor="#7E7E7E" />
+
+    <TextView
+        android:id="@+id/combinum"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="· 영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상 조합"
+        android:textColor="#7E7E7E" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <EditText
+        android:id="@+id/newPW_check"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:hint="새 비밀번호 확인"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/check_PW"
+        android:layout_width="346dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="#0054FF" />
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="187dp" />
 
     <Button
-        android:id="@+id/IDNect_btn"
+        android:id="@+id/PW_changeBTN"
         android:layout_width="171dp"
         android:layout_height="62dp"
         android:layout_gravity="center"
-        android:text="다음" />
+        android:text="변경하기" />
 </LinearLayout>

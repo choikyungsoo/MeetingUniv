@@ -25,8 +25,8 @@ public class FindingPWScreenFragment extends Fragment implements View.OnClickLis
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_findingpw_screen, container, false);
-        this.F_ID = view.findViewById(R.id.IDinput);
-        this.F_nextBTN = view.findViewById(R.id.IDNect_btn);
+        this.F_ID = view.findViewById(R.id.newPW);
+        this.F_nextBTN = view.findViewById(R.id.PW_changeBTN);
 
         this.F_nextBTN.setOnClickListener(this);
         return view;
@@ -35,7 +35,7 @@ public class FindingPWScreenFragment extends Fragment implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.IDNect_btn:
+            case R.id.PW_changeBTN:
                 F_checkID(v);
                 break;
         }
