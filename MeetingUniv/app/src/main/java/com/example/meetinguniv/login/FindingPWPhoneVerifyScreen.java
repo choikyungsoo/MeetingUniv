@@ -23,7 +23,7 @@ public class FindingPWPhoneVerifyScreen extends Fragment implements View.OnClick
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_finding_p_w_phone_verify_screen, container, false);
-        this.PW_nextBTN = view.findViewById(R.id.PW_checkBTN);
+        this.PW_nextBTN = view.findViewById(R.id.ID_checkBTN);
         this.PW_name = view.findViewById(R.id.Nameinput);
         this.PW_nextBTN.setOnClickListener(this);
         return view;
@@ -32,7 +32,7 @@ public class FindingPWPhoneVerifyScreen extends Fragment implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.PW_checkBTN:
+            case R.id.ID_checkBTN:
                 pw_checkList(v);
                 break;
         }

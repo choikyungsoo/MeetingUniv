@@ -98,7 +98,7 @@
         android:layout_height="53dp" />
 
     <Button
-        android:id="@+id/PW_checkBTN"
+        android:id="@+id/ID_checkBTN"
         android:layout_width="178dp"
         android:layout_height="62dp"
         android:layout_gravity="center"

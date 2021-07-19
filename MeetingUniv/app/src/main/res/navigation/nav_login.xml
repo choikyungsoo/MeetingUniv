@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_login"
-    app:startDestination="@id/changingPWScreenFragment">
+    app:startDestination="@id/login">
 
     <fragment
         android:id="@+id/login"
@@ -30,7 +30,11 @@
         android:id="@+id/findIDScreenFragment"
         android:name="com.example.meetinguniv.login.FindingIDScreenFragment"
         android:label="fragment_find_i_d_screen"
-        tools:layout="@layout/fragment_findingid_screen" />
+        tools:layout="@layout/fragment_findingid_screen" >
+        <action
+            android:id="@+id/action_findIDScreenFragment_to_showIDScreenFragment"
+            app:destination="@id/showIDScreenFragment" />
+    </fragment>
     <fragment
         android:id="@+id/findingPWScreenFragment"
         android:name="com.example.meetinguniv.login.FindingPWScreenFragment"
@@ -54,4 +58,9 @@
         android:name="com.example.meetinguniv.login.ChangingPWScreenFragment"
         android:label="fragment_changing_p_w_screen"
         tools:layout="@layout/fragment_changing_p_w_screen" />
+    <fragment
+        android:id="@+id/showIDScreenFragment"
+        android:name="com.example.meetinguniv.ShowIDScreenFragment"
+        android:label="fragment_show_i_d_screen"
+        tools:layout="@layout/fragment_show_i_d_screen" />
 </navigation>

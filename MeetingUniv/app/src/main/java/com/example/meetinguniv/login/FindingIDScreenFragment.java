@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 
 
 public class FindingIDScreenFragment extends Fragment implements View.OnClickListener{
+    private EditText name;
     private EditText phoneNum;
     private EditText verifykey;
     private Button verifyBTN;
@@ -39,10 +41,11 @@ public class FindingIDScreenFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        this.name = view.findViewById(R.id.Nameinput);
         this.phoneNum = view.findViewById(R.id.PhoneNum);
         this.verifykey = view.findViewById(R.id.PW_Verifykey);
         this.verifyBTN = view.findViewById(R.id.VerifyBTN);
-        this.VcheckBTN = view.findViewById(R.id.PW_checkBTN);
+        this.VcheckBTN = view.findViewById(R.id.ID_checkBTN);
 
         this.firebaseAuth = FirebaseAuth.getInstance();
         this.firebaseAuthSettings  = firebaseAuth.getFirebaseAuthSettings();
@@ -53,7 +56,7 @@ public class FindingIDScreenFragment extends Fragment implements View.OnClickLis
         firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(phoneNumber, smsCode);
 
         this.verifyBTN.setOnClickListener(this);
-
+        this.VcheckBTN.setOnClickListener(this);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,6 +71,17 @@ public class FindingIDScreenFragment extends Fragment implements View.OnClickLis
             case R.id.VerifyBTN:
                verfiyphone();
                break;
+            case R.id.ID_checkBTN:
+                moveToshowID(v);
+                break;
+        }
+    }
+
+    private void moveToshowID(View v) {
+        if(this.name.getText().toString().equals("")){
+            Toast.makeText(getContext(),"이름을 입력해주세요", Toast.LENGTH_SHORT).show();
+        } else{
+            Navigation.findNavController(v).navigate(R.id.action_findIDScreenFragment_to_showIDScreenFragment);
         }
     }
 
