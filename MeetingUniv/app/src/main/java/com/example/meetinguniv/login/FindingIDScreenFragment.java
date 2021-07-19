@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.TimeUnit;
 
 
-public class FindIDScreenFragment extends Fragment implements View.OnClickListener{
+public class FindingIDScreenFragment extends Fragment implements View.OnClickListener{
     private EditText phoneNum;
     private EditText verifykey;
     private Button verifyBTN;
@@ -40,9 +40,9 @@ public class FindIDScreenFragment extends Fragment implements View.OnClickListen
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.phoneNum = view.findViewById(R.id.PhoneNum);
-        this.verifykey = view.findViewById(R.id.Verifykey);
+        this.verifykey = view.findViewById(R.id.PW_Verifykey);
         this.verifyBTN = view.findViewById(R.id.VerifyBTN);
-        this.VcheckBTN = view.findViewById(R.id.VcheckBTN);
+        this.VcheckBTN = view.findViewById(R.id.PW_checkBTN);
 
         this.firebaseAuth = FirebaseAuth.getInstance();
         this.firebaseAuthSettings  = firebaseAuth.getFirebaseAuthSettings();

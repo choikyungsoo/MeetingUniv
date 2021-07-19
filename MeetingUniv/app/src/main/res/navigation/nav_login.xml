@@ -28,12 +28,30 @@
         tools:layout="@layout/fragment_join_profile" />
     <fragment
         android:id="@+id/findIDScreenFragment"
-        android:name="com.example.meetinguniv.login.FindIDScreenFragment"
+        android:name="com.example.meetinguniv.login.FindingIDScreenFragment"
         android:label="fragment_find_i_d_screen"
         tools:layout="@layout/fragment_findingid_screen" />
     <fragment
         android:id="@+id/findingPWScreenFragment"
         android:name="com.example.meetinguniv.login.FindingPWScreenFragment"
         android:label="fragment_findingpw_screen"
-        tools:layout="@layout/fragment_findingpw_screen" />
+        tools:layout="@layout/fragment_findingpw_screen" >
+        <action
+            android:id="@+id/action_findingPWScreenFragment_to_findingPWPhoneVerifyScreen"
+            app:destination="@id/findingPWPhoneVerifyScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/findingPWPhoneVerifyScreen"
+        android:name="com.example.meetinguniv.login.FindingPWPhoneVerifyScreen"
+        android:label="fragment_finding_p_w_phone_verify_screen"
+        tools:layout="@layout/fragment_finding_p_w_phone_verify_screen" >
+        <action
+            android:id="@+id/action_findingPWPhoneVerifyScreen_to_changingPWScreenFragment"
+            app:destination="@id/changingPWScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changingPWScreenFragment"
+        android:name="com.example.meetinguniv.login.ChangingPWScreenFragment"
+        android:label="fragment_changing_p_w_screen"
+        tools:layout="@layout/fragment_changing_p_w_screen" />
 </navigation>

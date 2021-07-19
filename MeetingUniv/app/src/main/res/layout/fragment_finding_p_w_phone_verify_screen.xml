@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="아이디 찾기"
+        android:text="비밀번호 변경"
         android:textSize="20sp" />
 
     <Space
@@ -100,7 +100,7 @@
     <Button
         android:id="@+id/PW_checkBTN"
         android:layout_width="178dp"
-        android:layout_height="wrap_content"
+        android:layout_height="62dp"
         android:layout_gravity="center"
         android:text="확인" />
 

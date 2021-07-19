@@ -36,72 +36,30 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="아이디 찾기"
+        android:text="비밀번호 변경"
         android:textSize="20sp" />
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="34dp" />
+        android:layout_height="40dp" />
 
     <EditText
-        android:id="@+id/Nameinput"
-        android:layout_width="310dp"
+        android:id="@+id/IDinput"
+        android:layout_width="306dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:ems="10"
-        android:hint="이름 입력하기"
+        android:hint="새 비밀번호"
         android:inputType="textPersonName" />
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="27dp" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/PhoneNum"
-            android:layout_width="210dp"
-            android:layout_height="55dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="phone"
-            android:text="+1" />
-
-        <Button
-            android:id="@+id/VerifyBTN"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="인증하기" />
-
-    </LinearLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="27dp" />
-
-    <EditText
-        android:id="@+id/PW_Verifykey"
-        android:layout_width="310dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:ems="10"
-        android:hint="인증번호 입력"
-        android:inputType="phone" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="53dp" />
+        android:layout_height="187dp" />
 
     <Button
-        android:id="@+id/PW_checkBTN"
-        android:layout_width="178dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/IDNect_btn"
+        android:layout_width="171dp"
+        android:layout_height="62dp"
         android:layout_gravity="center"
-        android:text="확인" />
-
+        android:text="다음" />
 </LinearLayout>
