@@ -1,27 +1,20 @@
 package com.example.meetinguniv;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
+import com.example.meetinguniv.login.JoinProfileFragment;
+
 import java.util.regex.Pattern;
 
 
@@ -31,8 +24,12 @@ import java.util.regex.Pattern;
  * create an instance of this fragment.
  */
 public class JoinPersonalInfoScreenFragment extends Fragment {
-    Button gotoJoinProfileScreen_BTN;
-    TextView join_id, join_password, join_passwordCheck, join_univ;
+    private Button gotoJoinProfileScreen_BTN;
+    private TextView join_id, join_password, join_passwordCheck, join_univ;
+
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
+    private JoinProfileFragment joinProfileFragment;
 //    ImageView studentIDImage;
 //    File file;
 
@@ -79,6 +76,8 @@ public class JoinPersonalInfoScreenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        this.joinProfileFragment = new JoinProfileFragment();
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_join_personal_info_screen, container, false);
     }
@@ -108,7 +107,7 @@ public class JoinPersonalInfoScreenFragment extends Fragment {
                 } else if (join_univ.getText().toString().equals("")) {
                     Toast.makeText(getContext(), "학교를 선택하세요.", Toast.LENGTH_SHORT).show();
                 } else {
-
+                    gotoJoinProfileScreen();
                 }
             }
         });
@@ -153,5 +152,13 @@ public class JoinPersonalInfoScreenFragment extends Fragment {
 //
 //            studentIDImage.setImageBitmap(bitmap);
 //        }
+    }
+
+    public void gotoJoinProfileScreen() {
+        this.fragmentManager = this.getActivity().getSupportFragmentManager();
+        this.fragmentTransaction = this.fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.joinPersonalInfoScreen, this.joinProfileFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }
