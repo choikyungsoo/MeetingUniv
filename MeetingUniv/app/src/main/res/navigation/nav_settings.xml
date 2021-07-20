@@ -10,9 +10,16 @@
         <action
             android:id="@+id/action_settingsContentFragment_to_alarmSettingElementFragment"
             app:destination="@id/alarmSettingElementFragment" />
+        <action
+            android:id="@+id/action_settingsContentFragment_to_serviceInformationContentFragment"
+            app:destination="@id/serviceInformationContentFragment" />
     </fragment>
     <fragment
         android:id="@+id/alarmSettingElementFragment"
         android:name="com.example.meetinguniv.main.AlertSettingElementFragment"
         android:label="AlertSettingElementFragment" />
+    <fragment
+        android:id="@+id/serviceInformationContentFragment"
+        android:name="com.example.meetinguniv.ServiceInformationContentFragment"
+        android:label="ServiceInformationContentFragment" />
 </navigation>
