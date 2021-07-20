@@ -1,5 +1,7 @@
 package com.example.meetinguniv.main;
 
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -14,8 +16,10 @@ public class ChattingAdapterRecycleritem extends RecyclerView.Adapter<RecyclerVi
         return super.getItemViewType(position);
     }
 
+    @NonNull
+    @NotNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         return null;
     }
 
@@ -28,5 +32,6 @@ public class ChattingAdapterRecycleritem extends RecyclerView.Adapter<RecyclerVi
     public int getItemCount() {
         return 5;
     }
+
 }
 

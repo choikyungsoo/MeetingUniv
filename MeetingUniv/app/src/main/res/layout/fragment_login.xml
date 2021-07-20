@@ -53,7 +53,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editTextTextPassword2"
+        android:id="@+id/join_passwordCheck"
         android:layout_width="220dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
@@ -86,7 +86,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2"
+        app:layout_constraintTop_toBottomOf="@+id/join_passwordCheck"
         app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
