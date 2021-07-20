@@ -58,7 +58,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="· 8자 이상 입력"
-        android:textColor="#7E7E7E" />
+        android:textColor="#7E7E7E"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/combinum"
@@ -66,7 +67,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="· 영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상 조합"
-        android:textColor="#7E7E7E" />
+        android:textColor="#7E7E7E"
+        android:textSize="12sp" />
 
     <Space
         android:layout_width="match_parent"
@@ -86,7 +88,8 @@
         android:layout_width="346dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textColor="#0054FF" />
+        android:textColor="#0054FF"
+        android:textSize="12sp" />
 
     <Space
         android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package com.example.meetinguniv.main;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 
 import com.example.meetinguniv.R;
 
@@ -22,6 +25,8 @@ import java.util.ArrayList;
  */
 public class chooseteamElementFragment extends Fragment {
     private ImageButton backbtn;
+    private SearchView search;
+    private InputMethodManager imm;
     private ArrayList<chooseteamRecycleritem> list = new ArrayList<chooseteamRecycleritem>();
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -57,13 +62,16 @@ public class chooseteamElementFragment extends Fragment {
                              Bundle savedInstanceState) {
         MatchingContentFragment fragment = new MatchingContentFragment();
         View view = inflater.inflate(R.layout.fragment_chooseteam_element, container, false);
-        backbtn = view.findViewById(R.id.backbtn);
-        backbtn.setOnClickListener(new View.OnClickListener() {
+        this.backbtn = view.findViewById(R.id.backbtn);
+        this.search = view.findViewById(R.id.searchTeam);
+        this.imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        this.backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.Framecontainer, fragment)
                         .commit();
+                imm.hideSoftInputFromWindow(search.getWindowToken(),0);
             }
         });
         return view;

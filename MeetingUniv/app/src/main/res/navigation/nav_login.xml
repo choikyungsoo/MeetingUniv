@@ -60,7 +60,7 @@
         tools:layout="@layout/fragment_changing_p_w_screen" />
     <fragment
         android:id="@+id/showIDScreenFragment"
-        android:name="com.example.meetinguniv.ShowIDScreenFragment"
+        android:name="com.example.meetinguniv.login.ShowIDScreenFragment"
         android:label="fragment_show_i_d_screen"
         tools:layout="@layout/fragment_show_i_d_screen" />
 </navigation>
