@@ -110,15 +110,19 @@ public class MainFragment extends Fragment {
         this.fragmentTransaction = this.fragmentManager.beginTransaction();
         switch (n){
             case 0:
+                this.mainScreenFragment = new MainScreenFragment();
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.mainScreenFragment);
                 break;
             case 2:
+                this.chattingScreenFragment = new ChattingScreenFragment();
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.chattingScreenFragment);
                 break;
             case 3:
+                this.shopScreenFragment = new ShopScreenFragment();
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.shopScreenFragment);
                 break;
             case 4:
+                this.settingsContentFragment = new SettingsContentFragment();
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.settingsContentFragment);
                 break;
         }
