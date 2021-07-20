@@ -1,5 +1,6 @@
 package com.example.meetinguniv.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.meetinguniv.R;
+import com.example.meetinguniv.main.MainActivity;
 
 public class LoginFragment extends Fragment {
 
@@ -34,7 +36,9 @@ public class LoginFragment extends Fragment {
         this.login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
 
@@ -42,7 +46,7 @@ public class LoginFragment extends Fragment {
         this.join_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_login_to_join_profile);
+                Navigation.findNavController(view).navigate(R.id.action_login_to_joinAgreementScreenFragment);
             }
         });
 

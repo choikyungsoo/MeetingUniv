@@ -11,21 +11,25 @@
         android:label="login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_login_to_join_profile"
-            app:destination="@id/join_profile" />
-        <action
             android:id="@+id/action_login_to_findIDScreenFragment"
             app:destination="@id/findIDScreenFragment" />
         <action
             android:id="@+id/action_login_to_findingPWScreenFragment"
             app:destination="@id/findingPWScreenFragment" />
+        <action
+            android:id="@+id/action_login_to_joinAgreementScreenFragment"
+            app:destination="@id/joinAgreementScreenFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/join_profile"
         android:name="com.example.meetinguniv.login.JoinProfileFragment"
         android:label="login"
-        tools:layout="@layout/fragment_join_profile" />
+        tools:layout="@layout/fragment_join_profile" >
+        <action
+            android:id="@+id/action_join_profile_to_login"
+            app:destination="@id/login" />
+    </fragment>
     <fragment
         android:id="@+id/findIDScreenFragment"
         android:name="com.example.meetinguniv.login.FindingIDScreenFragment"
@@ -63,4 +67,22 @@
         android:name="com.example.meetinguniv.login.ShowIDScreenFragment"
         android:label="fragment_show_i_d_screen"
         tools:layout="@layout/fragment_show_i_d_screen" />
+    <fragment
+        android:id="@+id/joinAgreementScreenFragment"
+        android:name="com.example.meetinguniv.login.JoinAgreementScreenFragment"
+        android:label="fragment_show_i_d_screen"
+        tools:layout="@layout/fragment_join_agreement_screen" >
+        <action
+            android:id="@+id/action_joinAgreementScreenFragment_to_joinPersonalInfoScreenFragment"
+            app:destination="@id/joinPersonalInfoScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/joinPersonalInfoScreenFragment"
+        android:name="com.example.meetinguniv.login.JoinPersonalInfoScreenFragment"
+        android:label="fragment_show_i_d_screen"
+        tools:layout="@layout/fragment_join_personal_info_screen" >
+        <action
+            android:id="@+id/action_joinPersonalInfoScreenFragment_to_join_profile"
+            app:destination="@id/join_profile" />
+    </fragment>
 </navigation>

@@ -1,10 +1,11 @@
-package com.example.meetinguniv;
+package com.example.meetinguniv.login;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import android.widget.CheckBox;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
-import com.example.meetinguniv.login.JoinProfileFragment;
+import com.example.meetinguniv.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -195,7 +196,8 @@ public class JoinAgreementScreenFragment extends Fragment {
             public void onClick(View v) {
                 if (meetingUnivAgreementCheckbox.isChecked() && personalInfoAgreementCheckbox.isChecked()
                         && locationInfoAgreementCheckbox.isChecked()) {
-                    gotojoinPersonalInfoScreen();
+                    Navigation.findNavController(view).navigate(R.id.action_joinAgreementScreenFragment_to_joinPersonalInfoScreenFragment);
+//                    gotojoinPersonalInfoScreen();
                 } else {
                     Toast.makeText(getContext(), "필수 약관에 모두 동의하세요.", Toast.LENGTH_SHORT).show();
                 }
@@ -203,11 +205,11 @@ public class JoinAgreementScreenFragment extends Fragment {
         });
     }
 
-    public void gotojoinPersonalInfoScreen() {
-        this.fragmentManager = this.getActivity().getSupportFragmentManager();
-        this.fragmentTransaction = this.fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.joinAgreementScreen, this.joinPersonalInfoScreenFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }
+//    public void gotojoinPersonalInfoScreen() {
+//        this.fragmentManager = this.getActivity().getSupportFragmentManager();
+//        this.fragmentTransaction = this.fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.joinAgreementScreen, this.joinPersonalInfoScreenFragment);
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
+//    }
 }
