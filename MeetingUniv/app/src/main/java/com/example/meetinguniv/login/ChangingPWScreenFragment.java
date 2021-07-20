@@ -65,11 +65,14 @@ public class ChangingPWScreenFragment extends Fragment implements View.OnClickLi
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-               changeText(view);
+                changeText(view);
+                checkcheckP = false;
+                checkDulicapted(view);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+
             }
         });
         this.CheckNewPW.addTextChangedListener(new TextWatcher() {
@@ -110,10 +113,24 @@ public class ChangingPWScreenFragment extends Fragment implements View.OnClickLi
         if(this.PWinput.length() >= 8){
             this.overE.setTextColor(Color.parseColor("#0054FF"));
             this.checkOverE = true;
+            //(?=.*[a-zA-Z])(?=.*[0-9])
+            if(Pattern.matches("^.*(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$", this.PWinput)){
+                this.comBi.setTextColor(Color.parseColor("#0054FF"));
+                this.checkcomBi = true;
+            } else if(Pattern.matches("^.*(?=.*[a-zA-Z])(?=.*[0-9]).*$", this.PWinput)){
+                this.comBi.setTextColor(Color.parseColor("#0054FF"));
+                this.checkcomBi = true;
+            } else if(Pattern.matches("^.*(?=.*[0-9])(?=.*[!@#$%^&+=]).*$", this.PWinput)){
+                this.comBi.setTextColor(Color.parseColor("#0054FF"));
+                this.checkcomBi = true;
+            }else if(Pattern.matches("^.*(?=^.{8,20}$)(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$", this.PWinput)){
+                this.comBi.setTextColor(Color.parseColor("#0054FF"));
+                this.checkcomBi = true;
+            } else{
+                this.comBi.setTextColor(Color.parseColor("#7E7E7E"));
+            }
         } else if(this.PWinput.length() < 8){
             this.overE.setTextColor(Color.parseColor("#7E7E7E"));
-        } else if(!Pattern.matches("^[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?~`]+$", this.PWinput)){
-            this.comBi.setTextColor(Color.parseColor("#0054FF"));
         }
     }
 
@@ -127,15 +144,12 @@ public class ChangingPWScreenFragment extends Fragment implements View.OnClickLi
     }
 
     private void changPW(View v) {
-//        if(checkOverE && checkcomBi && checkcheckP){
-//            //이 상태일경우에만 변경하기 버튼이 작동되도록!!
-//            Toast.makeText(getContext(),"변경완료", Toast.LENGTH_SHORT).show();
-//        } else if(this.PWinput.equals("") && this.PwCheckinput.equals("")){
-//            Toast.makeText(getContext(),"비밀번호 입력을 모두 완료해주세요", Toast.LENGTH_SHORT).show();
-//        } else if(this.PWinput.equals("")){
-//            Toast.makeText(getContext(),"비밀번호 확인을 해주세요", Toast.LENGTH_SHORT).show();
-//        } else if(this.PwCheckinput.equals("")){
-//            Toast.makeText(getContext(),"변경하고자 하는 비밀번호를 입력 해주세요", Toast.LENGTH_SHORT).show();
-//        }
+        if(checkOverE && checkcomBi && checkcheckP){
+            //이 상태일경우에만 변경하기 버튼이 작동되도록!!
+            Toast.makeText(getContext(),"변경완료", Toast.LENGTH_SHORT).show();
+        } else{
+            Toast.makeText(getContext(),"조건을 완성해주세요", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }
