@@ -18,6 +18,7 @@ import com.example.meetinguniv.R;
 
 public class SettingsContentFragment extends PreferenceFragmentCompat {
 
+    private Preference my_information;
     private Preference service_information;
     private Preference logout;
     private Preference withdrawal;
@@ -31,6 +32,7 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        this.my_information = this.findPreference("my_information");
         this.service_information = this.findPreference("service_information");
         this.logout = this.findPreference("logout");
         this.withdrawal = this.findPreference("withdrawal");
@@ -39,6 +41,14 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
 //        Preference preference = this.findPreference("alertSwitch");
 //        preference.setOnPreferenceClickListener();
 //
+
+        this.my_information.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Navigation.findNavController(view).navigate(R.id.action_settingsContentFragment_to_myInformationSettingContentFragment);
+                return true;
+            }
+        });
 
         this.service_information.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -55,7 +65,7 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
                 final String[] str = getResources().getStringArray(R.array.logout);
                 AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
                 b.setTitle("로그아웃");
-                b.setItems(str, null);
+//                b.setItems(str, null);
 //                        new DialogInterface.OnClickListener() {
 //
 //                    @Override
@@ -83,7 +93,7 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
                 dialog = b.create();
                 dialog.show();
 
-                return false;
+                return true;
             }
         });
 
@@ -122,7 +132,7 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
                 dialog = b.create();
                 dialog.show();
 
-                return false;
+                return true;
             }
         });
 

@@ -38,7 +38,7 @@ import java.io.File;
 import java.util.regex.Pattern;
 
 public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPermissionsListener {
-    View view;
+    private View view;
     private InputMethodManager inputMethodManager;
 
     private Button gotoJoinProfileScreen_BTN;
@@ -47,8 +47,8 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private JoinProfileFragment joinProfileFragment;
-    ImageView studentIDImage;
-    File file;
+    private ImageView studentIDImage;
+    private File file;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

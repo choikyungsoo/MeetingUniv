@@ -23,7 +23,7 @@ public class MyInformationSettingContentFragment extends PreferenceFragmentCompa
         preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Navigation.findNavController(view).navigate(R.id.findIDScreenFragment);
+                Navigation.findNavController(view).navigate(R.id.action_myInformationSettingContentFragment_to_findIDScreenFragment);
                 return false;
             }
         });

@@ -5,27 +5,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:iconSpaceReserved="false"
-        app:key="alert"
+        app:key="P_idchange"
         app:title="아이디 변경"></Preference>
     <Preference
         android:id="@+id/P_pwchange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:iconSpaceReserved="false"
-        app:key="alert"
+        app:key="P_pwchange"
         app:title="비밀번호 변경"></Preference>
     <Preference
         android:id="@+id/P_nickchange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:iconSpaceReserved="false"
-        app:key="alert"
+        app:key="P_nickchange"
         app:title="닉네임 변경"></Preference>
     <Preference
         android:id="@+id/P_phonechange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:iconSpaceReserved="false"
-        app:key="alert"
-        app:title="전화변호 변경"></Preference>
+        app:key="P_phonechange"
+        app:title="전화번호 변경"></Preference>
 </PreferenceScreen>
