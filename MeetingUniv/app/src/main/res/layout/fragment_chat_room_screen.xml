@@ -13,6 +13,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <Space
+            android:id="@+id/statusspace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
@@ -67,14 +72,15 @@
             android:baselineAligned="false"
             android:orientation="horizontal">
 
-            <TextView
+            <EditText
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@null"
                 android:gravity="center_vertical"
+                android:hint="text"
                 android:paddingLeft="10dp"
-                android:text="TextView"
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatButton

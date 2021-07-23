@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meetinguniv.R;
@@ -19,22 +20,12 @@ import com.example.meetinguniv.R;
 public class PersonalChatingAdapterRecycleritem extends RecyclerView.Adapter<PersonalChatingAdapterRecycleritem.viewHolder> {
     private ArrayList<PersonalChatingRecycleritem> mData;
 
-    public class viewHolder extends RecyclerView.ViewHolder {
-
-        private ImageView chatprofile;
-        private TextView memberlist;
-
-        public viewHolder(@NonNull @NotNull View itemView) {
-            super(itemView);
-
-            chatprofile = itemView.findViewById(R.id.chatprofile);
-            memberlist = itemView.findViewById(R.id.memberlist);
-
-        }
-    }
-    PersonalChatingAdapterRecycleritem(ArrayList<PersonalChatingRecycleritem> list){
+    public PersonalChatingAdapterRecycleritem(ArrayList<PersonalChatingRecycleritem> list){
         this.mData = list;
     }
+
+
+
 
     @Override
     public PersonalChatingAdapterRecycleritem.viewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
@@ -42,14 +33,14 @@ public class PersonalChatingAdapterRecycleritem extends RecyclerView.Adapter<Per
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
 
         View view = inflater.inflate(R.layout.recycleritem_chatmembers, parent, false) ;
-        PersonalChatingAdapterRecycleritem.viewHolder vh = new PersonalChatingAdapterRecycleritem.viewHolder(view) ;
+//        PersonalChatingAdapterRecycleritem.viewHolder vh = new PersonalChatingAdapterRecycleritem.viewHolder(view) ;
 
-        return vh;
+        return new PersonalChatingAdapterRecycleritem.viewHolder(view);
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull PersonalChatingAdapterRecycleritem.viewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PersonalChatingAdapterRecycleritem.viewHolder holder, int position) {
         PersonalChatingRecycleritem recyclerItem = mData.get(position) ;
         holder.chatprofile.setImageResource(recyclerItem.getChatingProfile());
         holder.memberlist.setText(recyclerItem.getMemberlist()) ;
@@ -59,8 +50,28 @@ public class PersonalChatingAdapterRecycleritem extends RecyclerView.Adapter<Per
     public int getItemCount() {
         return mData.size();
     }
+
     @Override
     public int getItemViewType(int position) {
         return position;
+    }
+
+    public class viewHolder extends RecyclerView.ViewHolder {
+
+        private ImageView chatprofile;
+        private TextView memberlist;
+
+        public viewHolder(@NonNull @NotNull View itemView) {
+            super(itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(itemView).navigate(R.id.action_mainFragment_to_chatRoomScreenFragment);
+                }
+            });
+            chatprofile = itemView.findViewById(R.id.chatprofile);
+            memberlist = itemView.findViewById(R.id.memberlist);
+
+        }
     }
 }

@@ -21,9 +21,12 @@ public class PersonalChattingContentFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         RecyclerView recyclerView = view.findViewById(R.id.F_chatinglist) ;
+        RecyclerView recyclerView = view.findViewById(R.id.chatinglist);
+        
         PersonalChatingAdapterRecycleritem recyclerItemAdapter = new PersonalChatingAdapterRecycleritem(this.list);
-        recyclerView.setAdapter(recyclerItemAdapter) ;
+        recyclerView.setAdapter(recyclerItemAdapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -36,8 +39,9 @@ public class PersonalChattingContentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_personal_chatting_content, container, false);
-        return rootView;
+//        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_personal_chatting_content, container, false);
+//        return rootView;
+        return inflater.inflate(R.layout.fragment_personal_chatting_content, container, false);
     }
 
     private void addRecyclerItem(int profile, String memberlist){

@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Space;
 
 import com.example.meetinguniv.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -27,12 +28,15 @@ public class MainFragment extends Fragment {
     private FriendsListScreenFragment friendsListScreenFragment;
     private ChattingScreenFragment chattingScreenFragment;
     private ShopScreenFragment shopScreenFragment;
-    private SettingsContentFragment settingsContentFragment;
+    private SettingsScreenFragment settingsScreenFragment;
 
+    private Space status_bar_space;
     private Button needmoreheart_btn;
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
+
+    private int statusBarHeight;
 
     public MainFragment() {
         // Required empty public constructor
@@ -44,17 +48,27 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         this.mainScreenFragment = new MainScreenFragment();
         this.friendsListScreenFragment = new FriendsListScreenFragment();
+//        this.chattingScreenFragment = new ChattingScreenFragment();
         this.chattingScreenFragment = new ChattingScreenFragment();
         this.shopScreenFragment = new ShopScreenFragment();
-        this.settingsContentFragment = new SettingsContentFragment();
+        this.settingsScreenFragment = new SettingsScreenFragment();
 
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        this.statusBarHeight = 0;
+        int resId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if(resId>0){
+            this.statusBarHeight = getResources().getDimensionPixelSize(resId);
+        }
+
+        this.status_bar_space = view.findViewById(R.id.status_bar_space);
         this.bottomNavigationView = view.findViewById(R.id.bottomNavigationView);
         this.needmoreheart_btn = view.findViewById(R.id.needmoreheartBTN);
+
+        this.status_bar_space.getLayoutParams().height = statusBarHeight;
 
         getActivity().getSupportFragmentManager().beginTransaction().add(R.id.screenfragmentContainer, this.mainScreenFragment).commit();
         this.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -122,6 +136,8 @@ public class MainFragment extends Fragment {
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.friendsListScreenFragment);
                 break;
             case 2:
+//                this.chattingScreenFragment = new ChattingScreenFragment();
+//                fragmentTransaction.replace(R.id.screenfragmentContainer, this.chattingScreenFragment);
                 this.chattingScreenFragment = new ChattingScreenFragment();
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.chattingScreenFragment);
                 break;
@@ -130,8 +146,8 @@ public class MainFragment extends Fragment {
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.shopScreenFragment);
                 break;
             case 4:
-                this.settingsContentFragment = new SettingsContentFragment();
-                fragmentTransaction.replace(R.id.screenfragmentContainer, this.settingsContentFragment);
+                this.settingsScreenFragment = new SettingsScreenFragment();
+                fragmentTransaction.replace(R.id.screenfragmentContainer, this.settingsScreenFragment);
                 break;
         }
         fragmentTransaction.addToBackStack(null);
