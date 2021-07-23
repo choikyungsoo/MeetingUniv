@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="서비스 정보">
+        <EditTextPreference
+            android:defaultValue="Default value"
+            android:key="service_agreement_info"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="서비스 이용약관" />
+        <EditTextPreference
+            android:defaultValue="Default value"
+            android:key="personal_info_agreement"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="개인정보 처리방침" />
+        <EditTextPreference
+            android:defaultValue="Default value"
+            android:key="location_info_agreement"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="위치정보 처리방침" />
+        <EditTextPreference
+            android:defaultValue="Default value"
+            android:key="open_source_license_info"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="오픈소스 라이선스" />
+    </PreferenceCategory>
+</PreferenceScreen>

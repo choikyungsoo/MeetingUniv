@@ -29,8 +29,8 @@
             android:id="@+id/action_settingsContentFragment_to_alarmSettingElementFragment"
             app:destination="@id/alarmSettingElementFragment" />
         <action
-            android:id="@+id/action_settingsContentFragment_to_serviceInformationContentFragment"
-            app:destination="@id/serviceInformationContentFragment" />
+            android:id="@+id/action_settingsContentFragment_to_serviceInfoContentFragment"
+            app:destination="@id/serviceInfoContentFragment" />
         <action
             android:id="@+id/action_settingsContentFragment_to_myInformationSettingContentFragment"
             app:destination="@id/myInformationSettingContentFragment" />
@@ -40,9 +40,41 @@
         android:name="com.example.meetinguniv.main.AlertSettingElementFragment"
         android:label="AlertSettingElementFragment" />
     <fragment
-        android:id="@+id/serviceInformationContentFragment"
-        android:name="com.example.meetinguniv.ServiceInformationContentFragment"
-        android:label="ServiceInformationContentFragment" />
+        android:id="@+id/serviceInfoContentFragment"
+        android:name="com.example.meetinguniv.ServiceInfoContentFragment"
+        android:label="ServiceInfoContentFragment" >
+        <action
+            android:id="@+id/action_serviceInfoContentFragment_to_serviceAgreementInfoScreenFragment"
+            app:destination="@id/serviceAgreementInfoScreenFragment" />
+        <action
+            android:id="@+id/action_serviceInfoContentFragment_to_personalInfoAgreementScreenFragment"
+            app:destination="@id/personalInfoAgreementScreenFragment" />
+        <action
+            android:id="@+id/action_serviceInfoContentFragment_to_locationInfoAgreementScreenFragment"
+            app:destination="@id/locationInfoAgreementScreenFragment" />
+        <action
+            android:id="@+id/action_serviceInfoContentFragment_to_openSourceLicenseInfoScreenFragment"
+            app:destination="@id/openSourceLicenseInfoScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/serviceAgreementInfoScreenFragment"
+        android:name="com.example.meetinguniv.ServiceAgreementInfoScreenFragment"
+        android:label="ServiceAgreementInfoScreenFragment" />
+    <fragment
+        android:id="@+id/personalInfoAgreementScreenFragment"
+        android:name="com.example.meetinguniv.PersonalInfoAgreementScreenFragment"
+        android:label="fragment_personal_info_agreement_screen"
+        tools:layout="@layout/fragment_personal_info_agreement_screen" />
+    <fragment
+        android:id="@+id/locationInfoAgreementScreenFragment"
+        android:name="com.example.meetinguniv.LocationInfoAgreementScreenFragment"
+        android:label="fragment_location_info_agreement_screen"
+        tools:layout="@layout/fragment_location_info_agreement_screen" />
+    <fragment
+        android:id="@+id/openSourceLicenseInfoScreenFragment"
+        android:name="com.example.meetinguniv.OpenSourceLicenseInfoScreenFragment"
+        android:label="fragment_open_source_license_info_screen"
+        tools:layout="@layout/fragment_open_source_license_info_screen" />
     <fragment
         android:id="@+id/myInformationSettingContentFragment"
         android:name="com.example.meetinguniv.MyInformationSettingContentFragment"

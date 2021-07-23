@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -27,11 +29,16 @@ import android.widget.Toast;
 
 import com.example.meetinguniv.R;
 import com.example.meetinguniv.login.JoinProfileFragment;
+import com.pedro.library.AutoPermissions;
+import com.pedro.library.AutoPermissionsListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.regex.Pattern;
 
-public class JoinPersonalInfoScreenFragment extends Fragment {
+public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPermissionsListener {
+    View view;
     private InputMethodManager inputMethodManager;
 
     private Button gotoJoinProfileScreen_BTN;
@@ -40,8 +47,8 @@ public class JoinPersonalInfoScreenFragment extends Fragment {
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private JoinProfileFragment joinProfileFragment;
-//    ImageView studentIDImage;
-//    File file;
+    ImageView studentIDImage;
+    File file;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +56,17 @@ public class JoinPersonalInfoScreenFragment extends Fragment {
         this.joinProfileFragment = new JoinProfileFragment();
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_join_personal_info_screen, container, false);
+        this.view = inflater.inflate(R.layout.fragment_join_personal_info_screen, container, false);
+        studentIDImage = this.view.findViewById(R.id.studentIDImage);
+        studentIDImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takePicture();
+            }
+        });
+
+        AutoPermissions.Companion.loadAllPermissions(getActivity(), 101);
+        return this.view;
     }
 
     @Override
@@ -107,48 +124,57 @@ public class JoinPersonalInfoScreenFragment extends Fragment {
                 }
             }
         });
-//        studentIDImage = view.findViewById(R.id.studentIDImage);
-//        studentIDImage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                takePicture();
-//            }
-//        });
-//    }
-//
-//    public void takePicture() {
-//        if (file == null) {
-//            file = createFile();
-//        }
-//
-//        Uri fileUri = FileProvider.getUriForFile(getContext(), "com.example.meetinguniv.fileprovider", file);
-//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-//        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-//            startActivityForResult(intent, 101);
-//        }
-//    }
-//
-//    private File createFile() {
-//        String filename = "capture.jpg";
-//        File storageDir = Environment.getExternalStorageState();
-//        File outFile = new File(storageDir, filename);
-//
-//        return outFile;
-//    }
-//
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == 101 & resultCode == Activity.RESULT_OK) {
-//            BitmapFactory.Options options = new BitmapFactory.Options();
-//            options.inSampleSize = 8;
-//            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
-//
-//            studentIDImage.setImageBitmap(bitmap);
-//        }
-//    }
+    }
+
+    public void takePicture() {
+        if (file == null) {
+            file = createFile();
+        }
+
+        Uri fileUri = FileProvider.getUriForFile(getActivity(), "com.example.meetinguniv.fileprovider", file);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivityForResult(intent, 101);
+        }
+    }
+
+    private File createFile() {
+        String filename = "capture.jpg";
+        File storageDir = new File(Environment.getExternalStorageState());
+        File outFile = new File(storageDir, filename);
+
+        return outFile;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 101 & resultCode == Activity.RESULT_OK) {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 8;
+            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+
+            studentIDImage.setImageBitmap(bitmap);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        AutoPermissions.Companion.parsePermissions(getActivity(), requestCode, permissions, this);
+    }
+
+    @Override
+    public void onDenied(int requestCode, String[] permissions) {
+        Toast.makeText(getActivity(), "permissions denied : " + permissions.length, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onGranted(int requestCode, String[] permissions) {
+        Toast.makeText(getActivity(), "permissions granted : " + permissions.length, Toast.LENGTH_SHORT).show();
+    }
 
 //    public void gotoJoinProfileScreen() {
 //        this.fragmentManager = this.getActivity().getSupportFragmentManager();
@@ -157,5 +183,4 @@ public class JoinPersonalInfoScreenFragment extends Fragment {
 //        fragmentTransaction.addToBackStack(null);
 //        fragmentTransaction.commit();
 //    }
-    }
 }

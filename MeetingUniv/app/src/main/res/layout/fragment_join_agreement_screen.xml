@@ -18,10 +18,11 @@
         android:visibility="visible" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginVertical="5dp"
+        android:gravity="right"
         android:orientation="horizontal">
 
         <TextView
@@ -32,7 +33,7 @@
 
         <CheckBox
             android:id="@+id/meetingUnivAgreementCheckbox"
-            android:layout_width="wrap_content"
+            android:layout_width="32dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
@@ -59,10 +60,11 @@
     </ScrollView>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginVertical="5dp"
+        android:gravity="right"
         android:orientation="horizontal">
 
         <TextView
@@ -73,7 +75,7 @@
 
         <CheckBox
             android:id="@+id/personalInfoAgreementCheckbox"
-            android:layout_width="wrap_content"
+            android:layout_width="32dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
@@ -99,10 +101,11 @@
     </ScrollView>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginVertical="5dp"
+        android:gravity="right"
         android:orientation="horizontal">
 
         <TextView
@@ -113,7 +116,7 @@
 
         <CheckBox
             android:id="@+id/locationInfoAgreementCheckbox"
-            android:layout_width="wrap_content"
+            android:layout_width="32dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
@@ -139,10 +142,11 @@
     </ScrollView>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginVertical="5dp"
+        android:gravity="right"
         android:orientation="horizontal">
 
         <TextView
@@ -153,7 +157,7 @@
 
         <CheckBox
             android:id="@+id/promotionInfoAgreementCheckbox"
-            android:layout_width="wrap_content"
+            android:layout_width="32dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
@@ -183,6 +187,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginVertical="20dp"
+        android:gravity="right"
         android:orientation="horizontal"
         android:weightSum="35">
 
@@ -197,7 +202,7 @@
 
         <CheckBox
             android:id="@+id/allAgreementCheckbox"
-            android:layout_width="34dp"
+            android:layout_width="32dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="2" />
