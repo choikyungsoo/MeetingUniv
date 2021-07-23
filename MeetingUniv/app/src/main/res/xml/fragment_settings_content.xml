@@ -22,10 +22,12 @@
             app:key="service_information"
             app:title="서비스 정보"></Preference>
         <Preference
+            android:id="@+id/logout"
             app:iconSpaceReserved="false"
             app:key="logout"
             app:title="로그아웃"></Preference>
         <Preference
+            android:id="@+id/withdrawal"
             app:iconSpaceReserved="false"
             app:key="withdrawal"
             app:title="탈퇴"></Preference>

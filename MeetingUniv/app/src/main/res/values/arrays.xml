@@ -14,4 +14,12 @@
         <item>20</item>
         <item>29</item>
     </array>
+
+    <array name="logout">
+        <item>로그아웃 하시겠습니까?</item>
+    </array>
+
+    <array name="withdrawal">
+        <item>회원 탈퇴 하시겠습니까?</item>
+    </array>
 </resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_chatting"
+    app:startDestination="@id/chattingScreenFragment">
+    <fragment
+        android:id="@+id/chattingScreenFragment"
+        android:name="com.example.meetinguniv.main.ChattingScreenFragment"
+        android:label="ChattingContentFragment">
+        <action
+            android:id="@+id/action_chattingScreenFragment_to_chatRoomScreenFragment"
+            app:destination="@id/chatRoomScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatRoomScreenFragment"
+        android:name="com.example.meetinguniv.main.ChatRoomScreenFragment"
+        android:label="fragment_chat_room_screen"
+        tools:layout="@layout/fragment_chat_room_screen" />
+    <fragment
+        android:id="@+id/personalChattingContentsFragment"
+        android:name="com.example.meetinguniv.main.PersonalChattingContentFragment"
+        android:label="fragment_personal_chating_contents"
+        tools:layout="@layout/fragment_personal_chatting_content" >
+        <action
+            android:id="@+id/action_personalChattingContentsFragment_to_chatRoomScreenFragment"
+            app:destination="@id/chatRoomScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/matchChattingContentsFragment2"
+        android:name="com.example.meetinguniv.main.MatchChattingContentFragment"
+        android:label="fragment_match_chatting_contents"
+        tools:layout="@layout/fragment_match_chatting_content" >
+        <action
+            android:id="@+id/action_matchChattingContentsFragment2_to_chatRoomScreenFragment"
+            app:destination="@id/chatRoomScreenFragment" />
+    </fragment>
+</navigation>

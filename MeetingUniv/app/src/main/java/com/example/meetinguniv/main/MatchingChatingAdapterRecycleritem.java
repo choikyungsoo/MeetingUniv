@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meetinguniv.R;
@@ -20,19 +21,7 @@ public class MatchingChatingAdapterRecycleritem extends RecyclerView.Adapter<Mat
 
     private ArrayList<MatchingChatingRecycleritem> mData;
 
-    public class viewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView chatprofile;
-        private TextView memberlist;
-
-        public viewHolder(@NonNull @NotNull View itemView) {
-            super(itemView);
-
-            chatprofile = itemView.findViewById(R.id.chatprofile);
-            memberlist = itemView.findViewById(R.id.memberlist);
-
-        }
-    }
     MatchingChatingAdapterRecycleritem(ArrayList<MatchingChatingRecycleritem> list){
         this.mData = list;
     }
@@ -62,5 +51,24 @@ public class MatchingChatingAdapterRecycleritem extends RecyclerView.Adapter<Mat
     @Override
     public int getItemViewType(int position) {
         return position;
+    }
+
+    public class viewHolder extends RecyclerView.ViewHolder {
+
+        private ImageView chatprofile;
+        private TextView memberlist;
+
+        public viewHolder(@NonNull @NotNull View itemView) {
+            super(itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(itemView).navigate(R.id.action_mainFragment_to_chatRoomScreenFragment);
+                }
+            });
+            chatprofile = itemView.findViewById(R.id.chatprofile);
+            memberlist = itemView.findViewById(R.id.memberlist);
+
+        }
     }
 }
