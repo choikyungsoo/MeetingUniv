@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_settings"
-    app:startDestination="@id/settingsContentFragment">
+    app:startDestination="@id/myInformationSettingContentFragment">
+    <fragment
+        android:id="@+id/showIDScreenFragment"
+        android:name="com.example.meetinguniv.login.ShowIDScreenFragment"
+        android:label="fragment_show_i_d_screen"
+        tools:layout="@layout/fragment_show_i_d_screen" />
+    <fragment
+        android:id="@+id/findIDScreenFragment"
+        android:name="com.example.meetinguniv.login.FindingIDScreenFragment"
+        android:label="fragment_find_i_d_screen"
+        tools:layout="@layout/fragment_findingid_screen">
+        <action
+            android:id="@+id/action_findIDScreenFragment_to_showIDScreenFragment"
+            app:destination="@id/showIDScreenFragment" />
+    </fragment>
+    <action
+        android:id="@+id/action_findIDScreenFragment_to_showIDScreenFragment"
+        app:destination="@id/showIDScreenFragment" />
     <fragment
         android:id="@+id/settingsContentFragment"
         android:name="com.example.meetinguniv.main.SettingsContentFragment"
@@ -13,6 +31,9 @@
         <action
             android:id="@+id/action_settingsContentFragment_to_serviceInformationContentFragment"
             app:destination="@id/serviceInformationContentFragment" />
+        <action
+            android:id="@+id/action_settingsContentFragment_to_myInformationSettingContentFragment"
+            app:destination="@id/myInformationSettingContentFragment" />
     </fragment>
     <fragment
         android:id="@+id/alarmSettingElementFragment"
@@ -22,4 +43,12 @@
         android:id="@+id/serviceInformationContentFragment"
         android:name="com.example.meetinguniv.ServiceInformationContentFragment"
         android:label="ServiceInformationContentFragment" />
+    <fragment
+        android:id="@+id/myInformationSettingContentFragment"
+        android:name="com.example.meetinguniv.MyInformationSettingContentFragment"
+        android:label="MyInformationSettingContentFragment" >
+        <action
+            android:id="@+id/action_myInformationSettingContentFragment_to_findIDScreenFragment"
+            app:destination="@id/findIDScreenFragment" />
+    </fragment>
 </navigation>

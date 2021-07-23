@@ -36,13 +36,19 @@ public class FriendsListAdapterRecycleritem extends RecyclerView.Adapter<Friends
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
-                        Navigation.findNavController(v).navigate(R.id.action_friendsListScreenFragment_to_friendsProfileScreenFragment);
+                        moveToFPF(v);
+
                     }
                 }
             });
 
         }
     }
+
+    private void moveToFPF(View v) {
+        Navigation.findNavController(v).navigate(R.id.action_friendsListScreenFragment_to_friendsProfileScreenFragment);
+    }
+
     FriendsListAdapterRecycleritem(ArrayList<FriendsListRecycleritem> list){
         this.mData = list;
     }
