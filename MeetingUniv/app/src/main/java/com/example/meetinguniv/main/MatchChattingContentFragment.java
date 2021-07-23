@@ -19,7 +19,7 @@ public class MatchChattingContentFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerView recyclerView = view.findViewById(R.id.chatinglist) ;
+        RecyclerView recyclerView = view.findViewById(R.id.F_chatinglist) ;
         MatchingChatingAdapterRecycleritem recyclerItemAdapter = new MatchingChatingAdapterRecycleritem(this.list);
         recyclerView.setAdapter(recyclerItemAdapter) ;
 

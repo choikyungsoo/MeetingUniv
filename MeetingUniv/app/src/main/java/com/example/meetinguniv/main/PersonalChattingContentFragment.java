@@ -21,7 +21,7 @@ public class PersonalChattingContentFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerView recyclerView = view.findViewById(R.id.chatinglist) ;
+        RecyclerView recyclerView = view.findViewById(R.id.F_chatinglist) ;
         PersonalChatingAdapterRecycleritem recyclerItemAdapter = new PersonalChatingAdapterRecycleritem(this.list);
         recyclerView.setAdapter(recyclerItemAdapter) ;
 

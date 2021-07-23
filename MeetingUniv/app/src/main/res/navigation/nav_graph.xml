@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_mainFragment_to_chatingScreenFragment"
             app:destination="@id/chattingScreenFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_friendsListScreenFragment"
+            app:destination="@id/friendsListScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
@@ -101,4 +104,18 @@
             android:id="@+id/action_chattingScreenFragment_to_personalChattingContentsFragment"
             app:destination="@id/personalChattingContentsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/friendsListScreenFragment"
+        android:name="com.example.meetinguniv.main.FriendsListScreenFragment"
+        android:label="fragment_friends_list_screen"
+        tools:layout="@layout/fragment_friends_list_screen" >
+        <action
+            android:id="@+id/action_friendsListScreenFragment_to_friendsProfileScreenFragment"
+            app:destination="@id/friendsProfileScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/friendsProfileScreenFragment"
+        android:name="com.example.meetinguniv.FriendsProfileScreenFragment"
+        android:label="fragment_friends_profile_screen"
+        tools:layout="@layout/fragment_friends_profile_screen" />
 </navigation>

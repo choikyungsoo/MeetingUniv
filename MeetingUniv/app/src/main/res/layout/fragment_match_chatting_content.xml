@@ -17,7 +17,7 @@
         android:layout_height="13dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/chatinglist"
+        android:id="@+id/F_chatinglist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/recycleritem_chatmembers" />
