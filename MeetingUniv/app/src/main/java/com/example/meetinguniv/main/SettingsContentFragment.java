@@ -65,6 +65,7 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
                 final String[] str = getResources().getStringArray(R.array.logout);
                 AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
                 b.setTitle("로그아웃");
+                b.setMessage("로그아웃 하시겠습니까?");
 //                b.setItems(str, null);
 //                        new DialogInterface.OnClickListener() {
 //
@@ -100,11 +101,13 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
         this.withdrawal.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
+                Alert
                 Dialog dialog;
                 final String[] str = getResources().getStringArray(R.array.withdrawal);
                 AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
                 b.setTitle("회원 탈퇴");
-                b.setItems(str, null);
+                b.setMessage("회원 탈퇴 하시겠습니까?");
+//                b.setItems(str, null);
 //                        new DialogInterface.OnClickListener() {
 //
 //                    @Override
