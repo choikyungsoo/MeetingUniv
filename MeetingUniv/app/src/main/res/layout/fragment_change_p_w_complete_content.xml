@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context=".ChangePWCompleteContentFragment" >
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="158dp" />
+
+<TextView
+    android:id="@+id/textView7"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:text="비밀번호 변경"
+    android:textSize="20sp" />
+
+<Space
+    android:layout_width="match_parent"
+    android:layout_height="40dp" />
+
+<EditText
+    android:id="@+id/newPW"
+    android:layout_width="360dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:ems="10"
+    android:hint="새 비밀번호"
+    android:inputType="textPassword" />
+
+<TextView
+    android:id="@+id/overEight"
+    android:layout_width="360dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:text="· 8자 이상 입력"
+    android:textColor="#7E7E7E"
+    android:textSize="12sp" />
+
+<TextView
+    android:id="@+id/combinum"
+    android:layout_width="360dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:text="· 영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상 조합"
+    android:textColor="#7E7E7E"
+    android:textSize="12sp" />
+
+<Space
+    android:layout_width="match_parent"
+    android:layout_height="20dp" />
+
+<EditText
+    android:id="@+id/newPW_check"
+    android:layout_width="360dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:ems="10"
+    android:hint="새 비밀번호 확인"
+    android:inputType="textPassword" />
+
+<TextView
+    android:id="@+id/check_PW"
+    android:layout_width="346dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:textColor="#0054FF"
+    android:textSize="12sp" />
+
+<Space
+    android:layout_width="match_parent"
+    android:layout_height="187dp" />
+
+<Button
+    android:id="@+id/PW_changeBTN"
+    android:layout_width="171dp"
+    android:layout_height="62dp"
+    android:layout_gravity="center"
+    android:text="변경하기" />
+</LinearLayout>

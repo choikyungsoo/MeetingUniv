@@ -20,13 +20,20 @@ public class MyInformationSettingContentFragment extends PreferenceFragmentCompa
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Preference preference = this.findPreference("P_idchange");
+        Preference PW_preference = this.findPreference("P_pwchange");
         preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Navigation.findNavController(view).navigate(R.id.action_myInformationSettingContentFragment_to_findIDScreenFragment);
+                Navigation.findNavController(view).navigate(R.id.action_myInformationSettingContentFragment_to_changeIDContentFragment);
                 return false;
             }
         });
-
+        PW_preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Navigation.findNavController(view).navigate(R.id.action_myInformationSettingContentFragment_to_changePWContentFragment);
+                    return false;
+                }
+            });
     }
 }

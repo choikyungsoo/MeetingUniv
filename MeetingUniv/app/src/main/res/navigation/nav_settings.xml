@@ -5,23 +5,6 @@
     android:id="@+id/nav_settings"
     app:startDestination="@id/settingsContentFragment">
     <fragment
-        android:id="@+id/showIDScreenFragment"
-        android:name="com.example.meetinguniv.login.ShowIDScreenFragment"
-        android:label="fragment_show_i_d_screen"
-        tools:layout="@layout/fragment_show_i_d_screen" />
-    <fragment
-        android:id="@+id/findIDScreenFragment"
-        android:name="com.example.meetinguniv.login.FindingIDScreenFragment"
-        android:label="fragment_find_i_d_screen"
-        tools:layout="@layout/fragment_findingid_screen">
-        <action
-            android:id="@+id/action_findIDScreenFragment_to_showIDScreenFragment"
-            app:destination="@id/showIDScreenFragment" />
-    </fragment>
-    <action
-        android:id="@+id/action_findIDScreenFragment_to_showIDScreenFragment"
-        app:destination="@id/showIDScreenFragment" />
-    <fragment
         android:id="@+id/settingsContentFragment"
         android:name="com.example.meetinguniv.main.SettingsContentFragment"
         android:label="SettingsScreenFragment" >
@@ -80,7 +63,64 @@
         android:name="com.example.meetinguniv.MyInformationSettingContentFragment"
         android:label="MyInformationSettingContentFragment" >
         <action
-            android:id="@+id/action_myInformationSettingContentFragment_to_findIDScreenFragment"
-            app:destination="@id/findIDScreenFragment" />
+            android:id="@+id/action_myInformationSettingContentFragment_to_changeIDContentFragment"
+            app:destination="@id/changeIDContentFragment" />
+        <action
+            android:id="@+id/action_myInformationSettingContentFragment_to_changePWContentFragment"
+            app:destination="@id/changePWContentFragment" />
+        <action
+            android:id="@+id/action_myInformationSettingContentFragment_to_changNickVerfiyPWContentFragment"
+            app:destination="@id/changNickVerfiyPWContentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeIDContentFragment"
+        android:name="com.example.meetinguniv.ChangeIDContentFragment"
+        android:label="fragment_change_i_d_content"
+        tools:layout="@layout/fragment_change_i_d_content" >
+        <action
+            android:id="@+id/action_changeIDContentFragment_to_changeIDNewContentFragment"
+            app:destination="@id/changeIDNewContentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeIDNewContentFragment"
+        android:name="com.example.meetinguniv.ChangeIDNewContentFragment"
+        android:label="fragment_change_i_d_new_content"
+        tools:layout="@layout/fragment_change_i_d_new_content" />
+    <fragment
+        android:id="@+id/changePWContentFragment"
+        android:name="com.example.meetinguniv.ChangePWContentFragment"
+        android:label="fragment_change_p_w_content"
+        tools:layout="@layout/fragment_change_p_w_content" >
+        <action
+            android:id="@+id/action_changePWContentFragment_to_changePWVerifyContentFragment"
+            app:destination="@id/changePWVerifyContentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePWVerifyContentFragment"
+        android:name="com.example.meetinguniv.ChangePWVerifyContentFragment"
+        android:label="fragment_change_p_w_verify_content"
+        tools:layout="@layout/fragment_change_p_w_verify_content" >
+        <action
+            android:id="@+id/action_changePWVerifyContentFragment_to_changePWCompleteContentFragment"
+            app:destination="@id/changePWCompleteContentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePWCompleteContentFragment"
+        android:name="com.example.meetinguniv.ChangePWCompleteContentFragment"
+        android:label="fragment_change_p_w_complete_content"
+        tools:layout="@layout/fragment_change_p_w_complete_content" />
+    <fragment
+        android:id="@+id/changeNickContentFragment"
+        android:name="com.example.meetinguniv.ChangeNickContentFragment"
+        android:label="fragment_change_nick_content"
+        tools:layout="@layout/fragment_change_nick_content" />
+    <fragment
+        android:id="@+id/changNickVerfiyPWContentFragment"
+        android:name="com.example.meetinguniv.ChangNickVerfiyPWContentFragment"
+        android:label="fragment_chang_nick_verfiy_p_w_content"
+        tools:layout="@layout/fragment_chang_nick_verfiy_p_w_content" >
+        <action
+            android:id="@+id/action_changNickVerfiyPWContentFragment_to_changeNickContentFragment"
+            app:destination="@id/changeNickContentFragment" />
     </fragment>
 </navigation>

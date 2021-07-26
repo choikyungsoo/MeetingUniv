@@ -1,4 +1,4 @@
-package com.example.meetinguniv.login;
+package com.example.meetinguniv;
 
 import android.os.Bundle;
 
@@ -12,19 +12,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.meetinguniv.R;
+public class ChangePWContentFragment extends Fragment implements View.OnClickListener {
 
-
-public class FindingPWScreenFragment extends Fragment implements View.OnClickListener{
-
-   private EditText F_ID;
-   private Button F_nextBTN;
+    private EditText F_ID;
+    private Button F_nextBTN;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_findingpw_screen, container, false);
+        View view = inflater.inflate(R.layout.fragment_change_p_w_content, container, false);
         this.F_ID = view.findViewById(R.id.newPW);
         this.F_nextBTN = view.findViewById(R.id.PW_changeBTN);
 
@@ -49,4 +46,5 @@ public class FindingPWScreenFragment extends Fragment implements View.OnClickLis
             Navigation.findNavController(v).navigate(R.id.action_changePWContentFragment_to_changePWVerifyContentFragment);
         }
     }
+
 }
