@@ -58,17 +58,9 @@ public class MainFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        this.statusBarHeight = 0;
-        int resId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if(resId>0){
-            this.statusBarHeight = getResources().getDimensionPixelSize(resId);
-        }
-
-        this.status_bar_space = view.findViewById(R.id.status_bar_space);
+        
         this.bottomNavigationView = view.findViewById(R.id.bottomNavigationView);
         this.needmoreheart_btn = view.findViewById(R.id.needmoreheartBTN);
-
-        this.status_bar_space.getLayoutParams().height = statusBarHeight;
 
         getActivity().getSupportFragmentManager().beginTransaction().add(R.id.screenfragmentContainer, this.mainScreenFragment).commit();
         this.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

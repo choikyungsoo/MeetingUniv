@@ -101,7 +101,6 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
         this.withdrawal.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Alert
                 Dialog dialog;
                 final String[] str = getResources().getStringArray(R.array.withdrawal);
                 AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
