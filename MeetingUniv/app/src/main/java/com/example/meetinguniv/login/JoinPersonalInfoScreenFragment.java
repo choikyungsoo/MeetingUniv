@@ -1,15 +1,19 @@
 package com.example.meetinguniv.login;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -18,6 +22,7 @@ import androidx.navigation.Navigation;
 
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +42,9 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.util.regex.Pattern;
 
+import static android.app.Activity.RESULT_OK;
+import static android.content.ContentValues.TAG;
+
 public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPermissionsListener {
     private View view;
     private InputMethodManager inputMethodManager;
@@ -50,6 +58,8 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
     ImageView studentIDImage;
     File file;
 
+    final private static String TAG = "GILBOMI"; Button btn_photo; ImageView iv_photo; final static int TAKE_PICTURE = 1; String mCurrentPhotoPath; final static int REQUEST_TAKE_PHOTO = 1;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,15 +67,28 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
 
         // Inflate the layout for this fragment
         this.view = inflater.inflate(R.layout.fragment_join_personal_info_screen, container, false);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(this.getActivity().checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+                    && this.getActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                Log.d(TAG, "권한 설정 완료");
+            } else {
+                Log.d(TAG, "권한 설정 요청");
+                ActivityCompat.requestPermissions(this.getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            }
+        }
+
         studentIDImage = this.view.findViewById(R.id.studentIDImage);
         studentIDImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                takePicture();
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, TAKE_PICTURE);
+
+//                takePicture();
             }
         });
 
-        AutoPermissions.Companion.loadAllPermissions(getActivity(), 101);
+//        AutoPermissions.Companion.loadAllPermissions(getActivity(), 101);
         return this.view;
     }
 
@@ -126,45 +149,60 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
         });
     }
 
-    public void takePicture() {
-        if (this.file == null) {
-            this.file = createFile();
-        }
-
-        Uri fileUri = FileProvider.getUriForFile(this.getActivity(), "com.example.meetinguniv.fileprovider", this.file);
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-        if (intent.resolveActivity(this.getActivity().getPackageManager()) != null) {
-            startActivityForResult(intent, 101);
-        }
-    }
-
-    private File createFile() {
-        String filename = "capture.jpg";
-        File storageDir = Environment.getExternalStorageDirectory();
-        File outFile = new File(storageDir, filename);
-
-        return outFile;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 101 & resultCode == Activity.RESULT_OK) {
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 8;
-            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
-
-            studentIDImage.setImageBitmap(bitmap);
-        }
-    }
+//    public void takePicture() {
+//        if (this.file == null) {
+//            this.file = createFile();
+//        }
+//
+//        Uri fileUri = FileProvider.getUriForFile(this.getActivity(), "com.example.meetinguniv.fileprovider", this.file);
+//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+//        if (intent.resolveActivity(this.getActivity().getPackageManager()) != null) {
+//            startActivityForResult(intent, 101);
+//        }
+//    }
+//
+//    private File createFile() {
+//        String filename = "capture.jpg";
+//        File storageDir = Environment.getExternalStorageDirectory();
+//        File outFile = new File(storageDir, filename);
+//
+//        return outFile;
+//    }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        AutoPermissions.Companion.parsePermissions(getActivity(), requestCode, permissions, this);
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        switch (requestCode) {
+            case TAKE_PICTURE:
+                if (resultCode == RESULT_OK && intent.hasExtra("data")) {
+                    Bitmap bitmap = (Bitmap) intent.getExtras().get("data");
+                    if (bitmap != null) { studentIDImage.setImageBitmap(bitmap);
+                    }
+                }
+                break;
+        }
     }
+
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == 101 & resultCode == Activity.RESULT_OK) {
+//            BitmapFactory.Options options = new BitmapFactory.Options();
+//            options.inSampleSize = 8;
+//            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+//
+//            studentIDImage.setImageBitmap(bitmap);
+//        }
+//    }
+
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        AutoPermissions.Companion.parsePermissions(getActivity(), requestCode, permissions, this);
+//    }
 
     @Override
     public void onDenied(int requestCode, String[] permissions) {
