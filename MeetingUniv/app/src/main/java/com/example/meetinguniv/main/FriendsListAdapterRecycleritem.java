@@ -46,7 +46,7 @@ public class FriendsListAdapterRecycleritem extends RecyclerView.Adapter<Friends
     }
 
     private void moveToFPF(View v) {
-        Navigation.findNavController(v).navigate(R.id.action_friendsListScreenFragment_to_friendsProfileScreenFragment);
+        Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_friendsProfileScreenFragment);
     }
 
     FriendsListAdapterRecycleritem(ArrayList<FriendsListRecycleritem> list){

@@ -36,6 +36,6 @@ public class FriendsProfileScreenFragment extends Fragment implements View.OnCli
     }
 
     private void backtoFriends(View v) {
-        Navigation.findNavController(v).navigate(R.id.friendsListScreenFragment);
+        Navigation.findNavController(v).navigate(R.id.action_friendsProfileScreenFragment_to_mainFragment);
     }
 }

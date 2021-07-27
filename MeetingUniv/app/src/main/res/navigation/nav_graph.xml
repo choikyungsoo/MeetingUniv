@@ -28,6 +28,12 @@
         <action
             android:id="@+id/action_mainFragment_to_chatRoomScreenFragment"
             app:destination="@id/chatRoomScreenFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_friendsProfileScreenFragment"
+            app:destination="@id/friendsProfileScreenFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_personalProfileScreenFragment"
+            app:destination="@id/personalProfileScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
@@ -113,11 +119,23 @@
         <action
             android:id="@+id/action_friendsListScreenFragment_to_friendsProfileScreenFragment"
             app:destination="@id/friendsProfileScreenFragment" />
+        <action
+            android:id="@+id/action_friendsListScreenFragment_to_personalProfileScreenFragment"
+            app:destination="@id/personalProfileScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/friendsProfileScreenFragment"
         android:name="com.example.meetinguniv.FriendsProfileScreenFragment"
         android:label="fragment_friends_profile_screen"
-        tools:layout="@layout/fragment_friends_profile_screen" />
+        tools:layout="@layout/fragment_friends_profile_screen" >
+        <action
+            android:id="@+id/action_friendsProfileScreenFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalProfileScreenFragment"
+        android:name="com.example.meetinguniv.PersonalProfileScreenFragment"
+        android:label="fragment_personal_profile_screen"
+        tools:layout="@layout/fragment_personal_profile_screen" />
 
 </navigation>
