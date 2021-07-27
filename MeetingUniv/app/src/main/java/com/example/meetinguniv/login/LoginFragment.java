@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Space;
 import android.widget.TextView;
 
 import com.example.meetinguniv.R;
@@ -28,6 +29,7 @@ public class LoginFragment extends Fragment {
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
         this.login_btn = view.findViewById(R.id.login_btn);
         this.join_btn = view.findViewById(R.id.joinBTN);
         this.findingID_btn = view.findViewById(R.id.FindingIDBTN);
