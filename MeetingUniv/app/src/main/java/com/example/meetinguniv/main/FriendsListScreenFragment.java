@@ -5,12 +5,14 @@ import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.meetinguniv.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 public class FriendsListScreenFragment extends Fragment implements View.OnClickListener {
     private ArrayList<FriendsListRecycleritem> list = new ArrayList<FriendsListRecycleritem>();
     private FloatingActionButton inviteFriends;
+    private ImageView PersonalProfile;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -49,7 +52,9 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_friends_list_screen, container, false);
         this.inviteFriends = rootView.findViewById(R.id.invitingfriends);
+        this.PersonalProfile = rootView.findViewById(R.id.chatprofile);
         this.inviteFriends.setOnClickListener(this);
+        this.PersonalProfile.setOnClickListener(this);
         return rootView;
     }
 
@@ -61,7 +66,14 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
             case R.id.invitingfriends:
                 InviteFriendDialog(v);
                 break;
+            case R.id.chatprofile:
+                movetoPersonalProfile(v);
+                break;
         }
+    }
+
+    private void movetoPersonalProfile(View v) {
+        Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_personalProfileScreenFragment);
     }
 
     private void InviteFriendDialog(View v) {
