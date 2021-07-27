@@ -58,23 +58,23 @@
     </fragment>
     <fragment
         android:id="@+id/serviceAgreementInfoScreenFragment"
-        android:name="com.example.meetinguniv.ServiceAgreementInfoScreenFragment"
+        android:name="com.example.meetinguniv.ServiceAgreementInfoContentFragment"
         android:label="ServiceAgreementInfoScreenFragment" />
     <fragment
         android:id="@+id/personalInfoAgreementScreenFragment"
-        android:name="com.example.meetinguniv.PersonalInfoAgreementScreenFragment"
+        android:name="com.example.meetinguniv.PersonalInfoAgreementContentFragment"
         android:label="fragment_personal_info_agreement_screen"
-        tools:layout="@layout/fragment_personal_info_agreement_screen" />
+        tools:layout="@layout/fragment_personal_info_agreement_content" />
     <fragment
         android:id="@+id/locationInfoAgreementScreenFragment"
-        android:name="com.example.meetinguniv.LocationInfoAgreementScreenFragment"
+        android:name="com.example.meetinguniv.LocationInfoAgreementContentFragment"
         android:label="fragment_location_info_agreement_screen"
-        tools:layout="@layout/fragment_location_info_agreement_screen" />
+        tools:layout="@layout/fragment_location_info_agreement_content" />
     <fragment
         android:id="@+id/openSourceLicenseInfoScreenFragment"
-        android:name="com.example.meetinguniv.OpenSourceLicenseInfoScreenFragment"
+        android:name="com.example.meetinguniv.OpenSourceLicenseInfoContentFragment"
         android:label="fragment_open_source_license_info_screen"
-        tools:layout="@layout/fragment_open_source_license_info_screen" />
+        tools:layout="@layout/fragment_open_source_license_info_content" />
     <fragment
         android:id="@+id/myInformationSettingContentFragment"
         android:name="com.example.meetinguniv.MyInformationSettingContentFragment"

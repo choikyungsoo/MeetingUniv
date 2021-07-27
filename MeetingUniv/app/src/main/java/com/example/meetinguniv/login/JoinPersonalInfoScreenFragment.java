@@ -47,8 +47,8 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private JoinProfileFragment joinProfileFragment;
-    private ImageView studentIDImage;
-    private File file;
+    ImageView studentIDImage;
+    File file;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -127,21 +127,21 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
     }
 
     public void takePicture() {
-        if (file == null) {
-            file = createFile();
+        if (this.file == null) {
+            this.file = createFile();
         }
 
-        Uri fileUri = FileProvider.getUriForFile(getActivity(), "com.example.meetinguniv.fileprovider", file);
+        Uri fileUri = FileProvider.getUriForFile(this.getActivity(), "com.example.meetinguniv.fileprovider", this.file);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+        if (intent.resolveActivity(this.getActivity().getPackageManager()) != null) {
             startActivityForResult(intent, 101);
         }
     }
 
     private File createFile() {
         String filename = "capture.jpg";
-        File storageDir = new File(Environment.getExternalStorageState());
+        File storageDir = Environment.getExternalStorageDirectory();
         File outFile = new File(storageDir, filename);
 
         return outFile;
