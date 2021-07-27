@@ -46,7 +46,7 @@ public class FindingPWScreenFragment extends Fragment implements View.OnClickLis
             //아이디가 존재할 경우와 아이디가 존재하지 않을 경우를 나누어야 함(파이어베이스 연결)
             Toast.makeText(getContext(),"아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
         } else{
-            Navigation.findNavController(v).navigate(R.id.action_changePWContentFragment_to_changePWVerifyContentFragment);
+            Navigation.findNavController(v).navigate(R.id.action_findingPWScreenFragment_to_findingPWPhoneVerifyScreen);
         }
     }
 }

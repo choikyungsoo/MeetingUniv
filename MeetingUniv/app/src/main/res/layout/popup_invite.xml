@@ -9,12 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="20dp" />
 
-    <Button
-        android:id="@+id/button2"
+    <TextView
+        android:id="@+id/textView57"
         android:layout_width="299dp"
-        android:layout_height="59dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="친구초대" />
+        android:gravity="center"
+        android:text="친구초대"
+        android:textColor="#000000"
+        android:textSize="20sp" />
 
     <Space
         android:layout_width="match_parent"
