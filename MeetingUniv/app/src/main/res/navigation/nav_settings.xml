@@ -71,6 +71,9 @@
         <action
             android:id="@+id/action_myInformationSettingContentFragment_to_changNickVerfiyPWContentFragment"
             app:destination="@id/changNickVerfiyPWContentFragment" />
+        <action
+            android:id="@+id/action_myInformationSettingContentFragment_to_changPhoneVerfiyPWContentFragment"
+            app:destination="@id/changPhoneVerfiyPWContentFragment" />
     </fragment>
     <fragment
         android:id="@+id/changeIDContentFragment"
@@ -123,4 +126,18 @@
             android:id="@+id/action_changNickVerfiyPWContentFragment_to_changeNickContentFragment"
             app:destination="@id/changeNickContentFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/changPhoneVerfiyPWContentFragment"
+        android:name="com.example.meetinguniv.ChangPhoneVerfiyPWContentFragment"
+        android:label="fragment_chang_phone_verfiy_p_w_content"
+        tools:layout="@layout/fragment_chang_phone_verfiy_p_w_content" >
+        <action
+            android:id="@+id/action_changPhoneVerfiyPWContentFragment_to_changePhoneNumContentFragment"
+            app:destination="@id/changePhoneNumContentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePhoneNumContentFragment"
+        android:name="com.example.meetinguniv.ChangePhoneNumContentFragment"
+        android:label="fragment_change_phone_num_content"
+        tools:layout="@layout/fragment_change_phone_num_content" />
 </navigation>

@@ -16,11 +16,14 @@ public class MyInformationSettingContentFragment extends PreferenceFragmentCompa
         setPreferencesFromResource(R.xml.fragment_my_information_content, rootKey);
     }
 
-        @Override
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         Preference preference = this.findPreference("P_idchange");
         Preference PW_preference = this.findPreference("P_pwchange");
+        Preference NICK_preference = this.findPreference("P_nickchange");
+        Preference PHONE_preference = this.findPreference("P_phonechange");
         preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -29,11 +32,25 @@ public class MyInformationSettingContentFragment extends PreferenceFragmentCompa
             }
         });
         PW_preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    Navigation.findNavController(view).navigate(R.id.action_myInformationSettingContentFragment_to_changePWContentFragment);
-                    return false;
-                }
-            });
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Navigation.findNavController(view).navigate(R.id.action_myInformationSettingContentFragment_to_changePWContentFragment);
+                return false;
+            }
+        });
+        NICK_preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Navigation.findNavController(view).navigate(R.id.action_myInformationSettingContentFragment_to_changNickVerfiyPWContentFragment);
+                return false;
+            }
+        });
+        PHONE_preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Navigation.findNavController(view).navigate(R.id.action_myInformationSettingContentFragment_to_changPhoneVerfiyPWContentFragment);
+                return false;
+            }
+        });
     }
 }
