@@ -116,10 +116,9 @@
     <ImageView
         android:id="@+id/studentIDImage"
         android:layout_width="300dp"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:layout_gravity="center"
-        android:background="#FA8B8B"
-        tools:src="@tools:sample/avatars" />
+        android:background="#FA8B8B" />
 
     <Button
         android:id="@+id/gotoJoinProfileScreen_BTN"
