@@ -60,7 +60,7 @@ public class chooseteamElementFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        MatchingContentFragment fragment = new MatchingContentFragment();
+        MatchingContentFragment fragment1 = new MatchingContentFragment();
         View view = inflater.inflate(R.layout.fragment_chooseteam_element, container, false);
         this.backbtn = view.findViewById(R.id.backbtn);
         this.search = view.findViewById(R.id.searchTeam);
@@ -69,7 +69,7 @@ public class chooseteamElementFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.Framecontainer, fragment)
+                        .replace(R.id.Framecontainer, fragment1)
                         .commit();
                 imm.hideSoftInputFromWindow(search.getWindowToken(),0);
             }
