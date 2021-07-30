@@ -13,11 +13,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Space
-            android:id="@+id/statusspace"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
@@ -58,7 +53,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView2"
+            android:id="@+id/chatRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
