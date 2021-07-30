@@ -3,7 +3,7 @@
 
     <Preference
         android:defaultValue="Default value"
-        android:key="edit_text_preference_1"
+        android:key="ToSettingContentFromServiceInfo_BTN"
         android:layout="@layout/option_setting"
         android:selectAllOnFocus="true"
         android:singleLine="true"

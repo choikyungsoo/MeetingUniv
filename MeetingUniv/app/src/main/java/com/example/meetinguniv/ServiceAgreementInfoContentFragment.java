@@ -8,7 +8,6 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.preference.Preference;
 
 public class ServiceAgreementInfoContentFragment extends Fragment {
     @Override

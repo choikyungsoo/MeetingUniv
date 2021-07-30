@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_serviceInfoContentFragment_to_openSourceLicenseInfoScreenFragment"
             app:destination="@id/openSourceLicenseInfoScreenFragment" />
+        <action
+            android:id="@+id/action_serviceInfoContentFragment_to_settingsContentFragment"
+            app:destination="@id/settingsContentFragment" />
     </fragment>
     <fragment
         android:id="@+id/serviceAgreementInfoScreenFragment"

@@ -19,7 +19,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/ToServiceInfoFromServiceAgreementInfo_BTN"
+                    android:id="@+id/ToServiceInfoFromPersonalInfoAgreement_BTN"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#FFFFFF"
