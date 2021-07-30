@@ -3,6 +3,7 @@ package com.example.meetinguniv;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -58,9 +59,17 @@ public class ServiceInfoContentFragment extends PreferenceFragmentCompat {
         ToSettingContentFromServiceInfo_BTN.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
+                Toast.makeText(getContext(), "비밀번호를 8자 이상 입력하세요.", Toast.LENGTH_SHORT).show();
                 Navigation.findNavController(view).navigate(R.id.action_serviceInfoContentFragment_to_settingsContentFragment);
                 return true;
             }
         });
+//        Button button = view.findViewById(R.id.button13);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Navigation.findNavController(view).navigate(R.id.action_serviceInfoContentFragment_to_settingsContentFragment);
+//            }
+//        });
     }
 }
