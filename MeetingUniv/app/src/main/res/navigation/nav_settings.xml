@@ -42,7 +42,11 @@
     <fragment
         android:id="@+id/serviceAgreementInfoScreenFragment"
         android:name="com.example.meetinguniv.ServiceAgreementInfoContentFragment"
-        android:label="ServiceAgreementInfoScreenFragment" />
+        android:label="ServiceAgreementInfoScreenFragment" >
+        <action
+            android:id="@+id/action_serviceAgreementInfoScreenFragment_to_serviceInfoContentFragment"
+            app:destination="@id/serviceInfoContentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/personalInfoAgreementScreenFragment"
         android:name="com.example.meetinguniv.PersonalInfoAgreementContentFragment"

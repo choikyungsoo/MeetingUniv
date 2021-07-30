@@ -14,12 +14,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.meetinguniv.Intro;
 import com.example.meetinguniv.R;
-import com.example.meetinguniv.main.MainActivity;
 
 public class JoinProfileFragment extends Fragment {
-    private ImageView profile_image;
+    private ImageView join_profile_image;
     private Button go_start;
 
     @Override
@@ -31,8 +29,8 @@ public class JoinProfileFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        this.profile_image = view.findViewById(R.id.profile_image);
-        this.profile_image.setOnClickListener(new View.OnClickListener() {
+        this.join_profile_image = view.findViewById(R.id.join_profile_image);
+        this.join_profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
@@ -57,7 +55,7 @@ public class JoinProfileFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 200 && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
             Uri selectedImageUri = data.getData();
-            this.profile_image.setImageURI(selectedImageUri);
+            this.join_profile_image.setImageURI(selectedImageUri);
         }
     }
 }

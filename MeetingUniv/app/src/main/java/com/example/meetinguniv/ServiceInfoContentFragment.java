@@ -2,6 +2,7 @@ package com.example.meetinguniv;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,5 +54,6 @@ public class ServiceInfoContentFragment extends PreferenceFragmentCompat {
                 return true;
             }
         });
+
     }
 }

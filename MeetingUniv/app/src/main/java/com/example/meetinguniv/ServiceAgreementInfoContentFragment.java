@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.preference.Preference;
 
 public class ServiceAgreementInfoContentFragment extends Fragment {
     @Override
@@ -17,6 +20,12 @@ public class ServiceAgreementInfoContentFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
+        Button ToServiceInfoFromServiceAgreementInfo_BTN = view.findViewById(R.id.ToServiceInfoFromServiceAgreementInfo_BTN);
+        ToServiceInfoFromServiceAgreementInfo_BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_serviceAgreementInfoScreenFragment_to_serviceInfoContentFragment);
+            }
+        });
     }
 }
