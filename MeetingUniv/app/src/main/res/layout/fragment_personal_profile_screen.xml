@@ -11,6 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="35dp" />
 
+    <Button
+        android:id="@+id/button14"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="@android:drawable/ic_menu_close_clear_cancel"
+        android:visibility="gone" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,11 +48,15 @@
         android:layout_height="35dp" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/personal_profile_image"
+        android:layout_width="335dp"
+        android:layout_height="333dp"
+        android:layout_gravity="center"
+        android:background="@drawable/prot" />
+
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="414dp"
-        android:background="@drawable/ic_launcher_background"
-        tools:src="@drawable/gradient" />
+        android:layout_height="35dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,7 +75,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="미팅대학"
+            android:text="이름"
             android:textSize="28sp" />
 
         <Button
@@ -82,14 +94,16 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="37dp" />
+        android:layout_height="37dp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/button12"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:background="@android:drawable/ic_menu_edit" />
+        android:background="@android:drawable/ic_menu_edit"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/textView59"
@@ -97,6 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="프로필 편집하기" />
+        android:text="프로필 편집하기"
+        android:visibility="gone" />
 
 </LinearLayout>

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <Preference
+        android:defaultValue="Default value"
+        android:key="ToSettingContentFromServiceInfo_BTN"
+        android:layout="@layout/option_setting"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="전" />
     <PreferenceCategory android:title="서비스 정보">
         <Preference
             android:defaultValue="Default value"

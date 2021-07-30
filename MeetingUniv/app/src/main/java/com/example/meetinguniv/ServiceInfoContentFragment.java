@@ -2,6 +2,7 @@ package com.example.meetinguniv;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,6 +51,14 @@ public class ServiceInfoContentFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Navigation.findNavController(view).navigate(R.id.action_serviceInfoContentFragment_to_openSourceLicenseInfoScreenFragment);
+                return true;
+            }
+        });
+        Preference ToSettingContentFromServiceInfo_BTN = this.findPreference("ToSettingContentFromServiceInfo_BTN");
+        ToSettingContentFromServiceInfo_BTN.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Navigation.findNavController(view).navigate(R.id.action_serviceInfoContentFragment_to_settingsContentFragment);
                 return true;
             }
         });
