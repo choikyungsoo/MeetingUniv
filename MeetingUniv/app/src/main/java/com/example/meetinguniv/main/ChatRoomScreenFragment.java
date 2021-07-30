@@ -2,6 +2,7 @@ package com.example.meetinguniv.main;
 
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -18,7 +19,7 @@ public class ChatRoomScreenFragment extends Fragment {
     boolean openMenu = false;
 
     private Animation translateLeftAnim;
-    private LinearLayout basePage;
+    private ConstraintLayout basePage;
     private LinearLayout menuPage;
     private ImageView menubtn;
     private Space status_bar_space;
@@ -41,13 +42,13 @@ public class ChatRoomScreenFragment extends Fragment {
 
         this.status_bar_space = view.findViewById(R.id.statusspace);
 
-        this.status_bar_space.getLayoutParams().height = statusBarHeight;
+        this.status_bar_space.getLayoutParams().height = this.statusBarHeight;
 
-        basePage = view.findViewById(R.id.basePage);
-        menuPage = view.findViewById(R.id.menuPage);
+        this.basePage = view.findViewById(R.id.basePage);
+        this.menuPage = view.findViewById(R.id.menuPage);
 
-        menubtn = view.findViewById(R.id.menubtn);
-        menubtn.setOnClickListener(new ImageView.OnClickListener() {
+        this.menubtn = view.findViewById(R.id.menubtn);
+        this.menubtn.setOnClickListener(new ImageView.OnClickListener() {
             @Override
             public void onClick(View v) {
                 menuPage.setVisibility(View.VISIBLE);
