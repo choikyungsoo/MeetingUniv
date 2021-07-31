@@ -8,12 +8,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.meetinguniv.R;
+import com.google.android.material.slider.RangeSlider;
 
 import java.util.ArrayList;
 
@@ -22,13 +24,15 @@ import java.util.ArrayList;
  * Use the  factory method to
  * create an instance of this fragment.
  */
-public class MatchingContentFragment extends Fragment implements View.OnClickListener{
+public class MatchingContentFragment extends Fragment implements View.OnClickListener, View.OnDragListener {
 
     private View view;
     private Button collectBtn;
     private Button matchingBtn;
+    private RangeSlider rangeSlider;
 
     private ArrayList<TeamMemberRecyclerItem> list = new ArrayList<TeamMemberRecyclerItem>();
+    private ArrayList<Float> ageRange = new ArrayList<Float>();
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -102,6 +106,12 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         }
     }
 
+    @Override
+    public boolean onDrag(View v, DragEvent event) {
+        this.ageRange = (ArrayList<Float>) this.rangeSlider.getValues();
+        return false;
+    }
+
     private void showPopUp() {
         Dialog dialog;
 //        CrystalRangeSeekbar rangeSeekbar = new CrystalRangeSeekbar(getContext());
@@ -129,6 +139,9 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 //        });
         dialog = builder.create();
         dialog.show();
+
+        this.rangeSlider = view.findViewById(R.id.rangeSlider);
+        this.rangeSlider.setOnDragListener(this);
     }
 
 //    private void Dialog() {
