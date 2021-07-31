@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.meetinguniv.R;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.FirebaseTooManyRequestsException;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthSettings;
@@ -35,14 +36,19 @@ public class FindingIDScreenFragment extends Fragment implements View.OnClickLis
     private EditText verifykey;
     private Button verifyBTN;
     private Button VcheckBTN;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseAuthSettings firebaseAuthSettings;
-    private String storedVerificationId = "";
-    private PhoneAuthProvider.ForceResendingToken resendToken;
-    private PhoneAuthViewModel viewModel;
 
-    private String phoneNumber = "+11074051954";
-    private String smsCode = "195419";
+    private String phoneNumber;
+    private String verifycode;
+
+    //파이어베이스
+    private static final String TAG = "PhoneAuthActivity";
+
+    private FirebaseAuth mAuth;
+    private FirebaseAuthSettings firebaseAuthSettings;
+
+    private String mVerificationId;
+    private PhoneAuthProvider.ForceResendingToken mResendToken;
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -52,14 +58,12 @@ public class FindingIDScreenFragment extends Fragment implements View.OnClickLis
         this.verifyBTN = view.findViewById(R.id.VerifyBTN);
         this.VcheckBTN = view.findViewById(R.id.ID_checkBTN);
 
-        this.firebaseAuth = FirebaseAuth.getInstance();
-        this.firebaseAuthSettings  = firebaseAuth.getFirebaseAuthSettings();
 
-        this.viewModel = new PhoneAuthViewModel();
+        this.mAuth = FirebaseAuth.getInstance();
+        this.firebaseAuthSettings  = this.mAuth.getFirebaseAuthSettings();
 
-//        this.phoneNumber = String.valueOf(this.phoneNum);
-//        this.smsCode = String.valueOf(this.verifykey);
-        this.resendToken = null;
+        this.phoneNumber = String.valueOf(this.phoneNum);
+        this.verifycode = String.valueOf(this.verifykey);
 
         this.verifyBTN.setOnClickListener(this);
         this.VcheckBTN.setOnClickListener(this);
@@ -70,24 +74,6 @@ public class FindingIDScreenFragment extends Fragment implements View.OnClickLis
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_findingid_screen, container, false);
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.VerifyBTN:
-               verfiyphone();
-               initViewModelCallback();
-               break;
-            case R.id.ID_checkBTN:
-                moveToshowID(v);
-                break;
-        }
-    }
-
-    private void initViewModelCallback() {
-        
-    }
-
     private void moveToshowID(View v) {
         if(this.name.getText().toString().equals("")){
             Toast.makeText(getContext(),"이름을 입력해주세요", Toast.LENGTH_SHORT).show();
@@ -96,46 +82,142 @@ public class FindingIDScreenFragment extends Fragment implements View.OnClickLis
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.VerifyBTN:
+               verfiyphone();
+               break;
+            case R.id.ID_checkBTN:
+                moveToshowID(v);
+                break;
+        }
+    }
+
     private void verfiyphone() {
-        this.firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(String.valueOf(this.phoneNum), String.valueOf(this.verifykey));
-        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(firebaseAuth)
-                .setPhoneNumber(String.valueOf(this.phoneNum))
-                .setTimeout(60L, TimeUnit.SECONDS)
-                .setActivity(this.getActivity())
-                .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                    @Override
-                    public void onVerificationCompleted(PhoneAuthCredential credential) {
-                        // Instant verification is applied and a credential is directly returned.
-                        // ...
-                        Log.d("test", "onVerificationCompleted:" + credential);
-                        Toast.makeText(getContext(),"인증코드가 전송되었습니다.", Toast.LENGTH_SHORT).show();
-                        signInWithPhoneAuthCredential(credential);
-                    }
+        this.mAuth = FirebaseAuth.getInstance();
+        startPhoneNumberVerification(this.phoneNumber);
+        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
-                    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-                    }
+            @Override
+            public void onVerificationCompleted(PhoneAuthCredential credential) {
+                // This callback will be invoked in two situations:
+                // 1 - Instant verification. In some cases the phone number can be instantly
+                //     verified without needing to send or enter a verification code.
+                // 2 - Auto-retrieval. On some devices Google Play services can automatically
+                //     detect the incoming verification SMS and perform verification without
+                //     user action.
+                Log.d(TAG, "onVerificationCompleted:" + credential);
 
-                    @Override
-                    public void onVerificationFailed(@NonNull @NotNull FirebaseException e) {
-                        if (e instanceof FirebaseAuthInvalidCredentialsException) {
-                            // Invalid request
-                        } else if (e instanceof FirebaseTooManyRequestsException) {
-                            // The SMS quota for the project has been exceeded
-                        }
+                signInWithPhoneAuthCredential(credential);
+            }
 
-                        Toast.makeText(getContext(),"인증실패", Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public void onCodeSent(@NonNull String verificationId,
-                                           @NonNull PhoneAuthProvider.ForceResendingToken token) {
-                        storedVerificationId = verificationId;
-                        resendToken = token;
+            @Override
+            public void onVerificationFailed(FirebaseException e) {
+                // This callback is invoked in an invalid request for verification is made,
+                // for instance if the the phone number format is not valid.
+                Log.w(TAG, "onVerificationFailed", e);
 
-                    }
+                if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                    // Invalid request
+                } else if (e instanceof FirebaseTooManyRequestsException) {
+                    // The SMS quota for the project has been exceeded
+                }
 
-                    // ...
-                })
-                .build();
+                // Show a message and update the UI
+            }
+
+            @Override
+            public void onCodeSent(@NonNull String verificationId,
+                                   @NonNull PhoneAuthProvider.ForceResendingToken token) {
+                // The SMS verification code has been sent to the provided phone number, we
+                // now need to ask the user to enter the code and then construct a credential
+                // by combining the code with a verification ID.
+                Log.d(TAG, "onCodeSent:" + verificationId);
+
+                // Save verification ID and resending token so we can use them later
+                mVerificationId = verificationId;
+                mResendToken = token;
+
+            }
+        };
+        verifyPhoneNumberWithCode(this.mVerificationId, this.verifycode);
+    }
+    private void startPhoneNumberVerification(String phoneNumber) {
+        // [START start_phone_auth]
+        PhoneAuthOptions options =
+                PhoneAuthOptions.newBuilder(mAuth)
+                        .setPhoneNumber(phoneNumber)       // Phone number to verify
+                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                        .setActivity(this.getActivity())                 // Activity (for callback binding)
+                        .setCallbacks(mCallbacks)          // OnVerificationStateChangedCallbacks
+                        .build();
+        PhoneAuthProvider.verifyPhoneNumber(options);
+        // [END start_phone_auth]
+    }
+
+    private void verifyPhoneNumberWithCode(String verificationId, String code) {
+        // [START verify_with_code]
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
+        // [END verify_with_code]
+    }
+
+    // [START resend_verification]
+    private void resendVerificationCode(String phoneNumber,
+                                        PhoneAuthProvider.ForceResendingToken token) {
+        PhoneAuthOptions options =
+                PhoneAuthOptions.newBuilder(mAuth)
+                        .setPhoneNumber(phoneNumber)       // Phone number to verify
+                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                        .setActivity(this.getActivity())                 // Activity (for callback binding)
+                        .setCallbacks(mCallbacks)          // OnVerificationStateChangedCallbacks
+                        .setForceResendingToken(token)     // ForceResendingToken from callbacks
+                        .build();
         PhoneAuthProvider.verifyPhoneNumber(options);
     }
+
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+
+    }
+//        this.firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(String.valueOf(this.phoneNum), String.valueOf(this.verifykey));
+//        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
+//                .setPhoneNumber(String.valueOf(this.phoneNum))
+//                .setTimeout(60L, TimeUnit.SECONDS)
+//                .setActivity(this.getActivity())
+//                .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+//                    @Override
+//                    public void onVerificationCompleted(PhoneAuthCredential credential) {
+//                        // Instant verification is applied and a credential is directly returned.
+//                        // ...
+//                        Log.d("test", "onVerificationCompleted:" + credential);
+//                        Toast.makeText(getContext(),"인증코드가 전송되었습니다.", Toast.LENGTH_SHORT).show();
+//                        signInWithPhoneAuthCredential(credential);
+//                    }
+//
+//                    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+//                    }
+//
+//                    @Override
+//                    public void onVerificationFailed(@NonNull @NotNull FirebaseException e) {
+//                        if (e instanceof FirebaseAuthInvalidCredentialsException) {
+//                            // Invalid request
+//                        } else if (e instanceof FirebaseTooManyRequestsException) {
+//                            // The SMS quota for the project has been exceeded
+//                        }
+//
+//                        Toast.makeText(getContext(),"인증실패", Toast.LENGTH_SHORT).show();
+//                    }
+//                    @Override
+//                    public void onCodeSent(@NonNull String verificationId,
+//                                           @NonNull PhoneAuthProvider.ForceResendingToken token) {
+//                        mVerificationId = verificationId;
+//                        mResendToken = token;
+//
+//                    }
+//
+//                    // ...
+//                })
+//                .build();
+//        PhoneAuthProvider.verifyPhoneNumber(options);
+//    }
 }
