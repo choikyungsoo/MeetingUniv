@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -27,6 +28,8 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
     private ImageView personal_profile_image;
     private Button backToMainFromPersonalProfile_BTN;
     private TextView personal_name;
+
+    final private static String TAG = "GILBOMI"; Button btn_photo; ImageView iv_photo; final static int TAKE_PICTURE = 1; String mCurrentPhotoPath; final static int REQUEST_TAKE_PHOTO = 1;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -93,6 +96,17 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
             case R.id.personal_profile_image:
                 ChangePersonalProfileImageDialog changePersonalProfileImageDialog = new ChangePersonalProfileImageDialog(getActivity());
                 changePersonalProfileImageDialog.changeProfileImageFunction(this.personal_profile_image);
+//                int num = changePersonalProfileImageDialog.getInt();
+//                if (num == 1) {
+//                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+//                    startActivityForResult(cameraIntent, TAKE_PICTURE);
+//                } else if (num == 2) {
+//                    Intent intent = new Intent(Intent.ACTION_PICK);
+//                    intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+//                    startActivityForResult(intent, 200);
+//                } else {
+//                    Toast.makeText(getContext(), "비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show();
+//                }
                 break;
             case R.id.backToMainFromPersonalProfile_BTN:
                 Navigation.findNavController(v).navigate(R.id.action_personalProfileScreenFragment_to_mainFragment);
@@ -104,19 +118,19 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
         }
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (requestCode == 200 && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
-//            Uri selectedImageUri = data.getData();
-//            this.personal_profile_image.setImageURI(selectedImageUri);
-//        } else if (requestCode == TAKE_PICTURE) {
-//            if (resultCode == RESULT_OK && data.hasExtra("data")) {
-//                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-//                if (bitmap != null) {
-//                    this.personal_profile_image.setImageBitmap(bitmap);
-//                }
-//            }
-//        }
-//    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 200 && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+            Uri selectedImageUri = data.getData();
+            this.personal_profile_image.setImageURI(selectedImageUri);
+        } else if (requestCode == TAKE_PICTURE) {
+            if (resultCode == RESULT_OK && data.hasExtra("data")) {
+                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                if (bitmap != null) {
+                    this.personal_profile_image.setImageBitmap(bitmap);
+                }
+            }
+        }
+    }
 
 }
