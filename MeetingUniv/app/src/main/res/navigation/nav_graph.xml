@@ -139,7 +139,11 @@
         android:id="@+id/personalProfileScreenFragment"
         android:name="com.example.meetinguniv.PersonalProfileScreenFragment"
         android:label="fragment_personal_profile_screen"
-        tools:layout="@layout/fragment_personal_profile_screen" />
+        tools:layout="@layout/fragment_personal_profile_screen" >
+        <action
+            android:id="@+id/action_personalProfileScreenFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/floatingFriendsListContentFragment"
         android:name="com.example.meetinguniv.FloatingFriendsListContentFragment"

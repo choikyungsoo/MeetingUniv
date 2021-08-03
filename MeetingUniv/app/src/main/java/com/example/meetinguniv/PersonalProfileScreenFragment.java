@@ -5,24 +5,25 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
-
-import org.jetbrains.annotations.NotNull;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link PersonalProfileScreenFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PersonalProfileScreenFragment extends Fragment {
+public class PersonalProfileScreenFragment extends Fragment implements View.OnClickListener {
     private ImageView personal_profile_image;
+    private Button backToMainFromPersonalProfile_BTN;
+    private TextView personal_name;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -74,21 +75,38 @@ public class PersonalProfileScreenFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.personal_profile_image = view.findViewById(R.id.personal_profile_image);
-        this.personal_profile_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent. setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                startActivityForResult(intent, 200);
-            }
-        });
+        this.personal_profile_image.setOnClickListener(this);
+
+        this.backToMainFromPersonalProfile_BTN = view.findViewById(R.id.backToMainFromPersonalProfile_BTN);
+        this.backToMainFromPersonalProfile_BTN.setOnClickListener(this);
+
+        this.personal_name = view.findViewById(R.id.personal_name);
+        this.personal_name.setOnClickListener(this);
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 200 && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
-            Uri selectedImageUri = data.getData();
-            this.personal_profile_image.setImageURI(selectedImageUri);
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.personal_profile_image:
+                ChangePersonalProfileImageDialog changePersonalProfileImageDialog = new ChangePersonalProfileImageDialog(getActivity());
+                changePersonalProfileImageDialog.changeProfileImageFunction(this.personal_profile_image);
+                break;
+            case R.id.backToMainFromPersonalProfile_BTN:
+                Navigation.findNavController(v).navigate(R.id.action_friendsProfileScreenFragment_to_mainFragment);
+                break;
+            case R.id.personal_name:
+                ChangePersonalNameDialog changePersonalNameDialog = new ChangePersonalNameDialog(getActivity());
+                changePersonalNameDialog.changeNameFunction(this.personal_name);
+                break;
         }
     }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (requestCode == 200 && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+//            Uri selectedImageUri = data.getData();
+//            this.personal_profile_image.setImageURI(selectedImageUri);
+//        }
+//    }
+
 }
