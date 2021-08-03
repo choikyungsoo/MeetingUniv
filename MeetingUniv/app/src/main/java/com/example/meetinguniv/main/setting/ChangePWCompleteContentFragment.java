@@ -1,4 +1,4 @@
-package com.example.meetinguniv;
+package com.example.meetinguniv.main.setting;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.meetinguniv.R;
 
 import java.util.regex.Pattern;
 

@@ -1,4 +1,4 @@
-package com.example.meetinguniv;
+package com.example.meetinguniv.main.setting;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.meetinguniv.R;
 
 public class ChangePersonalNameDialog {
     private Context context;

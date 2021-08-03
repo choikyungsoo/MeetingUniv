@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.meetinguniv.FloatingFriendsListContentFragment;
 import com.example.meetinguniv.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

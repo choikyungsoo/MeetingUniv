@@ -1,4 +1,4 @@
-package com.example.meetinguniv;
+package com.example.meetinguniv.main.setting;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.meetinguniv.R;
 
 import static android.app.Activity.RESULT_OK;
 

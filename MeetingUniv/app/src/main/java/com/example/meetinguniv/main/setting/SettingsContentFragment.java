@@ -1,4 +1,4 @@
-package com.example.meetinguniv.main;
+package com.example.meetinguniv.main.setting;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

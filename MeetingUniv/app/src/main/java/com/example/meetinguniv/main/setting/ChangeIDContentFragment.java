@@ -1,4 +1,4 @@
-package com.example.meetinguniv;
+package com.example.meetinguniv.main.setting;
 
 import android.os.Bundle;
 
@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.meetinguniv.R;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthSettings;

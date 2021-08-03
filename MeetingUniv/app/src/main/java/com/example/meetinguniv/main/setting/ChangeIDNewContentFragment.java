@@ -1,4 +1,4 @@
-package com.example.meetinguniv;
+package com.example.meetinguniv.main.setting;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.meetinguniv.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SettingIdFragment#newInstance} factory method to
+ * Use the {@link ChangeIDNewContentFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SettingIdFragment extends Fragment {
+public class ChangeIDNewContentFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class SettingIdFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public SettingIdFragment() {
+    public ChangeIDNewContentFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class SettingIdFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SettingIdFragment.
+     * @return A new instance of fragment ChangeIDNewContentFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SettingIdFragment newInstance(String param1, String param2) {
-        SettingIdFragment fragment = new SettingIdFragment();
+    public static ChangeIDNewContentFragment newInstance(String param1, String param2) {
+        ChangeIDNewContentFragment fragment = new ChangeIDNewContentFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class SettingIdFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setting_id, container, false);
+        return inflater.inflate(R.layout.fragment_change_i_d_new_content, container, false);
     }
 }

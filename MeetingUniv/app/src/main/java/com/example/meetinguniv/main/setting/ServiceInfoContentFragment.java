@@ -1,4 +1,4 @@
-package com.example.meetinguniv;
+package com.example.meetinguniv.main.setting;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +11,8 @@ import androidx.navigation.Navigation;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+
+import com.example.meetinguniv.R;
 
 import org.jetbrains.annotations.NotNull;
 

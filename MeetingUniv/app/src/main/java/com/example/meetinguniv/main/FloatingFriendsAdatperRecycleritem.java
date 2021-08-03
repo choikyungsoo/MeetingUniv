@@ -1,4 +1,4 @@
-package com.example.meetinguniv;
+package com.example.meetinguniv.main;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,15 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.meetinguniv.main.FriendsListAdapterRecycleritem;
-import com.example.meetinguniv.main.FriendsListRecycleritem;
+import com.example.meetinguniv.R;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class FloatingFriendsAdatperRecycleritem extends RecyclerView.Adapter<FloatingFriendsAdatperRecycleritem.viewHolder>{

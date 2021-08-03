@@ -1,10 +1,9 @@
-package com.example.meetinguniv;
+package com.example.meetinguniv.main;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,13 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.SearchView;
 
-import com.example.meetinguniv.main.FriendsListAdapterRecycleritem;
-import com.example.meetinguniv.main.FriendsListRecycleritem;
-import com.example.meetinguniv.main.PersonalChattingContentFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.meetinguniv.R;
 
 import java.util.ArrayList;
 

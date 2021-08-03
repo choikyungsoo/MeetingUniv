@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.Space;
 
 import com.example.meetinguniv.R;
+import com.example.meetinguniv.main.setting.SettingsScreenFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 

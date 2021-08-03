@@ -1,4 +1,4 @@
-package com.example.meetinguniv;
+package com.example.meetinguniv.main;
 
 public class FloatingFriendsRecylceritem {
 

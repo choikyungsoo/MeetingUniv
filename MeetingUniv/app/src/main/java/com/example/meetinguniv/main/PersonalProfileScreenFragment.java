@@ -1,4 +1,4 @@
-package com.example.meetinguniv;
+package com.example.meetinguniv.main;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,7 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.meetinguniv.R;
+import com.example.meetinguniv.main.setting.ChangePersonalNameDialog;
+import com.example.meetinguniv.main.setting.ChangePersonalProfileImageDialog;
 
 import static android.app.Activity.RESULT_OK;
 
