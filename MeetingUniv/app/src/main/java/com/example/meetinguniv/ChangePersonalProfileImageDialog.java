@@ -70,9 +70,25 @@ public class ChangePersonalProfileImageDialog  extends Fragment implements View.
         } else if (requestCode == TAKE_PICTURE) {
             if (resultCode == RESULT_OK && data.hasExtra("data")) {
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                if (bitmap != null) { this.personal_profile_image.setImageBitmap(bitmap);
+                if (bitmap != null) {
+                    this.personal_profile_image.setImageBitmap(bitmap);
                 }
             }
         }
     }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (requestCode == 200 && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+//            Uri selectedImageUri = data.getData();
+//            this.personal_profile_image.setImageURI(selectedImageUri);
+//        } else if (requestCode == TAKE_PICTURE) {
+//            if (resultCode == RESULT_OK && data.hasExtra("data")) {
+//                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+//                if (bitmap != null) {
+//                    this.personal_profile_image.setImageBitmap(bitmap);
+//                }
+//            }
+//        }
+//    }
 }

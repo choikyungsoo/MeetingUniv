@@ -2,6 +2,7 @@ package com.example.meetinguniv;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -92,7 +95,7 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
                 changePersonalProfileImageDialog.changeProfileImageFunction(this.personal_profile_image);
                 break;
             case R.id.backToMainFromPersonalProfile_BTN:
-                Navigation.findNavController(v).navigate(R.id.action_friendsProfileScreenFragment_to_mainFragment);
+                Navigation.findNavController(v).navigate(R.id.action_personalProfileScreenFragment_to_mainFragment);
                 break;
             case R.id.personal_name:
                 ChangePersonalNameDialog changePersonalNameDialog = new ChangePersonalNameDialog(getActivity());
@@ -106,6 +109,13 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
 //        if (requestCode == 200 && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
 //            Uri selectedImageUri = data.getData();
 //            this.personal_profile_image.setImageURI(selectedImageUri);
+//        } else if (requestCode == TAKE_PICTURE) {
+//            if (resultCode == RESULT_OK && data.hasExtra("data")) {
+//                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+//                if (bitmap != null) {
+//                    this.personal_profile_image.setImageBitmap(bitmap);
+//                }
+//            }
 //        }
 //    }
 
