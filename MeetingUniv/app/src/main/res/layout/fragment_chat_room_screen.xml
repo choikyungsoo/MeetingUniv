@@ -31,7 +31,7 @@
                 android:text="b" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/valueFrom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="박채윤, 문인배, 최경수"

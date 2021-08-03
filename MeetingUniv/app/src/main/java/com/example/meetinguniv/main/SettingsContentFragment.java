@@ -3,6 +3,7 @@ package com.example.meetinguniv.main;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.meetinguniv.R;
+import com.example.meetinguniv.login.LoginActivity;
 
 public class SettingsContentFragment extends PreferenceFragmentCompat {
 
@@ -66,21 +68,15 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
                 AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
                 b.setTitle("로그아웃");
                 b.setMessage("로그아웃 하시겠습니까?");
-//                b.setItems(str, null);
-//                        new DialogInterface.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int position){
-//                        Log.i("Clicked the AlertDialog" ,str[position]);
-//
-//                    }
-//                }
-//                );
 
                 b.setPositiveButton("네", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //logout
+                        //turn back to LoginActivity
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
                     }
                 });
                 b.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
@@ -106,21 +102,15 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
                 AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
                 b.setTitle("회원 탈퇴");
                 b.setMessage("회원 탈퇴 하시겠습니까?");
-//                b.setItems(str, null);
-//                        new DialogInterface.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int position){
-//                        Log.i("Clicked the AlertDialog" ,str[position]);
-//
-//                    }
-//                }
-//                );
 
                 b.setPositiveButton("네", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //logout
+                        //withDrawal
+                        //turn back to LoginActivity
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
                     }
                 });
                 b.setNegativeButton("아니요", new DialogInterface.OnClickListener() {

@@ -44,17 +44,18 @@ public class ChatRoomScreenFragment extends Fragment implements View.OnClickList
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        //recyclerview
-//        this.recyclerView = view.findViewById(R.id.chatRecyclerView);
-//
-//        ChatRoomRecyclerAdapter chatRoomRecyclerAdapter = new ChatRoomRecyclerAdapter(this.list);
-//        this.recyclerView.setAdapter(chatRoomRecyclerAdapter);
-//
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-//        this.recyclerView.setLayoutManager(linearLayoutManager);
-//
-//        addRecyclerItem("테스트 메세지입니다.");
-//
+        //recyclerview
+        this.recyclerView = view.findViewById(R.id.chatRecyclerView);
+
+        ChatRoomRecyclerAdapter chatRoomRecyclerAdapter = new ChatRoomRecyclerAdapter(this.list);
+        this.recyclerView.setAdapter(chatRoomRecyclerAdapter);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        this.recyclerView.setLayoutManager(linearLayoutManager);
+
+        addRecyclerItem("테스트 메세지입니다.", 0);
+        addRecyclerItem("테스트 메세지입니다.", 1);
+
 //        this.chatRoomRecyclerAdapter.notifyDataSetChanged();
 
         //the other
@@ -67,11 +68,12 @@ public class ChatRoomScreenFragment extends Fragment implements View.OnClickList
         this.basePage.setOnClickListener(this);
     }
 
-//    private void addRecyclerItem(String message) {
-//        this.chatRoomRecyclerItem = new ChatRoomRecyclerItem();
-//        this.chatRoomRecyclerItem.setMessage(message);
-//        this.list.add(this.chatRoomRecyclerItem);
-//    }
+    private void addRecyclerItem(String message, int viewType) {
+        this.chatRoomRecyclerItem = new ChatRoomRecyclerItem();
+        this.chatRoomRecyclerItem.setMessage(message);
+        this.chatRoomRecyclerItem.setViewType(viewType);
+        this.list.add(this.chatRoomRecyclerItem);
+    }
 
     @Override
     public void onClick(View v) {
