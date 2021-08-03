@@ -17,7 +17,7 @@
             android:src="@drawable/ic_icon" />
 
         <TextView
-            android:id="@+id/textView32"
+            android:id="@+id/valueTo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
