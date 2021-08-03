@@ -4,7 +4,6 @@
     <Preference
         android:defaultValue="Default value"
         android:key="ToSettingContentFromServiceInfo_BTN"
-        android:layout="@layout/option_setting"
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:title="전" />
