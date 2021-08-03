@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "1047172133294",
-    "project_id": "verify-phone-ef116",
-    "storage_bucket": "verify-phone-ef116.appspot.com"
+    "project_number": "208949132146",
+    "project_id": "meetinguniv-d9983",
+    "storage_bucket": "meetinguniv-d9983.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1047172133294:android:2e91e8db8a218367cc983f",
+        "mobilesdk_app_id": "1:208949132146:android:502546a47722a102087beb",
         "android_client_info": {
-          "package_name": "com.team_noyeah.hankyung_adroid"
+          "package_name": "com.example.meetinguniv"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1047172133294-2qf7k9v2i9dstod236dlc5bac16sf4fo.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.team_noyeah.hankyung_adroid",
-            "certificate_hash": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
-          }
-        },
-        {
-          "client_id": "1047172133294-244et66vllbvjm53ga2jlq0m1aaa8cr7.apps.googleusercontent.com",
+          "client_id": "208949132146-tq5g8f9ai2vklj7cc5md33h0ftl1n77v.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDVVWveTg9EKUr8xRIZ_1f0dEe9qWt-sU4"
+          "current_key": "AIzaSyDwCf99McInyZdo-vBlI2MXw5_zL9M8D3g"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1047172133294-244et66vllbvjm53ga2jlq0m1aaa8cr7.apps.googleusercontent.com",
+              "client_id": "208949132146-tq5g8f9ai2vklj7cc5md33h0ftl1n77v.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -65,6 +65,7 @@ public class ChatRoomScreenFragment extends Fragment implements View.OnClickList
         this.menubtn.setOnClickListener(this);
 
         this.basePage.setOnClickListener(this);
+        this.menuPage.setOnClickListener(this);
     }
 
 //    private void addRecyclerItem(String message) {
@@ -85,6 +86,8 @@ public class ChatRoomScreenFragment extends Fragment implements View.OnClickList
                     menuPage.setVisibility(View.GONE);
                 }
                 break;
+            case R.id.menuPage:
+                menuPage.setVisibility(View.VISIBLE);
         }
     }
 }
