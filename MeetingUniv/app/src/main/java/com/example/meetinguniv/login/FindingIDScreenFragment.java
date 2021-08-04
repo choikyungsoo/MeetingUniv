@@ -118,7 +118,7 @@ public class FindingIDScreenFragment extends Fragment implements View.OnClickLis
                 } else if (e instanceof FirebaseTooManyRequestsException) {
                     // The SMS quota for the project has been exceeded
                 }
-
+                Toast.makeText(getContext(), "인증실패", Toast.LENGTH_SHORT).show();
                 // Show a message and update the UI
             }
 
@@ -172,7 +172,7 @@ public class FindingIDScreenFragment extends Fragment implements View.OnClickLis
 
     private void verfiyphone() {
         startPhoneNumberVerification(this.phoneNumber);
-        verifyPhoneNumberWithCode(this.mVerificationId, this.verifycode);
+//        verifyPhoneNumberWithCode(this.mVerificationId, this.verifycode);
         //방법1
 //        this.mAuth = FirebaseAuth.getInstance();
 //        startPhoneNumberVerification(this.phoneNumber);

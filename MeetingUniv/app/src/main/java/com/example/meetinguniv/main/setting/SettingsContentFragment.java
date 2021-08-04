@@ -51,7 +51,6 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
                 return true;
             }
         });
-
         this.service_information.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
