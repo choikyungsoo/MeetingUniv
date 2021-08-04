@@ -6,7 +6,9 @@
             app:iconSpaceReserved="false"
             app:key="my_information"
             app:title="내 정보"></Preference>
-        <Preference android:layout="@layout/fragment_custom_switchpreference"></Preference>
+        <Preference
+            android:layout="@layout/fragment_custom_switchpreference"
+            app:key="alarmsetting"></Preference>
         <Preference
             app:iconSpaceReserved="false"
             app:key="faq"

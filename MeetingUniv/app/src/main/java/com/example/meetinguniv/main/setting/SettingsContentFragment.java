@@ -21,6 +21,7 @@ import com.example.meetinguniv.login.LoginActivity;
 public class SettingsContentFragment extends PreferenceFragmentCompat {
 
     private Preference my_information;
+    private Preference alarm;
     private Preference service_information;
     private Preference logout;
     private Preference withdrawal;
@@ -35,6 +36,7 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
         super.onViewCreated(view, savedInstanceState);
 
         this.my_information = this.findPreference("my_information");
+        this.alarm = this.findPreference("alarmsetting");
         this.service_information = this.findPreference("service_information");
         this.logout = this.findPreference("logout");
         this.withdrawal = this.findPreference("withdrawal");
@@ -48,6 +50,13 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Navigation.findNavController(view).navigate(R.id.action_settingsContentFragment_to_myInformationSettingContentFragment);
+                return true;
+            }
+        });
+        this.alarm.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Navigation.findNavController(view).navigate(R.id.action_settingsContentFragment_to_alarmSettingElementFragment);
                 return true;
             }
         });
