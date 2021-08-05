@@ -1,16 +1,24 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="check_box_preference_1"
-        android:title="Check box preference" />
-    <EditTextPreference
-        android:defaultValue="Default value"
-        android:key="edit_text_preference_1"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="Edit text preference" />
-    <PreferenceCategory android:title="Preference category">
-
-    </PreferenceCategory>
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/alarmonoff"
+        android:entryValues="@array/alarmonoff_values"
+        android:key="list_preference_1"
+        android:title="알림 켜기/끄기"
+        app:iconSpaceReserved="false" />
+    <Preference
+        android:id="@+id/alarmsong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:iconSpaceReserved="false"
+        app:key="alarmsong"
+        app:title="알림음 설정"></Preference>
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/alarmmodeset"
+        android:entryValues="@array/alarmmodeset_values"
+        android:key="list_preference_2"
+        android:title="알림 모드"
+        app:iconSpaceReserved="false" />
 </PreferenceScreen>
