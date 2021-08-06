@@ -61,7 +61,6 @@ public class ServiceInfoContentFragment extends PreferenceFragmentCompat {
         ToSettingContentFromServiceInfo_BTN.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Toast.makeText(getContext(), "비밀번호를 8자 이상 입력하세요.", Toast.LENGTH_SHORT).show();
                 Navigation.findNavController(view).navigate(R.id.action_serviceInfoContentFragment_to_settingsContentFragment);
                 return true;
             }
