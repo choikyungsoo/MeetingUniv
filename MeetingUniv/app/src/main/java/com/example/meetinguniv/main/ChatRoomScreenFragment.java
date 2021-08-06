@@ -47,16 +47,16 @@ public class ChatRoomScreenFragment extends Fragment implements View.OnClickList
         //recyclerview
         this.recyclerView = view.findViewById(R.id.chatRecyclerView);
 
-        ChatRoomRecyclerAdapter chatRoomRecyclerAdapter = new ChatRoomRecyclerAdapter(this.list);
+        this.chatRoomRecyclerAdapter = new ChatRoomRecyclerAdapter(this.list);
         this.recyclerView.setAdapter(chatRoomRecyclerAdapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         this.recyclerView.setLayoutManager(linearLayoutManager);
 
-        addRecyclerItem("테스트 메세지입니다.", 0);
-        addRecyclerItem("테스트 메세지입니다.", 1);
+        addRecyclerItem("테스트 메세지입니다.1", 0);
+        addRecyclerItem("테스트 메세지입니다.2", 1);
 
-//        this.chatRoomRecyclerAdapter.notifyDataSetChanged();
+        this.chatRoomRecyclerAdapter.notifyDataSetChanged();
 
         //the other
         this.basePage = view.findViewById(R.id.basePage);

@@ -1,6 +1,7 @@
 package com.example.meetinguniv.main;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,29 +41,17 @@ public class ChatRoomRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
             view = inflater.inflate(R.layout.recycleritem_otherchat, parent, false);
             return new OtherSideViewHolder(view);
         }
-
-
-//        switch (viewType) {
-//            case TYPE_PAGER:
-//                return new PagerViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pager, parent, false));
-//            case TYPE_NORMAL:
-//                return new ItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyler, parent, false));
-//        }
-
-
-//        Context context = parent.getContext();
-//        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//
-//        View view = inflater.inflate(R.layout.re)
         return null;
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder viewHolder, int position) {
         if(viewHolder instanceof MySideViewHolder) {
+            Log.i("position", String.valueOf(position));
             ((MySideViewHolder)viewHolder).mychattext.setText(mData.get(position).getMessage());
         }
         else if(viewHolder instanceof OtherSideViewHolder) {
+            Log.i("position", String.valueOf(position));
             ((OtherSideViewHolder)viewHolder).otherchattext.setText(mData.get(position).getMessage());
         }
     }
@@ -70,6 +59,11 @@ public class ChatRoomRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return this.mData.get(position).getViewType();
     }
 
     public class MySideViewHolder extends RecyclerView.ViewHolder {
