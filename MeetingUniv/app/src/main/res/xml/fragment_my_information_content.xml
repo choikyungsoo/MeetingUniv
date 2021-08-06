@@ -1,5 +1,10 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        android:title="내정보"
+        app:iconSpaceReserved="false">
+
+    </PreferenceCategory>
     <Preference
         android:id="@+id/P_idchange"
         android:layout_width="wrap_content"
