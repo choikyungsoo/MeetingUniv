@@ -15,18 +15,22 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.meetinguniv.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthSettings;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
 
@@ -171,7 +175,8 @@ public class FindingIDScreenFragment extends Fragment implements View.OnClickLis
     }
 
     private void verfiyphone() {
-        startPhoneNumberVerification(this.phoneNumber);
+//        startPhoneNumberVerification(this.phoneNumber);
+//        phoneVerfiyfunction();
 //        verifyPhoneNumberWithCode(this.mVerificationId, this.verifycode);
         //방법1
 //        this.mAuth = FirebaseAuth.getInstance();
@@ -292,12 +297,49 @@ public class FindingIDScreenFragment extends Fragment implements View.OnClickLis
 //                                           @NonNull PhoneAuthProvider.ForceResendingToken token) {
 //                        mVerificationId = verificationId;
 //                        mResendToken = token;
-//
+//                        startPhoneNumberVerification(phoneNumber);
 //                    }
 //
 //                    // ...
 //                })
 //                .build();
 //        PhoneAuthProvider.verifyPhoneNumber(options);
+//    }
+        String phoneNum = "+12611954";
+        String testVerificationCode = "123456";
+
+// Whenever verification is triggered with the whitelisted number,
+// provided it is not set for auto-retrieval, onCodeSent will be triggered.
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(auth)
+                .setPhoneNumber(phoneNum)
+                .setTimeout(60L, TimeUnit.SECONDS)
+                .setActivity(this.getActivity())
+                .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                    @Override
+                    public void onCodeSent(String verificationId,
+                                           PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                        // Save the verification id somewhere
+                        // ...
+
+                        // The corresponding whitelisted code above should be used to complete sign-in.
+
+                    }
+
+                    @Override
+                    public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+                        // Sign in with the credential
+                        // ...
+                        Toast.makeText(getContext(), "인증성공", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onVerificationFailed(FirebaseException e) {
+                        // ...
+                        Toast.makeText(getContext(), "인증실패", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .build();
+        PhoneAuthProvider.verifyPhoneNumber(options);
     }
 }
