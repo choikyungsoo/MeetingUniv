@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import androidx.fragment.app.Fragment;
 
 import com.example.meetinguniv.R;
+import com.example.meetinguniv.main.PersonalProfileScreenFragment;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -50,6 +51,7 @@ public class ChangePersonalProfileImageDialog extends Fragment {
             public void onClick(View v) {
                 dlg.dismiss();
                 num = 1;
+                setEventNum(num);
 //                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 //                startActivityForResult(cameraIntent, TAKE_PICTURE);
             }
@@ -59,6 +61,7 @@ public class ChangePersonalProfileImageDialog extends Fragment {
             public void onClick(View v) {
                 dlg.dismiss();
                 num = 2;
+                setEventNum(num);
 //                Intent intent = new Intent(Intent.ACTION_PICK);
 //                intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
 //                startActivityForResult(intent, 200);
@@ -68,12 +71,14 @@ public class ChangePersonalProfileImageDialog extends Fragment {
             @Override
             public void onClick(View v) {
                 dlg.dismiss();
+                num = 0;
             }
         });
     }
 
-    public int getInt() {
-        return this.num;
+    public void setEventNum(int eventNum) {
+//        PersonalProfileScreenFragment personalProfileScreenFragment = new PersonalProfileScreenFragment();
+//        personalProfileScreenFragment.changeProfileImage(eventNum);
     }
 
 //    public int getInt() {

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.meetinguniv.R;
 import com.example.meetinguniv.main.setting.ChangePersonalNameDialog;
@@ -99,17 +100,7 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
             case R.id.personal_profile_image:
                 ChangePersonalProfileImageDialog changePersonalProfileImageDialog = new ChangePersonalProfileImageDialog(getActivity());
                 changePersonalProfileImageDialog.changeProfileImageFunction(this.personal_profile_image);
-//                int num = changePersonalProfileImageDialog.getInt();
-//                if (num == 1) {
-//                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//                    startActivityForResult(cameraIntent, TAKE_PICTURE);
-//                } else if (num == 2) {
-//                    Intent intent = new Intent(Intent.ACTION_PICK);
-//                    intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-//                    startActivityForResult(intent, 200);
-//                } else {
-//                    Toast.makeText(getContext(), "비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show();
-//                }
+                changeProfileImage(0);
                 break;
             case R.id.backToMainFromPersonalProfile_BTN:
                 Navigation.findNavController(v).navigate(R.id.action_personalProfileScreenFragment_to_mainFragment);
@@ -118,6 +109,19 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
                 ChangePersonalNameDialog changePersonalNameDialog = new ChangePersonalNameDialog(getActivity());
                 changePersonalNameDialog.changeNameFunction(this.personal_name);
                 break;
+        }
+    }
+
+    public void changeProfileImage(int eventNum) {
+        if (eventNum == 1) {
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, TAKE_PICTURE);
+        } else if (eventNum == 2) {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+            startActivityForResult(intent, 200);
+        } else {
+            Toast.makeText(getContext(), "비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show();
         }
     }
 
