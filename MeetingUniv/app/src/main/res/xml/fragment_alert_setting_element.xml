@@ -7,13 +7,12 @@
         android:key="list_preference_1"
         android:title="알림 켜기/끄기"
         app:iconSpaceReserved="false" />
-    <Preference
-        android:id="@+id/alarmsong"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:iconSpaceReserved="false"
-        app:key="alarmsong"
-        app:title="알림음 설정"></Preference>
+    <RingtonePreference
+        android:showDefault="true"
+        android:key="Audio"
+        android:title="Select sound"
+        android:ringtoneType="notification" />
+
     <ListPreference
         android:defaultValue="1"
         android:entries="@array/alarmmodeset"
