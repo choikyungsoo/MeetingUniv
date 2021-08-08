@@ -67,7 +67,7 @@ public class MainFragment extends Fragment {
         this.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.main:
                         setFragment(0);
                         break;
@@ -87,7 +87,7 @@ public class MainFragment extends Fragment {
                 return true;
             }
         });
-//        this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//        this.bottomNavigationView.setOnNavigationItemSelectedListener(7new BottomNavigationView.OnNavigationItemSelectedListener() {
 //            @Override
 //            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem menuItem) {
 //                switch (menuItem.getItemId()){
@@ -111,8 +111,8 @@ public class MainFragment extends Fragment {
         this.needmoreheart_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                bottomNavigationView.setSelectedItemId(3);
-                setFragment(3);
+                bottomNavigationView.setSelectedItemId(R.id.shop);
+//                setFragment(3);
             }
         });
     }
