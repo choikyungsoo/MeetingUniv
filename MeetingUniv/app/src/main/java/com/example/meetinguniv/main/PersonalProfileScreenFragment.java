@@ -1,9 +1,12 @@
 package com.example.meetinguniv.main;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +15,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +24,8 @@ import android.widget.Toast;
 import com.example.meetinguniv.R;
 import com.example.meetinguniv.main.setting.ChangePersonalNameDialog;
 import com.example.meetinguniv.main.setting.ChangePersonalProfileImageDialog;
+
+import java.util.EventListener;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -99,8 +105,10 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
         switch (v.getId()) {
             case R.id.personal_profile_image:
                 ChangePersonalProfileImageDialog changePersonalProfileImageDialog = new ChangePersonalProfileImageDialog(getActivity());
-                changePersonalProfileImageDialog.changeProfileImageFunction(this.personal_profile_image);
-                changeProfileImage(0);
+                ClickHandler clickHandler = new ClickHandler();
+
+                changePersonalProfileImageDialog.changeProfileImageFunction(clickHandler);
+//                changeProfileImage(0);
                 break;
             case R.id.backToMainFromPersonalProfile_BTN:
                 Navigation.findNavController(v).navigate(R.id.action_personalProfileScreenFragment_to_mainFragment);
@@ -122,6 +130,32 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
             startActivityForResult(intent, 200);
         } else {
             Toast.makeText(getContext(), "비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public class ClickHandler implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            ChangePersonalProfileImageDialog changePersonalProfileImageDialog = new ChangePersonalProfileImageDialog(getActivity());
+            Dialog dlg = changePersonalProfileImageDialog.getDlg();
+            View cameraBTN = changePersonalProfileImageDialog.getCameraBTN();
+            View albumBTN = changePersonalProfileImageDialog.getAlbumBTN();
+            View cancelBTN = changePersonalProfileImageDialog.getAlbumBTN();
+
+            if (v.getId() == R.id.changeProfileImage_cameraBTN) {
+//                dlg.dismiss();
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, TAKE_PICTURE);
+//                changePersonalProfileImageDialog.dismissDlg();
+            } else if (v.getId() == R.id.changeProfileImage_albumBTN) {
+//                dlg.dismiss();
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                startActivityForResult(intent, 200);
+            } else {
+                Toast.makeText(getContext(), "비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show();
+//                dlg.dismiss();
+            }
         }
     }
 

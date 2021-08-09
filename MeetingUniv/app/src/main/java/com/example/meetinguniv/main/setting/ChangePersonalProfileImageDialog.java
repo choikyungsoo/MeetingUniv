@@ -21,6 +21,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class ChangePersonalProfileImageDialog extends Fragment {
     private Context context;
+    private Dialog dlg;
     private ImageView personal_profile_image;
     private Button changeProfileImage_cameraBTN, changeProfileImage_albumBTN, changePersonalProfileImage_cancelBTN;
     String TAG = "GILBOMI";
@@ -35,9 +36,29 @@ public class ChangePersonalProfileImageDialog extends Fragment {
         this.context = context;
     }
 
-    public void changeProfileImageFunction(ImageView personal_profile_image) {
-        this.personal_profile_image = personal_profile_image;
-        Dialog dlg = new Dialog(context);
+    public View getCameraBTN() {
+        return this.changeProfileImage_cameraBTN;
+    }
+
+    public View getAlbumBTN() {
+        return this.changeProfileImage_cameraBTN;
+    }
+
+    public View getCancelBTN() {
+        return this.changeProfileImage_cameraBTN;
+    }
+
+    public Dialog getDlg() {
+        return this.dlg;
+    }
+
+    public void dismissDlg() {
+        this.dlg.dismiss();
+    }
+
+    public void changeProfileImageFunction(PersonalProfileScreenFragment.ClickHandler clickHandler) {
+//        this.personal_profile_image = personal_profile_image;
+        this.dlg = new Dialog(context);
         dlg.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dlg.setContentView(R.layout.dialog_change_personal_profile_image);
         dlg.show();
@@ -46,34 +67,38 @@ public class ChangePersonalProfileImageDialog extends Fragment {
         this.changeProfileImage_albumBTN = dlg.findViewById(R.id.changeProfileImage_albumBTN);
         this.changePersonalProfileImage_cancelBTN = dlg.findViewById(R.id.changePersonalProfileImage_cancelBTN);
 
-        this.changeProfileImage_cameraBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dlg.dismiss();
-                num = 1;
-                setEventNum(num);
-//                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//                startActivityForResult(cameraIntent, TAKE_PICTURE);
-            }
-        });
-        this.changeProfileImage_albumBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dlg.dismiss();
-                num = 2;
-                setEventNum(num);
-//                Intent intent = new Intent(Intent.ACTION_PICK);
-//                intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-//                startActivityForResult(intent, 200);
-            }
-        });
-        this.changePersonalProfileImage_cancelBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dlg.dismiss();
-                num = 0;
-            }
-        });
+        this.changeProfileImage_cameraBTN.setOnClickListener(clickHandler);
+        this.changeProfileImage_albumBTN.setOnClickListener(clickHandler);
+        this.changePersonalProfileImage_cancelBTN.setOnClickListener(clickHandler);
+
+//        this.changeProfileImage_cameraBTN.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dlg.dismiss();
+//                num = 1;
+//                setEventNum(num);
+////                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+////                startActivityForResult(cameraIntent, TAKE_PICTURE);
+//            }
+//        });
+//        this.changeProfileImage_albumBTN.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dlg.dismiss();
+//                num = 2;
+//                setEventNum(num);
+////                Intent intent = new Intent(Intent.ACTION_PICK);
+////                intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+////                startActivityForResult(intent, 200);
+//            }
+//        });
+//        this.changePersonalProfileImage_cancelBTN.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dlg.dismiss();
+//                num = 0;
+//            }
+//        });
     }
 
     public void setEventNum(int eventNum) {
