@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,13 +24,32 @@ import com.example.meetinguniv.login.LoginActivity;
 public class SettingsContentFragment extends PreferenceFragmentCompat {
 
     private Preference my_information;
+    private Preference alarm;
     private Preference service_information;
     private Preference logout;
     private Preference withdrawal;
+    private Switch custom;
+    private View view;
+    private int onoff;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.fragment_settings_content, rootKey);
+    }
+
+
+    public void sendCustomView(View view) {
+        this.view = view;
+        this.custom = this.view.findViewById(R.id.customswitch);
+        this.custom.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    Toast.makeText(getContext(), "체크됨", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(getContext(), "체크안됨", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -35,14 +57,11 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
         super.onViewCreated(view, savedInstanceState);
 
         this.my_information = this.findPreference("my_information");
+        this.alarm = this.findPreference("alarmsetting");
         this.service_information = this.findPreference("service_information");
         this.logout = this.findPreference("logout");
         this.withdrawal = this.findPreference("withdrawal");
 
-
-//        Preference preference = this.findPreference("alertSwitch");
-//        preference.setOnPreferenceClickListener();
-//
 
         this.my_information.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -51,7 +70,13 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
                 return true;
             }
         });
-
+        this.alarm.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Navigation.findNavController(view).navigate(R.id.action_settingsContentFragment_to_alarmSettingElementFragment);
+                return true;
+            }
+        });
         this.service_information.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -128,5 +153,16 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
             }
         });
 
+    }
+
+
+    public void sendVerfiynum(int onoff) {
+        this.onoff = onoff;
+        if(this.onoff == 1) {
+            Toast.makeText(getContext(), "체크됨", Toast.LENGTH_SHORT).show();
+        }
+        else if(this.onoff == 2) {
+            Toast.makeText(getContext(), "체크안됨", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -111,6 +111,7 @@ public class MainFragment extends Fragment {
         this.needmoreheart_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                bottomNavigationView.setSelectedItemId(3);
                 setFragment(3);
             }
         });
@@ -129,8 +130,6 @@ public class MainFragment extends Fragment {
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.friendsListScreenFragment);
                 break;
             case 2:
-//                this.chattingScreenFragment = new ChattingScreenFragment();
-//                fragmentTransaction.replace(R.id.screenfragmentContainer, this.chattingScreenFragment);
                 this.chattingScreenFragment = new ChattingScreenFragment();
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.chattingScreenFragment);
                 break;

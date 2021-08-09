@@ -138,7 +138,7 @@
         tools:layout="@layout/fragment_change_nick_content" />
     <fragment
         android:id="@+id/changNickVerfiyPWContentFragment"
-        android:name="com.example.meetinguniv.main.setting.ChangNickVerfiyPWContentFragment"
+        android:name="com.example.meetinguniv.main.setting.ChangeNickVerfiyPWContentFragment"
         android:label="fragment_chang_nick_verfiy_p_w_content"
         tools:layout="@layout/fragment_chang_nick_verfiy_p_w_content" >
         <action
@@ -147,7 +147,7 @@
     </fragment>
     <fragment
         android:id="@+id/changPhoneVerfiyPWContentFragment"
-        android:name="com.example.meetinguniv.main.setting.ChangPhoneVerfiyPWContentFragment"
+        android:name="com.example.meetinguniv.main.setting.ChangePhoneVerfiyPWContentFragment"
         android:label="fragment_chang_phone_verfiy_p_w_content"
         tools:layout="@layout/fragment_chang_phone_verfiy_p_w_content" >
         <action

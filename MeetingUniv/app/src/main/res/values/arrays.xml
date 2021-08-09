@@ -22,5 +22,29 @@
     <array name="withdrawal">
         <item>회원 탈퇴 하시겠습니까?</item>
     </array>
-    
+
+
+    <string-array name="alarmonoff">
+        <item>켜짐</item>
+        <item>꺼짐</item>
+    </string-array>
+
+    <string-array name="alarmonoff_values">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+
+    <string-array name="alarmmodeset">
+        <item>소리만</item>
+        <item>소리+진동</item>
+        <item>진동만</item>
+        <item>무음</item>
+    </string-array>
+
+    <string-array name="alarmmodeset_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>

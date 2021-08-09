@@ -6,14 +6,9 @@
             app:iconSpaceReserved="false"
             app:key="my_information"
             app:title="내 정보"></Preference>
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="alertSwitch"
-            android:title="알림" />
         <Preference
-            app:iconSpaceReserved="false"
-            app:key="alert"
-            app:title="알림"></Preference>
+            android:layout="@layout/fragment_custom_switchpreference"
+            app:key="alarmsetting"></Preference>
         <Preference
             app:iconSpaceReserved="false"
             app:key="faq"
