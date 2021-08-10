@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.wifi.p2p.WifiP2pManager;
+import android.opengl.Visibility;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -27,10 +28,12 @@ import com.example.meetinguniv.main.setting.ChangePersonalProfileImageDialog;
 
 import java.util.EventListener;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 import static android.app.Activity.RESULT_OK;
 
 public class PersonalProfileScreenFragment extends Fragment implements View.OnClickListener {
-    private ImageView personal_profile_image;
+    private CircleImageView personal_profile_image;
     private Button backToMainFromPersonalProfile_BTN;
     private TextView personal_name;
 
