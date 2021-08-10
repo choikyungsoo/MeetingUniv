@@ -28,8 +28,8 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
     private Preference service_information;
     private Preference logout;
     private Preference withdrawal;
-    private Switch custom;
-    private View view;
+
+    private CustomSwitchPreference CSP;
     private int onoff;
 
     @Override
@@ -37,20 +37,6 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
         setPreferencesFromResource(R.xml.fragment_settings_content, rootKey);
     }
 
-
-    public void sendCustomView(View view) {
-        this.view = view;
-        this.custom = this.view.findViewById(R.id.customswitch);
-        this.custom.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                    Toast.makeText(getContext(), "체크됨", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(getContext(), "체크안됨", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -62,7 +48,13 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
         this.logout = this.findPreference("logout");
         this.withdrawal = this.findPreference("withdrawal");
 
-
+        this.CSP = new CustomSwitchPreference();
+        this.onoff = this.CSP.verfiyonoff();
+        if(this.onoff == 1){
+            Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
+        } else{
+            Toast.makeText(getContext(), "0입니다", Toast.LENGTH_SHORT).show();
+        }
         this.my_information.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -153,16 +145,5 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
             }
         });
 
-    }
-
-
-    public void sendVerfiynum(int onoff) {
-        this.onoff = onoff;
-        if(this.onoff == 1) {
-            Toast.makeText(getContext(), "체크됨", Toast.LENGTH_SHORT).show();
-        }
-        else if(this.onoff == 2) {
-            Toast.makeText(getContext(), "체크안됨", Toast.LENGTH_SHORT).show();
-        }
     }
 }

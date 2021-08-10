@@ -23,13 +23,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">
 
-            <ImageView
-                android:id="@+id/menubtn"
-                android:layout_width="50dp"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:backgroundTint="@color/colorCenter"
-                app:srcCompat="@android:drawable/ic_dialog_dialer" />
+                android:text="b" />
+
+            <TextView
+                android:id="@+id/valueFrom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="박채윤, 문인배, 최경수"
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -40,62 +47,15 @@
                 android:text="3명"
                 android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/valueFrom"
-                android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/menubtn"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:text="박채윤, 문인배, 최경수"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:backgroundTint="@color/colorCenter"
-                android:text="b" />
+                app:srcCompat="@android:drawable/ic_dialog_dialer" />
+
         </LinearLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="106dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="386dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/white_round"
-                android:baselineAligned="true"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.8">
-
-                <EditText
-                    android:id="@+id/textView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:gravity="center_vertical"
-                    android:hint="text"
-                    android:paddingLeft="10dp"
-                    android:textSize="14sp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/button4"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/pink_round"
-                    android:text="전송" />
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chatRecyclerView"
@@ -108,6 +68,40 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
             app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/recycleritem_otherchat" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="386dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/white_round"
+            android:baselineAligned="true"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chatRecyclerView"
+            app:layout_constraintVertical_bias="1.0">
+
+            <EditText
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="text"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button4"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pink_round"
+                android:text="전송" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

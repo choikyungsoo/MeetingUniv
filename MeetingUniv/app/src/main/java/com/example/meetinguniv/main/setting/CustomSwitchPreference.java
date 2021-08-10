@@ -22,23 +22,21 @@ public class CustomSwitchPreference extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_custom_switchpreference, container, false);
         this.customswitch = view.findViewById(R.id.customswitch);
+        this.SCF = new SettingsContentFragment();
         this.customswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    Toast.makeText(getContext(), "체크됨", Toast.LENGTH_SHORT).show();
+                if(isChecked){
                     onoff = 1;
-                }
-                else {
-                    Toast.makeText(getContext(), "체크안됨", Toast.LENGTH_SHORT).show();
-                    onoff = 2;
+                } else{
+                    onoff = 0;
                 }
             }
         });
-        this.SCF = new SettingsContentFragment();
-        this.SCF.sendVerfiynum(this.onoff);
-        this.SCF.sendCustomView(view);
-
         return view;
+    }
+
+    public int verfiyonoff() {
+        return this.onoff;
     }
 }
