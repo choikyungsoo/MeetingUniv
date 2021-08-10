@@ -1,15 +1,21 @@
 package com.example.meetinguniv.main;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.meetinguniv.R;
+import com.example.meetinguniv.onBackPressedListener;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.Objects;
 
 
 public class ChattingScreenFragment extends Fragment {
@@ -64,4 +70,29 @@ public class ChattingScreenFragment extends Fragment {
         });
         return view;
     }
+
+//    public void onBackKey() {
+//        MainActivity activity = (MainActivity) getActivity();
+//        activity.setOnKeyBackPressedListener(null);
+//        activity.onBackPressed();
+//    }
+//
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        ((MainActivity) context).setOnKeyBackPressedListener((MainActivity.onKeyBackPressedListener) this);
+//    }
+
+//    @Override
+//    public void onBackPressed() {
+//        goToMain();
+//    }
+//
+//    //프래그먼트 종료
+//    private void goToMain(){
+//        @SuppressLint("UseRequireInsteadOfGet")
+//        FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+//        fragmentManager.beginTransaction().remove(ChattingScreenFragment.this).commit();
+//        fragmentManager.popBackStack();
+//    }
 }
