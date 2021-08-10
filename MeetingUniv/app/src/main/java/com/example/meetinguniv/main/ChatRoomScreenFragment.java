@@ -1,5 +1,6 @@
 package com.example.meetinguniv.main;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Space;
@@ -31,6 +34,7 @@ public class ChatRoomScreenFragment extends Fragment implements View.OnClickList
     private LinearLayout menuPage;
     private ImageView menubtn;
     private RecyclerView recyclerView;
+    private EditText editText;
     private ChatRoomRecyclerAdapter chatRoomRecyclerAdapter;
     private ChatRoomRecyclerItem chatRoomRecyclerItem;
 
@@ -45,6 +49,7 @@ public class ChatRoomScreenFragment extends Fragment implements View.OnClickList
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+//        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         //recyclerview
         this.recyclerView = view.findViewById(R.id.chatRecyclerView);
@@ -65,10 +70,13 @@ public class ChatRoomScreenFragment extends Fragment implements View.OnClickList
         this.menuPage = view.findViewById(R.id.menuPage);
 
         this.menubtn = view.findViewById(R.id.menubtn);
-        this.menubtn.setOnClickListener(this);
 
+//        this.editText = view.findViewById(R.id.textView14);
+
+        this.menubtn.setOnClickListener(this);
         this.basePage.setOnClickListener(this);
         this.menuPage.setOnClickListener(this);
+//        this.editText.setOnClickListener(this);
     }
 
     private void addRecyclerItem(String message, int viewType) {
@@ -88,10 +96,18 @@ public class ChatRoomScreenFragment extends Fragment implements View.OnClickList
             case R.id.basePage:
                 if (this.openMenu) {
                     menuPage.setVisibility(View.GONE);
+                    this.openMenu = false;
+//                    this.basePage.requestFocus();
+//                    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
                 }
                 break;
             case R.id.menuPage:
                 menuPage.setVisibility(View.VISIBLE);
+//            case R.id.textView14:
+//                InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                this.editText.requestFocus();
+//                inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
         }
     }
 }
