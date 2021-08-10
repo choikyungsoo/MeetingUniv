@@ -18,7 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.Objects;
 
 
-public class ChattingScreenFragment extends Fragment implements onBackPressedListener {
+public class ChattingScreenFragment extends Fragment {
 
     private View view;
     private TabLayout tabs;
@@ -83,16 +83,16 @@ public class ChattingScreenFragment extends Fragment implements onBackPressedLis
 //        ((MainActivity) context).setOnKeyBackPressedListener((MainActivity.onKeyBackPressedListener) this);
 //    }
 
-    @Override
-    public void onBackPressed() {
-        goToMain();
-    }
-
-    //프래그먼트 종료
-    private void goToMain(){
-        @SuppressLint("UseRequireInsteadOfGet")
-        FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
-        fragmentManager.beginTransaction().remove(ChattingScreenFragment.this).commit();
-        fragmentManager.popBackStack();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        goToMain();
+//    }
+//
+//    //프래그먼트 종료
+//    private void goToMain(){
+//        @SuppressLint("UseRequireInsteadOfGet")
+//        FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+//        fragmentManager.beginTransaction().remove(ChattingScreenFragment.this).commit();
+//        fragmentManager.popBackStack();
+//    }
 }
