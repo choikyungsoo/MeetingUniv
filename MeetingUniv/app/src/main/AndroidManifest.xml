@@ -18,6 +18,8 @@
             android:name=".main.ChatRoomScreenFragment"
             android:windowSoftInputMode="adjustPan|adjustResize"
             tools:ignore="Instantiatable"></activity>
+        <activity android:name=".ChatRoomContentFragment" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|adjustPan"
+            tools:ignore="Instantiatable"> </activity>
         <activity android:name=".login.LoginActivity"></activity>
         <activity android:name=".main.MainActivity" />
         <activity android:name=".Intro">

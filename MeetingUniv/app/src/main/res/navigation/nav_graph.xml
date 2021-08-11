@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_mainFragment_to_personalProfileScreenFragment"
             app:destination="@id/personalProfileScreenFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_chatRoomScreenFragmentVersion2"
+            app:destination="@id/chatRoomScreenFragmentVersion2" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
@@ -88,11 +91,11 @@
         android:label="fragment_personal_chating_contents"
         tools:layout="@layout/fragment_personal_chatting_content" >
         <action
-            android:id="@+id/action_personalChattingContentsFragment_to_chatRoomScreenFragment"
-            app:destination="@id/chatRoomScreenFragment" />
-        <action
             android:id="@+id/action_personalChattingContentsFragment_to_floatingFriendsListContentFragment"
             app:destination="@id/floatingFriendsListContentFragment" />
+        <action
+            android:id="@+id/action_personalChattingContentsFragment_to_chatRoomScreenFragmentVersion2"
+            app:destination="@id/chatRoomScreenFragmentVersion2" />
     </fragment>
     <fragment
         android:id="@+id/matchChattingContentsFragment2"
@@ -100,7 +103,7 @@
         android:label="fragment_match_chatting_contents"
         tools:layout="@layout/fragment_match_chatting_content" >
         <action
-            android:id="@+id/action_matchChattingContentsFragment2_to_chatRoomScreenFragment"
+            android:id="@+id/action_matchChattingContentsFragment2_to_chatRoomScreenFragment2"
             app:destination="@id/chatRoomScreenFragment" />
     </fragment>
     <fragment
@@ -149,5 +152,19 @@
         android:name="com.example.meetinguniv.main.FloatingFriendsListContentFragment"
         android:label="fragment_floating_friends_list_content"
         tools:layout="@layout/fragment_floating_friends_list_content" />
+    <fragment
+        android:id="@+id/chatRoomScreenFragmentVersion2"
+        android:name="com.example.meetinguniv.ChatRoomScreenFragmentVersion2"
+        android:label="fragment_chat_room_screen_version2"
+        tools:layout="@layout/fragment_chat_room_screen_version2" >
+        <action
+            android:id="@+id/action_chatRoomScreenFragmentVersion2_to_chatRoomContentFragment"
+            app:destination="@id/chatRoomContentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatRoomContentFragment"
+        android:name="com.example.meetinguniv.ChatRoomContentFragment"
+        android:label="fragment_chat_room_content"
+        tools:layout="@layout/fragment_chat_room_content" />
 
 </navigation>
