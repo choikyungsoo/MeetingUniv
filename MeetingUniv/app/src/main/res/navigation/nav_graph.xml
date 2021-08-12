@@ -97,11 +97,11 @@
             android:id="@+id/action_personalChattingContentsFragment_to_floatingFriendsListContentFragment"
             app:destination="@id/floatingFriendsListContentFragment" />
         <action
-            android:id="@+id/action_personalChattingContentsFragment_to_chatRoomScreenFragmentVersion3"
-            app:destination="@id/chatRoomScreenFragmentVersion3" />
-        <action
             android:id="@+id/action_personalChattingContentsFragment_to_chatRoomScreenFragmentVersion2"
             app:destination="@id/chatRoomScreenFragmentVersion2" />
+        <action
+            android:id="@+id/action_personalChattingContentsFragment_to_chatRoomScreenFragmentVersion32"
+            app:destination="@id/chatRoomScreenFragmentVersion3" />
     </fragment>
     <fragment
         android:id="@+id/matchChattingContentsFragment2"
@@ -176,6 +176,15 @@
         android:id="@+id/chatRoomScreenFragmentVersion3"
         android:name="com.example.meetinguniv.chatRoomScreenFragmentVersion3"
         android:label="fragment_chat_room_screen_version3"
-        tools:layout="@layout/fragment_chat_room_screen_version3" />
+        tools:layout="@layout/fragment_chat_room_screen_version3" >
+        <action
+            android:id="@+id/action_chatRoomScreenFragmentVersion3_to_chatRoomContentFragmentVersion2"
+            app:destination="@id/chatRoomContentFragmentVersion2" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatRoomContentFragmentVersion2"
+        android:name="com.example.meetinguniv.ChatRoomContentFragmentVersion2"
+        android:label="fragment_chat_room_content_version2"
+        tools:layout="@layout/fragment_chat_room_content_version2" />
 
 </navigation>

@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorCenter"
-    tools:context=".ChatRoomContentFragment" >
+    tools:context=".ChatRoomContentFragment">
 
     <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="410dp"
         android:layout_height="55dp"
         android:orientation="horizontal"
@@ -17,6 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
+
+        <Button
+            android:id="@+id/button13"
+            android:layout_width="wrap_content"
+            android:layout_height="57dp"
+            android:layout_weight="1"
+            android:background="#DF7474"
+            android:text="전송" />
 
         <EditText
             android:id="@+id/editTextTextPersonName4"
@@ -31,25 +40,18 @@
             android:paddingTop="15dp"
             android:text="Name" />
 
-        <Button
-            android:id="@+id/button13"
-            android:layout_width="wrap_content"
-            android:layout_height="57dp"
-            android:layout_weight="1"
-            android:background="#DF7474"
-            android:text="전송" />
-
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView60"
-        android:layout_width="311dp"
-        android:layout_height="246dp"
-        android:layout_marginTop="16dp"
-        android:background="#FF0000"
-        android:text="TextView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/recycleritem_otherchat" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

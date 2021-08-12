@@ -16,6 +16,9 @@
         >
         <activity android:name=".login.LoginActivity"></activity>
         <activity android:name=".main.MainActivity" />
+        <activity android:name=".ChatRoomContentFragment"
+            android:windowSoftInputMode="adjustResize"
+            tools:ignore="Instantiatable" />
         <activity android:name=".Intro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

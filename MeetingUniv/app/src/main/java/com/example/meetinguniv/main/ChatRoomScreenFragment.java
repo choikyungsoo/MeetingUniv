@@ -33,8 +33,9 @@ public class ChatRoomScreenFragment extends Fragment implements View.OnClickList
     private ConstraintLayout basePage;
     private LinearLayout menuPage;
     private ImageView menubtn;
-    private RecyclerView recyclerView;
+
     private EditText editText;
+    private RecyclerView recyclerView;
     private ChatRoomRecyclerAdapter chatRoomRecyclerAdapter;
     private ChatRoomRecyclerItem chatRoomRecyclerItem;
 
