@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_mainFragment_to_chatRoomScreenFragmentVersion2"
             app:destination="@id/chatRoomScreenFragmentVersion2" />
+        <action
+            android:id="@+id/action_mainFragment_to_chatRoomScreenFragmentVersion3"
+            app:destination="@id/chatRoomScreenFragmentVersion3" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
@@ -93,6 +96,9 @@
         <action
             android:id="@+id/action_personalChattingContentsFragment_to_floatingFriendsListContentFragment"
             app:destination="@id/floatingFriendsListContentFragment" />
+        <action
+            android:id="@+id/action_personalChattingContentsFragment_to_chatRoomScreenFragmentVersion3"
+            app:destination="@id/chatRoomScreenFragmentVersion3" />
         <action
             android:id="@+id/action_personalChattingContentsFragment_to_chatRoomScreenFragmentVersion2"
             app:destination="@id/chatRoomScreenFragmentVersion2" />
@@ -166,5 +172,10 @@
         android:name="com.example.meetinguniv.ChatRoomContentFragment"
         android:label="fragment_chat_room_content"
         tools:layout="@layout/fragment_chat_room_content" />
+    <fragment
+        android:id="@+id/chatRoomScreenFragmentVersion3"
+        android:name="com.example.meetinguniv.chatRoomScreenFragmentVersion3"
+        android:label="fragment_chat_room_screen_version3"
+        tools:layout="@layout/fragment_chat_room_screen_version3" />
 
 </navigation>

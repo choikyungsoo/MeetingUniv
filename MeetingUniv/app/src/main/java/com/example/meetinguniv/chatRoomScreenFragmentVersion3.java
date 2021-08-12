@@ -9,14 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-
-public class ChatRoomContentFragment extends Fragment {
+public class chatRoomScreenFragmentVersion3 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_chat_room_content, container, false);
+        View view =  inflater.inflate(R.layout.fragment_chat_room_screen_version3, container, false);
 //        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         return view;
     }
