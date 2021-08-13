@@ -48,13 +48,16 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
         this.logout = this.findPreference("logout");
         this.withdrawal = this.findPreference("withdrawal");
 
+        CheckedChangeHandler checkedChangeHandler = new CheckedChangeHandler();
         this.CSP = new CustomSwitchPreference();
-        this.onoff = this.CSP.verfiyonoff();
-        if(this.onoff == 1){
-            Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
-        } else{
-            Toast.makeText(getContext(), "0입니다", Toast.LENGTH_SHORT).show();
-        }
+
+        this.CSP.verfiyonoff(checkedChangeHandler);
+
+//        if(this.onoff == 1){
+//            Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
+//        } else{
+//            Toast.makeText(getContext(), "0입니다", Toast.LENGTH_SHORT).show();
+//        }
         this.my_information.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -145,5 +148,18 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
             }
         });
 
+    }
+
+    public class CheckedChangeHandler implements CompoundButton.OnCheckedChangeListener {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if(isChecked){
+                onoff = 1;
+                Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
+            } else {
+                onoff = 0;
+                Toast.makeText(getContext(), "0입니다", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
