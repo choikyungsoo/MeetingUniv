@@ -21,14 +21,14 @@ public class PersonalInfoAgreementContentFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_personal_info_agreement_content, container, false);
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        Button ToServiceInfoFromPersonalInfoAgreement_BTN = view.findViewById(R.id.ToServiceInfoFromPersonalInfoAgreement_BTN);
-        ToServiceInfoFromPersonalInfoAgreement_BTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_personalInfoAgreementScreenFragment_to_serviceInfoContentFragment);
-            }
-        });
-    }
+//    @Override
+//    public void onViewCreated(View view, Bundle savedInstanceState) {
+//        Button ToServiceInfoFromPersonalInfoAgreement_BTN = view.findViewById(R.id.ToServiceInfoFromPersonalInfoAgreement_BTN);
+//        ToServiceInfoFromPersonalInfoAgreement_BTN.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Navigation.findNavController(view).navigate(R.id.action_personalInfoAgreementScreenFragment_to_serviceInfoContentFragment);
+//            }
+//        });
+//    }
 }

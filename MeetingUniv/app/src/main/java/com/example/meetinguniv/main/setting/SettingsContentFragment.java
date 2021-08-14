@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreference;
 
 import com.example.meetinguniv.R;
 import com.example.meetinguniv.login.LoginActivity;
@@ -28,6 +29,7 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
     private Preference service_information;
     private Preference logout;
     private Preference withdrawal;
+    private SwitchPreference alarmTest;
 
     private CustomSwitchPreference CSP;
     private int onoff;
@@ -48,13 +50,28 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
         this.logout = this.findPreference("logout");
         this.withdrawal = this.findPreference("withdrawal");
 
+        CheckedChangeHandler checkedChangeHandler = new CheckedChangeHandler();
         this.CSP = new CustomSwitchPreference();
-        this.onoff = this.CSP.verfiyonoff();
-        if(this.onoff == 1){
-            Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
-        } else{
-            Toast.makeText(getContext(), "0입니다", Toast.LENGTH_SHORT).show();
-        }
+
+        this.CSP.verfiyonoff(checkedChangeHandler);
+
+        this.alarmTest = this.findPreference("alarmsettingtest");
+        this.alarmTest.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                if (alarmTest.isChecked()) {
+                    Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "0입니다", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+//        if(this.onoff == 1){
+//            Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
+//        } else{
+//            Toast.makeText(getContext(), "0입니다", Toast.LENGTH_SHORT).show();
+//        }
         this.my_information.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -145,5 +162,18 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
             }
         });
 
+    }
+
+    public class CheckedChangeHandler implements CompoundButton.OnCheckedChangeListener {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if(isChecked){
+                onoff = 1;
+                Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
+            } else {
+                onoff = 0;
+                Toast.makeText(getContext(), "0입니다", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

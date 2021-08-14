@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,6 +40,7 @@ public class ChatRoomScreenFragment extends Fragment implements View.OnClickList
     private RecyclerView recyclerView;
     private ChatRoomRecyclerAdapter chatRoomRecyclerAdapter;
     private ChatRoomRecyclerItem chatRoomRecyclerItem;
+    private Button backFromChatRoom_BTN;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,10 +77,14 @@ public class ChatRoomScreenFragment extends Fragment implements View.OnClickList
 
 //        this.editText = view.findViewById(R.id.textView14);
 
+        this.backFromChatRoom_BTN = view.findViewById(R.id.backFromChatRoom_BTN);
+
         this.menubtn.setOnClickListener(this);
         this.basePage.setOnClickListener(this);
         this.menuPage.setOnClickListener(this);
+        this.backFromChatRoom_BTN.setOnClickListener(this);
 //        this.editText.setOnClickListener(this);
+
     }
 
     private void addRecyclerItem(String message, int viewType) {
@@ -104,6 +111,10 @@ public class ChatRoomScreenFragment extends Fragment implements View.OnClickList
                 break;
             case R.id.menuPage:
                 menuPage.setVisibility(View.VISIBLE);
+                break;
+            case R.id.backFromChatRoom_BTN:
+                Navigation.findNavController(v).navigate(R.id.action_chatRoomScreenFragment_to_mainFragment);
+                break;
 //            case R.id.textView14:
 //                InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 //                this.editText.requestFocus();

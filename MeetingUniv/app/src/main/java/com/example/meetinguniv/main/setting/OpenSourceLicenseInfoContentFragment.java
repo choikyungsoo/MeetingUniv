@@ -21,14 +21,14 @@ public class OpenSourceLicenseInfoContentFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_open_source_license_info_content, container, false);
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        Button ToServiceInfoFromOpenSourceLicenseInfo_BTN = view.findViewById(R.id.ToServiceInfoFromOpenSourceLicenseInfo_BTN);
-        ToServiceInfoFromOpenSourceLicenseInfo_BTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_openSourceLicenseInfoScreenFragment_to_serviceInfoContentFragment);
-            }
-        });
-    }
+//    @Override
+//    public void onViewCreated(View view, Bundle savedInstanceState) {
+//        Button ToServiceInfoFromOpenSourceLicenseInfo_BTN = view.findViewById(R.id.ToServiceInfoFromOpenSourceLicenseInfo_BTN);
+//        ToServiceInfoFromOpenSourceLicenseInfo_BTN.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Navigation.findNavController(view).navigate(R.id.action_openSourceLicenseInfoScreenFragment_to_serviceInfoContentFragment);
+//            }
+//        });
+//    }
 }

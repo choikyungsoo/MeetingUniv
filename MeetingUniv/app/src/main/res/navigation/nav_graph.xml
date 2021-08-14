@@ -87,7 +87,11 @@
         android:id="@+id/chatRoomScreenFragment"
         android:name="com.example.meetinguniv.main.ChatRoomScreenFragment"
         android:label="fragment_chat_room_screen"
-        tools:layout="@layout/fragment_chat_room_screen" />
+        tools:layout="@layout/fragment_chat_room_screen" >
+        <action
+            android:id="@+id/action_chatRoomScreenFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/personalChattingContentsFragment"
         android:name="com.example.meetinguniv.main.PersonalChattingContentFragment"

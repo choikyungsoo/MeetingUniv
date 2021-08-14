@@ -21,14 +21,14 @@ public class LocationInfoAgreementContentFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_location_info_agreement_content, container, false);
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        Button ToServiceInfoFromLocationInfoAgreement_BTN = view.findViewById(R.id.ToServiceInfoFromLocationInfoAgreement_BTN);
-        ToServiceInfoFromLocationInfoAgreement_BTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_locationInfoAgreementScreenFragment_to_serviceInfoContentFragment);
-            }
-        });
-    }
+//    @Override
+//    public void onViewCreated(View view, Bundle savedInstanceState) {
+//        Button ToServiceInfoFromLocationInfoAgreement_BTN = view.findViewById(R.id.ToServiceInfoFromLocationInfoAgreement_BTN);
+//        ToServiceInfoFromLocationInfoAgreement_BTN.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Navigation.findNavController(view).navigate(R.id.action_locationInfoAgreementScreenFragment_to_serviceInfoContentFragment);
+//            }
+//        });
+//    }
 }

@@ -17,20 +17,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/ToServiceInfoFromServiceAgreementInfo_BTN"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#FFFFFF"
-                    android:text="전"
-                    android:textColor="#000000" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/textView11"
@@ -41,10 +29,6 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5" />
             </LinearLayout>
 
             <Space

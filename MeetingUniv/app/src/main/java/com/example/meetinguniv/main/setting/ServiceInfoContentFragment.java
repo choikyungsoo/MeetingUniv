@@ -57,14 +57,14 @@ public class ServiceInfoContentFragment extends PreferenceFragmentCompat {
                 return true;
             }
         });
-        Preference ToSettingContentFromServiceInfo_BTN = this.findPreference("ToSettingContentFromServiceInfo_BTN");
-        ToSettingContentFromServiceInfo_BTN.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                Navigation.findNavController(view).navigate(R.id.action_serviceInfoContentFragment_to_settingsContentFragment);
-                return true;
-            }
-        });
+//        Preference ToSettingContentFromServiceInfo_BTN = this.findPreference("ToSettingContentFromServiceInfo_BTN");
+//        ToSettingContentFromServiceInfo_BTN.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+//            @Override
+//            public boolean onPreferenceClick(Preference preference) {
+//                Navigation.findNavController(view).navigate(R.id.action_serviceInfoContentFragment_to_settingsContentFragment);
+//                return true;
+//            }
+//        });
 //        Button button = view.findViewById(R.id.button13);
 //        button.setOnClickListener(new View.OnClickListener() {
 //            @Override

@@ -19,14 +19,14 @@ public class ServiceAgreementInfoContentFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_service_agreement_info_content, container, false);
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        Button ToServiceInfoFromServiceAgreementInfo_BTN = view.findViewById(R.id.ToServiceInfoFromServiceAgreementInfo_BTN);
-        ToServiceInfoFromServiceAgreementInfo_BTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_serviceAgreementInfoScreenFragment_to_serviceInfoContentFragment);
-            }
-        });
-    }
+//    @Override
+//    public void onViewCreated(View view, Bundle savedInstanceState) {
+//        Button ToServiceInfoFromServiceAgreementInfo_BTN = view.findViewById(R.id.ToServiceInfoFromServiceAgreementInfo_BTN);
+//        ToServiceInfoFromServiceAgreementInfo_BTN.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Navigation.findNavController(view).navigate(R.id.action_serviceAgreementInfoScreenFragment_to_serviceInfoContentFragment);
+//            }
+//        });
+//    }
 }
