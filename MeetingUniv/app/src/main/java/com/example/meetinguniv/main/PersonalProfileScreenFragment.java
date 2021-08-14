@@ -100,29 +100,19 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
     public class ClickHandler implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            ChangePersonalProfileImageDialog changePersonalProfileImageDialog = new ChangePersonalProfileImageDialog(getActivity());
-            Dialog dlg = changePersonalProfileImageDialog.getDlg();
 //            View cameraBTN = changePersonalProfileImageDialog.getCameraBTN();
 //            View albumBTN = changePersonalProfileImageDialog.getAlbumBTN();
 //            View cancelBTN = changePersonalProfileImageDialog.getAlbumBTN();
 
             if (v.getId() == R.id.changeProfileImage_cameraBTN) {
-//                dlg.dismiss();
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, TAKE_PICTURE);
-                changePersonalProfileImageDialog.dismissDlg();
-
-//                changePersonalProfileImageDialog.dismissDlg();
             } else if (v.getId() == R.id.changeProfileImage_albumBTN) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                 startActivityForResult(intent, 200);
-                changePersonalProfileImageDialog.dismissDlg();
-
-            } else {
-                Toast.makeText(getContext(), "비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show();
-                changePersonalProfileImageDialog.dismissDlg();
             }
+            v.getRootView().setVisibility(View.GONE);
         }
     }
 
