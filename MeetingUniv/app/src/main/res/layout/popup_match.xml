@@ -148,7 +148,7 @@
                 android:textSize="20sp" />
 
             <Spinner
-                android:id="@+id/spinner6"
+                android:id="@+id/UniversitySpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="17" />

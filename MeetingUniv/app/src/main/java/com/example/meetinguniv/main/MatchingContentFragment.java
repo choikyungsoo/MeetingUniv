@@ -10,17 +10,28 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.meetinguniv.R;
 import com.google.android.material.slider.RangeSlider;
 
 import org.jetbrains.annotations.NotNull;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class MatchingContentFragment extends Fragment implements View.OnClickListener, RangeSlider.OnChangeListener {
@@ -31,6 +42,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     private RangeSlider rangeSlider;
     private TextView ageFrom;
     private TextView ageTo;
+    private Spinner univSpinner;
 
     private float valueFrom;
     private float valueTo;
@@ -38,6 +50,13 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     private ArrayList<TeamMemberRecyclerItem> list = new ArrayList<TeamMemberRecyclerItem>();
     private ArrayList<Float> ageRange = new ArrayList<Float>();
     private View dialogView;
+
+    private String location;
+    private String schoolName;
+
+    private ArrayList<String> schoolNames = new ArrayList<String>();
+
+    private boolean inSchoolName = false;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -57,6 +76,64 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         }
         recyclerItemAdapter.notifyDataSetChanged();
 
+
+
+    }
+
+    private void getSchoolNameXmlData() {
+        try {
+            URL url = new URL("http://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=39e99a147405ffbc1ef3a36fee8a8ac9&svcType=api&svcCode=SCHOOL&contentType=xml&gubun=univ_list&thisPage=1&perPage=433");
+//            InputStream is= url.openStream();
+
+            XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
+            XmlPullParser parser = parserCreator.newPullParser();
+
+//            parser.setInput(new InputStreamReader(is, "UTF-8"));
+            parser.setInput(url.openStream(), "UTF-8"); //문제 발생
+
+//            parser.next();
+            int parserEvent = parser.getEventType();
+            Log.i("parsing", "파싱 시작");
+
+            while (parserEvent != XmlPullParser.END_DOCUMENT) {
+                switch(parserEvent) {
+                    case XmlPullParser.START_TAG:
+                        if(parser.getName().equals("schoolName")) {
+                            this.inSchoolName = true;
+                        }
+                        break;
+
+                    case XmlPullParser.TEXT:
+                        if(this.inSchoolName) {
+                            this.schoolName = parser.getText();
+                            this.inSchoolName = false;
+                        }
+                        break;
+
+                    case XmlPullParser.END_TAG:
+                        if(parser.getName().equals("content")) {
+                            this.schoolNames.add(this.schoolName);
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, this.schoolNames);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                            this.univSpinner.setAdapter(adapter);
+                            this.univSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                }
+                            });
+                        }
+                        break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void addRecyclerItem(int profile){
@@ -101,7 +178,29 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                 this.ageFrom = this.dialogView.findViewById(R.id.valueFrom);
                 this.ageTo = this.dialogView.findViewById(R.id.valueTo);
                 this.rangeSlider = this.dialogView.findViewById(R.id.rangeSlider);
+                this.univSpinner = this.dialogView.findViewById(R.id.UniversitySpinner);
+
                 this.rangeSlider.addOnChangeListener(this);
+
+                //using API
+                getSchoolNameXmlData();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+//                location = getLocationXmlData();
+//                        schoolName = getSchoolNameXmlData();
+                        getSchoolNameXmlData();
+                        Log.i("parsing", "파싱 완료");
+
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+//                        ArrayList<String> adapter = new ArrayList<String>(R.Layout.)
+//                        univSpinner.
+                            }
+                        });
+                    }
+                });
         }
     }
 
