@@ -55,7 +55,7 @@ public class CustomSwitchPreference extends Fragment {
     }
 
     public void verfiyonoff(SettingsContentFragment.CheckedChangeHandler checkedChangeHandler) {
-        this.customswitch = view.findViewById(R.id.customswitch);
+//        this.customswitch = view.findViewById(R.id.customswitch);
 
         if(this.customswitch != null) {
             this.customswitch.setOnCheckedChangeListener(checkedChangeHandler);
