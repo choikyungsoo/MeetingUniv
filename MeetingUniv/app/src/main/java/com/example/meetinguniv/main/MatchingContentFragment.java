@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,59 +82,72 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     }
 
     private void getSchoolNameXmlData() {
-        try {
-            URL url = new URL("http://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=39e99a147405ffbc1ef3a36fee8a8ac9&svcType=api&svcCode=SCHOOL&contentType=xml&gubun=univ_list&thisPage=1&perPage=433");
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            //your codes here
+            try {
+
+                URL url = new URL("https://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=39e99a147405ffbc1ef3a36fee8a8ac9&svcType=api&svcCode=SCHOOL&contentType=xml&gubun=univ_list&thisPage=1&perPage=433");
 //            InputStream is= url.openStream();
 
-            XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
-            XmlPullParser parser = parserCreator.newPullParser();
+                XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
+                XmlPullParser parser = parserCreator.newPullParser();
 
 //            parser.setInput(new InputStreamReader(is, "UTF-8"));
-            parser.setInput(url.openStream(), "UTF-8"); //문제 발생
+                parser.setInput(url.openStream(), "UTF-8"); //문제 발생
 
 //            parser.next();
-            int parserEvent = parser.getEventType();
-            Log.i("parsing", "파싱 시작");
+                int parserEvent = parser.getEventType();
+                Log.i("parsing", "파싱 시작");
 
-            while (parserEvent != XmlPullParser.END_DOCUMENT) {
-                switch(parserEvent) {
-                    case XmlPullParser.START_TAG:
-                        if(parser.getName().equals("schoolName")) {
-                            this.inSchoolName = true;
-                        }
-                        break;
+                while (parserEvent != XmlPullParser.END_DOCUMENT) {
+                    switch(parserEvent) {
+                        case XmlPullParser.START_DOCUMENT:
+                            break;
+                        case XmlPullParser.START_TAG:
+                            if(parser.getName().equals("schoolName")) {
+                                this.inSchoolName = true;
+                            }
+                            break;
 
-                    case XmlPullParser.TEXT:
-                        if(this.inSchoolName) {
-                            this.schoolName = parser.getText();
-                            this.inSchoolName = false;
-                        }
-                        break;
+                        case XmlPullParser.TEXT:
+                            if(this.inSchoolName) {
+                                this.schoolName = parser.getText();
+                                this.inSchoolName = false;
+                            }
+                            break;
 
-                    case XmlPullParser.END_TAG:
-                        if(parser.getName().equals("content")) {
-                            this.schoolNames.add(this.schoolName);
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, this.schoolNames);
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-                            this.univSpinner.setAdapter(adapter);
-                            this.univSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                @Override
-                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        case XmlPullParser.END_TAG:
+                            if(parser.getName().equals("content")) {
+                                this.schoolNames.add(this.schoolName);
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, this.schoolNames);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                                this.univSpinner.setAdapter(adapter);
+                                this.univSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                                }
+                                    }
 
-                                @Override
-                                public void onNothingSelected(AdapterView<?> parent) {
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
 
-                                }
-                            });
-                        }
-                        break;
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    parserEvent = parser.next();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+
     }
 
     private void addRecyclerItem(int profile){
