@@ -1,18 +1,24 @@
 package com.example.meetinguniv.main;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.opengl.Visibility;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,8 +111,29 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
 //            View cancelBTN = changePersonalProfileImageDialog.getAlbumBTN();
 
             if (v.getId() == R.id.changeProfileImage_cameraBTN) {
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, TAKE_PICTURE);
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if(getActivity().checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                        Log.d(TAG, "권한 설정 완료");
+                        Toast.makeText(getContext(), "권한 설정?", Toast.LENGTH_SHORT).show();
+
+                        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(cameraIntent, TAKE_PICTURE);
+                    } else {
+                        Log.d(TAG, "권한 설정 요청");
+                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                        Toast.makeText(getContext(), "222", Toast.LENGTH_SHORT).show();
+
+                        if(getActivity().checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                            Log.d(TAG, "권한 설정 완료");
+                            Toast.makeText(getContext(), "권한 설정?", Toast.LENGTH_SHORT).show();
+
+                            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                            startActivityForResult(cameraIntent, TAKE_PICTURE);
+                        }
+                    }
+                }
+
             } else if (v.getId() == R.id.changeProfileImage_albumBTN) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
@@ -128,6 +155,16 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
                     this.personal_profile_image.setImageBitmap(bitmap);
                 }
             }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Log.d(TAG, "onRequestPermissionsResult");
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED
+                && grantResults[1] == PackageManager.PERMISSION_GRANTED ) {
+            Log.d(TAG, "Permission: " + permissions[0] + "was " + grantResults[0]);
         }
     }
 }
