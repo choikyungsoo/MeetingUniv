@@ -26,10 +26,10 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
 
     private Preference my_information;
     private Preference alarm;
+    private Preference alarmTest;
     private Preference service_information;
     private Preference logout;
     private Preference withdrawal;
-    private SwitchPreference alarmTest;
 
     private CustomSwitchPreference CSP;
     private int onoff;
@@ -46,6 +46,7 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
 
         this.my_information = this.findPreference("my_information");
         this.alarm = this.findPreference("alarmsetting");
+        this.alarmTest = this.findPreference("alarmsetting_test");
         this.service_information = this.findPreference("service_information");
         this.logout = this.findPreference("logout");
         this.withdrawal = this.findPreference("withdrawal");
@@ -55,18 +56,20 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
 
         this.CSP.verfiyonoff(checkedChangeHandler);
 
-        this.alarmTest = this.findPreference("alarmsettingtest");
-        this.alarmTest.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                if (alarmTest.isChecked()) {
-                    Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getContext(), "0입니다", Toast.LENGTH_SHORT).show();
-                }
-                return true;
-            }
-        });
+//        this.alarmTest = this.findPreference("alarmsettingtest");
+//        this.alarmTest.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+//            @Override
+//            public boolean onPreferenceClick(Preference preference) {
+//                if (alarmTest.isChecked()) {
+//                    Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    Toast.makeText(getContext(), "0입니다", Toast.LENGTH_SHORT).show();
+//                }
+//                return true;
+//            }
+//        });
+
+
 //        if(this.onoff == 1){
 //            Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
 //        } else{
@@ -86,6 +89,15 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
                 return true;
             }
         });
+        ///////////////////
+        this.alarmTest.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Navigation.findNavController(view).navigate(R.id.action_settingsContentFragment_to_alarmSettingElementFragment3);
+                return true;
+            }
+        });
+        //////////////////
         this.service_information.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {

@@ -1,0 +1,27 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        android:title="알림"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="alarmOnAndOff"
+            android:title="알림 켜기/끄기"
+            app:iconSpaceReserved="false" />
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/alarmmodeset"
+            android:entryValues="@array/alarmmodeset_values"
+            android:key="alarm_modeSetting"
+            android:title="알림 모드"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:defaultValue="false"
+            android:key="alarm_songSetting"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="알림음 설정"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -7,13 +7,13 @@
             app:key="my_information"
             app:title="내 정보"></Preference>
         <Preference
-            android:layout="@layout/fragment_custom_switchpreference"
+            android:title="알림"
+            app:iconSpaceReserved="false"
             app:key="alarmsetting"></Preference>
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="alarmsettingtest"
+        <Preference
             android:title="알림test"
-            app:iconSpaceReserved="false" />
+            app:iconSpaceReserved="false"
+            app:key="alarmsetting_test"></Preference>
         <Preference
             app:iconSpaceReserved="false"
             app:key="faq"

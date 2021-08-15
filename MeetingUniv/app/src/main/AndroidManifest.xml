@@ -4,7 +4,18 @@
     package="com.example.meetinguniv">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> -->
+    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -14,13 +25,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MeetingUniv"
         android:usesCleartextTraffic="true">
+<!--        <service-->
+<!--            android:name=".FirebaseMessage"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true"></service>-->
+
         <activity
             android:name=".main.ChatRoomScreenFragment"
             android:windowSoftInputMode="adjustPan|adjustResize"
-            tools:ignore="Instantiatable"></activity>
-        <activity android:name=".login.LoginActivity"></activity>
+            tools:ignore="Instantiatable" />
+        <activity android:name=".login.LoginActivity" />
         <activity android:name=".main.MainActivity" />
-        <activity android:name=".ChatRoomContentFragment"
+        <activity
+            android:name=".ChatRoomContentFragment"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="Instantiatable" />
         <activity android:name=".Intro">
@@ -34,31 +51,20 @@
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.mydomain.fileprovider"
-            android:exported="false" android:grantUriPermissions="true">
-            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/external" />
         </provider>
 
-<!--        <provider-->
-<!--            android:name="androidx.core.content.FileProvider"-->
-<!--            android:authorities="com.example.meetinguniv.fileprovider"-->
-<!--            android:exported="false"-->
-<!--            android:grantUriPermissions="true">-->
-<!--            <meta-data-->
-<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
-<!--                android:resource="@xml/external" />-->
-<!--        </provider>-->
+        // firebase 푸시 알림
+        <service
+            android:name=".FirebaseMessage"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
-
-<!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
-<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-feature android:name="android.hardware.camera" android:required="true"/>
-
-
-    <uses-feature android:name="android.hardware.camera"
-                  android:required="true" />
 </manifest>
