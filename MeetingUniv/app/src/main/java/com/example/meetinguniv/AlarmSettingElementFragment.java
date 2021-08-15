@@ -1,7 +1,9 @@
 package com.example.meetinguniv;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -23,6 +25,7 @@ public class AlarmSettingElementFragment extends PreferenceFragmentCompat {
     private ListPreference alarmMode;
     private Preference alarmSong;
 
+    private AudioManager audioManager;
     private String TAG = "FirebaseService";
     private String FCM_TOPIC_NAME = "allowPushNotification";
 
@@ -34,6 +37,19 @@ public class AlarmSettingElementFragment extends PreferenceFragmentCompat {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+
+        audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
+
+        if (audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
+            // 벨소리 모드일 경우
+        } else if (audioManager.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE) {
+            // 진동 모드일 경우
+        } else if (audioManager.getRingerMode() == AudioManager.RINGER_MODE_SILENT) {
+            // 무음 모드일 경우
+
+        }
 
         FirebaseMessaging firebaseMessaging = FirebaseMessaging.getInstance();
 
@@ -79,10 +95,13 @@ public class AlarmSettingElementFragment extends PreferenceFragmentCompat {
     public void setAlarmMode(String selectedAlarmMode) {
         if (selectedAlarmMode.equals("0")) {
             Toast.makeText(getContext(), "소리+진동", Toast.LENGTH_SHORT).show();
+            this.audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
         } else if (selectedAlarmMode.equals("1")) {
             Toast.makeText(getContext(), "소리만", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getContext(), "진동만", Toast.LENGTH_SHORT).show();
+            this.audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
         }
     }
+
 }
