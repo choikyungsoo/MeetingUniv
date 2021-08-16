@@ -19,14 +19,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
-        <Button
-            android:id="@+id/button13"
-            android:layout_width="wrap_content"
-            android:layout_height="57dp"
-            android:layout_weight="1"
-            android:background="#DF7474"
-            android:text="전송" />
-
         <EditText
             android:id="@+id/editTextTextPersonName4"
             android:layout_width="349dp"
@@ -39,6 +31,14 @@
             android:paddingLeft="10dp"
             android:paddingTop="15dp"
             android:text="Name" />
+
+        <Button
+            android:id="@+id/button13"
+            android:layout_width="wrap_content"
+            android:layout_height="57dp"
+            android:layout_weight="1"
+            android:background="#DF7474"
+            android:text="전송" />
 
     </LinearLayout>
 
