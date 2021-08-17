@@ -196,7 +196,7 @@ public class JoinAgreementScreenFragment extends Fragment {
             public void onClick(View v) {
                 if (meetingUnivAgreementCheckbox.isChecked() && personalInfoAgreementCheckbox.isChecked()
                         && locationInfoAgreementCheckbox.isChecked()) {
-                    Navigation.findNavController(view).navigate(R.id.action_joinAgreementScreenFragment_to_joinPersonalInfoScreenFragment);
+                    Navigation.findNavController(view).navigate(R.id.action_joinAgreementScreenFragment_to_joinPhoneVerfiyImportScreenFragment);
 //                    gotojoinPersonalInfoScreen();
                 } else {
                     Toast.makeText(getContext(), "필수 약관에 모두 동의하세요.", Toast.LENGTH_SHORT).show();
