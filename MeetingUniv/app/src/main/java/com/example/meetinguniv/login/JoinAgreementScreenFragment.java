@@ -17,11 +17,6 @@ import android.widget.Toast;
 
 import com.example.meetinguniv.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link JoinAgreementScreenFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class JoinAgreementScreenFragment extends Fragment {
     private CheckBox meetingUnivAgreementCheckbox, personalInfoAgreementCheckbox,
             locationInfoAgreementCheckbox, promotionInfoAgreementCheckbox, allAgreementCheckbox;
@@ -33,45 +28,8 @@ public class JoinAgreementScreenFragment extends Fragment {
     private FragmentTransaction fragmentTransaction;
     private JoinPersonalInfoScreenFragment joinPersonalInfoScreenFragment;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private User user;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public JoinAgreementScreenFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment JoinScreenFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static JoinAgreementScreenFragment newInstance(String param1, String param2) {
-        JoinAgreementScreenFragment fragment = new JoinAgreementScreenFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,6 +42,8 @@ public class JoinAgreementScreenFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        this.user = new User();
+
         meetingUnivAgreementCheckbox = view.findViewById(R.id.meetingUnivAgreementCheckbox);
         meetingUnivAgreementContent = view.findViewById(R.id.meetingUnivAgreementContent);
         personalInfoAgreementCheckbox = view.findViewById(R.id.personalInfoAgreementCheckbox);
@@ -93,6 +53,11 @@ public class JoinAgreementScreenFragment extends Fragment {
         promotionInfoAgreementCheckbox = view.findViewById(R.id.promotionInfoAgreementCheckbox);
         promotionInfoAgreementContent = view.findViewById(R.id.promotionInfoAgreementContent);
         allAgreementCheckbox = view.findViewById(R.id.allAgreementCheckbox);
+
+        this.user.setMeetingUnivAgreementCheckbox(meetingUnivAgreementCheckbox.isChecked());
+        this.user.setPersonalInfoAgreementCheckbox(personalInfoAgreementCheckbox.isChecked());
+        this.user.setLocationInfoAgreementCheckbox(locationInfoAgreementCheckbox.isChecked());
+        this.user.setPromotionInfoAgreementCheckbox(promotionInfoAgreementCheckbox.isChecked());
 
         meetingUnivAgreementCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +74,7 @@ public class JoinAgreementScreenFragment extends Fragment {
                         allAgreementCheckbox.setChecked(false);
                     }
                 }
+                user.setMeetingUnivAgreementCheckbox(meetingUnivAgreementCheckbox.isChecked());
             }
         });
         personalInfoAgreementCheckbox.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +92,7 @@ public class JoinAgreementScreenFragment extends Fragment {
                         allAgreementCheckbox.setChecked(false);
                     }
                 }
+                user.setPersonalInfoAgreementCheckbox(personalInfoAgreementCheckbox.isChecked());
             }
         });
         locationInfoAgreementCheckbox.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +110,7 @@ public class JoinAgreementScreenFragment extends Fragment {
                         allAgreementCheckbox.setChecked(false);
                     }
                 }
+                user.setLocationInfoAgreementCheckbox(locationInfoAgreementCheckbox.isChecked());
             }
         });
         promotionInfoAgreementCheckbox.setOnClickListener(new View.OnClickListener() {
@@ -160,6 +128,7 @@ public class JoinAgreementScreenFragment extends Fragment {
                         allAgreementCheckbox.setChecked(false);
                     }
                 }
+                user.setPromotionInfoAgreementCheckbox(promotionInfoAgreementCheckbox.isChecked());
             }
         });
 
@@ -187,6 +156,10 @@ public class JoinAgreementScreenFragment extends Fragment {
                     locationInfoAgreementContent.setVisibility(View.VISIBLE);
                     promotionInfoAgreementContent.setVisibility(View.VISIBLE);
                 }
+                user.setMeetingUnivAgreementCheckbox(meetingUnivAgreementCheckbox.isChecked());
+                user.setPersonalInfoAgreementCheckbox(personalInfoAgreementCheckbox.isChecked());
+                user.setLocationInfoAgreementCheckbox(locationInfoAgreementCheckbox.isChecked());
+                user.setPromotionInfoAgreementCheckbox(promotionInfoAgreementCheckbox.isChecked());
             }
         });
 

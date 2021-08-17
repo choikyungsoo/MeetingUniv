@@ -15,15 +15,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.meetinguniv.R;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class JoinProfileFragment extends Fragment {
     private ImageView join_profile_image;
     private Button go_start;
+    private FirebaseAuth mAuth;//
+    private DatabaseReference mDatabase;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_join_profile, container, false);
     }
 
@@ -43,12 +50,22 @@ public class JoinProfileFragment extends Fragment {
         this.go_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                mAuth.createUserWithEmailAndPassword().addOnCompleteListener(this.getActivity(), task -> {
+//
+//                });
                 Navigation.findNavController(view).navigate(R.id.action_join_profile_to_login);
 //                Intent intent = new Intent(getActivity(), MainActivity.class);
 //                startActivity(intent);
 //                getActivity().finish();
             }
         });
+
+        mAuth = FirebaseAuth.getInstance();//
+        mDatabase = FirebaseDatabase.getInstance().getReference();//
+
+//        Bundle bundle = new Bundle();
+//        bundle.putString(FirebaseAnalytics.Param.METHOD, method);
+//        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SIGN_UP, bundle);
     }
 
     @Override

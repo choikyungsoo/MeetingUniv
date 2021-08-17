@@ -55,8 +55,9 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private JoinProfileFragment joinProfileFragment;
-    ImageView studentIDImage;
-    File file;
+
+    private ImageView studentIDImage;
+    private File file;
 
     final private static String TAG = "GILBOMI"; Button btn_photo; ImageView iv_photo; final static int TAKE_PICTURE = 1; String mCurrentPhotoPath; final static int REQUEST_TAKE_PHOTO = 1;
 
