@@ -73,8 +73,8 @@
         android:label="fragment_show_i_d_screen"
         tools:layout="@layout/fragment_join_agreement_screen" >
         <action
-            android:id="@+id/action_joinAgreementScreenFragment_to_joinPersonalInfoScreenFragment"
-            app:destination="@id/joinPersonalInfoScreenFragment" />
+            android:id="@+id/action_joinAgreementScreenFragment_to_joinPhoneVerfiyImportScreenFragment"
+            app:destination="@id/joinPhoneVerfiyImportScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/joinPersonalInfoScreenFragment"
@@ -84,5 +84,14 @@
         <action
             android:id="@+id/action_joinPersonalInfoScreenFragment_to_join_profile"
             app:destination="@id/join_profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/joinPhoneVerfiyImportScreenFragment"
+        android:name="com.example.meetinguniv.JoinPhoneVerfiyImportScreenFragment"
+        android:label="fragment_join_phone_verfiy_import_screen"
+        tools:layout="@layout/fragment_join_phone_verfiy_import_screen" >
+        <action
+            android:id="@+id/action_joinPhoneVerfiyImportScreenFragment_to_joinPersonalInfoScreenFragment"
+            app:destination="@id/joinPersonalInfoScreenFragment" />
     </fragment>
 </navigation>

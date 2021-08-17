@@ -30,6 +30,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MeetingUniv"
         android:usesCleartextTraffic="true">
+
 <!--        <service-->
 <!--            android:name=".FirebaseMessage"-->
 <!--            android:enabled="true"-->
@@ -39,12 +40,14 @@
             android:name=".main.ChatRoomScreenFragment"
             android:windowSoftInputMode="adjustPan|adjustResize"
             tools:ignore="Instantiatable" />
-        <activity android:name=".login.LoginActivity" />
-        <activity android:name=".main.MainActivity" />
         <activity
             android:name=".ChatRoomContentFragment"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="Instantiatable" />
+        <activity android:name=".login.LoginActivity"></activity>
+        <activity android:name=".main.MainActivity"
+            android:windowSoftInputMode="adjustResize"/>
+
         <activity android:name=".Intro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
