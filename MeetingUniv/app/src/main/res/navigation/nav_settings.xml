@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_settingsContentFragment_to_myInformationSettingContentFragment"
             app:destination="@id/myInformationSettingContentFragment" />
+        <action
+            android:id="@+id/action_settingsContentFragment_to_alarmSettingElementFragment3"
+            app:destination="@id/alarmSettingElementFragment3" />
     </fragment>
     <fragment
         android:id="@+id/alarmSettingElementFragment"
@@ -159,4 +162,8 @@
         android:name="com.example.meetinguniv.main.setting.ChangePhoneNumContentFragment"
         android:label="fragment_change_phone_num_content"
         tools:layout="@layout/fragment_change_phone_num_content" />
+    <fragment
+        android:id="@+id/alarmSettingElementFragment3"
+        android:name="com.example.meetinguniv.AlarmSettingElementFragment"
+        android:label="AlarmSettingElementFragment" />
 </navigation>
