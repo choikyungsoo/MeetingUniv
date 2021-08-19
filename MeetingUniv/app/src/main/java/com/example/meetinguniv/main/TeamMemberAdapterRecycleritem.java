@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,6 +27,17 @@ public class TeamMemberAdapterRecycleritem extends RecyclerView.Adapter<TeamMemb
             super(itemView);
 
             memProfile = itemView.findViewById(R.id.memProfile);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        if(pos == 3){
+                            Toast.makeText(v.getContext(), "설정입니다", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            });
         }
     }
     TeamMemberAdapterRecycleritem(ArrayList<TeamMemberRecyclerItem> list){

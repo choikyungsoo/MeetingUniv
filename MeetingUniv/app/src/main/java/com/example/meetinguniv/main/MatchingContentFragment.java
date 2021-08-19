@@ -72,9 +72,13 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         recyclerView.setLayoutManager(linearLayoutManager);
 
 //        addRecyclerItem(123);
-        for(int i=0; i<4; i++) {
+        //팀원 수와 편집에 따라 변함(유동적으로 변함)
+        for(int i=0; i<3; i++) {
             addRecyclerItem(R.drawable.prot);
         }
+
+        //팀원 편집 아이콘(필수적으로 고정)
+        addRecyclerItem(R.drawable.settingicon);
         recyclerItemAdapter.notifyDataSetChanged();
 
 
