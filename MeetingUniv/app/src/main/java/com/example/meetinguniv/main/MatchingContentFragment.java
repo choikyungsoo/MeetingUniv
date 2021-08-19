@@ -20,7 +20,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.meetinguniv.EditTeamMemberElementFragment;
 import com.example.meetinguniv.R;
 import com.google.android.material.slider.RangeSlider;
 
@@ -59,6 +61,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
     private boolean inSchoolName = false;
 
+    private Boolean cSetting;
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -79,10 +82,28 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
         //팀원 편집 아이콘(필수적으로 고정)
         addRecyclerItem(R.drawable.settingicon);
+        recyclerItemAdapter.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                if(position == 3){
+                    EditTeamMemberElementFragment fragment = new EditTeamMemberElementFragment();
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
+                            .replace(R.id.Framecontainer, fragment)
+                            .commit();
+                    Toast.makeText(getContext(), "설정입니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         recyclerItemAdapter.notifyDataSetChanged();
 
-
-
+    }
+    private void moveToEditFriends(View v) {
+        EditTeamMemberElementFragment fragment2 = new EditTeamMemberElementFragment();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
+                .replace(R.id.Framecontainer, fragment2)
+                .commit();
     }
 
     private void getSchoolNameXmlData() {

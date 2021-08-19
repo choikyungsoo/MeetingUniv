@@ -69,6 +69,10 @@
         <action
             android:id="@+id/action_matchingContentsFragment_to_chooseteamElementFragment"
             app:destination="@id/chooseteamElementFragment" />
+        <action
+            android:id="@+id/action_matchingContentsFragment_to_editTeamMemberElementFragment"
+            app:destination="@id/editTeamMemberElementFragment"
+            app:enterAnim="@anim/translate_up" />
     </fragment>
     <fragment
         android:id="@+id/currentContentsFragment"
@@ -201,5 +205,10 @@
         android:name="com.example.meetinguniv.ChatRoomScreenFragmentVersion4"
         android:label="fragment_chat_room_screen_version4"
         tools:layout="@layout/fragment_chat_room_screen_version4" />
+    <fragment
+        android:id="@+id/editTeamMemberElementFragment"
+        android:name="com.example.meetinguniv.EditTeamMemberElementFragment"
+        android:label="fragment_edit_team_member_element"
+        tools:layout="@layout/fragment_edit_team_member_element" />
 
 </navigation>
