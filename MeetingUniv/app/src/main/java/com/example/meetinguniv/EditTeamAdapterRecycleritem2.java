@@ -1,6 +1,7 @@
 package com.example.meetinguniv;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +24,32 @@ public class EditTeamAdapterRecycleritem2 extends  RecyclerView.Adapter<EditTeam
 
         private ImageView E_memProfile;
         private TextView E_memberlist;
+        private int RecyclerCount;
 
         public viewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             E_memProfile = itemView.findViewById(R.id.chatprofile);
             E_memberlist = itemView.findViewById(R.id.memberlist);
+            RecyclerCount = 0;
+            itemView.setClickable(true);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        RecyclerCount++;
+                        if(RecyclerCount > 0){
+                            if(RecyclerCount %2 == 1){
+                                v.setBackgroundColor(Color.rgb(234,234,234));
+                            } else if(RecyclerCount %2 == 0){
+                                v.setBackgroundColor(Color.WHITE);
+                            }
+                        }
+
+
+                    }
+                }
+            });
         }
     }
     EditTeamAdapterRecycleritem2(ArrayList<EditTeamRecycleritem> alllist) {
