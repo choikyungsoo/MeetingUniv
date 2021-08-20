@@ -4,11 +4,13 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -17,6 +19,7 @@ public class ChatRoomScreenFragmentVersion2 extends Fragment implements View.OnC
     private boolean openMenu = false;
     private LinearLayout basePage;
     private LinearLayout menuPage;
+    private Button C_backBTN;
     private ImageView menubtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,13 +29,14 @@ public class ChatRoomScreenFragmentVersion2 extends Fragment implements View.OnC
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         this.basePage = view.findViewById(R.id.basePage);
         this.menuPage = view.findViewById(R.id.menuPage);
-
+        this.C_backBTN = view.findViewById(R.id.C_Backbutton);
         this.menubtn = view.findViewById(R.id.menubtn);
 
 //        this.editText = view.findViewById(R.id.textView14);
 
         this.menubtn.setOnClickListener(this);
         this.basePage.setOnClickListener(this);
+        this.C_backBTN.setOnClickListener(this);
         this.menuPage.setOnClickListener(this);
         return view;
     }
@@ -51,6 +55,9 @@ public class ChatRoomScreenFragmentVersion2 extends Fragment implements View.OnC
 //                    this.basePage.requestFocus();
 //                    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
                 }
+                break;
+            case R.id.C_Backbutton:
+                Navigation.findNavController(v).navigate(R.id.action_chatRoomScreenFragmentVersion2_to_mainFragment);
                 break;
             case R.id.menuPage:
                 menuPage.setVisibility(View.VISIBLE);

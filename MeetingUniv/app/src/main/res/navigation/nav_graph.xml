@@ -180,6 +180,9 @@
         <action
             android:id="@+id/action_chatRoomScreenFragmentVersion2_to_chatRoomContentFragment"
             app:destination="@id/chatRoomContentFragment" />
+        <action
+            android:id="@+id/action_chatRoomScreenFragmentVersion2_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatRoomContentFragment"

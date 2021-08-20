@@ -7,7 +7,7 @@
     tools:context=".ChatRoomBottomedittext">
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/chatroomET"
         android:layout_width="349dp"
         android:layout_height="55dp"
         android:layout_weight="1"
