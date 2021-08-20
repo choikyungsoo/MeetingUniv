@@ -1,13 +1,8 @@
 package com.example.meetinguniv.main;
 
-import androidx.activity.OnBackPressedDispatcher;
-import androidx.activity.OnBackPressedDispatcherOwner;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Lifecycle;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Space;
@@ -67,30 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
     private long lastTimeBackPressed;
 
-//    public class BackPressHandler implements onBackPressedListener {
-//        @Override
-//        public void onBackPressed() {
-//            //프래그먼트 onBackPressedListener사용
-//            List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
-//            for(Fragment fragment : fragmentList){
-//                if(fragment instanceof onBackPressedListener){
-//                    ((onBackPressedListener)fragment).onBackPressed();
-//                    return;
-//                }
-//            }
-//
-//            //두 번 클릭시 어플 종료
-//            if(System.currentTimeMillis() - lastTimeBackPressed < 1500){
-//                finish();
-//                return;
-//            }
-//            lastTimeBackPressed = System.currentTimeMillis();
-////            Toast.makeText(this,"뒤로 가기 버튼을 한 번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
     @Override
     public void onBackPressed() {
+
         //프래그먼트 onBackPressedListener사용
         List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
         for(Fragment fragment : fragmentList){
@@ -99,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
         }
+
         //두 번 클릭시 어플 종료
         if(System.currentTimeMillis() - lastTimeBackPressed < 1500){
             finish();
@@ -106,5 +81,6 @@ public class MainActivity extends AppCompatActivity {
         }
         lastTimeBackPressed = System.currentTimeMillis();
         Toast.makeText(this,"뒤로 가기 버튼을 한 번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+
     }
 }
