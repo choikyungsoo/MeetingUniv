@@ -91,7 +91,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                             .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
                             .replace(R.id.Framecontainer, fragment)
                             .commit();
-                    Toast.makeText(getContext(), "설정입니다.", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
