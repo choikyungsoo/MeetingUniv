@@ -38,7 +38,7 @@
 
         <activity
             android:name=".main.ChatRoomScreenFragment"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustResize"
             tools:ignore="Instantiatable" />
         <activity
             android:name=".ChatRoomContentFragment"
@@ -47,7 +47,7 @@
         <activity android:name=".login.LoginActivity"
             android:windowSoftInputMode="adjustPan|adjustResize"></activity>
         <activity android:name=".main.MainActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustResize"
            />
 
         <activity android:name=".Intro">
