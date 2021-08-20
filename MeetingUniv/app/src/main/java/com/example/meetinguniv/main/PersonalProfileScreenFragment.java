@@ -15,6 +15,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -114,7 +115,7 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
 
             if (v.getId() == R.id.changeProfileImage_cameraBTN) {
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if(getActivity().checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+                    if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
                             && getActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                             == PackageManager.PERMISSION_GRANTED) {
                         Log.d(TAG, "권한 설정 완료");
@@ -124,15 +125,17 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
 
                         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                         startActivityForResult(cameraIntent, TAKE_PICTURE);
-                    } else if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                    } else if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+//                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
 //                        v.performClick();
-                    } else if (getActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 0);
+                    } else if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+//                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 0);
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, 0);
 //                        v.performClick();
                     } else {
-                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA,
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                        requestPermissions(new String[]{Manifest.permission.CAMERA,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
 //                        v.performClick();
                     }
 
@@ -153,6 +156,8 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
                 startActivityForResult(intent, 200);
             }
             v.getRootView().setVisibility(View.GONE);
+            Toast.makeText(getContext(), "꺼짐", Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -175,12 +180,21 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         Log.d(TAG, "onRequestPermissionsResult");
-        if (grantResults[0] == PackageManager.PERMISSION_GRANTED
-                && grantResults[1] == PackageManager.PERMISSION_GRANTED ) {
-            Toast.makeText(getContext(), "33", Toast.LENGTH_SHORT).show();
+        if (grantResults.length >= 2) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getContext(), "33", Toast.LENGTH_SHORT).show();
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, TAKE_PICTURE);
 //            Log.d(TAG, "Permission: " + permissions[0] + "was " + grantResults[0]);
 //        } else {
 //            Toast.makeText(getContext(), "33", Toast.LENGTH_SHORT).show();
+            }
+        } else if (grantResults.length == 1) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, TAKE_PICTURE);
+            }
         }
-    }
+     }
 }

@@ -1,5 +1,6 @@
 package com.example.meetinguniv;
 
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -38,12 +40,11 @@ public class AlarmSettingElementFragment extends PreferenceFragmentCompat {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-
         audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 
         if (audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
             // 벨소리 모드일 경우
+//            Toast.makeText(getContext(), "소리로", Toast.LENGTH_SHORT).show();
         } else if (audioManager.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE) {
             // 진동 모드일 경우
         } else if (audioManager.getRingerMode() == AudioManager.RINGER_MODE_SILENT) {
@@ -93,9 +94,11 @@ public class AlarmSettingElementFragment extends PreferenceFragmentCompat {
     }
 
     public void setAlarmMode(String selectedAlarmMode) {
+//        NotificationCompat.Builder notiBuilder = new NotificationCompat.Builder(getActivity());
         if (selectedAlarmMode.equals("0")) {
             Toast.makeText(getContext(), "소리+진동", Toast.LENGTH_SHORT).show();
             this.audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+//            notiBuilder.setDefaults(Notification.DEFAULT_SOUND);
         } else if (selectedAlarmMode.equals("1")) {
             Toast.makeText(getContext(), "소리만", Toast.LENGTH_SHORT).show();
         } else {
