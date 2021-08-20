@@ -115,6 +115,7 @@ public class MainFragment extends Fragment {
 //                setFragment(3);
             }
         });
+
     }
 
     public void setFragment(int n) {
