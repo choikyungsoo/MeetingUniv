@@ -5,18 +5,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.meetinguniv.EditTeamMemberElementFragment;
 import com.example.meetinguniv.R;
 
 public class TeamMemberAdapterRecycleritem extends RecyclerView.Adapter<TeamMemberAdapterRecycleritem.viewHolder> {
     private ArrayList<TeamMemberRecyclerItem> mData;
+    private OnItemClickListener mListener = null;
+    private Boolean settingc;
+
+    public interface OnItemClickListener{
+        void onItemClick(View v, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.mListener = listener;
+    }
+
 
     public class viewHolder extends RecyclerView.ViewHolder {
 
@@ -26,8 +40,20 @@ public class TeamMemberAdapterRecycleritem extends RecyclerView.Adapter<TeamMemb
             super(itemView);
 
             memProfile = itemView.findViewById(R.id.memProfile);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        if(mListener != null){
+                            mListener.onItemClick(v,pos);
+                        }
+                    }
+                }
+            });
         }
     }
+
     TeamMemberAdapterRecycleritem(ArrayList<TeamMemberRecyclerItem> list){
         mData = list;
     }

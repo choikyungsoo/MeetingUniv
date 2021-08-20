@@ -38,15 +38,17 @@
 
         <activity
             android:name=".main.ChatRoomScreenFragment"
-            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:windowSoftInputMode="adjustResize"
             tools:ignore="Instantiatable" />
         <activity
             android:name=".ChatRoomContentFragment"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="Instantiatable" />
-        <activity android:name=".login.LoginActivity"></activity>
+        <activity android:name=".login.LoginActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize"></activity>
         <activity android:name=".main.MainActivity"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize"
+           />
 
         <activity android:name=".Intro">
             <intent-filter>

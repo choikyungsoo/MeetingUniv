@@ -69,6 +69,10 @@
         <action
             android:id="@+id/action_matchingContentsFragment_to_chooseteamElementFragment"
             app:destination="@id/chooseteamElementFragment" />
+        <action
+            android:id="@+id/action_matchingContentsFragment_to_editTeamMemberElementFragment"
+            app:destination="@id/editTeamMemberElementFragment"
+            app:enterAnim="@anim/translate_up" />
     </fragment>
     <fragment
         android:id="@+id/currentContentsFragment"
@@ -176,6 +180,9 @@
         <action
             android:id="@+id/action_chatRoomScreenFragmentVersion2_to_chatRoomContentFragment"
             app:destination="@id/chatRoomContentFragment" />
+        <action
+            android:id="@+id/action_chatRoomScreenFragmentVersion2_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatRoomContentFragment"
@@ -200,6 +207,20 @@
         android:id="@+id/chatRoomScreenFragmentVersion4"
         android:name="com.example.meetinguniv.ChatRoomScreenFragmentVersion4"
         android:label="fragment_chat_room_screen_version4"
-        tools:layout="@layout/fragment_chat_room_screen_version4" />
+        tools:layout="@layout/fragment_chat_room_screen_version4" >
+        <action
+            android:id="@+id/action_chatRoomScreenFragmentVersion4_to_chatRoomBottomedittext"
+            app:destination="@id/chatRoomBottomedittext" />
+    </fragment>
+    <fragment
+        android:id="@+id/editTeamMemberElementFragment"
+        android:name="com.example.meetinguniv.EditTeamMemberElementFragment"
+        android:label="fragment_edit_team_member_element"
+        tools:layout="@layout/fragment_edit_team_member_element" />
+    <fragment
+        android:id="@+id/chatRoomBottomedittext"
+        android:name="com.example.meetinguniv.ChatRoomBottomedittext"
+        android:label="fragment_chat_room_bottomedittext"
+        tools:layout="@layout/fragment_chat_room_bottomedittext" />
 
 </navigation>
