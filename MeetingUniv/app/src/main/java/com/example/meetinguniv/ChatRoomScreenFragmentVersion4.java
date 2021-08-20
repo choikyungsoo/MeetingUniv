@@ -15,28 +15,31 @@ import android.widget.LinearLayout;
 public class ChatRoomScreenFragmentVersion4 extends Fragment {
 
     private NestedScrollView contents;
-
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chat_room_screen_version4, container, false);
-//        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        this.contents = view.findViewById(R.id.contents);
+//        this.contents = view.findViewById(R.id.contents);
 
-        this.contents.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                int w = contents.getLayoutParams().width;
-                int h = contents.getLayoutParams().height;
-
-                //스크롤뷰 내부 레이아웃 크기 고정 시키기
-                LinearLayout linearLayout;      //<-- 내부 레이아웃이라고 치고
-                linearLayout = view.findViewById(R.id.fixcontents);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(w, h);
-                linearLayout.setLayoutParams(layoutParams);
-            }
-        });
+//        this.contents.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void onGlobalLayout() {
+//                int w = contents.getLayoutParams().width;
+//                int h = contents.getLayoutParams().height;
+//
+//                //스크롤뷰 내부 레이아웃 크기 고정 시키기
+//                LinearLayout linearLayout;      //<-- 내부 레이아웃이라고 치고
+//                linearLayout = view.findViewById(R.id.fixcontents);
+//                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(w, h);
+//                linearLayout.setLayoutParams(layoutParams);
+//            }
+//        });
         return view;
     }
 }

@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="1.0">
 
         <EditText
-            android:id="@+id/editTextTextPersonName4"
+            android:id="@+id/chatroomET"
             android:layout_width="349dp"
             android:layout_height="55dp"
             android:layout_weight="1"
