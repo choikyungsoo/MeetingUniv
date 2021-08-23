@@ -6,7 +6,7 @@
     app:startDestination="@id/settingsContentFragment">
     <fragment
         android:id="@+id/settingsContentFragment"
-        android:name="com.example.meetinguniv.main.setting.SettingsContentFragment"
+        android:name="com.softcon.meetinguniv.main.setting.SettingsContentFragment"
         android:label="SettingsScreenFragment" >
         <action
             android:id="@+id/action_settingsContentFragment_to_alarmSettingElementFragment"
@@ -23,11 +23,11 @@
     </fragment>
     <fragment
         android:id="@+id/alarmSettingElementFragment"
-        android:name="com.example.meetinguniv.main.setting.AlertSettingElementFragment"
+        android:name="com.softcon.meetinguniv.main.setting.AlertSettingElementFragment"
         android:label="AlertSettingElementFragment" />
     <fragment
         android:id="@+id/serviceInfoContentFragment"
-        android:name="com.example.meetinguniv.main.setting.ServiceInfoContentFragment"
+        android:name="com.softcon.meetinguniv.main.setting.ServiceInfoContentFragment"
         android:label="ServiceInfoContentFragment" >
         <action
             android:id="@+id/action_serviceInfoContentFragment_to_serviceAgreementInfoScreenFragment"
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/serviceAgreementInfoScreenFragment"
-        android:name="com.example.meetinguniv.main.setting.ServiceAgreementInfoContentFragment"
+        android:name="com.softcon.meetinguniv.main.setting.ServiceAgreementInfoContentFragment"
         android:label="ServiceAgreementInfoScreenFragment" >
         <action
             android:id="@+id/action_serviceAgreementInfoScreenFragment_to_serviceInfoContentFragment"
@@ -55,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/personalInfoAgreementScreenFragment"
-        android:name="com.example.meetinguniv.main.setting.PersonalInfoAgreementContentFragment"
+        android:name="com.softcon.meetinguniv.main.setting.PersonalInfoAgreementContentFragment"
         android:label="fragment_personal_info_agreement_screen"
         tools:layout="@layout/fragment_personal_info_agreement_content" >
         <action
@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/locationInfoAgreementScreenFragment"
-        android:name="com.example.meetinguniv.main.setting.LocationInfoAgreementContentFragment"
+        android:name="com.softcon.meetinguniv.main.setting.LocationInfoAgreementContentFragment"
         android:label="fragment_location_info_agreement_screen"
         tools:layout="@layout/fragment_location_info_agreement_content" >
         <action
@@ -73,7 +73,7 @@
     </fragment>
     <fragment
         android:id="@+id/openSourceLicenseInfoScreenFragment"
-        android:name="com.example.meetinguniv.main.setting.OpenSourceLicenseInfoContentFragment"
+        android:name="com.softcon.meetinguniv.main.setting.OpenSourceLicenseInfoContentFragment"
         android:label="fragment_open_source_license_info_screen"
         tools:layout="@layout/fragment_open_source_license_info_content" >
         <action
@@ -82,7 +82,7 @@
     </fragment>
     <fragment
         android:id="@+id/myInformationSettingContentFragment"
-        android:name="com.example.meetinguniv.main.setting.MyInformationSettingContentFragment"
+        android:name="com.softcon.meetinguniv.main.setting.MyInformationSettingContentFragment"
         android:label="MyInformationSettingContentFragment" >
         <action
             android:id="@+id/action_myInformationSettingContentFragment_to_changeIDContentFragment"
@@ -99,7 +99,7 @@
     </fragment>
     <fragment
         android:id="@+id/changeIDContentFragment"
-        android:name="com.example.meetinguniv.main.setting.ChangeIDContentFragment"
+        android:name="com.softcon.meetinguniv.main.setting.ChangeIDContentFragment"
         android:label="fragment_change_i_d_content"
         tools:layout="@layout/fragment_change_i_d_content" >
         <action
@@ -108,12 +108,12 @@
     </fragment>
     <fragment
         android:id="@+id/changeIDNewContentFragment"
-        android:name="com.example.meetinguniv.main.setting.ChangeIDNewContentFragment"
+        android:name="com.softcon.meetinguniv.main.setting.ChangeIDNewContentFragment"
         android:label="fragment_change_i_d_new_content"
         tools:layout="@layout/fragment_change_i_d_new_content" />
     <fragment
         android:id="@+id/changePWContentFragment"
-        android:name="com.example.meetinguniv.main.setting.ChangePWContentFragment"
+        android:name="com.softcon.meetinguniv.main.setting.ChangePWContentFragment"
         android:label="fragment_change_p_w_content"
         tools:layout="@layout/fragment_change_p_w_content" >
         <action
@@ -122,7 +122,7 @@
     </fragment>
     <fragment
         android:id="@+id/changePWVerifyContentFragment"
-        android:name="com.example.meetinguniv.main.setting.ChangePWVerifyContentFragment"
+        android:name="com.softcon.meetinguniv.main.setting.ChangePWVerifyContentFragment"
         android:label="fragment_change_p_w_verify_content"
         tools:layout="@layout/fragment_change_p_w_verify_content" >
         <action
@@ -131,17 +131,17 @@
     </fragment>
     <fragment
         android:id="@+id/changePWCompleteContentFragment"
-        android:name="com.example.meetinguniv.main.setting.ChangePWCompleteContentFragment"
+        android:name="com.softcon.meetinguniv.main.setting.ChangePWCompleteContentFragment"
         android:label="fragment_change_p_w_complete_content"
         tools:layout="@layout/fragment_change_p_w_complete_content" />
     <fragment
         android:id="@+id/changeNickContentFragment"
-        android:name="com.example.meetinguniv.main.setting.ChangeNickContentFragment"
+        android:name="com.softcon.meetinguniv.main.setting.ChangeNickContentFragment"
         android:label="fragment_change_nick_content"
         tools:layout="@layout/fragment_change_nick_content" />
     <fragment
         android:id="@+id/changNickVerfiyPWContentFragment"
-        android:name="com.example.meetinguniv.main.setting.ChangeNickVerfiyPWContentFragment"
+        android:name="com.softcon.meetinguniv.main.setting.ChangeNickVerfiyPWContentFragment"
         android:label="fragment_chang_nick_verfiy_p_w_content"
         tools:layout="@layout/fragment_chang_nick_verfiy_p_w_content" >
         <action
@@ -150,7 +150,7 @@
     </fragment>
     <fragment
         android:id="@+id/changPhoneVerfiyPWContentFragment"
-        android:name="com.example.meetinguniv.main.setting.ChangePhoneVerfiyPWContentFragment"
+        android:name="com.softcon.meetinguniv.main.setting.ChangePhoneVerfiyPWContentFragment"
         android:label="fragment_chang_phone_verfiy_p_w_content"
         tools:layout="@layout/fragment_chang_phone_verfiy_p_w_content" >
         <action
@@ -159,11 +159,11 @@
     </fragment>
     <fragment
         android:id="@+id/changePhoneNumContentFragment"
-        android:name="com.example.meetinguniv.main.setting.ChangePhoneNumContentFragment"
+        android:name="com.softcon.meetinguniv.main.setting.ChangePhoneNumContentFragment"
         android:label="fragment_change_phone_num_content"
         tools:layout="@layout/fragment_change_phone_num_content" />
     <fragment
         android:id="@+id/alarmSettingElementFragment3"
-        android:name="com.example.meetinguniv.AlarmSettingElementFragment"
+        android:name="com.softcon.meetinguniv.AlarmSettingElementFragment"
         android:label="AlarmSettingElementFragment" />
 </navigation>

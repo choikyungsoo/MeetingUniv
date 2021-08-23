@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".main.CurrentContentsFragment">
+    tools:context="com.softcon.meetinguniv.main.CurrentContentsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler1"

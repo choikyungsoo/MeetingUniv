@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorCenter"
-    tools:context=".ChatRoomScreenFragmentVersion2">
+    tools:context="com.softcon.meetinguniv.ChatRoomScreenFragmentVersion2">
 
     <LinearLayout
         android:id="@+id/basePage"
@@ -55,7 +55,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView4"
-            android:name="com.example.meetinguniv.ChatRoomContentFragment"
+            android:name="com.softcon.meetinguniv.ChatRoomContentFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

@@ -6,7 +6,7 @@
     app:startDestination="@id/chattingScreenFragment">
     <fragment
         android:id="@+id/chattingScreenFragment"
-        android:name="com.example.meetinguniv.main.ChattingScreenFragment"
+        android:name="com.softcon.meetinguniv.main.ChattingScreenFragment"
         android:label="ChattingContentFragment">
         <action
             android:id="@+id/action_chattingScreenFragment_to_chatRoomScreenFragment"
@@ -14,12 +14,12 @@
     </fragment>
     <fragment
         android:id="@+id/chatRoomScreenFragment"
-        android:name="com.example.meetinguniv.main.ChatRoomScreenFragment"
+        android:name="com.softcon.meetinguniv.main.ChatRoomScreenFragment"
         android:label="fragment_chat_room_screen"
         tools:layout="@layout/fragment_chat_room_screen" />
     <fragment
         android:id="@+id/personalChattingContentsFragment"
-        android:name="com.example.meetinguniv.main.PersonalChattingContentFragment"
+        android:name="com.softcon.meetinguniv.main.PersonalChattingContentFragment"
         android:label="fragment_personal_chating_contents"
         tools:layout="@layout/fragment_personal_chatting_content" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/matchChattingContentsFragment2"
-        android:name="com.example.meetinguniv.main.MatchChattingContentFragment"
+        android:name="com.softcon.meetinguniv.main.MatchChattingContentFragment"
         android:label="fragment_match_chatting_contents"
         tools:layout="@layout/fragment_match_chatting_content" >
         <action
