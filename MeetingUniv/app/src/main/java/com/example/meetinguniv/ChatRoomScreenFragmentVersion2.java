@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 
 public class ChatRoomScreenFragmentVersion2 extends Fragment implements View.OnClickListener{
     private boolean openMenu = false;
-    private L inearLayout basePage;
+    private LinearLayout basePage;
     private LinearLayout menuPage;
     private Button C_backBTN;
     private ImageView menubtn;

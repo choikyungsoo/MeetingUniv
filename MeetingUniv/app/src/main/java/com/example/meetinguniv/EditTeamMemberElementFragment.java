@@ -42,7 +42,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         this.imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         this.EditbackBTN.setOnClickListener(this);
 
-        //리사이클러뷰 - 친구목록
+        //리사이클러뷰 - 현재 팀원
         this.allfriends = view.findViewById(R.id.editfriendslist);
         EditTeamAdapterRecycleritem recyclerItemAdapter = new EditTeamAdapterRecycleritem(this.alllist);
         this.allfriends.setAdapter(recyclerItemAdapter) ;
@@ -50,11 +50,11 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         this.allfriends.setLayoutManager(linearLayoutManager);
 
-        for(int i =0; i<15; i++) {
+        for(int i =0; i<3; i++) {
             addRecyclerItem(R.drawable.prot, "테스트용 입니다");
         }
 
-        //리사이클러뷰 - 현재 팀원
+        //리사이클러뷰 - 친구목록
         this.currentfriends = view.findViewById(R.id.editpresentfriendslist);
         EditTeamAdapterRecycleritem2 recyclerItemAdapter2 = new EditTeamAdapterRecycleritem2(this.currentlist);
         this.currentfriends.setAdapter(recyclerItemAdapter2) ;
@@ -62,7 +62,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
         this.currentfriends.setLayoutManager(linearLayoutManager2);
 
-        for(int i =0; i<3; i++) {
+        for(int i =0; i<15; i++) {
             addRecyclerItem2(R.drawable.prot, "테스트용 입니다");
         }
 

@@ -5,17 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.meetinguniv.EditTeamMemberElementFragment;
 import com.example.meetinguniv.R;
 
 public class TeamMemberAdapterRecycleritem extends RecyclerView.Adapter<TeamMemberAdapterRecycleritem.viewHolder> {
@@ -39,7 +36,7 @@ public class TeamMemberAdapterRecycleritem extends RecyclerView.Adapter<TeamMemb
         public viewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
-            memProfile = itemView.findViewById(R.id.memProfile);
+            memProfile = itemView.findViewById(R.id.chatprofile2);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
