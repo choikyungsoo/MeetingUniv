@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Space;
 
+import com.kakao.sdk.common.util.Utility;
 import com.softcon.meetinguniv.R;
 import com.kakao.sdk.common.KakaoSdk;
 
@@ -30,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-//        Log.d("GET_KEYHASH", getKeyHash(this));
+//        Log.d("GET_KEYHASH", Utility.INSTANCE.getKeyHash(this));
 
         this.statusBarHeight = 0;
         int resId = getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -42,28 +43,6 @@ public class LoginActivity extends AppCompatActivity {
 
         this.status_bar_space.getLayoutParams().height = statusBarHeight;
     }
-
-//    public static String getKeyHash(final Context context) {
-//        PackageManager pm = context.getPackageManager();
-//        try {
-//            PackageInfo packageInfo = pm.getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
-//            if (packageInfo == null)
-//                return null;
-//
-//            for (Signature signature : packageInfo.signatures) {
-//                try {
-//                    MessageDigest md = MessageDigest.getInstance("SHA");
-//                    md.update(signature.toByteArray());
-//                    return android.util.Base64.encodeToString(md.digest(), android.util.Base64.NO_WRAP);
-//                } catch (NoSuchAlgorithmException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        } catch (PackageManager.NameNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
