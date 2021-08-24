@@ -9,10 +9,6 @@
         <Preference
             android:title="알림"
             app:iconSpaceReserved="false"
-            app:key="alarmsetting"></Preference>
-        <Preference
-            android:title="알림test"
-            app:iconSpaceReserved="false"
             app:key="alarmsetting_test"></Preference>
         <Preference
             app:iconSpaceReserved="false"

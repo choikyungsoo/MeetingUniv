@@ -45,7 +45,6 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
         super.onViewCreated(view, savedInstanceState);
 
         this.my_information = this.findPreference("my_information");
-        this.alarm = this.findPreference("alarmsetting");
         this.alarmTest = this.findPreference("alarmsetting_test");
         this.service_information = this.findPreference("service_information");
         this.logout = this.findPreference("logout");
@@ -82,13 +81,7 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
                 return true;
             }
         });
-        this.alarm.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                Navigation.findNavController(view).navigate(R.id.action_settingsContentFragment_to_alarmSettingElementFragment);
-                return true;
-            }
-        });
+
         ///////////////////
         this.alarmTest.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override

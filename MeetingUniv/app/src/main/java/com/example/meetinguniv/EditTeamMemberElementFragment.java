@@ -27,7 +27,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     private SearchView editsearch;
     private InputMethodManager imm;
 
-    private ArrayList<EditTeamRecycleritem> alllist = new ArrayList<EditTeamRecycleritem>();
+    private ArrayList<EditTeamRecycleritem1> alllist = new ArrayList<EditTeamRecycleritem1>();
     private ArrayList<EditTeamRecycleritem> currentlist = new ArrayList<EditTeamRecycleritem>();
 
     private RecyclerView allfriends;
@@ -48,10 +48,11 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         this.allfriends.setAdapter(recyclerItemAdapter) ;
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         this.allfriends.setLayoutManager(linearLayoutManager);
 
         for(int i =0; i<3; i++) {
-            addRecyclerItem(R.drawable.prot, "테스트용 입니다");
+            addRecyclerItem(R.drawable.prot);
         }
 
         //리사이클러뷰 - 친구목록
@@ -71,10 +72,9 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         return view;
     }
 
-    private void addRecyclerItem(int profile, String memberlist){
-        EditTeamRecycleritem recyclerItem = new EditTeamRecycleritem();
+    private void addRecyclerItem(int profile){
+        EditTeamRecycleritem1 recyclerItem = new EditTeamRecycleritem1();
         recyclerItem.setE_memporife(profile);
-        recyclerItem.setE_memname(memberlist);
         this.alllist.add(recyclerItem);
     }
 

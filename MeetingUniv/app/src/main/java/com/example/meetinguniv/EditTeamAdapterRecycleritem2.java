@@ -1,15 +1,11 @@
 package com.example.meetinguniv;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.example.meetinguniv.main.FriendsListAdapterRecycleritem;
-import com.example.meetinguniv.main.FriendsListRecycleritem;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -23,33 +19,33 @@ public class EditTeamAdapterRecycleritem2 extends  RecyclerView.Adapter<EditTeam
     public class viewHolder extends RecyclerView.ViewHolder {
 
         private ImageView E_memProfile;
-        private TextView E_memberlist;
+        private CheckBox E_memberlist;
         private int RecyclerCount;
 
         public viewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            E_memProfile = itemView.findViewById(R.id.chatprofile);
-            E_memberlist = itemView.findViewById(R.id.memberlist);
+            E_memProfile = itemView.findViewById(R.id.memprofile3);
+            E_memberlist = itemView.findViewById(R.id.memberlist3);
             RecyclerCount = 0;
             itemView.setClickable(true);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    if(pos != RecyclerView.NO_POSITION){
-                        RecyclerCount++;
-                        if(RecyclerCount > 0){
-                            if(RecyclerCount %2 == 1){
-                                v.setBackgroundColor(Color.rgb(234,234,234));
-                            } else if(RecyclerCount %2 == 0){
-                                v.setBackgroundColor(Color.WHITE);
-                            }
-                        }
-
-
-                    }
-                }
-            });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    int pos = getAdapterPosition();
+//                    if(pos != RecyclerView.NO_POSITION){
+//                        RecyclerCount++;
+//                        if(RecyclerCount > 0){
+//                            if(RecyclerCount %2 == 1){
+//                                v.setBackgroundColor(Color.rgb(234,234,234));
+//                            } else if(RecyclerCount %2 == 0){
+//                                v.setBackgroundColor(Color.WHITE);
+//                            }
+//                        }
+//
+//
+//                    }
+//                }
+//            });
         }
     }
     EditTeamAdapterRecycleritem2(ArrayList<EditTeamRecycleritem> alllist) {
@@ -62,7 +58,7 @@ public class EditTeamAdapterRecycleritem2 extends  RecyclerView.Adapter<EditTeam
         Context context = parent.getContext() ;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
 
-        View view = inflater.inflate(R.layout.recycleritem_chatmembers, parent, false) ;
+        View view = inflater.inflate(R.layout.recycleritem_chooseteamtojoin, parent, false) ;
         EditTeamAdapterRecycleritem2.viewHolder vh = new EditTeamAdapterRecycleritem2.viewHolder(view) ;
         return vh;
     }
