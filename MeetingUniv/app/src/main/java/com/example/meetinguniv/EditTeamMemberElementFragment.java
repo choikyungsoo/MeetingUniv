@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.meetinguniv.main.FriendsListAdapterRecycleritem;
 import com.example.meetinguniv.main.FriendsListRecycleritem;
 import com.example.meetinguniv.main.MatchingContentFragment;
+import com.example.meetinguniv.main.TeamMemberRecyclerItem;
 
 import java.util.ArrayList;
 
@@ -29,10 +30,12 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 
     private ArrayList<EditTeamRecycleritem1> alllist = new ArrayList<EditTeamRecycleritem1>();
     private ArrayList<EditTeamRecycleritem> currentlist = new ArrayList<EditTeamRecycleritem>();
+    private ArrayList<TeamMemberRecyclerItem> storage = new ArrayList<TeamMemberRecyclerItem>();
 
     private RecyclerView allfriends;
     private RecyclerView currentfriends;
 
+    private EditTeamAdapterRecycleritem recyclerItemAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,17 +47,19 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 
         //리사이클러뷰 - 현재 팀원
         this.allfriends = view.findViewById(R.id.editfriendslist);
-        EditTeamAdapterRecycleritem recyclerItemAdapter = new EditTeamAdapterRecycleritem(this.alllist);
+        this.recyclerItemAdapter = new EditTeamAdapterRecycleritem(this.alllist);
         this.allfriends.setAdapter(recyclerItemAdapter) ;
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         this.allfriends.setLayoutManager(linearLayoutManager);
 
-        for(int i =0; i<3; i++) {
-            addRecyclerItem(R.drawable.prot);
+//        for(int i =0; i<3; i++) {
+//            addRecyclerItem(R.drawable.prot);
+//        }
+        for(TeamMemberRecyclerItem teamMemberRecyclerItem: this.storage){
+            addRecyclerItem(teamMemberRecyclerItem.getMemProfile());
         }
-
         //리사이클러뷰 - 친구목록
         this.currentfriends = view.findViewById(R.id.editpresentfriendslist);
         EditTeamAdapterRecycleritem2 recyclerItemAdapter2 = new EditTeamAdapterRecycleritem2(this.currentlist);
@@ -72,6 +77,9 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         return view;
     }
 
+    public void giveData(ArrayList<TeamMemberRecyclerItem> list) {
+        this.storage = list;
+    }
     private void addRecyclerItem(int profile){
         EditTeamRecycleritem1 recyclerItem = new EditTeamRecycleritem1();
         recyclerItem.setE_memporife(profile);
@@ -96,4 +104,5 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
                 break;
         }
     }
+
 }

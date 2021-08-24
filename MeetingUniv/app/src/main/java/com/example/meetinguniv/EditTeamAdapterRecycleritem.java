@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.meetinguniv.main.FriendsListAdapterRecycleritem;
 import com.example.meetinguniv.main.FriendsListRecycleritem;
+import com.example.meetinguniv.main.TeamMemberRecyclerItem;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -20,6 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class EditTeamAdapterRecycleritem extends  RecyclerView.Adapter<EditTeamAdapterRecycleritem.viewHolder> {
     private ArrayList<EditTeamRecycleritem1> mData;
+
+
     public class viewHolder extends RecyclerView.ViewHolder {
 
         private ImageView E_memProfile;

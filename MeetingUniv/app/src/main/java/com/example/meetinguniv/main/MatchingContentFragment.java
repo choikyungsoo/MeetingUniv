@@ -2,7 +2,6 @@ package com.example.meetinguniv.main;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.nfc.Tag;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,7 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.meetinguniv.EditTeamMemberElementFragment;
 import com.example.meetinguniv.R;
@@ -30,10 +28,6 @@ import org.jetbrains.annotations.NotNull;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Array;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -62,6 +56,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     private boolean inSchoolName = false;
 
     private Boolean cSetting;
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -74,11 +69,14 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+
 //        addRecyclerItem(123);
         //팀원 수와 편집에 따라 변함(유동적으로 변함)
-        for(int i=0; i<3; i++) {
-            addRecyclerItem(R.drawable.prot);
-        }
+
+        addRecyclerItem(R.drawable.prot);
+        addRecyclerItem(R.drawable.prot2);
+        addRecyclerItem(R.drawable.prot3);
+
 
         //팀원 편집 아이콘(필수적으로 고정)
         addRecyclerItem(R.drawable.settingicon);
@@ -97,6 +95,14 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         });
         recyclerItemAdapter.notifyDataSetChanged();
 
+    }
+
+    private void addRecyclerItem(int profile){
+        TeamMemberRecyclerItem recyclerItem = new TeamMemberRecyclerItem();
+        recyclerItem.setMemProfile(profile);
+        list.add(recyclerItem);
+        EditTeamMemberElementFragment ete = new EditTeamMemberElementFragment();
+        ete.giveData(list);
     }
     private void moveToEditFriends(View v) {
         EditTeamMemberElementFragment fragment2 = new EditTeamMemberElementFragment();
@@ -175,12 +181,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
     }
 
-    private void addRecyclerItem(int profile){
-        TeamMemberRecyclerItem recyclerItem = new TeamMemberRecyclerItem();
-        recyclerItem.setMemProfile(profile);
-        list.add(recyclerItem);
 
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_matching_content, container, false);
