@@ -6,20 +6,6 @@
 
     </PreferenceCategory>
     <Preference
-        android:id="@+id/P_idchange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:iconSpaceReserved="false"
-        app:key="P_idchange"
-        app:title="아이디 변경"></Preference>
-    <Preference
-        android:id="@+id/P_pwchange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:iconSpaceReserved="false"
-        app:key="P_pwchange"
-        app:title="비밀번호 변경"></Preference>
-    <Preference
         android:id="@+id/P_nickchange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -85,17 +85,11 @@
         android:name="com.example.meetinguniv.main.setting.MyInformationSettingContentFragment"
         android:label="MyInformationSettingContentFragment" >
         <action
-            android:id="@+id/action_myInformationSettingContentFragment_to_changeIDContentFragment"
-            app:destination="@id/changeIDContentFragment" />
-        <action
-            android:id="@+id/action_myInformationSettingContentFragment_to_changePWContentFragment"
-            app:destination="@id/changePWContentFragment" />
-        <action
-            android:id="@+id/action_myInformationSettingContentFragment_to_changNickVerfiyPWContentFragment"
-            app:destination="@id/changNickVerfiyPWContentFragment" />
-        <action
             android:id="@+id/action_myInformationSettingContentFragment_to_changPhoneVerfiyPWContentFragment"
             app:destination="@id/changPhoneVerfiyPWContentFragment" />
+        <action
+            android:id="@+id/action_myInformationSettingContentFragment_to_changeNickContentFragment"
+            app:destination="@id/changeNickContentFragment" />
     </fragment>
     <fragment
         android:id="@+id/changeIDContentFragment"
@@ -139,15 +133,6 @@
         android:name="com.example.meetinguniv.main.setting.ChangeNickContentFragment"
         android:label="fragment_change_nick_content"
         tools:layout="@layout/fragment_change_nick_content" />
-    <fragment
-        android:id="@+id/changNickVerfiyPWContentFragment"
-        android:name="com.example.meetinguniv.main.setting.ChangeNickVerfiyPWContentFragment"
-        android:label="fragment_chang_nick_verfiy_p_w_content"
-        tools:layout="@layout/fragment_chang_nick_verfiy_p_w_content" >
-        <action
-            android:id="@+id/action_changNickVerfiyPWContentFragment_to_changeNickContentFragment"
-            app:destination="@id/changeNickContentFragment" />
-    </fragment>
     <fragment
         android:id="@+id/changPhoneVerfiyPWContentFragment"
         android:name="com.example.meetinguniv.main.setting.ChangePhoneVerfiyPWContentFragment"
