@@ -3,6 +3,8 @@ package com.example.meetinguniv;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +39,11 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 
     private EditTeamAdapterRecycleritem recyclerItemAdapter;
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_team_member_element, container, false);
@@ -54,6 +61,14 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         this.allfriends.setLayoutManager(linearLayoutManager);
 
+        if(getArguments() != null){
+
+        }
+
+//        if(getArguments() != null){
+//            int images = getArguments().getInt("currentteam");
+//            addRecyclerItem(images);
+//        }
 //        for(int i =0; i<3; i++) {
 //            addRecyclerItem(R.drawable.prot);
 //        }

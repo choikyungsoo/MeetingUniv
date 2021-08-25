@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -85,6 +86,12 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
             public void onItemClick(View v, int position) {
                 if(position == 3){
                     EditTeamMemberElementFragment fragment = new EditTeamMemberElementFragment();
+                    TeamMemberRecyclerItem recyclerItem = new TeamMemberRecyclerItem();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("current",recyclerItem);
+                    bundle.putParcelableArrayList("currentteam", (ArrayList<? extends Parcelable>) list);
+                    EditTeamMemberElementFragment ETEfragment = new EditTeamMemberElementFragment();
+                    ETEfragment.setArguments(bundle);
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
                             .replace(R.id.Framecontainer, fragment)

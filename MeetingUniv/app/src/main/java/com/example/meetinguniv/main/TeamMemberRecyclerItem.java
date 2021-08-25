@@ -1,6 +1,8 @@
 package com.example.meetinguniv.main;
 
-public class TeamMemberRecyclerItem {
+import java.io.Serializable;
+
+public class TeamMemberRecyclerItem implements Serializable {
 
     private int memProfile;
 
