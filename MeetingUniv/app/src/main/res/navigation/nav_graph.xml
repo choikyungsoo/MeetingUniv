@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.meetinguniv.main.MainFragment"
+        android:name="com.softcon.meetinguniv.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
-        android:name="com.example.meetinguniv.main.MainScreenFragment"
+        android:name="com.softcon.meetinguniv.main.MainScreenFragment"
         android:label="fragment_main_screen"
         tools:layout="@layout/fragment_main_screen" >
         <action
@@ -58,12 +58,12 @@
     </fragment>
     <fragment
         android:id="@+id/shopScreenFragment"
-        android:name="com.example.meetinguniv.main.ShopScreenFragment"
+        android:name="com.softcon.meetinguniv.main.ShopScreenFragment"
         android:label="fragment_shop_screen"
         tools:layout="@layout/fragment_shop_screen" />
     <fragment
         android:id="@+id/matchingContentsFragment"
-        android:name="com.example.meetinguniv.main.MatchingContentFragment"
+        android:name="com.softcon.meetinguniv.main.MatchingContentFragment"
         android:label="fragment_matching_contents"
         tools:layout="@layout/fragment_matching_content" >
         <action
@@ -76,23 +76,23 @@
     </fragment>
     <fragment
         android:id="@+id/currentContentsFragment"
-        android:name="com.example.meetinguniv.main.CurrentContentsFragment"
+        android:name="com.softcon.meetinguniv.main.CurrentContentsFragment"
         android:label="fragment_current_contents"
         tools:layout="@layout/fragment_current_content" />
     <fragment
         android:id="@+id/chooseteamElementFragment"
-        android:name="com.example.meetinguniv.main.chooseteamElementFragment"
+        android:name="com.softcon.meetinguniv.main.chooseteamElementFragment"
         android:label="fragment_chooseteam_element"
         tools:layout="@layout/fragment_chooseteam_element" />
 
     <fragment
         android:id="@+id/settingsScreenFragment"
-        android:name="com.example.meetinguniv.main.setting.SettingsScreenFragment"
+        android:name="com.softcon.meetinguniv.main.setting.SettingsScreenFragment"
         android:label="fragment_settings_screen"
         tools:layout="@layout/fragment_settings_screen" />
     <fragment
         android:id="@+id/chatRoomScreenFragment"
-        android:name="com.example.meetinguniv.main.ChatRoomScreenFragment"
+        android:name="com.softcon.meetinguniv.main.ChatRoomScreenFragment"
         android:label="fragment_chat_room_screen"
         tools:layout="@layout/fragment_chat_room_screen" >
         <action
@@ -101,7 +101,7 @@
     </fragment>
     <fragment
         android:id="@+id/personalChattingContentsFragment"
-        android:name="com.example.meetinguniv.main.PersonalChattingContentFragment"
+        android:name="com.softcon.meetinguniv.main.PersonalChattingContentFragment"
         android:label="fragment_personal_chating_contents"
         tools:layout="@layout/fragment_personal_chatting_content" >
         <action
@@ -119,7 +119,7 @@
     </fragment>
     <fragment
         android:id="@+id/matchChattingContentsFragment2"
-        android:name="com.example.meetinguniv.main.MatchChattingContentFragment"
+        android:name="com.softcon.meetinguniv.main.MatchChattingContentFragment"
         android:label="fragment_match_chatting_contents"
         tools:layout="@layout/fragment_match_chatting_content" >
         <action
@@ -128,7 +128,7 @@
     </fragment>
     <fragment
         android:id="@+id/chattingScreenFragment"
-        android:name="com.example.meetinguniv.main.ChattingScreenFragment"
+        android:name="com.softcon.meetinguniv.main.ChattingScreenFragment"
         android:label="ChattingScreenFragment" >
         <action
             android:id="@+id/action_chattingScreenFragment_to_matchChattingContentsFragment2"
@@ -139,7 +139,7 @@
     </fragment>
     <fragment
         android:id="@+id/friendsListScreenFragment"
-        android:name="com.example.meetinguniv.main.FriendsListScreenFragment"
+        android:name="com.softcon.meetinguniv.main.FriendsListScreenFragment"
         android:label="fragment_friends_list_screen"
         tools:layout="@layout/fragment_friends_list_screen" >
         <action
@@ -151,7 +151,7 @@
     </fragment>
     <fragment
         android:id="@+id/friendsProfileScreenFragment"
-        android:name="com.example.meetinguniv.main.FriendsProfileScreenFragment"
+        android:name="com.softcon.meetinguniv.main.FriendsProfileScreenFragment"
         android:label="fragment_friends_profile_screen"
         tools:layout="@layout/fragment_friends_profile_screen" >
         <action
@@ -160,7 +160,7 @@
     </fragment>
     <fragment
         android:id="@+id/personalProfileScreenFragment"
-        android:name="com.example.meetinguniv.main.PersonalProfileScreenFragment"
+        android:name="com.softcon.meetinguniv.main.PersonalProfileScreenFragment"
         android:label="fragment_personal_profile_screen"
         tools:layout="@layout/fragment_personal_profile_screen" >
         <action
@@ -169,12 +169,12 @@
     </fragment>
     <fragment
         android:id="@+id/floatingFriendsListContentFragment"
-        android:name="com.example.meetinguniv.main.FloatingFriendsListContentFragment"
+        android:name="com.softcon.meetinguniv.main.FloatingFriendsListContentFragment"
         android:label="fragment_floating_friends_list_content"
         tools:layout="@layout/fragment_floating_friends_list_content" />
     <fragment
         android:id="@+id/chatRoomScreenFragmentVersion2"
-        android:name="com.example.meetinguniv.ChatRoomScreenFragmentVersion2"
+        android:name="com.softcon.meetinguniv.ChatRoomScreenFragmentVersion2"
         android:label="fragment_chat_room_screen_version2"
         tools:layout="@layout/fragment_chat_room_screen_version2" >
         <action
@@ -186,12 +186,12 @@
     </fragment>
     <fragment
         android:id="@+id/chatRoomContentFragment"
-        android:name="com.example.meetinguniv.ChatRoomContentFragment"
+        android:name="com.softcon.meetinguniv.ChatRoomContentFragment"
         android:label="fragment_chat_room_content"
         tools:layout="@layout/fragment_chat_room_content" />
     <fragment
         android:id="@+id/chatRoomScreenFragmentVersion3"
-        android:name="com.example.meetinguniv.chatRoomScreenFragmentVersion3"
+        android:name="com.softcon.meetinguniv.chatRoomScreenFragmentVersion3"
         android:label="fragment_chat_room_screen_version3"
         tools:layout="@layout/fragment_chat_room_screen_version3" >
         <action
@@ -200,12 +200,12 @@
     </fragment>
     <fragment
         android:id="@+id/chatRoomContentFragmentVersion2"
-        android:name="com.example.meetinguniv.ChatRoomContentFragmentVersion2"
+        android:name="com.softcon.meetinguniv.ChatRoomContentFragmentVersion2"
         android:label="fragment_chat_room_content_version2"
         tools:layout="@layout/fragment_chat_room_content_version2" />
     <fragment
         android:id="@+id/chatRoomScreenFragmentVersion4"
-        android:name="com.example.meetinguniv.ChatRoomScreenFragmentVersion4"
+        android:name="com.softcon.meetinguniv.ChatRoomScreenFragmentVersion4"
         android:label="fragment_chat_room_screen_version4"
         tools:layout="@layout/fragment_chat_room_screen_version4" >
         <action
@@ -214,12 +214,12 @@
     </fragment>
     <fragment
         android:id="@+id/editTeamMemberElementFragment"
-        android:name="com.example.meetinguniv.EditTeamMemberElementFragment"
+        android:name="com.softcon.meetinguniv.EditTeamMemberElementFragment"
         android:label="fragment_edit_team_member_element"
         tools:layout="@layout/fragment_edit_team_member_element" />
     <fragment
         android:id="@+id/chatRoomBottomedittext"
-        android:name="com.example.meetinguniv.ChatRoomBottomedittext"
+        android:name="com.softcon.meetinguniv.ChatRoomBottomedittext"
         android:label="fragment_chat_room_bottomedittext"
         tools:layout="@layout/fragment_chat_room_bottomedittext" />
 

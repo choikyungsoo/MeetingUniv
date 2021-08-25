@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.meetinguniv"
+        applicationId "com.softcon.meetinguniv"
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
@@ -36,6 +36,8 @@ allprojects {
 }
 
 dependencies {
+
+    implementation "com.kakao.sdk:v2-user:2.6.0" // 카카오 로그인
 
     implementation 'com.google.android.material:material:1.5.0-alpha01'
 

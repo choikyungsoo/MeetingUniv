@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.meetinguniv">
+    package="com.softcon.meetinguniv">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> -->
@@ -10,14 +10,11 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    // 알림음 설정
+<!--    // 알림음 설정-->
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.VIBLATE"/>
 
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="true" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -29,7 +26,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MeetingUniv"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:name=".GlobalApplication">
+
 
 <!--        <service-->
 <!--            android:name=".FirebaseMessage"-->
@@ -37,20 +36,31 @@
 <!--            android:exported="true"></service>-->
 
         <activity
-            android:name=".main.ChatRoomScreenFragment"
+            android:name="com.softcon.meetinguniv.main.ChatRoomScreenFragment"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".ChatRoomContentFragment"
+            android:name="com.softcon.meetinguniv.ChatRoomContentFragment"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="Instantiatable" />
-        <activity android:name=".login.LoginActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize"></activity>
-        <activity android:name=".main.MainActivity"
+        <activity android:name="com.softcon.meetinguniv.login.LoginActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <!--Redirect URI: "kakao{NATIVE_APP_KEY}://oauth"-->
+                <data
+                    android:host="oauth"
+                    android:scheme="kakao{e73b9463cb4d98b9d5460cc48a8fabb0}"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.softcon.meetinguniv.main.MainActivity"
             android:windowSoftInputMode="adjustResize"
            />
 
-        <activity android:name=".Intro">
+        <activity android:name="com.softcon.meetinguniv.Intro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -68,9 +78,9 @@
                 android:resource="@xml/external" />
         </provider>
 
-        // firebase 푸시 알림
+<!--        // firebase 푸시 알림-->
         <service
-            android:name=".FirebaseMessage"
+            android:name="com.softcon.meetinguniv.FirebaseMessage"
             android:stopWithTask="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

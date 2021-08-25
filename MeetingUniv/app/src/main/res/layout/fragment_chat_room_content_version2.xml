@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#F10000"
-    tools:context=".ChatRoomContentFragmentVersion2">
+    tools:context="com.softcon.meetinguniv.ChatRoomContentFragmentVersion2">
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"

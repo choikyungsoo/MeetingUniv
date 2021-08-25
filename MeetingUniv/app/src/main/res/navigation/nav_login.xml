@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_login"
-    app:startDestination="@id/login">
+    app:startDestination="@id/kakao_login">
 
     <fragment
         android:id="@+id/login"
-        android:name="com.example.meetinguniv.login.LoginFragment"
+        android:name="com.softcon.meetinguniv.login.LoginFragment"
         android:label="login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -22,9 +22,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/kakao_login"
+        android:name="com.softcon.meetinguniv.login.LoginFragment"
+        android:label="kakao_login"
+        tools:layout="@layout/fragment_kakao_login" >
+    </fragment>
+
+    <fragment
         android:id="@+id/join_profile"
-        android:name="com.example.meetinguniv.login.JoinProfileFragment"
-        android:label="login"
+        android:name="com.softcon.meetinguniv.login.JoinProfileFragment"
+        android:label="join_profile"
         tools:layout="@layout/fragment_join_profile" >
         <action
             android:id="@+id/action_join_profile_to_login"
@@ -32,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/findIDScreenFragment"
-        android:name="com.example.meetinguniv.login.FindingIDScreenFragment"
+        android:name="com.softcon.meetinguniv.login.FindingIDScreenFragment"
         android:label="fragment_find_i_d_screen"
         tools:layout="@layout/fragment_findingid_screen" >
         <action
@@ -41,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/findingPWScreenFragment"
-        android:name="com.example.meetinguniv.login.FindingPWScreenFragment"
+        android:name="com.softcon.meetinguniv.login.FindingPWScreenFragment"
         android:label="fragment_findingpw_screen"
         tools:layout="@layout/fragment_findingpw_screen" >
         <action
@@ -50,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/findingPWPhoneVerifyScreen"
-        android:name="com.example.meetinguniv.login.FindingPWPhoneVerifyScreen"
+        android:name="com.softcon.meetinguniv.login.FindingPWPhoneVerifyScreen"
         android:label="fragment_finding_p_w_phone_verify_screen"
         tools:layout="@layout/fragment_finding_p_w_phone_verify_screen" >
         <action
@@ -59,17 +66,17 @@
     </fragment>
     <fragment
         android:id="@+id/changingPWScreenFragment"
-        android:name="com.example.meetinguniv.login.ChangingPWScreenFragment"
+        android:name="com.softcon.meetinguniv.login.ChangingPWScreenFragment"
         android:label="fragment_changing_p_w_screen"
         tools:layout="@layout/fragment_changing_p_w_screen" />
     <fragment
         android:id="@+id/showIDScreenFragment"
-        android:name="com.example.meetinguniv.login.ShowIDScreenFragment"
+        android:name="com.softcon.meetinguniv.login.ShowIDScreenFragment"
         android:label="fragment_show_i_d_screen"
         tools:layout="@layout/fragment_show_i_d_screen" />
     <fragment
         android:id="@+id/joinAgreementScreenFragment"
-        android:name="com.example.meetinguniv.login.JoinAgreementScreenFragment"
+        android:name="com.softcon.meetinguniv.login.JoinAgreementScreenFragment"
         android:label="fragment_show_i_d_screen"
         tools:layout="@layout/fragment_join_agreement_screen" >
         <action
@@ -78,7 +85,7 @@
     </fragment>
     <fragment
         android:id="@+id/joinPersonalInfoScreenFragment"
-        android:name="com.example.meetinguniv.login.JoinPersonalInfoScreenFragment"
+        android:name="com.softcon.meetinguniv.login.JoinPersonalInfoScreenFragment"
         android:label="fragment_show_i_d_screen"
         tools:layout="@layout/fragment_join_personal_info_screen" >
         <action
@@ -87,7 +94,7 @@
     </fragment>
     <fragment
         android:id="@+id/joinPhoneVerfiyImportScreenFragment"
-        android:name="com.example.meetinguniv.JoinPhoneVerfiyImportScreenFragment"
+        android:name="com.softcon.meetinguniv.JoinPhoneVerfiyImportScreenFragment"
         android:label="fragment_join_phone_verfiy_import_screen"
         tools:layout="@layout/fragment_join_phone_verfiy_import_screen" >
         <action
