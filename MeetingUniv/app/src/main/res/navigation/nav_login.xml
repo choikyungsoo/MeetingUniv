@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_login"
-    app:startDestination="@id/login">
+    app:startDestination="@id/kakao_login">
 
     <fragment
         android:id="@+id/login"
@@ -22,9 +22,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/kakao_login"
+        android:name="com.softcon.meetinguniv.login.LoginFragment"
+        android:label="kakao_login"
+        tools:layout="@layout/fragment_kakao_login" >
+    </fragment>
+
+    <fragment
         android:id="@+id/join_profile"
         android:name="com.softcon.meetinguniv.login.JoinProfileFragment"
-        android:label="login"
+        android:label="join_profile"
         tools:layout="@layout/fragment_join_profile" >
         <action
             android:id="@+id/action_join_profile_to_login"
