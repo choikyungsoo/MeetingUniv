@@ -1,4 +1,4 @@
-package com.example.meetinguniv;
+package com.softcon.meetinguniv;
 
 public class EditTeamRecycleritem1 {
 

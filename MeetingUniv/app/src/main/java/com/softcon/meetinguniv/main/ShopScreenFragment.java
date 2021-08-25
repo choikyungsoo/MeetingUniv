@@ -27,12 +27,13 @@ public class ShopScreenFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        addRecyclerItem("하트 1개", "1200원");
-        addRecyclerItem("하트 5개", "6000원");
-        addRecyclerItem("하트 10개", "10000원");
-        addRecyclerItem("하트 20개", "17000원");
-        addRecyclerItem("10일동안 매일 하트 1개씩", "8500원");
-        addRecyclerItem("30일동안 매일 하트 1개씩", "24000원");
+        addRecyclerItem("하트 1개", "1,200원");
+        addRecyclerItem("하트 5개", "6,000원");
+        addRecyclerItem("하트 10개", "10,000원");
+        addRecyclerItem("하트 20개", "17,000원");
+        addRecyclerItem("10일동안 매일 하트 1개씩", "8,500원");
+        addRecyclerItem("30일동안 매일 하트 1개씩", "24,000원");
+        addRecyclerItem("1개월동안 무제한", "35,000원");
         recyclerItemAdapter.notifyDataSetChanged();
     }
 

@@ -87,11 +87,11 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                 if(position == 3){
                     EditTeamMemberElementFragment fragment = new EditTeamMemberElementFragment();
                     TeamMemberRecyclerItem recyclerItem = new TeamMemberRecyclerItem();
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("current",recyclerItem);
-                    bundle.putParcelableArrayList("currentteam", (ArrayList<? extends Parcelable>) list);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putSerializable("current",recyclerItem);
+//                    bundle.putParcelableArrayList("currentteam", (ArrayList<? extends Parcelable>) list);
                     EditTeamMemberElementFragment ETEfragment = new EditTeamMemberElementFragment();
-                    ETEfragment.setArguments(bundle);
+//                    ETEfragment.setArguments(bundle);
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
                             .replace(R.id.Framecontainer, fragment)

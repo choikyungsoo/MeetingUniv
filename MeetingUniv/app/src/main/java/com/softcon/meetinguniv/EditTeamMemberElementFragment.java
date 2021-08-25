@@ -63,6 +63,10 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         this.allfriends.setLayoutManager(linearLayoutManager);
 
+        //////////////////////////
+        addRecyclerItem(R.drawable.prot);
+        //////////////////////////
+
         if(getArguments() != null){
 
         }
