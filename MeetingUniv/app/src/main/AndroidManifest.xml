@@ -37,14 +37,12 @@
 
         <activity
             android:name="com.softcon.meetinguniv.main.ChatRoomScreenFragment"
-            android:windowSoftInputMode="adjustResize"
             tools:ignore="Instantiatable" />
         <activity
             android:name="com.softcon.meetinguniv.ChatRoomContentFragment"
-            android:windowSoftInputMode="adjustResize"
             tools:ignore="Instantiatable" />
         <activity android:name="com.softcon.meetinguniv.login.LoginActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -57,7 +55,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.softcon.meetinguniv.main.MainActivity"
-            android:windowSoftInputMode="adjustResize"
+
            />
 
         <activity android:name="com.softcon.meetinguniv.Intro">

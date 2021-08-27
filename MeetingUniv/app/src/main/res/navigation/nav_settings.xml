@@ -85,11 +85,11 @@
         android:name="com.softcon.meetinguniv.main.setting.MyInformationSettingContentFragment"
         android:label="MyInformationSettingContentFragment" >
         <action
-            android:id="@+id/action_myInformationSettingContentFragment_to_changPhoneVerfiyPWContentFragment"
-            app:destination="@id/changPhoneVerfiyPWContentFragment" />
-        <action
             android:id="@+id/action_myInformationSettingContentFragment_to_changeNickContentFragment"
             app:destination="@id/changeNickContentFragment" />
+        <action
+            android:id="@+id/action_myInformationSettingContentFragment_to_changePhoneNumContentFragment"
+            app:destination="@id/changePhoneNumContentFragment" />
     </fragment>
     <fragment
         android:id="@+id/changeIDContentFragment"
@@ -141,15 +141,6 @@
         <action
             android:id="@+id/action_changNickVerfiyPWContentFragment_to_changeNickContentFragment"
             app:destination="@id/changeNickContentFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/changPhoneVerfiyPWContentFragment"
-        android:name="com.softcon.meetinguniv.main.setting.ChangePhoneVerfiyPWContentFragment"
-        android:label="fragment_chang_phone_verfiy_p_w_content"
-        tools:layout="@layout/fragment_chang_phone_verfiy_p_w_content" >
-        <action
-            android:id="@+id/action_changPhoneVerfiyPWContentFragment_to_changePhoneNumContentFragment"
-            app:destination="@id/changePhoneNumContentFragment" />
     </fragment>
     <fragment
         android:id="@+id/changePhoneNumContentFragment"

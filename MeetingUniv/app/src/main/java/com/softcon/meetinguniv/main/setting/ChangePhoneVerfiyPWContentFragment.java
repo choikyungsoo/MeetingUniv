@@ -45,7 +45,7 @@ public class ChangePhoneVerfiyPWContentFragment extends Fragment implements View
             //아이디가 존재할 경우와 아이디가 존재하지 않을 경우를 나누어야 함(파이어베이스 연결)
             Toast.makeText(getContext(),"비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
         } else{
-            Navigation.findNavController(v).navigate(R.id.action_changPhoneVerfiyPWContentFragment_to_changePhoneNumContentFragment);
+            
         }
     }
 

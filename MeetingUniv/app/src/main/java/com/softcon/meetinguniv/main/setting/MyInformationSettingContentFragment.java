@@ -35,7 +35,7 @@ public class MyInformationSettingContentFragment extends PreferenceFragmentCompa
         PHONE_preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Navigation.findNavController(view).navigate(R.id.action_myInformationSettingContentFragment_to_changPhoneVerfiyPWContentFragment);
+                Navigation.findNavController(view).navigate(R.id.action_myInformationSettingContentFragment_to_changePhoneNumContentFragment);
                 return false;
             }
         });
