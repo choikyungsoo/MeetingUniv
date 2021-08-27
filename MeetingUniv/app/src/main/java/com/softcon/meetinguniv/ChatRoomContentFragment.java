@@ -3,6 +3,7 @@ package com.softcon.meetinguniv;
 import android.graphics.Rect;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,8 +31,10 @@ public class ChatRoomContentFragment extends Fragment {
     private EditText cET;
 
     //키보드 높이 구하기
+    private ConstraintLayout ChatRoomScreen;
     private boolean isKeyboardShowing = false;
     private int keyboardheight;
+    private int heigthConstraints;
     private View rootView;
 
     @Override
@@ -54,6 +57,11 @@ public class ChatRoomContentFragment extends Fragment {
 
         this.chatRoomRecyclerAdapter = new ChatRoomRecyclerAdapter(this.list);
         this.recyclerView.setAdapter(chatRoomRecyclerAdapter);
+
+        this.ChatRoomScreen = view.findViewById(R.id.CMainScreen);
+        this.heigthConstraints = this.ChatRoomScreen.getHeight()-keyboardheight;
+
+
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         this.recyclerView.setLayoutManager(linearLayoutManager);
@@ -78,11 +86,14 @@ public class ChatRoomContentFragment extends Fragment {
 
             if (tempkeyboardsize > screenHeight * 0.1) {
 //            대부분의 키보드 높이가 전체의 10프로이상차지해서 0.1로 정함
-                this.keyboardheight  = screenHeight - rectangle.bottom;
+                keyboardheight  = screenHeight - rectangle.bottom;
                 if (!isKeyboardShowing) {
 //                키보드가 보여지는 경우
                     isKeyboardShowing = true;
                     Toast.makeText(getContext(), "키보드가 보여짐", Toast.LENGTH_SHORT).show();
+                    ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(this.ChatRoomScreen.getWidth(),heigthConstraints);
+                    this.ChatRoomScreen.setLayoutParams(params);
+
                 }
             }
             else {
