@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.softcon.meetinguniv.EditTeamMemberElementFragment;
+import com.softcon.meetinguniv.MTeamMemberRecyclerItem;
 import com.softcon.meetinguniv.R;
 import com.google.android.material.slider.RangeSlider;
 
@@ -46,6 +47,11 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     private float valueTo;
 
     private ArrayList<TeamMemberRecyclerItem> list = new ArrayList<TeamMemberRecyclerItem>();
+
+    ///test
+    private ArrayList<MTeamMemberRecyclerItem> mlist = new ArrayList<MTeamMemberRecyclerItem>();
+    ////
+
     private ArrayList<Float> ageRange = new ArrayList<Float>();
     private View dialogView;
 
@@ -70,7 +76,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-
 //        addRecyclerItem(123);
         //팀원 수와 편집에 따라 변함(유동적으로 변함)
 
@@ -87,11 +92,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                 if(position == 3){
                     EditTeamMemberElementFragment fragment = new EditTeamMemberElementFragment();
                     TeamMemberRecyclerItem recyclerItem = new TeamMemberRecyclerItem();
-//                    Bundle bundle = new Bundle();
-//                    bundle.putSerializable("current",recyclerItem);
-//                    bundle.putParcelableArrayList("currentteam", (ArrayList<? extends Parcelable>) list);
-                    EditTeamMemberElementFragment ETEfragment = new EditTeamMemberElementFragment();
-//                    ETEfragment.setArguments(bundle);
+                    giveRecycleritemData(recyclerItem, fragment);
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
                             .replace(R.id.Framecontainer, fragment)
@@ -104,12 +105,21 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
     }
 
+    private void giveRecycleritemData(TeamMemberRecyclerItem recyclerItem, EditTeamMemberElementFragment fragment) {
+        EditTeamMemberElementFragment ETEfragment = new EditTeamMemberElementFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("current",recyclerItem);
+        MTeamMemberRecyclerItem mt = new MTeamMemberRecyclerItem(recyclerItem.getMemProfile());
+        this.mlist.add(mt);
+        bundle.putParcelableArrayList("currentteam", (ArrayList<? extends Parcelable>) mlist);
+        fragment.setArguments(bundle);
+    }
+
     private void addRecyclerItem(int profile){
         TeamMemberRecyclerItem recyclerItem = new TeamMemberRecyclerItem();
         recyclerItem.setMemProfile(profile);
         list.add(recyclerItem);
-        EditTeamMemberElementFragment ete = new EditTeamMemberElementFragment();
-        ete.giveData(list);
+        ///Test
     }
     private void moveToEditFriends(View v) {
         EditTeamMemberElementFragment fragment2 = new EditTeamMemberElementFragment();

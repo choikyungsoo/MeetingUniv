@@ -63,9 +63,9 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         this.allfriends.setLayoutManager(linearLayoutManager);
 
-        //////////////////////////
-        addRecyclerItem(R.drawable.prot);
-        //////////////////////////
+//        //////////////////////////
+//        addRecyclerItem(R.drawable.prot);
+//        //////////////////////////
 
         if(getArguments() != null){
 
@@ -78,9 +78,18 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 //        for(int i =0; i<3; i++) {
 //            addRecyclerItem(R.drawable.prot);
 //        }
-        for(TeamMemberRecyclerItem teamMemberRecyclerItem: this.storage){
-            addRecyclerItem(teamMemberRecyclerItem.getMemProfile());
+        //Test///////////////////////////
+        Bundle bundle = getArguments();
+        TeamMemberRecyclerItem teamMemberRecyclerItem = (TeamMemberRecyclerItem) bundle.getSerializable("current");
+        ArrayList<MTeamMemberRecyclerItem> mlist = bundle.getParcelableArrayList("currentteam");
+        for(MTeamMemberRecyclerItem tes: mlist){
+            addRecyclerItem(tes.memProfile);
         }
+
+        ////////////////////////////////
+//        for(TeamMemberRecyclerItem teamMemberRecyclerItem: this.storage){
+//            addRecyclerItem(teamMemberRecyclerItem.getMemProfile());
+//        }
         //리사이클러뷰 - 친구목록
         this.currentfriends = view.findViewById(R.id.editpresentfriendslist);
         EditTeamAdapterRecycleritem2 recyclerItemAdapter2 = new EditTeamAdapterRecycleritem2(this.currentlist);
