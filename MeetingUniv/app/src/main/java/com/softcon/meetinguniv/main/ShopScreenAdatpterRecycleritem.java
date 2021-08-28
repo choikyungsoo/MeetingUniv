@@ -17,6 +17,15 @@ import com.softcon.meetinguniv.R;
 
 public class ShopScreenAdatpterRecycleritem  extends RecyclerView.Adapter<ShopScreenAdatpterRecycleritem.viewHolder>{
     private ArrayList<ShopScreenRecycleritem> mData;
+    private OnItemClickListener itemClickHandler = null ;
+
+    public interface OnItemClickListener {
+        void onItemClick(View v, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener itemClickHandler) {
+        this.itemClickHandler = itemClickHandler ;
+    }
 
     public class viewHolder extends RecyclerView.ViewHolder {
 
@@ -29,8 +38,21 @@ public class ShopScreenAdatpterRecycleritem  extends RecyclerView.Adapter<ShopSc
             items = itemView.findViewById(R.id.item);
             price = itemView.findViewById(R.id.price);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition() ;
+                    if (pos != RecyclerView.NO_POSITION) {
+                        if (itemClickHandler != null) {
+                            itemClickHandler.onItemClick(v, pos) ;
+                        }
+                    }
+                }
+            });
+
         }
     }
+
     ShopScreenAdatpterRecycleritem(ArrayList<ShopScreenRecycleritem> list){
         this.mData = list;
     }
