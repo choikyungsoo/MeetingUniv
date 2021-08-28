@@ -1,11 +1,16 @@
 package com.softcon.meetinguniv;
 
+import static android.content.Context.VIBRATOR_SERVICE;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
+import android.media.Ringtone;
 import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -49,7 +54,6 @@ public class AlarmSettingElementFragment extends PreferenceFragmentCompat {
             // 진동 모드일 경우
         } else if (audioManager.getRingerMode() == AudioManager.RINGER_MODE_SILENT) {
             // 무음 모드일 경우
-
         }
 
         FirebaseMessaging firebaseMessaging = FirebaseMessaging.getInstance();
@@ -99,9 +103,14 @@ public class AlarmSettingElementFragment extends PreferenceFragmentCompat {
             this.audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
         } else if (selectedAlarmMode.equals("1")) {
             Toast.makeText(getContext(), "소리만", Toast.LENGTH_SHORT).show();
+            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone ringtone = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
+            ringtone.play();
         } else {
             Toast.makeText(getContext(), "진동만", Toast.LENGTH_SHORT).show();
             this.audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+            Vibrator vibrator = (Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE);
+            vibrator.vibrate(500);
         }
     }
 
