@@ -52,6 +52,8 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     private ArrayList<MTeamMemberRecyclerItem> mlist = new ArrayList<MTeamMemberRecyclerItem>();
     ////
 
+    private ArrayList<Integer> ImageSource = new ArrayList<Integer>();
+
     private ArrayList<Float> ageRange = new ArrayList<Float>();
     private View dialogView;
 
@@ -106,12 +108,14 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     }
 
     private void giveRecycleritemData(TeamMemberRecyclerItem recyclerItem, EditTeamMemberElementFragment fragment) {
-        EditTeamMemberElementFragment ETEfragment = new EditTeamMemberElementFragment();
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable("current",recyclerItem);
+//        MTeamMemberRecyclerItem mt = new MTeamMemberRecyclerItem(recyclerItem.getMemProfile());
+//        this.mlist.add(mt);
+//        bundle.putParcelableArrayList("currentteam", (ArrayList<? extends Parcelable>) mlist);
+//        fragment.setArguments(bundle);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("current",recyclerItem);
-        MTeamMemberRecyclerItem mt = new MTeamMemberRecyclerItem(recyclerItem.getMemProfile());
-        this.mlist.add(mt);
-        bundle.putParcelableArrayList("currentteam", (ArrayList<? extends Parcelable>) mlist);
+        bundle.putIntegerArrayList();
         fragment.setArguments(bundle);
     }
 
@@ -119,6 +123,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         TeamMemberRecyclerItem recyclerItem = new TeamMemberRecyclerItem();
         recyclerItem.setMemProfile(profile);
         list.add(recyclerItem);
+        this.ImageSource.add(profile);
         ///Test
     }
     private void moveToEditFriends(View v) {

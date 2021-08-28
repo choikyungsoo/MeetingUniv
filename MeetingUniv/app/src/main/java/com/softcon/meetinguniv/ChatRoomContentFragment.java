@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,8 +92,9 @@ public class ChatRoomContentFragment extends Fragment {
 //                키보드가 보여지는 경우
                     isKeyboardShowing = true;
                     Toast.makeText(getContext(), "키보드가 보여짐", Toast.LENGTH_SHORT).show();
-                    ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(this.ChatRoomScreen.getWidth(),heigthConstraints);
-                    this.ChatRoomScreen.setLayoutParams(params);
+//                    DisplayMetrics metrics = getResources().getDisplayMetrics();
+//                    ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(120,140);
+//                    this.ChatRoomScreen.setLayoutParams(params);
 
                 }
             }
