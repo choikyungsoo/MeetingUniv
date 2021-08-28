@@ -93,8 +93,8 @@ public class ChatRoomContentFragment extends Fragment {
                     isKeyboardShowing = true;
                     Toast.makeText(getContext(), "키보드가 보여짐", Toast.LENGTH_SHORT).show();
 //                    DisplayMetrics metrics = getResources().getDisplayMetrics();
-//                    ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(120,140);
-//                    this.ChatRoomScreen.setLayoutParams(params);
+                    ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(120,140);
+                    this.ChatRoomScreen.setLayoutParams(params);
 
                 }
             }

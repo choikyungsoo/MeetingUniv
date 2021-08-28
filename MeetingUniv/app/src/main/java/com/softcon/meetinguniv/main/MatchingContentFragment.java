@@ -108,15 +108,16 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     }
 
     private void giveRecycleritemData(TeamMemberRecyclerItem recyclerItem, EditTeamMemberElementFragment fragment) {
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable("current",recyclerItem);
-//        MTeamMemberRecyclerItem mt = new MTeamMemberRecyclerItem(recyclerItem.getMemProfile());
-//        this.mlist.add(mt);
-//        bundle.putParcelableArrayList("currentteam", (ArrayList<? extends Parcelable>) mlist);
-//        fragment.setArguments(bundle);
         Bundle bundle = new Bundle();
-        bundle.putIntegerArrayList();
+        bundle.putSerializable("current",recyclerItem);
+        MTeamMemberRecyclerItem mt = new MTeamMemberRecyclerItem(recyclerItem.getMemProfile());
+        this.mlist.add(mt);
+        bundle.putParcelableArrayList("currentteam", (ArrayList<? extends Parcelable>) mlist);
         fragment.setArguments(bundle);
+
+//        Bundle bundle = new Bundle();
+////        bundle.putIntegerArrayList();
+//        fragment.setArguments(bundle);
     }
 
     private void addRecyclerItem(int profile){
