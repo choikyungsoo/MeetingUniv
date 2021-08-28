@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         this.status_bar_space = findViewById(R.id.status_bar_space_login);
 
         this.status_bar_space.getLayoutParams().height = statusBarHeight;
+
     }
 
     @Override
