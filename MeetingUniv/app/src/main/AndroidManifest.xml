@@ -53,7 +53,7 @@
                 <!--Redirect URI: "kakao{NATIVE_APP_KEY}://oauth"-->
                 <data
                     android:host="oauth"
-                    android:scheme="kakao{e73b9463cb4d98b9d5460cc48a8fabb0}"/>
+                    android:scheme="kakaoe73b9463cb4d98b9d5460cc48a8fabb0"/>
             </intent-filter>
         </activity>
         <activity android:name="com.softcon.meetinguniv.main.MainActivity"

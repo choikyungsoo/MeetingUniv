@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/kakao_login"
-        android:name="com.softcon.meetinguniv.login.LoginFragment"
+        android:name="com.softcon.meetinguniv.login.KakaoLoginFragment"
         android:label="kakao_login"
         tools:layout="@layout/fragment_kakao_login" >
     </fragment>
