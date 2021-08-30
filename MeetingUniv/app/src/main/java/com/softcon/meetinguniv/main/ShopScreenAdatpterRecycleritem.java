@@ -44,7 +44,7 @@ public class ShopScreenAdatpterRecycleritem  extends RecyclerView.Adapter<ShopSc
                     int pos = getAdapterPosition() ;
                     if (pos != RecyclerView.NO_POSITION) {
                         if (itemClickHandler != null) {
-                            itemClickHandler.onItemClick(v, pos) ;
+                            itemClickHandler.onItemClick(v, pos);
                         }
                     }
                 }

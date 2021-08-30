@@ -222,5 +222,10 @@
         android:name="com.softcon.meetinguniv.ChatRoomBottomedittext"
         android:label="fragment_chat_room_bottomedittext"
         tools:layout="@layout/fragment_chat_room_bottomedittext" />
+    <fragment
+        android:id="@+id/chargeCashDialogFragment"
+        android:name="com.softcon.meetinguniv.ChargeCashDialogFragment"
+        android:label="fragment_charge_cash_dialog"
+        tools:layout="@layout/fragment_charge_cash_dialog" />
 
 </navigation>
