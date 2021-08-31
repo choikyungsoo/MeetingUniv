@@ -57,14 +57,11 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     private ArrayList<Float> ageRange = new ArrayList<Float>();
     private View dialogView;
 
-    private String location;
     private String schoolName;
 
     private ArrayList<String> schoolNames = new ArrayList<String>();
-
     private boolean inSchoolName = false;
 
-    private Boolean cSetting;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -107,13 +104,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     }
 
     private void giveRecycleritemData(TeamMemberRecyclerItem recyclerItem, EditTeamMemberElementFragment fragment) {
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable("current",recyclerItem);
-//        MTeamMemberRecyclerItem mt = new MTeamMemberRecyclerItem(recyclerItem.getMemProfile());
-//        this.mlist.add(mt);
-//        bundle.putParcelableArrayList("currentteam", (ArrayList<? extends Parcelable>) mlist);
-//        fragment.setArguments(bundle);
-
         Bundle bundle = new Bundle();
         bundle.putIntegerArrayList("currentteam", this.ImageSource);
         fragment.setArguments(bundle);

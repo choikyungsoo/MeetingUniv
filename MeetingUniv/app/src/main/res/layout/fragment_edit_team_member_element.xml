@@ -44,7 +44,7 @@
             android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/textView61"
+            android:id="@+id/TCCheck"
             android:layout_width="6dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
