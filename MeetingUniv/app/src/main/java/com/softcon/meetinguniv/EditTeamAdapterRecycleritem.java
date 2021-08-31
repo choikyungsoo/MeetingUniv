@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.softcon.meetinguniv.main.FriendsListAdapterRecycleritem;
 import com.softcon.meetinguniv.main.FriendsListRecycleritem;
+import com.softcon.meetinguniv.main.TeamMemberAdapterRecycleritem;
 import com.softcon.meetinguniv.main.TeamMemberRecyclerItem;
 import com.softcon.meetinguniv.R;
 
@@ -22,7 +23,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class EditTeamAdapterRecycleritem extends  RecyclerView.Adapter<EditTeamAdapterRecycleritem.viewHolder> {
     private ArrayList<EditTeamRecycleritem1> mData;
+    private TeamMemberAdapterRecycleritem.OnItemClickListener mListener = null;
 
+    public interface OnItemClickListener{
+        void onItemClick(View v, int position);
+    }
+    public void setOnItemClickListener(TeamMemberAdapterRecycleritem.OnItemClickListener listener){
+        this.mListener = listener;
+    }
 
     public class viewHolder extends RecyclerView.ViewHolder {
 
@@ -31,7 +39,19 @@ public class EditTeamAdapterRecycleritem extends  RecyclerView.Adapter<EditTeamA
 
         public viewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            E_memProfile = itemView.findViewById(R.id.chatprofile5); }
+            E_memProfile = itemView.findViewById(R.id.chatprofile5);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        if(mListener != null){
+                            mListener.onItemClick(v,pos);
+                        }
+                    }
+                }
+            });
+        }
     }
     EditTeamAdapterRecycleritem(ArrayList<EditTeamRecycleritem1> alllist) {
         this.mData = alllist;
