@@ -81,13 +81,13 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 //        addRecyclerItem(123);
         //팀원 수와 편집에 따라 변함(유동적으로 변함)
 
-        addRecyclerItem(R.drawable.prot);
-        addRecyclerItem(R.drawable.prot2);
-        addRecyclerItem(R.drawable.prot3);
+        addRecyclerItem(R.drawable.prot,0);
+        addRecyclerItem(R.drawable.prot2, 0);
+        addRecyclerItem(R.drawable.prot3, 0);
 
 
         //팀원 편집 아이콘(필수적으로 고정)
-        addRecyclerItem(R.drawable.settingicon);
+        addRecyclerItem(R.drawable.settingicon, 1);
         recyclerItemAdapter.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
@@ -99,7 +99,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                             .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
                             .replace(R.id.Framecontainer, fragment)
                             .commit();
-
                 }
             }
         });
@@ -108,23 +107,25 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     }
 
     private void giveRecycleritemData(TeamMemberRecyclerItem recyclerItem, EditTeamMemberElementFragment fragment) {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("current",recyclerItem);
-        MTeamMemberRecyclerItem mt = new MTeamMemberRecyclerItem(recyclerItem.getMemProfile());
-        this.mlist.add(mt);
-        bundle.putParcelableArrayList("currentteam", (ArrayList<? extends Parcelable>) mlist);
-        fragment.setArguments(bundle);
-
 //        Bundle bundle = new Bundle();
-////        bundle.putIntegerArrayList();
+//        bundle.putSerializable("current",recyclerItem);
+//        MTeamMemberRecyclerItem mt = new MTeamMemberRecyclerItem(recyclerItem.getMemProfile());
+//        this.mlist.add(mt);
+//        bundle.putParcelableArrayList("currentteam", (ArrayList<? extends Parcelable>) mlist);
 //        fragment.setArguments(bundle);
+
+        Bundle bundle = new Bundle();
+        bundle.putIntegerArrayList("currentteam", this.ImageSource);
+        fragment.setArguments(bundle);
     }
 
-    private void addRecyclerItem(int profile){
+    private void addRecyclerItem(int profile, int verfiycode){
         TeamMemberRecyclerItem recyclerItem = new TeamMemberRecyclerItem();
         recyclerItem.setMemProfile(profile);
         list.add(recyclerItem);
-        this.ImageSource.add(profile);
+        if(verfiycode == 0) {
+            this.ImageSource.add(profile);
+        }
         ///Test
     }
     private void moveToEditFriends(View v) {

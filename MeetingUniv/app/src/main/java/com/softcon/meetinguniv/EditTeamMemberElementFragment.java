@@ -80,12 +80,17 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 //        }
         //Test///////////////////////////
         Bundle bundle = getArguments();
-        TeamMemberRecyclerItem teamMemberRecyclerItem = (TeamMemberRecyclerItem) bundle.getSerializable("current");
-        ArrayList<MTeamMemberRecyclerItem> mlist = bundle.getParcelableArrayList("currentteam");
-        for(MTeamMemberRecyclerItem tes: mlist){
-            addRecyclerItem(tes.memProfile);
+//        TeamMemberRecyclerItem teamMemberRecyclerItem = (TeamMemberRecyclerItem) bundle.getSerializable("current");
+//        ArrayList<MTeamMemberRecyclerItem> mlist = bundle.getParcelableArrayList("currentteam");
+//        for(MTeamMemberRecyclerItem tes: mlist){
+//            addRecyclerItem(tes.memProfile);
+//        }
+        if(bundle != null){
+            ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
+            for(int i=0; i<takeData.size(); i++){
+                addRecyclerItem(takeData.get(i));
+            }
         }
-
         ////////////////////////////////
 //        for(TeamMemberRecyclerItem teamMemberRecyclerItem: this.storage){
 //            addRecyclerItem(teamMemberRecyclerItem.getMemProfile());
