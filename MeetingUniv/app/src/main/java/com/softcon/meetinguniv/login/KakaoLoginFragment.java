@@ -68,7 +68,7 @@ public class KakaoLoginFragment extends Fragment {
                                 if(oAuthToken !=null) {
 
                                 }
-                                if(oAuthToken != null) {
+                                if(throwable != null) {
 
                                 }
                                 checkLogin();
@@ -83,7 +83,7 @@ public class KakaoLoginFragment extends Fragment {
                                 if(oAuthToken !=null) {
 
                                 }
-                                if(oAuthToken != null) {
+                                if(throwable != null) {
 
                                 }
                                 checkLogin();
@@ -127,6 +127,7 @@ public class KakaoLoginFragment extends Fragment {
             @Override
             public Unit invoke(User user, Throwable throwable) {
                 if(user != null) {
+                    Log.d("카카오톡","카카오톡 설치 안됨");
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                     getActivity().finish();
