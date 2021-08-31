@@ -4,46 +4,92 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.softcon.meetinguniv.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class FriendsListScreenFragment extends Fragment implements View.OnClickListener {
-    private ArrayList<FriendsListRecycleritem> list = new ArrayList<FriendsListRecycleritem>();
+//    private ArrayList<FriendsListRecycleritem> list = new ArrayList<FriendsListRecycleritem>();
+    private List<FriendsListRecycleritem> list;
+    private FriendsListAdapterRecycleritem recyclerItemAdapter;
     private FloatingActionButton inviteFriends;
     private ImageView PersonalProfile;
+    private EditText editSearch;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerView recyclerView = view.findViewById(R.id.F_chatinglist) ;
-        FriendsListAdapterRecycleritem recyclerItemAdapter = new FriendsListAdapterRecycleritem(this.list);
-        recyclerView.setAdapter(recyclerItemAdapter) ;
+        RecyclerView recyclerView = view.findViewById(R.id.F_chatinglist);
+
+//        this.recyclerItemAdapter = new FriendsListAdapterRecycleritem(this.list);
+        this.list = new ArrayList<FriendsListRecycleritem>();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
         addRecyclerItem(R.drawable.prot, "테스트용 입니다");
-        recyclerItemAdapter.notifyDataSetChanged();
+        addRecyclerItem(R.drawable.prot, "meetingUniv");
+
+        this.recyclerItemAdapter = new FriendsListAdapterRecycleritem(this.getActivity(), this.list);
+        recyclerView.setAdapter(this.recyclerItemAdapter) ;
+
+//        recyclerItemAdapter.notifyDataSetChanged();
+
+        this.editSearch = (EditText) view.findViewById(R.id.searchFriendsListEditText);
+
+        editSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                String text = editSearch.getText().toString().toLowerCase(Locale.getDefault());
+                recyclerItemAdapter.filter(text);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+        });
     }
+
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//
+//
+//    }
+//
+//    private void init() {
+//    }
 
     private void addRecyclerItem(int profile, String memberlist){
         FriendsListRecycleritem recyclerItem = new FriendsListRecycleritem();
         recyclerItem.setF_chatingProfile(profile);
         recyclerItem.setF_memberlist(memberlist);
         list.add(recyclerItem);
-
     }
 
     @Override
@@ -57,8 +103,6 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         this.PersonalProfile.setOnClickListener(this);
         return rootView;
     }
-
-
 
     @Override
     public void onClick(View v) {
