@@ -12,12 +12,15 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ChargeCashDialogFragment extends Fragment {
     private Context context;
     private Dialog dlg;
     private TextView chargeHeartNum, chargeHeartCash, onHandCash, chargeCashAmount, paymentAmount;
     private Button goToChargeCash_BTN;
+    private String[] priceArr = null;
+    private String[] onHandCashArr = null;
 
     public ChargeCashDialogFragment(Context context) { this.context = context; }
 
@@ -38,8 +41,8 @@ public class ChargeCashDialogFragment extends Fragment {
         this.chargeHeartCash.setText(itemPrice);
         this.onHandCash.setText(onHandCashString);
 
-        String[] priceArr = itemPrice.split(" ");
-        String[] onHandCashArr = onHandCashString.split(" ");
+        this.priceArr = itemPrice.split(" ");
+        this.onHandCashArr = onHandCashString.split(" ");
 
         int priceInt = Integer.parseInt(priceArr[0]);
         int onHandCashInt = Integer.parseInt(onHandCashArr[0]);
