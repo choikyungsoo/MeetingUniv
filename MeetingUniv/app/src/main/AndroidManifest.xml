@@ -42,7 +42,9 @@
             android:name="com.softcon.meetinguniv.ChatRoomContentFragment"
             tools:ignore="Instantiatable" />
         <activity android:name="com.softcon.meetinguniv.login.LoginActivity"
-            >
+
+            />
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
