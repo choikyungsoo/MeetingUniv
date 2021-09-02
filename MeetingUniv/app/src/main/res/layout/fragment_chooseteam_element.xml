@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="69dp">
 
-        <SearchView
-            android:id="@+id/searchTeam"
+        <EditText
+            android:id="@+id/searchTeamEditText"
             android:layout_width="340dp"
             android:layout_height="40dp"
             android:iconifiedByDefault="false"
@@ -31,7 +31,7 @@
             android:layout_height="45dp"
             android:src="@android:drawable/ic_delete"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/searchTeam"
+            app:layout_constraintEnd_toStartOf="@+id/searchTeamEditText"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

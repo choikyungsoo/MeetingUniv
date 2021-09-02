@@ -28,8 +28,8 @@
             android:layout_weight="1"
             android:background="@android:drawable/ic_delete" />
 
-        <SearchView
-            android:id="@+id/P_search"
+        <EditText
+            android:id="@+id/searchFloatingFriendsListEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

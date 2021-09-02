@@ -7,16 +7,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 
 import com.softcon.meetinguniv.R;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,15 +30,21 @@ import java.util.ArrayList;
  */
 public class chooseteamElementFragment extends Fragment {
     private ImageButton backbtn;
-    private SearchView search;
+    private EditText editSearch;
     private InputMethodManager imm;
-    private ArrayList<chooseteamRecycleritem> list = new ArrayList<chooseteamRecycleritem>();
+//    private ArrayList<chooseteamRecycleritem> list = new ArrayList<chooseteamRecycleritem>();
+    private List<chooseteamRecycleritem> list;
+    private chooseteamAdapterRecyleritem recyclerItemAdapter;
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView = view.findViewById(R.id.teamrecycler) ;
-        chooseteamAdapterRecyleritem recyclerItemAdapter = new chooseteamAdapterRecyleritem(this.list);
-        recyclerView.setAdapter(recyclerItemAdapter) ;
+
+//        chooseteamAdapterRecyleritem recyclerItemAdapter = new chooseteamAdapterRecyleritem(this.list);
+//        recyclerView.setAdapter(recyclerItemAdapter) ;
+
+        this.list = new ArrayList<chooseteamRecycleritem>();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -46,8 +57,31 @@ public class chooseteamElementFragment extends Fragment {
         addRecyclerItem("한양대", "1,2,3");
         addRecyclerItem("연세대", "A,B,c");
         addRecyclerItem("고려대", "가,나,다");
-        recyclerItemAdapter.notifyDataSetChanged();
 
+        this.recyclerItemAdapter = new chooseteamAdapterRecyleritem(this.getActivity(), this.list);
+        recyclerView.setAdapter(this.recyclerItemAdapter);
+
+//        recyclerItemAdapter.notifyDataSetChanged();
+
+        this.editSearch = (EditText) view.findViewById(R.id.searchTeamEditText);
+
+        editSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                String text = editSearch.getText().toString().toLowerCase(Locale.getDefault());
+                recyclerItemAdapter.filter(text);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+        });
     }
 
     private void addRecyclerItem( String name, String member){
@@ -63,7 +97,7 @@ public class chooseteamElementFragment extends Fragment {
         MatchingContentFragment fragment1 = new MatchingContentFragment();
         View view = inflater.inflate(R.layout.fragment_chooseteam_element, container, false);
         this.backbtn = view.findViewById(R.id.backbtn);
-        this.search = view.findViewById(R.id.searchTeam);
+        this.editSearch = view.findViewById(R.id.searchTeamEditText);
         this.imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         this.backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +105,7 @@ public class chooseteamElementFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.Framecontainer, fragment1)
                         .commit();
-                imm.hideSoftInputFromWindow(search.getWindowToken(),0);
+                imm.hideSoftInputFromWindow(editSearch.getWindowToken(),0);
             }
         });
         return view;

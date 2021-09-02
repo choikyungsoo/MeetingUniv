@@ -7,7 +7,8 @@
     android:orientation="vertical"
     tools:context="com.softcon.meetinguniv.main.MatchChattingContentFragment" >
 
-    <SearchView
+    <EditText
+        android:id="@+id/searchMatchChattingEditText"
         android:iconifiedByDefault="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

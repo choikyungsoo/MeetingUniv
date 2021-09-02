@@ -6,10 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
@@ -18,14 +21,39 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.softcon.meetinguniv.R;
 
 public class PersonalChatingAdapterRecycleritem extends RecyclerView.Adapter<PersonalChatingAdapterRecycleritem.viewHolder> {
-    private ArrayList<PersonalChatingRecycleritem> mData;
+//    private ArrayList<PersonalChatingRecycleritem> mData;
 
-    public PersonalChatingAdapterRecycleritem(ArrayList<PersonalChatingRecycleritem> list){
-        this.mData = list;
+//    public PersonalChatingAdapterRecycleritem(ArrayList<PersonalChatingRecycleritem> list){
+//        this.mData = list;
+//    }
+
+    private List<PersonalChatingRecycleritem> items = null;
+    private ArrayList<PersonalChatingRecycleritem> arrayList;
+
+    private Context context;
+
+    public PersonalChatingAdapterRecycleritem(Context context, List<PersonalChatingRecycleritem> items) {
+        this.context = context;
+        this.items = items;
+        this.arrayList = new ArrayList<PersonalChatingRecycleritem>();
+        this.arrayList.addAll(items);
     }
 
-
-
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        items.clear();
+        if (charText.length() == 0) {
+            items.addAll(arrayList);
+        } else {
+            for (PersonalChatingRecycleritem personalChatingRecycleritem: arrayList) {
+                String name = personalChatingRecycleritem.getMemberlist();
+                if (name.toLowerCase().contains(charText)) {
+                    items.add(personalChatingRecycleritem);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
 
     @Override
     public PersonalChatingAdapterRecycleritem.viewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
@@ -41,14 +69,14 @@ public class PersonalChatingAdapterRecycleritem extends RecyclerView.Adapter<Per
 
     @Override
     public void onBindViewHolder(@NonNull PersonalChatingAdapterRecycleritem.viewHolder holder, int position) {
-        PersonalChatingRecycleritem recyclerItem = mData.get(position) ;
+        PersonalChatingRecycleritem recyclerItem = items.get(position) ;
         holder.chatprofile.setImageResource(recyclerItem.getChatingProfile());
         holder.memberlist.setText(recyclerItem.getMemberlist()) ;
     }
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return items.size();
     }
 
     @Override
