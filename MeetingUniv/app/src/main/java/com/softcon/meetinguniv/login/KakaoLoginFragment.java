@@ -29,6 +29,7 @@ public class KakaoLoginFragment extends Fragment {
 
     private static final String TAG = "유저";
     private ImageView kakao_login_btn;
+    private TextView logo;
 
     private View root;
 
@@ -119,6 +120,15 @@ public class KakaoLoginFragment extends Fragment {
 //                Intent intent = new Intent(getActivity(), MainActivity.class);
 //                startActivity(intent);
 //                getActivity().finish();
+            }
+        });
+        this.logo = view.findViewById(R.id.logo);
+        this.logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
     }

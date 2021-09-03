@@ -62,6 +62,8 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     private ArrayList<String> schoolNames = new ArrayList<String>();
     private boolean inSchoolName = false;
 
+    private int settingposition;
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -75,11 +77,12 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        this.settingposition = 0;
 //        addRecyclerItem(123);
         //팀원 수와 편집에 따라 변함(유동적으로 변함)
 
         addRecyclerItem(R.drawable.prot,0);
-        addRecyclerItem(R.drawable.prot2, 0);
+//        addRecyclerItem(R.drawable.prot2, 0);
         addRecyclerItem(R.drawable.prot3, 0);
 
 
@@ -88,7 +91,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         recyclerItemAdapter.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                if(position == 3){
+                if(position == settingposition){
                     EditTeamMemberElementFragment fragment = new EditTeamMemberElementFragment();
                     TeamMemberRecyclerItem recyclerItem = new TeamMemberRecyclerItem();
                     giveRecycleritemData(recyclerItem, fragment);
@@ -114,6 +117,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         recyclerItem.setMemProfile(profile);
         list.add(recyclerItem);
         if(verfiycode == 0) {
+            this.settingposition++;
             this.ImageSource.add(profile);
         }
         ///Test
