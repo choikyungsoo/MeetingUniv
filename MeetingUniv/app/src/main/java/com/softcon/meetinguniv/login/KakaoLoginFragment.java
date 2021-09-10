@@ -71,7 +71,8 @@ public class KakaoLoginFragment extends Fragment {
                                 if(throwable != null) {
 
                                 }
-                                checkLogin();
+                                Navigation.findNavController(view).navigate(R.id.action_kakao_login_to_joinAgreementScreenFragment);
+//                                checkLogin();
                                 return null;
                             }
                         });
@@ -86,7 +87,8 @@ public class KakaoLoginFragment extends Fragment {
                                 if(throwable != null) {
 
                                 }
-                                checkLogin();
+                                Navigation.findNavController(view).navigate(R.id.action_kakao_login_to_joinAgreementScreenFragment);
+//                                checkLogin();
                                 return null;
                             }
                         });
