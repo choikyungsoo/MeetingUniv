@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.softcon.meetinguniv.ChargeCashDialogFragment;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 
 public class ShopScreenFragment extends Fragment {
     private ArrayList<ShopScreenRecycleritem> list = new ArrayList<ShopScreenRecycleritem>();
+    private TextView myCashAmount;
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -38,6 +41,8 @@ public class ShopScreenFragment extends Fragment {
         addRecyclerItem("1개월 무제한", "5000 캐시");
         recyclerItemAdapter.notifyDataSetChanged();
 
+        this.myCashAmount = view.findViewById(R.id.myCashAmount);
+
         recyclerItemAdapter.setOnItemClickListener(new ShopScreenAdatpterRecycleritem.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
@@ -47,7 +52,7 @@ public class ShopScreenFragment extends Fragment {
                 String itemPrice = list.get(position).getPrice().toString();
 
                 ChargeCashDialogFragment chargeCashDialogFragment = new ChargeCashDialogFragment(getActivity());
-                chargeCashDialogFragment.showChargeCashDialogFunction(itemName, itemPrice, "0 캐시");
+                chargeCashDialogFragment.showChargeCashDialogFunction(itemName, itemPrice, myCashAmount.getText().toString());
             }
         });
     }
