@@ -41,6 +41,8 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     private ArrayList<EditTeamRecycleritem> currentlist = new ArrayList<EditTeamRecycleritem>();
     private ArrayList<TeamMemberRecyclerItem> storage = new ArrayList<TeamMemberRecyclerItem>();
 
+    private ArrayList<Integer> ImageSource2 = new ArrayList<Integer>();
+
     private RecyclerView allfriends;
     private RecyclerView currentfriends;
 
@@ -70,6 +72,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         this.allfriends.setLayoutManager(linearLayoutManager);
 
 
+        this.CheckTC.setOnClickListener(this);
         Bundle bundle = getArguments();
         if(bundle != null){
             ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
@@ -150,16 +153,35 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.EditbackBTN:
-                MatchingContentFragment fragment2= new MatchingContentFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.Framecontainer, fragment2)
-                        .commit();
-                imm.hideSoftInputFromWindow(editsearch.getWindowToken(),0);
+                moveToMachingcontent();
                 break;
             case R.id.TCCheck:
-
+                savechangememberInfo();
+                givechangememberInfo();
+                moveToMachingcontent();
                 break;
         }
+    }
+
+    private void moveToMachingcontent() {
+        MatchingContentFragment fragment2= new MatchingContentFragment();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.Framecontainer, fragment2)
+                .commit();
+        imm.hideSoftInputFromWindow(editsearch.getWindowToken(),0);
+    }
+
+    private void savechangememberInfo() {
+        for(EditTeamRecycleritem1 etr1: this.alllist){
+            this.ImageSource2.add(etr1.getE_memporife());
+        }
+    }
+
+    private void givechangememberInfo() {
+        Bundle bundle = new Bundle();
+        MatchingContentFragment fragment = new MatchingContentFragment();
+        bundle.putIntegerArrayList("changemember", this.ImageSource2);
+        fragment.setArguments(bundle);
     }
 
 }

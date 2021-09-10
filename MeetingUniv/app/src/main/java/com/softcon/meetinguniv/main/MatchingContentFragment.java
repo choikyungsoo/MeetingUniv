@@ -80,11 +80,17 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         this.settingposition = 0;
 //        addRecyclerItem(123);
         //팀원 수와 편집에 따라 변함(유동적으로 변함)
-
-        addRecyclerItem(R.drawable.prot,0);
-//        addRecyclerItem(R.drawable.prot2, 0);
-        addRecyclerItem(R.drawable.prot3, 0);
-
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            ArrayList<Integer> takeData = bundle.getIntegerArrayList("changemember");
+            for(int i=0; i<takeData.size(); i++){
+                addRecyclerItem(takeData.get(i),0);
+            }
+        } else {
+            addRecyclerItem(R.drawable.prot, 0);
+            addRecyclerItem(R.drawable.prot2, 0);
+            addRecyclerItem(R.drawable.prot3, 0);
+        }
 
         //팀원 편집 아이콘(필수적으로 고정)
         addRecyclerItem(R.drawable.settingicon, 1);
