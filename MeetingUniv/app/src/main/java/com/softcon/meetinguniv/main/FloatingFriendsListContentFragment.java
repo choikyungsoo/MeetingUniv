@@ -7,40 +7,73 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SearchView;
 
 import com.softcon.meetinguniv.R;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 
 public class FloatingFriendsListContentFragment extends Fragment implements View.OnClickListener{
 
-    private ArrayList<FloatingFriendsRecylceritem> list = new ArrayList<FloatingFriendsRecylceritem>();
+//    private ArrayList<FloatingFriendsRecylceritem> list = new ArrayList<FloatingFriendsRecylceritem>();
+    private List<FloatingFriendsRecylceritem> list;
+    private FloatingFriendsAdatperRecycleritem recyclerItemAdapter;
     private Button backtofriendBTN;
-    private SearchView P_search;
+    private EditText editSearch;
     private InputMethodManager imm;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerView recyclerView = view.findViewById(R.id.Popup_friendlist) ;
-        FloatingFriendsAdatperRecycleritem recyclerItemAdapter = new FloatingFriendsAdatperRecycleritem(this.list);
-        recyclerView.setAdapter(recyclerItemAdapter) ;
+        RecyclerView recyclerView = view.findViewById(R.id.Popup_friendlist);
+
+//        FloatingFriendsAdatperRecycleritem recyclerItemAdapter = new FloatingFriendsAdatperRecycleritem(this.list);
+//        recyclerView.setAdapter(recyclerItemAdapter) ;
+
+        this.list = new ArrayList<FloatingFriendsRecylceritem>();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
         addRecyclerItem(R.drawable.prot, "테스트용 입니다");
-        recyclerItemAdapter.notifyDataSetChanged();
+
+        this.recyclerItemAdapter = new FloatingFriendsAdatperRecycleritem(this.getActivity(), this.list);
+        recyclerView.setAdapter(this.recyclerItemAdapter);
+
+//        recyclerItemAdapter.notifyDataSetChanged();
 
         this.backtofriendBTN = view.findViewById(R.id.backtochatroom);
-        this.P_search = view.findViewById(R.id.P_search);
+        this.editSearch = (EditText) view.findViewById(R.id.searchFloatingFriendsListEditText);
+
+        editSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                String text = editSearch.getText().toString().toLowerCase(Locale.getDefault());
+                recyclerItemAdapter.filter(text);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+        });
+
         this.backtofriendBTN.setOnClickListener(this);
     }
 
@@ -76,6 +109,6 @@ public class FloatingFriendsListContentFragment extends Fragment implements View
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.containfriendlist, fragment2)
                 .commit();
-        imm.hideSoftInputFromWindow(P_search.getWindowToken(),0);
+        imm.hideSoftInputFromWindow(editSearch.getWindowToken(),0);
     }
 }

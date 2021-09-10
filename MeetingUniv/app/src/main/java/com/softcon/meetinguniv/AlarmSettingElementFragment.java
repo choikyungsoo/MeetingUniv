@@ -2,6 +2,7 @@ package com.softcon.meetinguniv;
 
 import static android.content.Context.VIBRATOR_SERVICE;
 
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -100,17 +102,26 @@ public class AlarmSettingElementFragment extends PreferenceFragmentCompat {
     public void setAlarmMode(String selectedAlarmMode) {
         if (selectedAlarmMode.equals("0")) {
             Toast.makeText(getContext(), "소리+진동", Toast.LENGTH_SHORT).show();
-            this.audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+            NotificationCompat.Builder notiBuilder = new NotificationCompat.Builder(getActivity())
+                    .setDefaults(Notification.DEFAULT_ALL)
+                    .setAutoCancel(true);
+//            this.audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
         } else if (selectedAlarmMode.equals("1")) {
             Toast.makeText(getContext(), "소리만", Toast.LENGTH_SHORT).show();
-            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            Ringtone ringtone = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
-            ringtone.play();
+            NotificationCompat.Builder notiBuilder = new NotificationCompat.Builder(getActivity())
+                    .setDefaults(Notification.DEFAULT_SOUND)
+                    .setAutoCancel(true);
+//            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//            Ringtone ringtone = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
+//            ringtone.play();
         } else {
             Toast.makeText(getContext(), "진동만", Toast.LENGTH_SHORT).show();
-            this.audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
-            Vibrator vibrator = (Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE);
-            vibrator.vibrate(500);
+            NotificationCompat.Builder notiBuilder = new NotificationCompat.Builder(getActivity())
+                    .setDefaults(Notification.DEFAULT_VIBRATE)
+                    .setAutoCancel(true);
+//            this.audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+//            Vibrator vibrator = (Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE);
+//            vibrator.vibrate(500);
         }
     }
 

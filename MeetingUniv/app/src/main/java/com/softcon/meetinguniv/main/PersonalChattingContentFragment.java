@@ -6,20 +6,31 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.softcon.meetinguniv.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 
 public class PersonalChattingContentFragment extends Fragment implements View.OnClickListener {
 
-    private ArrayList<PersonalChatingRecycleritem> list = new ArrayList<PersonalChatingRecycleritem>();
+//    private ArrayList<PersonalChatingRecycleritem> list = new ArrayList<PersonalChatingRecycleritem>();
+
+    private List<PersonalChatingRecycleritem> list;
+    private PersonalChatingAdapterRecycleritem recyclerItemAdapter;
+    private EditText editSearch;
     private FloatingActionButton invitingBTN;
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -27,16 +38,42 @@ public class PersonalChattingContentFragment extends Fragment implements View.On
         RecyclerView recyclerView = view.findViewById(R.id.F_chatinglist) ;
         this.invitingBTN = view.findViewById(R.id.invitingfriends);
         
-        PersonalChatingAdapterRecycleritem recyclerItemAdapter = new PersonalChatingAdapterRecycleritem(this.list);
-        recyclerView.setAdapter(recyclerItemAdapter);
+//        PersonalChatingAdapterRecycleritem recyclerItemAdapter = new PersonalChatingAdapterRecycleritem(this.list);
+//        recyclerView.setAdapter(recyclerItemAdapter);
+
+        this.list = new ArrayList<PersonalChatingRecycleritem>();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
         addRecyclerItem(R.drawable.prot, "테스트용 입니다");
-        recyclerItemAdapter.notifyDataSetChanged();
+
+        this.recyclerItemAdapter = new PersonalChatingAdapterRecycleritem(this.getActivity(), this.list);
+        recyclerView.setAdapter(this.recyclerItemAdapter);
+
+//        recyclerItemAdapter.notifyDataSetChanged();
 
         this.invitingBTN.setOnClickListener(this);
+
+        this.editSearch = (EditText) view.findViewById(R.id.searchPersonalChattingEditText);
+
+        editSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                String text = editSearch.getText().toString().toLowerCase(Locale.getDefault());
+                recyclerItemAdapter.filter(text);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+        });
     }
 
     @Override

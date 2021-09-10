@@ -41,6 +41,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         RecyclerView recyclerView = view.findViewById(R.id.F_chatinglist);
 
 //        this.recyclerItemAdapter = new FriendsListAdapterRecycleritem(this.list);
+
         this.list = new ArrayList<FriendsListRecycleritem>();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -50,7 +51,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         addRecyclerItem(R.drawable.prot, "meetingUniv");
 
         this.recyclerItemAdapter = new FriendsListAdapterRecycleritem(this.getActivity(), this.list);
-        recyclerView.setAdapter(this.recyclerItemAdapter) ;
+        recyclerView.setAdapter(this.recyclerItemAdapter);
 
 //        recyclerItemAdapter.notifyDataSetChanged();
 
