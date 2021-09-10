@@ -1,6 +1,8 @@
 package com.softcon.meetinguniv.login;
 
 public class User {
+    private String id;
+
     private boolean meetingUnivAgreementCheckbox;
     private boolean personalInfoAgreementCheckbox;
     private boolean locationInfoAgreementCheckbox;

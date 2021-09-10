@@ -160,6 +160,11 @@ public class JoinAgreementScreenFragment extends Fragment {
                 user.setPersonalInfoAgreementCheckbox(personalInfoAgreementCheckbox.isChecked());
                 user.setLocationInfoAgreementCheckbox(locationInfoAgreementCheckbox.isChecked());
                 user.setPromotionInfoAgreementCheckbox(promotionInfoAgreementCheckbox.isChecked());
+
+//                Toast.makeText(getContext(), String.valueOf(user.isMeetingUnivAgreementCheckbox()),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), String.valueOf(user.isPersonalInfoAgreementCheckbox()),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), String.valueOf(user.isLocationInfoAgreementCheckbox()),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), String.valueOf(user.isPromotionInfoAgreementCheckbox()),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -169,7 +174,7 @@ public class JoinAgreementScreenFragment extends Fragment {
             public void onClick(View v) {
                 if (meetingUnivAgreementCheckbox.isChecked() && personalInfoAgreementCheckbox.isChecked()
                         && locationInfoAgreementCheckbox.isChecked()) {
-                    Navigation.findNavController(view).navigate(R.id.action_joinAgreementScreenFragment_to_joinPhoneVerfiyImportScreenFragment);
+                    Navigation.findNavController(view).navigate(R.id.action_joinAgreementScreenFragment_to_joinPersonalInfoScreenFragment);
 //                    gotojoinPersonalInfoScreen();
                 } else {
                     Toast.makeText(getContext(), "필수 약관에 모두 동의하세요.", Toast.LENGTH_SHORT).show();
