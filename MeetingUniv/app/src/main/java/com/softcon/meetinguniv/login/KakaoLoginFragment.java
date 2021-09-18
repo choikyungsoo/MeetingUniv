@@ -6,8 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,9 +14,7 @@ import androidx.navigation.Navigation;
 
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
-import com.kakao.sdk.user.model.Account;
 import com.kakao.sdk.user.model.User;
-import com.softcon.meetinguniv.GlobalApplication;
 import com.softcon.meetinguniv.R;
 import com.softcon.meetinguniv.main.MainActivity;
 
@@ -66,13 +62,22 @@ public class KakaoLoginFragment extends Fragment {
                         UserApiClient.getInstance().loginWithKakaoTalk(root.getContext(), new Function2<OAuthToken, Throwable, Unit>() {
                             @Override
                             public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
-                                if(oAuthToken !=null) {
-
-                                }
                                 if(throwable != null) {
-
+                                    Log.e("error",throwable.getLocalizedMessage());
                                 }
-                                Navigation.findNavController(view).navigate(R.id.action_kakao_login_to_joinAgreementScreenFragment);
+                                if(oAuthToken !=null) {
+                                    Log.i("success", "로그인 성공");
+                                    UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+                                        @Override
+                                        public Unit invoke(User user, Throwable throwable) {
+                                            Log.d("UserID", String.valueOf(user.getId()));
+                                            return null;
+                                        }
+                                    });
+                                    Navigation.findNavController(view).navigate(R.id.action_kakao_login_to_joinAgreementScreenFragment);
+                                }
+//                                String nickname =
+
 //                                checkLogin();
                                 return null;
                             }
@@ -82,13 +87,26 @@ public class KakaoLoginFragment extends Fragment {
                         UserApiClient.getInstance().loginWithKakaoAccount(root.getContext(), new Function2<OAuthToken, Throwable, Unit>() {
                             @Override
                             public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
-                                if(oAuthToken !=null) {
-
-                                }
                                 if(throwable != null) {
-
+                                    Log.e("error",throwable.getLocalizedMessage());
                                 }
-                                Navigation.findNavController(view).navigate(R.id.action_kakao_login_to_joinAgreementScreenFragment);
+                                if(oAuthToken !=null) {
+                                    Log.i("success", "로그인 성공");
+                                    UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+                                        @Override
+                                        public Unit invoke(User user, Throwable throwable) {
+                                            UserInfo userInfo = new UserInfo();
+                                            userInfo.setUserID(user.getId());
+                                            Log.d("UserID", String.valueOf(user.getId()));
+                                            Bundle bundle = getArguments();
+                                            bundle.putSerializable("Obj", userInfo);
+                                            JoinAgreementScreenFragment joinAgreementScreenFragment = new JoinAgreementScreenFragment();
+                                            joinAgreementScreenFragment.setArguments(bundle);
+                                            return null;
+                                        }
+                                    });
+                                    Navigation.findNavController(view).navigate(R.id.action_kakao_login_to_joinAgreementScreenFragment);
+                                }
 //                                checkLogin();
                                 return null;
                             }
