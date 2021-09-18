@@ -47,6 +47,9 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     private RecyclerView currentfriends;
 
     private EditTeamAdapterRecycleritem recyclerItemAdapter;
+
+    private MatchingContentFragment fragment;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +64,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         this.editsearch = view.findViewById(R.id.Editsearch);
         this.imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         this.EditbackBTN.setOnClickListener(this);
+        this.fragment = new MatchingContentFragment();
 
         //리사이클러뷰 - 현재 팀원   /////////////////////////////////////////////////////////////
         this.allfriends = view.findViewById(R.id.editfriendslist);
@@ -164,9 +168,8 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     }
 
     private void moveToMachingcontent() {
-        MatchingContentFragment fragment2= new MatchingContentFragment();
         getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.Framecontainer, fragment2)
+                .replace(R.id.Framecontainer, this.fragment)
                 .commit();
         imm.hideSoftInputFromWindow(editsearch.getWindowToken(),0);
     }
@@ -179,9 +182,9 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 
     private void givechangememberInfo() {
         Bundle bundle = new Bundle();
-        MatchingContentFragment fragment = new MatchingContentFragment();
+
         bundle.putIntegerArrayList("changemember", this.ImageSource2);
-        fragment.setArguments(bundle);
+        this.fragment.setArguments(bundle);
     }
 
 }

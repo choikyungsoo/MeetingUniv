@@ -18,6 +18,7 @@
             android:layout_width="340dp"
             android:layout_height="40dp"
             android:iconifiedByDefault="false"
+            android:singleLine="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.774"

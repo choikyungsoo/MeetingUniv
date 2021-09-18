@@ -34,7 +34,8 @@
                 android:id="@+id/searchPersonalChattingEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:iconifiedByDefault="false" />
+                android:iconifiedByDefault="false"
+                android:singleLine="true" />
 
         </LinearLayout>
 
