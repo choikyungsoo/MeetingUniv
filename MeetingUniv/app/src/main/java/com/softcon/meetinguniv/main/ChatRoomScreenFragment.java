@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.widget.Button;
@@ -38,6 +39,10 @@ public class ChatRoomScreenFragment extends Fragment implements View.OnClickList
     private ChatRoomRecyclerAdapter chatRoomRecyclerAdapter;
     private ChatRoomRecyclerItem chatRoomRecyclerItem;
     private Button backFromChatRoom_BTN;
+
+    /// 키보드 이슈
+    private View rootView;
+    private int viewHeight;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -81,6 +86,17 @@ public class ChatRoomScreenFragment extends Fragment implements View.OnClickList
         this.menuPage.setOnClickListener(this);
         this.backFromChatRoom_BTN.setOnClickListener(this);
 //        this.editText.setOnClickListener(this);
+
+        this.rootView = getActivity().getWindow().getDecorView();
+        this.rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                int currentViewHeight = rootView.getHeight();
+                if (currentViewHeight > viewHeight) {
+                    viewHeight = currentViewHeight;
+                }
+            }
+        });
 
     }
 
