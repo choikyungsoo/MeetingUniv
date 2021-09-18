@@ -1,5 +1,6 @@
 package com.softcon.meetinguniv.main;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -12,9 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SearchView;
@@ -56,6 +59,19 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
 //        recyclerItemAdapter.notifyDataSetChanged();
 
         this.editSearch = (EditText) view.findViewById(R.id.searchFriendsListEditText);
+
+        // 엔터 눌렀을 때 키보드 숨기기
+        this.editSearch.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow( editSearch.getWindowToken(), 0);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         editSearch.addTextChangedListener(new TextWatcher() {
             @Override
