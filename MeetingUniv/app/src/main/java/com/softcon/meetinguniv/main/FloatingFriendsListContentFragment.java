@@ -70,7 +70,7 @@ public class FloatingFriendsListContentFragment extends Fragment implements View
                 return false;
             }
         });
-        
+
         editSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
