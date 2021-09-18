@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ public class JoinAgreementScreenFragment extends Fragment {
     private FragmentTransaction fragmentTransaction;
     private JoinPersonalInfoScreenFragment joinPersonalInfoScreenFragment;
 
-    private User user;
+    private UserInfo userInfo;
 
 
     @Override
@@ -37,12 +38,16 @@ public class JoinAgreementScreenFragment extends Fragment {
         this.joinPersonalInfoScreenFragment = new JoinPersonalInfoScreenFragment();
 
         // Inflate the layout for this fragment
+
+//        Bundle bundle = getArguments();
+//        this.userInfo = (UserInfo) bundle.getSerializable("Obj");
+
         return inflater.inflate(R.layout.fragment_join_agreement_screen, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        this.user = new User();
+        this.userInfo = new UserInfo();
 
         meetingUnivAgreementCheckbox = view.findViewById(R.id.meetingUnivAgreementCheckbox);
         meetingUnivAgreementContent = view.findViewById(R.id.meetingUnivAgreementContent);
@@ -54,10 +59,10 @@ public class JoinAgreementScreenFragment extends Fragment {
         promotionInfoAgreementContent = view.findViewById(R.id.promotionInfoAgreementContent);
         allAgreementCheckbox = view.findViewById(R.id.allAgreementCheckbox);
 
-        this.user.setMeetingUnivAgreementCheckbox(meetingUnivAgreementCheckbox.isChecked());
-        this.user.setPersonalInfoAgreementCheckbox(personalInfoAgreementCheckbox.isChecked());
-        this.user.setLocationInfoAgreementCheckbox(locationInfoAgreementCheckbox.isChecked());
-        this.user.setPromotionInfoAgreementCheckbox(promotionInfoAgreementCheckbox.isChecked());
+        this.userInfo.setMeetingUnivAgreementCheckbox(meetingUnivAgreementCheckbox.isChecked());
+        this.userInfo.setPersonalInfoAgreementCheckbox(personalInfoAgreementCheckbox.isChecked());
+        this.userInfo.setLocationInfoAgreementCheckbox(locationInfoAgreementCheckbox.isChecked());
+        this.userInfo.setPromotionInfoAgreementCheckbox(promotionInfoAgreementCheckbox.isChecked());
 
         meetingUnivAgreementCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +79,7 @@ public class JoinAgreementScreenFragment extends Fragment {
                         allAgreementCheckbox.setChecked(false);
                     }
                 }
-                user.setMeetingUnivAgreementCheckbox(meetingUnivAgreementCheckbox.isChecked());
+                userInfo.setMeetingUnivAgreementCheckbox(meetingUnivAgreementCheckbox.isChecked());
             }
         });
         personalInfoAgreementCheckbox.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +97,7 @@ public class JoinAgreementScreenFragment extends Fragment {
                         allAgreementCheckbox.setChecked(false);
                     }
                 }
-                user.setPersonalInfoAgreementCheckbox(personalInfoAgreementCheckbox.isChecked());
+                userInfo.setPersonalInfoAgreementCheckbox(personalInfoAgreementCheckbox.isChecked());
             }
         });
         locationInfoAgreementCheckbox.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +115,7 @@ public class JoinAgreementScreenFragment extends Fragment {
                         allAgreementCheckbox.setChecked(false);
                     }
                 }
-                user.setLocationInfoAgreementCheckbox(locationInfoAgreementCheckbox.isChecked());
+                userInfo.setLocationInfoAgreementCheckbox(locationInfoAgreementCheckbox.isChecked());
             }
         });
         promotionInfoAgreementCheckbox.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +133,7 @@ public class JoinAgreementScreenFragment extends Fragment {
                         allAgreementCheckbox.setChecked(false);
                     }
                 }
-                user.setPromotionInfoAgreementCheckbox(promotionInfoAgreementCheckbox.isChecked());
+                userInfo.setPromotionInfoAgreementCheckbox(promotionInfoAgreementCheckbox.isChecked());
             }
         });
 
@@ -156,10 +161,16 @@ public class JoinAgreementScreenFragment extends Fragment {
                     locationInfoAgreementContent.setVisibility(View.VISIBLE);
                     promotionInfoAgreementContent.setVisibility(View.VISIBLE);
                 }
-                user.setMeetingUnivAgreementCheckbox(meetingUnivAgreementCheckbox.isChecked());
-                user.setPersonalInfoAgreementCheckbox(personalInfoAgreementCheckbox.isChecked());
-                user.setLocationInfoAgreementCheckbox(locationInfoAgreementCheckbox.isChecked());
-                user.setPromotionInfoAgreementCheckbox(promotionInfoAgreementCheckbox.isChecked());
+                userInfo.setMeetingUnivAgreementCheckbox(meetingUnivAgreementCheckbox.isChecked());
+                userInfo.setPersonalInfoAgreementCheckbox(personalInfoAgreementCheckbox.isChecked());
+                userInfo.setLocationInfoAgreementCheckbox(locationInfoAgreementCheckbox.isChecked());
+                userInfo.setPromotionInfoAgreementCheckbox(promotionInfoAgreementCheckbox.isChecked());
+
+                Log.d("1", String.valueOf(userInfo.getUserID()));
+                Log.d("2", String.valueOf(userInfo.isLocationInfoAgreementCheckbox()));
+                Log.d("3", String.valueOf(userInfo.isMeetingUnivAgreementCheckbox()));
+                Log.d("4", String.valueOf(userInfo.isPersonalInfoAgreementCheckbox()));
+                Log.d("5", String.valueOf(userInfo.isPromotionInfoAgreementCheckbox()));
 
 //                Toast.makeText(getContext(), String.valueOf(user.isMeetingUnivAgreementCheckbox()),Toast.LENGTH_SHORT).show();
 //                Toast.makeText(getContext(), String.valueOf(user.isPersonalInfoAgreementCheckbox()),Toast.LENGTH_SHORT).show();
