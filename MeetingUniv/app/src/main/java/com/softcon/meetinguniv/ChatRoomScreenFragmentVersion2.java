@@ -70,14 +70,13 @@ public class ChatRoomScreenFragmentVersion2 extends Fragment implements View.OnC
         addRecyclerItem("테스트 메세지입니다.2", 1);
 
         caculatekeyboard(view);
-
     }
+
     private void caculatekeyboard(View view) {
         Rect rectangle = new Rect();
         view.getWindowVisibleDisplayFrame(rectangle);
         int screenHeight = view.getRootView().getHeight();
         int tempkeyboardsize = screenHeight - rectangle.bottom;
-
 
         if (tempkeyboardsize > screenHeight * 0.1) {
 //            대부분의 키보드 높이가 전체의 10프로이상차지해서 0.1로 정함
@@ -100,8 +99,6 @@ public class ChatRoomScreenFragmentVersion2 extends Fragment implements View.OnC
                 Toast.makeText(getContext(), "키보드가 닫힘", Toast.LENGTH_SHORT).show();
             }
         }
-
-
 
         this.rootView = getActivity().getWindow().getDecorView();
         this.rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {

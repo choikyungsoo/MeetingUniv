@@ -47,7 +47,6 @@ public class MatchingChatingAdapterRecycleritem extends RecyclerView.Adapter<Mat
         items.clear();
         if (charText.length() == 0) {
             items.addAll(arrayList);
-            Toast.makeText(context, "ddd", Toast.LENGTH_SHORT).show();
         } else {
             for (MatchingChatingRecycleritem matchingChatingRecycleritem: arrayList) {
                 String name = matchingChatingRecycleritem.getMemberlist();

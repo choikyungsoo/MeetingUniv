@@ -40,7 +40,6 @@ public class FriendsListAdapterRecycleritem extends RecyclerView.Adapter<Friends
         items.clear();
         if (charText.length() == 0) {
             items.addAll(arrayList);
-            Toast.makeText(context, "ddd", Toast.LENGTH_SHORT).show();
         } else {
             for (FriendsListRecycleritem friendsListRecycleritem: arrayList) {
                 String name = friendsListRecycleritem.getF_memberlist();

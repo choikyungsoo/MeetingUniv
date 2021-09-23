@@ -38,7 +38,6 @@ public class chooseteamAdapterRecyleritem extends RecyclerView.Adapter<choosetea
         items.clear();
         if (charText.length() == 0) {
             items.addAll(arrayList);
-            Toast.makeText(context, "ddd", Toast.LENGTH_SHORT).show();
         } else {
             for (chooseteamRecycleritem teamRecycleritem: arrayList) {
                 String name = teamRecycleritem.getMember();
