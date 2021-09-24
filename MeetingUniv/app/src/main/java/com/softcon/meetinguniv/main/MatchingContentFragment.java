@@ -65,6 +65,8 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     private int settingposition;
 
 
+    private EditTeamMemberElementFragment ETMfragment;
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -73,6 +75,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         TeamMemberAdapterRecycleritem recyclerItemAdapter = new TeamMemberAdapterRecycleritem(this.list);
         recyclerView.setAdapter(recyclerItemAdapter) ;
 
+        this.ETMfragment = new EditTeamMemberElementFragment();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -98,12 +101,10 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
             @Override
             public void onItemClick(View v, int position) {
                 if(position == settingposition){
-                    EditTeamMemberElementFragment fragment = new EditTeamMemberElementFragment();
-                    TeamMemberRecyclerItem recyclerItem = new TeamMemberRecyclerItem();
-                    giveRecycleritemData(recyclerItem, fragment);
+                    giveRecycleritemData();
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
-                            .replace(R.id.Framecontainer, fragment)
+                            .replace(R.id.Framecontainer, ETMfragment)
                             .commit();
                 }
             }
@@ -112,10 +113,10 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
     }
 
-    private void giveRecycleritemData(TeamMemberRecyclerItem recyclerItem, EditTeamMemberElementFragment fragment) {
+    private void giveRecycleritemData() {
         Bundle bundle = new Bundle();
         bundle.putIntegerArrayList("currentteam", this.ImageSource);
-        fragment.setArguments(bundle);
+        this.ETMfragment.setArguments(bundle);
     }
 
     private void addRecyclerItem(int profile, int verfiycode){

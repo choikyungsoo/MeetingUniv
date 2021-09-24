@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.softcon.meetinguniv.R;
+import com.softcon.meetinguniv.main.TeamMemberAdapterRecycleritem;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -20,6 +21,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class EditTeamAdapterRecycleritem2 extends  RecyclerView.Adapter<EditTeamAdapterRecycleritem2.viewHolder> {
     private ArrayList<EditTeamRecycleritem> mData;
+    private TeamMemberAdapterRecycleritem.OnItemClickListener mListener = null;
+
+    public interface OnItemClickListener{
+        void onItemClick(View v, int position);
+    }
+    public void setOnItemClickListener(TeamMemberAdapterRecycleritem.OnItemClickListener listener){
+        this.mListener = listener;
+    }
+
     public class viewHolder extends RecyclerView.ViewHolder {
 
         private ImageView E_memProfile;
@@ -32,6 +42,17 @@ public class EditTeamAdapterRecycleritem2 extends  RecyclerView.Adapter<EditTeam
             E_memberlist = itemView.findViewById(R.id.memberlist3);
             RecyclerCount = 0;
             itemView.setClickable(true);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        if(mListener != null){
+                            mListener.onItemClick(v,pos);
+                        }
+                    }
+                }
+            });
 //            itemView.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
