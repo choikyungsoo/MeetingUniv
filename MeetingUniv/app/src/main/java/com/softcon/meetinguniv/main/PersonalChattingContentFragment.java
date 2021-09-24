@@ -50,6 +50,7 @@ public class PersonalChattingContentFragment extends Fragment implements View.On
         recyclerView.setLayoutManager(linearLayoutManager);
 
         addRecyclerItem(R.drawable.prot, "테스트용 입니다");
+        addRecyclerItem(R.drawable.prot, "aaa");
 
         this.recyclerItemAdapter = new PersonalChatingAdapterRecycleritem(this.getActivity(), this.list);
         recyclerView.setAdapter(this.recyclerItemAdapter);

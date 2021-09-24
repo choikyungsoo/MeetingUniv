@@ -78,9 +78,9 @@
                     android:background="#FFFFFF"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:paddingBottom="15dp"
                     android:paddingLeft="10dp"
                     android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
                     android:text="Name" />
 
                 <Button
