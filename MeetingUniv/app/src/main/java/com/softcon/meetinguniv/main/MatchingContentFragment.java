@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Parcelable;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -240,7 +239,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
             case R.id.matchbtn:
                 //매칭하기 버튼
                 showPopUp();
-                this.ageFrom = this.dialogView.findViewById(R.id.valueFrom);
+                this.ageFrom = this.dialogView.findViewById(R.id.chatRoomMembers);
                 this.ageTo = this.dialogView.findViewById(R.id.valueTo);
                 this.rangeSlider = this.dialogView.findViewById(R.id.rangeSlider);
                 this.univSpinner = this.dialogView.findViewById(R.id.UniversitySpinner);

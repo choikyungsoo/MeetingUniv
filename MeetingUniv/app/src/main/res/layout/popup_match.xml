@@ -36,7 +36,7 @@
                 android:layout_weight="45" />
 
             <TextView
-                android:id="@+id/valueFrom"
+                android:id="@+id/chatRoomMembers"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -101,7 +101,7 @@
             android:weightSum="60">
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/numOfChatRoomMembers"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="9"
@@ -139,7 +139,7 @@
             android:weightSum="20">
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/chatRoomEditText"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"

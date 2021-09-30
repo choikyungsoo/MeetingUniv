@@ -95,7 +95,7 @@ public class PersonalChatingAdapterRecycleritem extends RecyclerView.Adapter<Per
                 @Override
                 public void onClick(View v) {
 //                    Navigation.findNavController(itemView).navigate(R.id.action_mainFragment_to_chatRoomScreenFragment);
-                    Navigation.findNavController(itemView).navigate(R.id.action_mainFragment_to_chatRoomScreenFragmentVersion2);
+                    Navigation.findNavController(itemView).navigate(R.id.action_mainFragment_to_chatRoomScreenFragmentPopupVer);
                 }
             });
             chatprofile = itemView.findViewById(R.id.chatprofile);

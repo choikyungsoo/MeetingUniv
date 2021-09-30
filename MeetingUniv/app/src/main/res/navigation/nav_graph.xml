@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_mainFragment_to_chatRoomScreenFragmentVersion4"
             app:destination="@id/chatRoomScreenFragmentVersion4" />
+        <action
+            android:id="@+id/action_mainFragment_to_chatRoomScreenFragmentPopupVer"
+            app:destination="@id/chatRoomScreenFragmentPopupVer" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
@@ -116,6 +119,9 @@
         <action
             android:id="@+id/action_personalChattingContentsFragment_to_chatRoomScreenFragmentVersion4"
             app:destination="@id/chatRoomScreenFragmentVersion4" />
+        <action
+            android:id="@+id/action_personalChattingContentsFragment_to_chatRoomScreenFragmentPopupVer"
+            app:destination="@id/chatRoomScreenFragmentPopupVer" />
     </fragment>
     <fragment
         android:id="@+id/matchChattingContentsFragment2"
@@ -227,5 +233,15 @@
         android:name="com.softcon.meetinguniv.ChargeCashDialogFragment"
         android:label="fragment_charge_cash_dialog"
         tools:layout="@layout/fragment_charge_cash_dialog" />
+    <fragment
+        android:id="@+id/chatRoomScreenFragmentPopupVer"
+        android:name="com.softcon.meetinguniv.ChatRoomScreenFragmentPopupVer"
+        android:label="fragment_chat_room_screen_popup_ver"
+        tools:layout="@layout/fragment_chat_room_screen_popup_ver" />
+    <fragment
+        android:id="@+id/chatRoomMembersDialogFragment"
+        android:name="com.softcon.meetinguniv.ChatRoomMembersDialogFragment"
+        android:label="fragment_chat_room_members_dialog"
+        tools:layout="@layout/fragment_chat_room_members_dialog" />
 
 </navigation>

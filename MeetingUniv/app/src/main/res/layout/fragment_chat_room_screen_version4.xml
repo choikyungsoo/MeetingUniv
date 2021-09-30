@@ -28,7 +28,7 @@
                 android:text="b" />
 
             <TextView
-                android:id="@+id/valueFrom"
+                android:id="@+id/chatRoomMembers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="박채윤, 문인배, 최경수"
@@ -36,7 +36,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/numOfChatRoomMembers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
