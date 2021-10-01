@@ -36,8 +36,8 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
     private View view;
     private InputMethodManager inputMethodManager;
 
-    private Button gotoJoinProfileScreen_BTN;
-    private TextView join_id, join_password, join_passwordCheck, join_univ;
+    private Button gotoJoinProfileScreen_BTN, skip_BTN;
+    private TextView join_univ;
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
@@ -85,54 +85,60 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
 
         this.inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        this.join_id = view.findViewById(R.id.join_id);
-        this.join_password = view.findViewById(R.id.join_password);
-        this.join_passwordCheck = view.findViewById(R.id.join_passwordCheck);
         this.join_univ = view.findViewById(R.id.join_univ);
         this.gotoJoinProfileScreen_BTN = view.findViewById(R.id.gotoJoinProfileScreen_BTN);
+        this.skip_BTN = view.findViewById(R.id.skip_BTN);
 
         this.gotoJoinProfileScreen_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (join_id.getText().toString().equals("")) {
-                    Toast.makeText(getContext(), "아이디를 입력하세요.", Toast.LENGTH_SHORT).show();
-                } else if (join_password.getText().toString().equals("")) {
-                    Toast.makeText(getContext(), "비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show();
-                } else if (join_password.getText().toString().length() < 8) {
-                    Toast.makeText(getContext(), "비밀번호를 8자 이상 입력하세요.", Toast.LENGTH_SHORT).show();
-                } else if (!Pattern.matches("^[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?~`]+$", join_password.getText().toString())) {
-                    Toast.makeText(getContext(), "비밀번호는 영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상 조합해주세요.", Toast.LENGTH_SHORT).show();
-                } //Only 영문
-                else if (join_password.getText().toString().matches(".*[a-zA-Z]+.*")
-                        && !join_password.getText().toString().matches(".*[0-9]+.*")
-                        && !join_password.getText().toString().matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?~`]+.*")) {
-                    Toast.makeText(getContext(), "Only 영문", Toast.LENGTH_SHORT).show();
-                    join_password.requestFocus();
-                    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-                }
-                //Only 숫자
-                else if (!join_password.getText().toString().matches(".*[a-zA-Z]+.*")
-                        && join_password.getText().toString().matches(".*[0-9]+.*")
-                        && !join_password.getText().toString().matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?~`]+.*")) {
-                    Toast.makeText(getContext(), "Only 숫자", Toast.LENGTH_SHORT).show();
-                    join_password.requestFocus();
-                    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-                }
-                //Only 특수문자
-                else if (!join_password.getText().toString().matches(".*[a-zA-Z]+.*")
-                        && !join_password.getText().toString().matches(".*[0-9]+.*")
-                        && join_password.getText().toString().matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?~`]+.*")) {
-                    Toast.makeText(getContext(), "Only 특수문자", Toast.LENGTH_SHORT).show();
-                    join_password.requestFocus();
-                    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-                } else if (join_passwordCheck.getText().toString().equals("")) {
-                    Toast.makeText(getContext(), "비밀번호 확인을 입력하세요.", Toast.LENGTH_SHORT).show();
-                } else if (join_univ.getText().toString().equals("")) {
+//                if (join_id.getText().toString().equals("")) {
+//                    Toast.makeText(getContext(), "아이디를 입력하세요.", Toast.LENGTH_SHORT).show();
+//                } else if (join_password.getText().toString().equals("")) {
+//                    Toast.makeText(getContext(), "비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show();
+//                } else if (join_password.getText().toString().length() < 8) {
+//                    Toast.makeText(getContext(), "비밀번호를 8자 이상 입력하세요.", Toast.LENGTH_SHORT).show();
+//                } else if (!Pattern.matches("^[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?~`]+$", join_password.getText().toString())) {
+//                    Toast.makeText(getContext(), "비밀번호는 영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상 조합해주세요.", Toast.LENGTH_SHORT).show();
+//                } //Only 영문
+//                else if (join_password.getText().toString().matches(".*[a-zA-Z]+.*")
+//                        && !join_password.getText().toString().matches(".*[0-9]+.*")
+//                        && !join_password.getText().toString().matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?~`]+.*")) {
+//                    Toast.makeText(getContext(), "Only 영문", Toast.LENGTH_SHORT).show();
+//                    join_password.requestFocus();
+//                    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+//                }
+//                //Only 숫자
+//                else if (!join_password.getText().toString().matches(".*[a-zA-Z]+.*")
+//                        && join_password.getText().toString().matches(".*[0-9]+.*")
+//                        && !join_password.getText().toString().matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?~`]+.*")) {
+//                    Toast.makeText(getContext(), "Only 숫자", Toast.LENGTH_SHORT).show();
+//                    join_password.requestFocus();
+//                    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+//                }
+//                //Only 특수문자
+//                else if (!join_password.getText().toString().matches(".*[a-zA-Z]+.*")
+//                        && !join_password.getText().toString().matches(".*[0-9]+.*")
+//                        && join_password.getText().toString().matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?~`]+.*")) {
+//                    Toast.makeText(getContext(), "Only 특수문자", Toast.LENGTH_SHORT).show();
+//                    join_password.requestFocus();
+//                    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+//                } else if (join_passwordCheck.getText().toString().equals("")) {
+//                    Toast.makeText(getContext(), "비밀번호 확인을 입력하세요.", Toast.LENGTH_SHORT).show();
+//                } else
+                if (join_univ.getText().toString().equals("")) {
                     Toast.makeText(getContext(), "학교를 선택하세요.", Toast.LENGTH_SHORT).show();
                 } else {
                     Navigation.findNavController(view).navigate(R.id.action_joinPersonalInfoScreenFragment_to_join_profile);
 //                    gotoJoinProfileScreen();
                 }
+            }
+        });
+
+        this.skip_BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_joinPersonalInfoScreenFragment_to_join_profile);
             }
         });
     }

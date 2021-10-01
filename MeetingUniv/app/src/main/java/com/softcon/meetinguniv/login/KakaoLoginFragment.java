@@ -40,20 +40,6 @@ public class KakaoLoginFragment extends Fragment {
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-//        Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
-//            @Override
-//            public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
-//                if(oAuthToken !=null) {
-//
-//                }
-//                if(oAuthToken != null) {
-//
-//                }
-//                checkLogin();
-//                return null;
-//            }
-//        });
-
         this.kakao_login_btn = view.findViewById(R.id.kakao_login_btn);
 
         this.kakao_login_btn.setOnClickListener(new View.OnClickListener() {
@@ -92,12 +78,8 @@ public class KakaoLoginFragment extends Fragment {
                                     Bundle bundle = new Bundle();
                                     UserInfo userInfo = updateUserInfo();
 
-                                    //                                            Bundle bundle = getArguments();
                                     bundle.putSerializable("Obj", (Serializable) userInfo);
-//                                    UserInfo a = (UserInfo) getArguments().getSerializable("Obj");
 //                                    Log.d("0", String.valueOf(a.getUserID()));
-//                                            JoinAgreementScreenFragment joinAgreementScreenFragment = new JoinAgreementScreenFragment();
-//                                            joinAgreementScreenFragment.setArguments(bundle);
 
                                     Navigation.findNavController(view).navigate(R.id.action_kakao_login_to_joinAgreementScreenFragment, bundle);
                                 }
@@ -153,13 +135,10 @@ public class KakaoLoginFragment extends Fragment {
 
             @Override
             public Unit invoke(User user, Throwable throwable) {
-
                 userInfo.setUserID(user.getId());
 
                 Log.d("UserID", String.valueOf(user.getId()));
                 Log.d("StoredUserID", String.valueOf(userInfo.getUserID()));
-
-
 
                 return null;
             }

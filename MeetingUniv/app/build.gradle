@@ -89,6 +89,6 @@ dependencies {
     implementation 'com.github.pedroSG94:AutoPermissions:1.0.3'
 
     //이미지 둥글게 만들어주는 라이브러리.
-    implementation 'de.hdodenhof:circleimageview:3.0.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
 }
