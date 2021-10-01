@@ -155,7 +155,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
 //            parser.setInput(new InputStreamReader(is, "UTF-8"));
                 parser.setInput(url.openStream(), "UTF-8"); //문제 발생
-
 //            parser.next();
                 int parserEvent = parser.getEventType();
                 Log.i("parsing", "파싱 시작");

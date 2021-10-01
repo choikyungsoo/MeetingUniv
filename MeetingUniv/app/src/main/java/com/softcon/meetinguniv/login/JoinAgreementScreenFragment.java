@@ -16,6 +16,8 @@ import android.widget.CheckBox;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.softcon.meetinguniv.R;
 
 public class JoinAgreementScreenFragment extends Fragment {
@@ -29,8 +31,10 @@ public class JoinAgreementScreenFragment extends Fragment {
     private FragmentTransaction fragmentTransaction;
     private JoinPersonalInfoScreenFragment joinPersonalInfoScreenFragment;
 
-    private UserInfo userInfo;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();;
+    private DatabaseReference databaseReference = database.getReference();
 
+    private UserInfo userInfo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,15 +43,18 @@ public class JoinAgreementScreenFragment extends Fragment {
 
         // Inflate the layout for this fragment
 
-//        Bundle bundle = getArguments();
-//        this.userInfo = (UserInfo) bundle.getSerializable("Obj");
+        this.userInfo = (UserInfo) (getArguments().getSerializable("Obj"));
+
+//        myRef.setValue("Hello World!");
+
+//        this.userInfo = (UserInfo) getActivity().getIntent().getSerializableExtra("Obj");
 
         return inflater.inflate(R.layout.fragment_join_agreement_screen, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        this.userInfo = new UserInfo();
+//        this.userInfo = new UserInfo();
 
         meetingUnivAgreementCheckbox = view.findViewById(R.id.meetingUnivAgreementCheckbox);
         meetingUnivAgreementContent = view.findViewById(R.id.meetingUnivAgreementContent);
@@ -79,7 +86,8 @@ public class JoinAgreementScreenFragment extends Fragment {
                         allAgreementCheckbox.setChecked(false);
                     }
                 }
-                userInfo.setMeetingUnivAgreementCheckbox(meetingUnivAgreementCheckbox.isChecked());
+                userInfoCheck();
+//                userInfo.setMeetingUnivAgreementCheckbox(meetingUnivAgreementCheckbox.isChecked());
             }
         });
         personalInfoAgreementCheckbox.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +105,8 @@ public class JoinAgreementScreenFragment extends Fragment {
                         allAgreementCheckbox.setChecked(false);
                     }
                 }
-                userInfo.setPersonalInfoAgreementCheckbox(personalInfoAgreementCheckbox.isChecked());
+                userInfoCheck();
+//                userInfo.setPersonalInfoAgreementCheckbox(personalInfoAgreementCheckbox.isChecked());
             }
         });
         locationInfoAgreementCheckbox.setOnClickListener(new View.OnClickListener() {
@@ -115,7 +124,8 @@ public class JoinAgreementScreenFragment extends Fragment {
                         allAgreementCheckbox.setChecked(false);
                     }
                 }
-                userInfo.setLocationInfoAgreementCheckbox(locationInfoAgreementCheckbox.isChecked());
+                userInfoCheck();
+//                userInfo.setLocationInfoAgreementCheckbox(locationInfoAgreementCheckbox.isChecked());
             }
         });
         promotionInfoAgreementCheckbox.setOnClickListener(new View.OnClickListener() {
@@ -133,7 +143,8 @@ public class JoinAgreementScreenFragment extends Fragment {
                         allAgreementCheckbox.setChecked(false);
                     }
                 }
-                userInfo.setPromotionInfoAgreementCheckbox(promotionInfoAgreementCheckbox.isChecked());
+                userInfoCheck();
+//                userInfo.setPromotionInfoAgreementCheckbox(promotionInfoAgreementCheckbox.isChecked());
             }
         });
 
@@ -161,10 +172,11 @@ public class JoinAgreementScreenFragment extends Fragment {
                     locationInfoAgreementContent.setVisibility(View.VISIBLE);
                     promotionInfoAgreementContent.setVisibility(View.VISIBLE);
                 }
-                userInfo.setMeetingUnivAgreementCheckbox(meetingUnivAgreementCheckbox.isChecked());
-                userInfo.setPersonalInfoAgreementCheckbox(personalInfoAgreementCheckbox.isChecked());
-                userInfo.setLocationInfoAgreementCheckbox(locationInfoAgreementCheckbox.isChecked());
-                userInfo.setPromotionInfoAgreementCheckbox(promotionInfoAgreementCheckbox.isChecked());
+                userInfoCheck();
+//                userInfo.setMeetingUnivAgreementCheckbox(meetingUnivAgreementCheckbox.isChecked());
+//                userInfo.setPersonalInfoAgreementCheckbox(personalInfoAgreementCheckbox.isChecked());
+//                userInfo.setLocationInfoAgreementCheckbox(locationInfoAgreementCheckbox.isChecked());
+//                userInfo.setPromotionInfoAgreementCheckbox(promotionInfoAgreementCheckbox.isChecked());
 
                 Log.d("1", String.valueOf(userInfo.getUserID()));
                 Log.d("2", String.valueOf(userInfo.isLocationInfoAgreementCheckbox()));
@@ -185,6 +197,11 @@ public class JoinAgreementScreenFragment extends Fragment {
             public void onClick(View v) {
                 if (meetingUnivAgreementCheckbox.isChecked() && personalInfoAgreementCheckbox.isChecked()
                         && locationInfoAgreementCheckbox.isChecked()) {
+                    databaseReference.child("회원정보").child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").setValue(userInfo.isMeetingUnivAgreementCheckbox());
+                    databaseReference.child("회원정보").child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").setValue(userInfo.isPersonalInfoAgreementCheckbox());
+                    databaseReference.child("회원정보").child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("위치정보 이용약관 동의").setValue(userInfo.isLocationInfoAgreementCheckbox());
+                    databaseReference.child("회원정보").child(String.valueOf(userInfo.getUserID())).child("약관동의").child("선택").child("프로모션 정보 수신 동의").setValue(userInfo.isPromotionInfoAgreementCheckbox());
+
                     Navigation.findNavController(view).navigate(R.id.action_joinAgreementScreenFragment_to_joinPersonalInfoScreenFragment);
 //                    gotojoinPersonalInfoScreen();
                 } else {
@@ -192,6 +209,13 @@ public class JoinAgreementScreenFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void userInfoCheck() {
+        userInfo.setMeetingUnivAgreementCheckbox(meetingUnivAgreementCheckbox.isChecked());
+        userInfo.setPersonalInfoAgreementCheckbox(personalInfoAgreementCheckbox.isChecked());
+        userInfo.setLocationInfoAgreementCheckbox(locationInfoAgreementCheckbox.isChecked());
+        userInfo.setPromotionInfoAgreementCheckbox(promotionInfoAgreementCheckbox.isChecked());
     }
 
 //    public void gotojoinPersonalInfoScreen() {
