@@ -9,9 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
@@ -24,6 +30,9 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
 public class KakaoLoginFragment extends Fragment {
+
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();;
+    private DatabaseReference databaseReference = database.getReference("회원정보");
 
     private static final String TAG = "유저";
     private ImageView kakao_login_btn;
@@ -54,11 +63,8 @@ public class KakaoLoginFragment extends Fragment {
                                     Log.e("error",throwable.getLocalizedMessage());
                                 }
                                 if(oAuthToken !=null) {
-                                    Log.i("success", "로그인 성공");
-                                    Bundle bundle = new Bundle();
-                                    UserInfo userInfo = updateUserInfo();
+                                    updateUserInfo(view);
 
-                                    Navigation.findNavController(view).navigate(R.id.action_kakao_login_to_joinAgreementScreenFragment, bundle);
                                 }
 
 //                                checkLogin();
@@ -74,14 +80,7 @@ public class KakaoLoginFragment extends Fragment {
                                     Log.e("error",throwable.getLocalizedMessage());
                                 }
                                 if(oAuthToken !=null) {
-                                    Log.i("success", "로그인 성공");
-                                    Bundle bundle = new Bundle();
-                                    UserInfo userInfo = updateUserInfo();
-
-                                    bundle.putSerializable("Obj", (Serializable) userInfo);
-//                                    Log.d("0", String.valueOf(a.getUserID()));
-
-                                    Navigation.findNavController(view).navigate(R.id.action_kakao_login_to_joinAgreementScreenFragment, bundle);
+                                    updateUserInfo(view);
                                 }
 //                                checkLogin();
                                 return null;
@@ -129,7 +128,20 @@ public class KakaoLoginFragment extends Fragment {
         });
     }
 
-    private UserInfo updateUserInfo() {
+//    private void successKakaoLogin() {
+//        Log.i("success", "로그인 성공");
+//        Bundle bundle = new Bundle();
+//        UserInfo userInfo = updateUserInfo(view);
+//
+//        bundle.putSerializable("Obj", (Serializable) userInfo);
+//
+//        Navigation.findNavController(view).navigate(R.id.action_kakao_login_to_joinAgreementScreenFragment, bundle);
+//    }
+
+    private void updateUserInfo(View view) {
+        Log.i("success", "로그인 성공");
+        Bundle bundle = new Bundle();
+
         UserInfo userInfo = new UserInfo();
         UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
 
@@ -140,24 +152,61 @@ public class KakaoLoginFragment extends Fragment {
                 Log.d("UserID", String.valueOf(user.getId()));
                 Log.d("StoredUserID", String.valueOf(userInfo.getUserID()));
 
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        //약관 동의 여부 확인
+                        if(snapshot.hasChild(String.valueOf(user.getId()))){
+                            if(snapshot.child(String.valueOf(user.getId())).child("약관동의").child("선택").hasChild("프로모션 정보 수신 동의")
+                                    && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("개인정보 수집 및 이용 동의")
+                                    && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("미팅대학 이용약관 동의")
+                                    && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("위치정보 이용약관 동의")) {
+//                                Log.d("프로모션 정보 수신 동의", String.valueOf(snapshot.child(String.valueOf(user.getId())).child("약관동의").child("선택").child("프로모션 정보 수신 동의").getValue().equals(true)));
+                                if(snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").getValue().equals(true)
+                                        && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").getValue().equals(true)
+                                        && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("위치정보 이용약관 동의").getValue().equals(true)) {
+//----------------------------------학생증 인증 여부 확인 필요------------------------------------------------------------------------------------------------------------------------
+                                    //if(){}
+//----------------------------------닉네임 설정 여부 확인 필요------------------------------------------------------------------------------------------------------------------------
+                                        //if(){}
+                                    Log.d("Comment", "goooooooood~");
+                                    Log.d("카카오톡","로그인 성공");
+                                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                                    startActivity(intent);
+                                    getActivity().finish();
+                                }
+                            }
+//                            Log.d("프로모션 정보 수신 동의", String.valueOf(snapshot.child(String.valueOf(user.getId())).child("약관동의").child("선택").hasChild("프로모션 정보 수신 동의")));
+//                            Log.d("개인정보 수집 및 이용 동의", String.valueOf(snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("개인정보 수집 및 이용 동의")));
+//                            Log.d("미팅대학 이용약관 동의", String.valueOf(snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("미팅대학 이용약관 동의")));
+//                            Log.d("위치정보 이용약관 동의", String.valueOf(snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("위치정보 이용약관 동의")));
+                        }
+
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 return null;
             }
         });
-        return userInfo;
+        bundle.putSerializable("Obj", (Serializable) userInfo);
+        Navigation.findNavController(view).navigate(R.id.action_kakao_login_to_joinAgreementScreenFragment, bundle);
     }
 
-    private void checkLogin() {
-        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
-            @Override
-            public Unit invoke(User user, Throwable throwable) {
-                if(user != null) {
-                    Log.d("카카오톡","로그인 성공");
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                }
-                return null;
-            }
-        });
-    }
+//    private void checkLogin() {
+//        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+//            @Override
+//            public Unit invoke(User user, Throwable throwable) {
+//                if(user != null) {
+//                    Log.d("카카오톡","로그인 성공");
+//                    Intent intent = new Intent(getActivity(), MainActivity.class);
+//                    startActivity(intent);
+//                    getActivity().finish();
+//                }
+//                return null;
+//            }
+//        });
+//    }
 }
