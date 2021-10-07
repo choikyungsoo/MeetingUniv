@@ -10,6 +10,13 @@ public class UserInfo implements Serializable {
     private boolean locationInfoAgreementCheckbox;
     private boolean promotionInfoAgreementCheckbox;
 
+    private String schoolName;
+//    private studentCard;
+
+//    private profileImage;
+    private String nickname;
+
+
     public UserInfo() {
 //        this.meetingUnivAgreementCheckbox = false;
 //        this.personalInfoAgreementCheckbox = false;
@@ -18,7 +25,6 @@ public class UserInfo implements Serializable {
     }
 
     public long getUserID() { return userID; }
-
     public void setUserID(long userID) {
         this.userID = userID;
     }
@@ -26,7 +32,6 @@ public class UserInfo implements Serializable {
     public boolean isMeetingUnivAgreementCheckbox() {
         return meetingUnivAgreementCheckbox;
     }
-
     public void setMeetingUnivAgreementCheckbox(boolean meetingUnivAgreementCheckbox) {
         this.meetingUnivAgreementCheckbox = meetingUnivAgreementCheckbox;
     }
@@ -34,7 +39,6 @@ public class UserInfo implements Serializable {
     public boolean isPersonalInfoAgreementCheckbox() {
         return personalInfoAgreementCheckbox;
     }
-
     public void setPersonalInfoAgreementCheckbox(boolean personalInfoAgreementCheckbox) {
         this.personalInfoAgreementCheckbox = personalInfoAgreementCheckbox;
     }
@@ -42,7 +46,6 @@ public class UserInfo implements Serializable {
     public boolean isLocationInfoAgreementCheckbox() {
         return locationInfoAgreementCheckbox;
     }
-
     public void setLocationInfoAgreementCheckbox(boolean locationInfoAgreementCheckbox) {
         this.locationInfoAgreementCheckbox = locationInfoAgreementCheckbox;
     }
@@ -50,8 +53,17 @@ public class UserInfo implements Serializable {
     public boolean isPromotionInfoAgreementCheckbox() {
         return promotionInfoAgreementCheckbox;
     }
-
     public void setPromotionInfoAgreementCheckbox(boolean promotionInfoAgreementCheckbox) {
         this.promotionInfoAgreementCheckbox = promotionInfoAgreementCheckbox;
+    }
+
+    public String getSchoolName() { return schoolName; }
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
+    }
+
+    public String getNickname() { return nickname; }
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }

@@ -168,7 +168,7 @@ public class KakaoLoginFragment extends Fragment {
 //----------------------------------학생증 인증 여부 확인 필요------------------------------------------------------------------------------------------------------------------------
                                     //if(){}
 //----------------------------------닉네임 설정 여부 확인 필요------------------------------------------------------------------------------------------------------------------------
-                                        //if(){}
+//                                    if(){}
                                     Log.d("Comment", "goooooooood~");
                                     Log.d("카카오톡","로그인 성공");
                                     Intent intent = new Intent(getActivity(), MainActivity.class);
@@ -191,6 +191,7 @@ public class KakaoLoginFragment extends Fragment {
                 return null;
             }
         });
+        // 데이터 보내기
         bundle.putSerializable("Obj", (Serializable) userInfo);
         Navigation.findNavController(view).navigate(R.id.action_kakao_login_to_joinAgreementScreenFragment, bundle);
     }

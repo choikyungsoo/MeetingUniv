@@ -28,6 +28,7 @@ import com.softcon.meetinguniv.R;
 import com.pedro.library.AutoPermissionsListener;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.regex.Pattern;
 
 import static android.app.Activity.RESULT_OK;
@@ -41,7 +42,9 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
+
     private JoinProfileFragment joinProfileFragment;
+    private UserInfo userInfo;
 
     private ImageView studentIDImage;
     private File file;
@@ -75,6 +78,14 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
 //                takePicture();
             }
         });
+
+        // bundle 데이터 받기
+        this.userInfo = (UserInfo) (getArguments().getSerializable("Obj"));
+        Log.d("bundledata0",String.valueOf(this.userInfo.getUserID()));
+        Log.d("bundledata1",String.valueOf(this.userInfo.isPromotionInfoAgreementCheckbox()));
+        Log.d("bundledata2",String.valueOf(this.userInfo.isMeetingUnivAgreementCheckbox()));
+        Log.d("bundledata3",String.valueOf(this.userInfo.isPersonalInfoAgreementCheckbox()));
+        Log.d("bundledata4",String.valueOf(this.userInfo.isLocationInfoAgreementCheckbox()));
 
 //        AutoPermissions.Companion.loadAllPermissions(getActivity(), 101);
         return this.view;
@@ -129,7 +140,10 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
                 if (join_univ.getText().toString().equals("")) {
                     Toast.makeText(getContext(), "학교를 선택하세요.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Navigation.findNavController(view).navigate(R.id.action_joinPersonalInfoScreenFragment_to_join_profile);
+                    // 데이터 보내기
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("Obj", (Serializable) userInfo);
+                    Navigation.findNavController(view).navigate(R.id.action_joinPersonalInfoScreenFragment_to_join_profile, bundle);
 //                    gotoJoinProfileScreen();
                 }
             }
@@ -138,7 +152,10 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
         this.skip_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_joinPersonalInfoScreenFragment_to_join_profile);
+                // 데이터 보내기
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Obj", (Serializable) userInfo);
+                Navigation.findNavController(view).navigate(R.id.action_joinPersonalInfoScreenFragment_to_join_profile, bundle);
             }
         });
     }

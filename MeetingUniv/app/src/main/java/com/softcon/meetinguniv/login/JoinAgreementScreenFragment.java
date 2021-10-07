@@ -27,6 +27,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.core.Path;
 import com.softcon.meetinguniv.R;
 
+import java.io.Serializable;
+
 public class JoinAgreementScreenFragment extends Fragment {
     private CheckBox meetingUnivAgreementCheckbox, personalInfoAgreementCheckbox,
             locationInfoAgreementCheckbox, promotionInfoAgreementCheckbox, allAgreementCheckbox;
@@ -46,7 +48,7 @@ public class JoinAgreementScreenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.joinPersonalInfoScreenFragment = new JoinPersonalInfoScreenFragment();
+//        this.joinPersonalInfoScreenFragment = new JoinPersonalInfoScreenFragment();
 
         // Inflate the layout for this fragment
 
@@ -234,8 +236,10 @@ public class JoinAgreementScreenFragment extends Fragment {
                     databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("위치정보 이용약관 동의").setValue(userInfo.isLocationInfoAgreementCheckbox());
                     databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("선택").child("프로모션 정보 수신 동의").setValue(userInfo.isPromotionInfoAgreementCheckbox());
 
-
-                    Navigation.findNavController(view).navigate(R.id.action_joinAgreementScreenFragment_to_joinPersonalInfoScreenFragment);
+                    // 데이터 보내기
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("Obj", (Serializable) userInfo);
+                    Navigation.findNavController(view).navigate(R.id.action_joinAgreementScreenFragment_to_joinPersonalInfoScreenFragment, bundle);
 //                    gotojoinPersonalInfoScreen();
                 } else {
                     Toast.makeText(getContext(), "필수 약관에 모두 동의하세요.", Toast.LENGTH_SHORT).show();
