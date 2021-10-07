@@ -29,7 +29,7 @@ public class JoinAgreementScreenFragment extends Fragment {
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
-    private JoinPersonalInfoScreenFragment joinPersonalInfoScreenFragment;
+    private JoinUnivVerifyScreenFragment joinUnivVerifyScreenFragment;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();;
     private DatabaseReference databaseReference = database.getReference();
@@ -39,7 +39,7 @@ public class JoinAgreementScreenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.joinPersonalInfoScreenFragment = new JoinPersonalInfoScreenFragment();
+        this.joinUnivVerifyScreenFragment = new JoinUnivVerifyScreenFragment();
 
         // Inflate the layout for this fragment
 

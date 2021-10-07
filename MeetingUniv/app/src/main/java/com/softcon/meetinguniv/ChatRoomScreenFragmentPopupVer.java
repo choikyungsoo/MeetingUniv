@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -34,8 +33,8 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         this.chatRoomMembers = view.findViewById(R.id.chatRoomMembers);
-        this.numOfChatRoomMembers = view.findViewById(R.id.numOfChatRoomMembers);
-        this.chatRoomEditText = view.findViewById(R.id.chatRoomEditText);
+        this.numOfChatRoomMembers = view.findViewById(R.id.join_selectAreaText);
+        this.chatRoomEditText = view.findViewById(R.id.join_selectUnivText);
         this.inputChatRoom = view.findViewById(R.id.inputChatRoom);
 
         this.chatRoomMembers.setOnClickListener(this);
@@ -45,7 +44,7 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.chatRoomEditText:
+            case R.id.join_selectUnivText:
                 break;
             case R.id.chatRoomMembers:
                 ChatRoomMembersDialogFragment chatRoomMembersDialogFragment = new ChatRoomMembersDialogFragment(getActivity());

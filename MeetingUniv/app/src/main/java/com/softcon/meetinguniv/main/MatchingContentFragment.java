@@ -241,7 +241,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                 this.ageFrom = this.dialogView.findViewById(R.id.chatRoomMembers);
                 this.ageTo = this.dialogView.findViewById(R.id.valueTo);
                 this.rangeSlider = this.dialogView.findViewById(R.id.rangeSlider);
-                this.univSpinner = this.dialogView.findViewById(R.id.UniversitySpinner);
+                this.univSpinner = this.dialogView.findViewById(R.id.join_UnivSpinner);
 
                 this.rangeSlider.addOnChangeListener(this);
 
