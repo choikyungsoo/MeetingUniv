@@ -11,6 +11,10 @@ public class UserInfo implements Serializable {
     private boolean promotionInfoAgreementCheckbox;
 
     public UserInfo() {
+//        this.meetingUnivAgreementCheckbox = false;
+//        this.personalInfoAgreementCheckbox = false;
+//        this.locationInfoAgreementCheckbox = false;
+//        this.promotionInfoAgreementCheckbox = false;
     }
 
     public long getUserID() { return userID; }

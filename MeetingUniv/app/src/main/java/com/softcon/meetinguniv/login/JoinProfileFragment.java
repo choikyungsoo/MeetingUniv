@@ -14,11 +14,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.softcon.meetinguniv.Intro;
 import com.softcon.meetinguniv.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.softcon.meetinguniv.main.MainActivity;
 
 public class JoinProfileFragment extends Fragment {
     private ImageView join_profile_image;
@@ -53,10 +55,10 @@ public class JoinProfileFragment extends Fragment {
 //                mAuth.createUserWithEmailAndPassword().addOnCompleteListener(this.getActivity(), task -> {
 //
 //                });
-                Navigation.findNavController(view).navigate(R.id.action_join_profile_to_login);
-//                Intent intent = new Intent(getActivity(), MainActivity.class);
-//                startActivity(intent);
-//                getActivity().finish();
+//                Navigation.findNavController(view).navigate(R.id.action_join_profile_to_login);
+                Intent intent = new Intent(getActivity(), Intro.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
 
