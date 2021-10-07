@@ -26,6 +26,6 @@ public class JoinSelectUnivDialogFragment extends Fragment {
         dlg.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dlg.setContentView(R.layout.fragment_join_select_univ_dialog);
         dlg.show();
-        
+
     }
 }
