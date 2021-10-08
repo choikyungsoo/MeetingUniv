@@ -125,7 +125,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     }
 
     private void AddCurrentDialog(int position) {
-        
+
     }
 
     private void DeleteCurrentDialog(int position) {
@@ -197,7 +197,6 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 
     private void givechangememberInfo() {
         Bundle bundle = new Bundle();
-
         bundle.putIntegerArrayList("changemember", this.ImageSource2);
         this.fragment.setArguments(bundle);
     }
