@@ -29,6 +29,11 @@ import org.jetbrains.annotations.NotNull;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.Console;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -122,7 +127,15 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         TeamMemberRecyclerItem recyclerItem = new TeamMemberRecyclerItem();
         recyclerItem.setMemProfile(profile);
         list.add(recyclerItem);
+        System.out.println("프로필프로필프로필"+ profile);
         if(verfiycode == 0) {
+            try {
+                PrintWriter printWriter = new PrintWriter(new FileWriter(new File("Test")));
+
+                printWriter.println(profile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             this.settingposition++;
             this.ImageSource.add(profile);
         }

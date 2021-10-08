@@ -50,6 +50,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 
     private MatchingContentFragment fragment;
 
+    private Boolean checkok = false;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +92,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
                DeleteCurrentDialog(position);
             }
         });
+
         //////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -103,15 +105,27 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         this.currentfriends.setLayoutManager(linearLayoutManager2);
 
         //DB연결 시 addRecyclerItem2를 통해 친구목록 가져오기!
-        for(int i =0; i<15; i++) {
-            addRecyclerItem2(R.drawable.prot, "테스트용 입니다");
-        }
+
+        addRecyclerItem2(R.drawable.prot, "친구 1");
+        addRecyclerItem2(R.drawable.prot2, "친구 2");
+        addRecyclerItem2(R.drawable.prot3, "친구 3");
+
+        recyclerItemAdapter2.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                AddCurrentDialog(position);
+            }
+        });
         /////////////////////////////////////////////////////////////////////////////////////////
 
 
         recyclerItemAdapter.notifyDataSetChanged();
         recyclerItemAdapter2.notifyDataSetChanged();
         return view;
+    }
+
+    private void AddCurrentDialog(int position) {
+        
     }
 
     private void DeleteCurrentDialog(int position) {
@@ -160,6 +174,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
                 moveToMachingcontent();
                 break;
             case R.id.TCCheck:
+                this.checkok = true;
                 savechangememberInfo();
                 givechangememberInfo();
                 moveToMachingcontent();
