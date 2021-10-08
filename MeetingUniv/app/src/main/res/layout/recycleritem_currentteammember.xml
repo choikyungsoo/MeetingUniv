@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/friendcancel"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="@android:drawable/ic_notification_clear_all"

@@ -16,8 +16,13 @@ import androidx.navigation.Navigation;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import com.kakao.sdk.user.UserApiClient;
+import com.softcon.meetinguniv.Intro;
 import com.softcon.meetinguniv.R;
 import com.softcon.meetinguniv.login.LoginActivity;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class SettingsContentFragment extends PreferenceFragmentCompat {
 
@@ -116,9 +121,18 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
                     public void onClick(DialogInterface dialog, int which) {
                         //logout
                         //turn back to LoginActivity
-                        Intent intent = new Intent(getActivity(), LoginActivity.class);
-                        startActivity(intent);
-                        getActivity().finish();
+//                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+//                        startActivity(intent);
+//                        getActivity().finish();
+                        UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
+                            @Override
+                            public Unit invoke(Throwable throwable) {
+                                Intent intent = new Intent(getActivity(), Intro.class);
+                                startActivity(intent);
+                                getActivity().finish();
+                                return null;
+                            }
+                        });
                     }
                 });
                 b.setNegativeButton("아니요", new DialogInterface.OnClickListener() {

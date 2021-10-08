@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "208949132146",
+    "firebase_url": "https://meetinguniv-d9983-default-rtdb.firebaseio.com",
     "project_id": "meetinguniv-d9983",
     "storage_bucket": "meetinguniv-d9983.appspot.com"
   },
@@ -9,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:208949132146:android:502546a47722a102087beb",
         "android_client_info": {
-          "package_name": "com.softcon.meetinguniv"
+          "package_name": "com.example.meetinguniv"
         }
       },
       "oauth_client": [

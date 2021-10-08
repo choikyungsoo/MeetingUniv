@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,11 +36,13 @@ public class EditTeamAdapterRecycleritem extends  RecyclerView.Adapter<EditTeamA
     public class viewHolder extends RecyclerView.ViewHolder {
 
         private ImageView E_memProfile;
+        private Button E_friendcancel;
         private int RecyclerCount;
 
         public viewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             E_memProfile = itemView.findViewById(R.id.chatprofile5);
+            E_friendcancel = itemView.findViewById(R.id.friendcancel);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

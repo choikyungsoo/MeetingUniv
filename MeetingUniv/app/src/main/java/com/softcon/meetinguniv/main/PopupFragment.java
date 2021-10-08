@@ -25,7 +25,7 @@ public class PopupFragment extends Dialog {
         view = inflater.inflate(R.layout.popup_match, container, false);
         return view;
     }
-PopupFragment m_oDialog;
+//    PopupFragment m_oDialog;
     public PopupFragment(Context context)
     {
         super(context, android.R.style.Theme_Translucent_NoTitleBar);
