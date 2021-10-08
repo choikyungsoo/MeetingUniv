@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_login"
-    app:startDestination="@id/kakao_login">
+    app:startDestination="@id/login">
 
     <fragment
         android:id="@+id/login"
@@ -88,9 +88,9 @@
     </fragment>
     <fragment
         android:id="@+id/joinPersonalInfoScreenFragment"
-        android:name="com.softcon.meetinguniv.login.JoinPersonalInfoScreenFragment"
+        android:name="com.softcon.meetinguniv.login.JoinUnivVerifyScreenFragment"
         android:label="fragment_show_i_d_screen"
-        tools:layout="@layout/fragment_join_personal_info_screen" >
+        tools:layout="@layout/fragment_join_univ_verify_screen" >
         <action
             android:id="@+id/action_joinPersonalInfoScreenFragment_to_join_profile"
             app:destination="@id/join_profile" />

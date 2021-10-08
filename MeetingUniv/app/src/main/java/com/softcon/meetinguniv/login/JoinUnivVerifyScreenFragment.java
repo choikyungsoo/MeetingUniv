@@ -1,6 +1,7 @@
 package com.softcon.meetinguniv.login;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,19 +25,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.softcon.meetinguniv.JoinSelectUnivDialogFragment;
 import com.softcon.meetinguniv.R;
 import com.pedro.library.AutoPermissionsListener;
 
 import java.io.File;
-import java.util.regex.Pattern;
 
 import static android.app.Activity.RESULT_OK;
 
-public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPermissionsListener {
+public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermissionsListener {
     private View view;
     private InputMethodManager inputMethodManager;
 
-    private Button gotoJoinProfileScreen_BTN, skip_BTN;
+    private Button gotoJoinProfileScreen_BTN, skip_BTN, selectUniv_BTN;
     private TextView join_univ;
 
     private FragmentManager fragmentManager;
@@ -45,6 +46,7 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
 
     private ImageView studentIDImage;
     private File file;
+    private boolean setStudentIDImage = false;
 
     final private static String TAG = "GILBOMI"; Button btn_photo; ImageView iv_photo; final static int TAKE_PICTURE = 1; String mCurrentPhotoPath; final static int REQUEST_TAKE_PHOTO = 1;
 
@@ -54,7 +56,7 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
         this.joinProfileFragment = new JoinProfileFragment();
 
         // Inflate the layout for this fragment
-        this.view = inflater.inflate(R.layout.fragment_join_personal_info_screen, container, false);
+        this.view = inflater.inflate(R.layout.fragment_join_univ_verify_screen, container, false);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if(this.getActivity().checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
                     && this.getActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
@@ -88,6 +90,7 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
         this.join_univ = view.findViewById(R.id.join_univ);
         this.gotoJoinProfileScreen_BTN = view.findViewById(R.id.gotoJoinProfileScreen_BTN);
         this.skip_BTN = view.findViewById(R.id.skip_BTN);
+        this.selectUniv_BTN = view.findViewById(R.id.selectUniv_BTN);
 
         this.gotoJoinProfileScreen_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +131,8 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
 //                } else
                 if (join_univ.getText().toString().equals("")) {
                     Toast.makeText(getContext(), "학교를 선택하세요.", Toast.LENGTH_SHORT).show();
+                } else if (!setStudentIDImage) {
+                    Toast.makeText(getContext(), "학생증 인증을 완료하세요.", Toast.LENGTH_SHORT).show();
                 } else {
                     Navigation.findNavController(view).navigate(R.id.action_joinPersonalInfoScreenFragment_to_join_profile);
 //                    gotoJoinProfileScreen();
@@ -141,7 +146,16 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
                 Navigation.findNavController(view).navigate(R.id.action_joinPersonalInfoScreenFragment_to_join_profile);
             }
         });
+
+        this.selectUniv_BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JoinSelectUnivDialogFragment joinSelectUnivDialogFragment = new JoinSelectUnivDialogFragment(getActivity());
+                joinSelectUnivDialogFragment.showJoinSelectUnivDialog();
+            }
+        });
     }
+
 
 //    public void takePicture() {
 //        if (this.file == null) {
@@ -171,7 +185,9 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
             case TAKE_PICTURE:
                 if (resultCode == RESULT_OK && intent.hasExtra("data")) {
                     Bitmap bitmap = (Bitmap) intent.getExtras().get("data");
-                    if (bitmap != null) { studentIDImage.setImageBitmap(bitmap);
+                    if (bitmap != null) {
+                        studentIDImage.setImageBitmap(bitmap);
+                        this.setStudentIDImage = true;
                     }
                 }
                 break;
