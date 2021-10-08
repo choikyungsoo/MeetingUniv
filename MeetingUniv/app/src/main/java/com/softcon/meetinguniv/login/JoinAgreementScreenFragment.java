@@ -2,6 +2,8 @@ package com.softcon.meetinguniv.login;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,9 +18,16 @@ import android.widget.CheckBox;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.Path;
 import com.softcon.meetinguniv.R;
+
+import java.io.Serializable;
 
 public class JoinAgreementScreenFragment extends Fragment {
     private CheckBox meetingUnivAgreementCheckbox, personalInfoAgreementCheckbox,
@@ -32,7 +41,7 @@ public class JoinAgreementScreenFragment extends Fragment {
     private JoinUnivVerifyScreenFragment joinUnivVerifyScreenFragment;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();;
-    private DatabaseReference databaseReference = database.getReference();
+    private DatabaseReference databaseReference = database.getReference("회원정보");
 
     private UserInfo userInfo;
 
@@ -40,6 +49,7 @@ public class JoinAgreementScreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.joinUnivVerifyScreenFragment = new JoinUnivVerifyScreenFragment();
+        this.joinPersonalInfoScreenFragment = new JoinPersonalInfoScreenFragment();
 
         // Inflate the layout for this fragment
 
@@ -197,12 +207,40 @@ public class JoinAgreementScreenFragment extends Fragment {
             public void onClick(View v) {
                 if (meetingUnivAgreementCheckbox.isChecked() && personalInfoAgreementCheckbox.isChecked()
                         && locationInfoAgreementCheckbox.isChecked()) {
-                    databaseReference.child("회원정보").child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").setValue(userInfo.isMeetingUnivAgreementCheckbox());
-                    databaseReference.child("회원정보").child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").setValue(userInfo.isPersonalInfoAgreementCheckbox());
-                    databaseReference.child("회원정보").child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("위치정보 이용약관 동의").setValue(userInfo.isLocationInfoAgreementCheckbox());
-                    databaseReference.child("회원정보").child(String.valueOf(userInfo.getUserID())).child("약관동의").child("선택").child("프로모션 정보 수신 동의").setValue(userInfo.isPromotionInfoAgreementCheckbox());
 
-                    Navigation.findNavController(view).navigate(R.id.action_joinAgreementScreenFragment_to_joinPersonalInfoScreenFragment);
+//                    ChildEventHandler childEventHandler = new ChildEventHandler();
+//                    databaseReference.addChildEventListener(childEventHandler);
+
+//                    ValueEventHandler valueEventHandler = new ValueEventHandler();
+//                    databaseReference.addValueEventListener(valueEventHandler);
+
+//                    databaseReference.child("회원정보").
+
+                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            boolean bool = snapshot.hasChild("0000000001");
+                            Log.d("booooooooooooool", String.valueOf(bool));
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+//                    databaseReference.child("회원정보").child(String.valueOf(userInfo.getUserID())).get().add;
+//                    Path path = databaseReference.child("회원정보").getPath("");
+//                    databaseReference.child("회원정보").child(String.valueOf(userInfo.getUserID())).getVal
+//                    databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").setValue(userInfo.isMeetingUnivAgreementCheckbox());
+//                    databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").setValue(userInfo.isPersonalInfoAgreementCheckbox());
+//                    databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("위치정보 이용약관 동의").setValue(userInfo.isLocationInfoAgreementCheckbox());
+//                    databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("선택").child("프로모션 정보 수신 동의").setValue(userInfo.isPromotionInfoAgreementCheckbox());
+
+                    // 데이터 보내기
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("Obj", (Serializable) userInfo);
+                    Navigation.findNavController(view).navigate(R.id.action_joinAgreementScreenFragment_to_joinPersonalInfoScreenFragment, bundle);
 //                    gotojoinPersonalInfoScreen();
                 } else {
                     Toast.makeText(getContext(), "필수 약관에 모두 동의하세요.", Toast.LENGTH_SHORT).show();
@@ -225,4 +263,45 @@ public class JoinAgreementScreenFragment extends Fragment {
 //        fragmentTransaction.addToBackStack(null);
 //        fragmentTransaction.commit();
 //    }
+//    private class ChildEventHandler implements ChildEventListener {
+//        @Override
+//        public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+////            Log.d("previousChildName", previousChildName);
+////            boolean bool = snapshot.child("회원정보").child("0000000001").exists();
+////            Log.d("booooooooooooool", String.valueOf(bool));
+//        }
+//
+//        @Override
+//        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//        }
+//
+//        @Override
+//        public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+//
+//        }
+//
+//        @Override
+//        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//        }
+//
+//        @Override
+//        public void onCancelled(@NonNull DatabaseError error) {
+//
+//        }
+//    }
+//    private class ValueEventHandler implements ValueEventListener {
+//        @Override
+//        public void onDataChange(@NonNull DataSnapshot snapshot) {
+////            boolean bool = snapshot.hasChild("0000000001");
+////            Log.d("booooooooooooool", String.valueOf(bool));
+//        }
+//
+//        @Override
+//        public void onCancelled(@NonNull DatabaseError error) {
+//
+//        }
+//    }
+//    private class HandlerForSingleValueEvent implements Value
 }
