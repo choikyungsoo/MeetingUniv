@@ -98,12 +98,12 @@ public class JoinProfileFragment extends Fragment {
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("닉네임").setValue(userInfo.getNickname());
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("추천인코드").setValue(userInfo.getInviteCode());
 
-                ArrayList<Integer> arrayList = new ArrayList<Integer>();
-                arrayList.add(0);
-                arrayList.add(1);
-                arrayList.add(2);
-
-                databaseReference.child(String.valueOf(userInfo.getUserID())).child("팀").setValue(arrayList);
+//                ArrayList<Integer> arrayList = new ArrayList<Integer>();
+//                arrayList.add(0);
+//                arrayList.add(1);
+//                arrayList.add(2);
+//
+//                databaseReference.child(String.valueOf(userInfo.getUserID())).child("팀").setValue(arrayList);
 
                 // 아직 보낼 필요 없음?
 //                Bundle bundle = new Bundle();
