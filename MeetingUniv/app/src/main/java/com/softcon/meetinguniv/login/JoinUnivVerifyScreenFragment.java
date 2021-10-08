@@ -1,6 +1,7 @@
 package com.softcon.meetinguniv.login;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,13 +16,17 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,10 +40,15 @@ import com.pedro.library.AutoPermissionsListener;
 
 import java.io.File;
 import java.io.Serializable;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 // >>>>>>> inbae:MeetingUniv/app/src/main/java/com/softcon/meetinguniv/login/JoinPersonalInfoScreenFragment.java
 
 import static android.app.Activity.RESULT_OK;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermissionsListener {
     private View view;
@@ -47,11 +57,20 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
     private Button gotoJoinProfileScreen_BTN, skip_BTN, selectUniv_BTN;
     private TextView join_univ;
 
+    //popup
+    private View dialogView;
+    private Spinner join_UnivSpinner;
+
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
 
     private JoinProfileFragment joinProfileFragment;
     private UserInfo userInfo;
+
+    // for parsing
+    private String schoolName;
+    private ArrayList<String> schoolNames = new ArrayList<String>();
+    private boolean inSchoolName = false;
 
     private ImageView studentIDImage;
     private File file;
@@ -188,12 +207,104 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
         this.selectUniv_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JoinSelectUnivDialogFragment joinSelectUnivDialogFragment = new JoinSelectUnivDialogFragment(getActivity());
-                joinSelectUnivDialogFragment.showJoinSelectUnivDialog();
+//                JoinSelectUnivDialogFragment joinSelectUnivDialogFragment = new JoinSelectUnivDialogFragment(getActivity());
+//                joinSelectUnivDialogFragment.showJoinSelectUnivDialog();
+
+                popUp();
+
+                join_UnivSpinner = dialogView.findViewById(R.id.join_UnivSpinner);
+
+                getSchoolNameXmlData();
+
+
+//                Dialog dialog;
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                LayoutInflater inflater = requireActivity().getLayoutInflater();
+//                builder.setView(inflater.inflate(R.layout.fragment_join_select_univ_dialog, null));
+//
+//                dialog = builder.create();
+//                dialog.show();
             }
         });
     }
 
+    private void popUp() {
+        Dialog dialog;
+        this.dialogView = requireActivity().getLayoutInflater().inflate(R.layout.fragment_join_select_univ_dialog, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                builder.setTitle("조건 선택");
+        builder.setView(this.dialogView);
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    private void getSchoolNameXmlData() {
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            //your codes here
+            try {
+
+                URL url = new URL("https://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=39e99a147405ffbc1ef3a36fee8a8ac9&svcType=api&svcCode=SCHOOL&contentType=xml&gubun=univ_list&thisPage=1&perPage=433");
+//            InputStream is= url.openStream();
+
+                XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
+                XmlPullParser parser = parserCreator.newPullParser();
+
+//            parser.setInput(new InputStreamReader(is, "UTF-8"));
+                parser.setInput(url.openStream(), "UTF-8"); //문제 발생
+//            parser.next();
+                int parserEvent = parser.getEventType();
+                Log.i("parsing", "파싱 시작");
+
+                while (parserEvent != XmlPullParser.END_DOCUMENT) {
+                    switch(parserEvent) {
+                        case XmlPullParser.START_DOCUMENT:
+                            break;
+                        case XmlPullParser.START_TAG:
+                            if(parser.getName().equals("schoolName")) {
+                                this.inSchoolName = true;
+                            }
+                            break;
+
+                        case XmlPullParser.TEXT:
+                            if(this.inSchoolName) {
+                                this.schoolName = parser.getText();
+                                this.inSchoolName = false;
+                            }
+                            break;
+
+                        case XmlPullParser.END_TAG:
+                            if(parser.getName().equals("content")) {
+                                this.schoolNames.add(this.schoolName);
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, this.schoolNames);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                                this.join_UnivSpinner.setAdapter(adapter);
+                                this.join_UnivSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    parserEvent = parser.next();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 
 //    public void takePicture() {
 //        if (this.file == null) {

@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.softcon.meetinguniv.main.MainActivity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class JoinProfileFragment extends Fragment {
     private ImageView join_profile_image;
@@ -82,12 +83,28 @@ public class JoinProfileFragment extends Fragment {
                 //프로필 사진 작업 필요
                 //닉네임 등록
                 userInfo.setNickname(String.valueOf(settingNickName.getText()));
+                //추천인 코드 생성(난수 작업)
+
+                String inviteCode = makeInviteCode();
+                //추천인 코드 업로드
+//                userInfo.setInviteCode();
+
+                //내가 초대된 코드는 바로 코드 주인에게 +1 하트
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").setValue(userInfo.isMeetingUnivAgreementCheckbox());
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").setValue(userInfo.isPersonalInfoAgreementCheckbox());
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("위치정보 이용약관 동의").setValue(userInfo.isLocationInfoAgreementCheckbox());
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("선택").child("프로모션 정보 수신 동의").setValue(userInfo.isPromotionInfoAgreementCheckbox());
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("학교").setValue(userInfo.getSchoolName());
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("닉네임").setValue(userInfo.getNickname());
+                databaseReference.child(String.valueOf(userInfo.getUserID())).child("추천인코드").setValue(userInfo.getInviteCode());
+
+                ArrayList<Integer> arrayList = new ArrayList<Integer>();
+                arrayList.add(0);
+                arrayList.add(1);
+                arrayList.add(2);
+
+                databaseReference.child(String.valueOf(userInfo.getUserID())).child("팀").setValue(arrayList);
+
                 // 아직 보낼 필요 없음?
 //                Bundle bundle = new Bundle();
 //                bundle.putSerializable("Obj", (Serializable) userInfo);
@@ -98,14 +115,17 @@ public class JoinProfileFragment extends Fragment {
             }
         });
 
-
-
-        mAuth = FirebaseAuth.getInstance();//
-        mDatabase = FirebaseDatabase.getInstance().getReference();//
+//        mAuth = FirebaseAuth.getInstance();//
+//        mDatabase = FirebaseDatabase.getInstance().getReference();//
 
 //        Bundle bundle = new Bundle();
 //        bundle.putString(FirebaseAnalytics.Param.METHOD, method);
 //        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SIGN_UP, bundle);
+    }
+
+    private String makeInviteCode() {
+        //난수 작업
+        return null;
     }
 
     @Override

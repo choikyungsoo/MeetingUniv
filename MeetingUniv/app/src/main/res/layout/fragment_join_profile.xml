@@ -54,6 +54,7 @@
         android:background="#D8D6D6"
         android:gravity="center"
         android:hint="닉네임"
+        android:singleLine="true"
         android:textSize="20sp" />
 
     <androidx.appcompat.widget.AppCompatButton

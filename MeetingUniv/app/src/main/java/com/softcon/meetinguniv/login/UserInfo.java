@@ -16,6 +16,8 @@ public class UserInfo implements Serializable {
 //    private profileImage;
     private String nickname;
 
+    private String inviteCode;
+
 
     public UserInfo() {
 //        this.meetingUnivAgreementCheckbox = false;
@@ -65,5 +67,10 @@ public class UserInfo implements Serializable {
     public String getNickname() { return nickname; }
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getInviteCode() { return inviteCode; }
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
     }
 }
