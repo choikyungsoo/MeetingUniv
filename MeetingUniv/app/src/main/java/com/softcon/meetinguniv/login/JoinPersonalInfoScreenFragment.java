@@ -24,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.softcon.meetinguniv.R;
 import com.pedro.library.AutoPermissionsListener;
 
@@ -48,6 +50,9 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
 
     private ImageView studentIDImage;
     private File file;
+
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = database.getReference("회원정보");
 
     final private static String TAG = "GILBOMI"; Button btn_photo; ImageView iv_photo; final static int TAKE_PICTURE = 1; String mCurrentPhotoPath; final static int REQUEST_TAKE_PHOTO = 1;
 
@@ -81,11 +86,11 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
 
         // bundle 데이터 받기
         this.userInfo = (UserInfo) (getArguments().getSerializable("Obj"));
-        Log.d("bundledata0",String.valueOf(this.userInfo.getUserID()));
-        Log.d("bundledata1",String.valueOf(this.userInfo.isPromotionInfoAgreementCheckbox()));
-        Log.d("bundledata2",String.valueOf(this.userInfo.isMeetingUnivAgreementCheckbox()));
-        Log.d("bundledata3",String.valueOf(this.userInfo.isPersonalInfoAgreementCheckbox()));
-        Log.d("bundledata4",String.valueOf(this.userInfo.isLocationInfoAgreementCheckbox()));
+//        Log.d("bundledata0",String.valueOf(this.userInfo.getUserID()));
+//        Log.d("bundledata1",String.valueOf(this.userInfo.isPromotionInfoAgreementCheckbox()));
+//        Log.d("bundledata2",String.valueOf(this.userInfo.isMeetingUnivAgreementCheckbox()));
+//        Log.d("bundledata3",String.valueOf(this.userInfo.isPersonalInfoAgreementCheckbox()));
+//        Log.d("bundledata4",String.valueOf(this.userInfo.isLocationInfoAgreementCheckbox()));
 
 //        AutoPermissions.Companion.loadAllPermissions(getActivity(), 101);
         return this.view;
@@ -140,6 +145,10 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
                 if (join_univ.getText().toString().equals("")) {
                     Toast.makeText(getContext(), "학교를 선택하세요.", Toast.LENGTH_SHORT).show();
                 } else {
+                    // 학교 정보
+                    userInfo.setSchoolName(String.valueOf(join_univ.getText()));
+                    databaseReference.child(String.valueOf(userInfo.getUserID())).child("학교").setValue(userInfo.getSchoolName());
+                    // 학생증 정보
                     // 데이터 보내기
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("Obj", (Serializable) userInfo);
@@ -152,6 +161,14 @@ public class JoinPersonalInfoScreenFragment extends Fragment implements AutoPerm
         this.skip_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 학교 정보
+                userInfo.setSchoolName(String.valueOf(join_univ.getText()));
+//                databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").setValue(userInfo.isMeetingUnivAgreementCheckbox());
+//                databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").setValue(userInfo.isPersonalInfoAgreementCheckbox());
+//                databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("위치정보 이용약관 동의").setValue(userInfo.isLocationInfoAgreementCheckbox());
+//                databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("선택").child("프로모션 정보 수신 동의").setValue(userInfo.isPromotionInfoAgreementCheckbox());
+//                databaseReference.child(String.valueOf(userInfo.getUserID())).child("학교").setValue(userInfo.getSchoolName());
+                // 학생증 정보
                 // 데이터 보내기
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("Obj", (Serializable) userInfo);
