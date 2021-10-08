@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import org.jetbrains.annotations.NotNull;
@@ -34,6 +35,7 @@ public class TeamMemberAdapterRecycleritem extends RecyclerView.Adapter<TeamMemb
     public class viewHolder extends RecyclerView.ViewHolder {
 
         private ImageView memProfile;
+        private Button cancelTeam;
 
         public viewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
