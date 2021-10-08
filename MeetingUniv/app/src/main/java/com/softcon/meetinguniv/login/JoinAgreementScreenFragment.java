@@ -49,7 +49,7 @@ public class JoinAgreementScreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.joinUnivVerifyScreenFragment = new JoinUnivVerifyScreenFragment();
-        this.joinPersonalInfoScreenFragment = new JoinPersonalInfoScreenFragment();
+//        this.joinPersonalInfoScreenFragment = new JoinPersonalInfoScreenFragment();
 
         // Inflate the layout for this fragment
 

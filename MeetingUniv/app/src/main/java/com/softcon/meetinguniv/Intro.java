@@ -68,7 +68,25 @@ public class Intro extends AppCompatActivity {
                                         startActivity(intent);
                                         finish();
                                     }
+                                    else {
+                                        Log.d("카카오톡","로그인은 되어있으나 가입 시 문제가 발생한 적이 있음");
+                                        Intent intent = new Intent(Intro.this, LoginActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
                                 }
+                                else {
+                                    Log.d("카카오톡","로그인은 되어있으나 가입 시 문제가 발생한 적이 있음");
+                                    Intent intent = new Intent(Intro.this, LoginActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+                            else {
+                                Log.d("카카오톡","로그인은 되어있으나 가입 시 문제가 발생한 적이 있음");
+                                Intent intent = new Intent(Intro.this, LoginActivity.class);
+                                startActivity(intent);
+                                finish();
                             }
                         }
                         @Override
@@ -76,10 +94,10 @@ public class Intro extends AppCompatActivity {
 
                         }
                     });
-                    Log.d("카카오톡","로그인은 되어있으나 가입 시 문제가 발생한 적이 있음");
-                    Intent intent = new Intent(Intro.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
+//                    Log.d("카카오톡","로그인은 되어있으나 가입 시 문제가 발생한 적이 있음");
+//                    Intent intent = new Intent(Intro.this, LoginActivity.class);
+//                    startActivity(intent);
+//                    finish();
                 }
                 else {
                     Log.d("카카오톡","로그인 안되어 있음");
