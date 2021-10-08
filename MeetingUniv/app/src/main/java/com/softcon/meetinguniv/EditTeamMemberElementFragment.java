@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     private ArrayList<TeamMemberRecyclerItem> storage = new ArrayList<TeamMemberRecyclerItem>();
 
     private ArrayList<Integer> ImageSource2 = new ArrayList<Integer>();
+    private ArrayList<Integer> ImageSource1 = new ArrayList<Integer>();
 
     private RecyclerView allfriends;
     private RecyclerView currentfriends;
@@ -125,7 +127,9 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     }
 
     private void AddCurrentDialog(int position) {
-
+        for(EditTeamRecycleritem etr: this.currentlist){
+            this.ImageSource1.add(etr.getE_memporife());
+        } 
     }
 
     private void DeleteCurrentDialog(int position) {
