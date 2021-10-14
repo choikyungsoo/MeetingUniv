@@ -57,8 +57,8 @@ public class FloatingFriendsAdatperRecycleritem extends RecyclerView.Adapter<Flo
         public viewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
-            pop_chatprofile = itemView.findViewById(R.id.addTeam_BTN);
-            pop_memberlist = itemView.findViewById(R.id.addTeamTextView);
+            pop_chatprofile = itemView.findViewById(R.id.chatprofile);
+            pop_memberlist = itemView.findViewById(R.id.memberlist);
 
         }
     }

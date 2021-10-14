@@ -97,8 +97,8 @@ public class PersonalChatingAdapterRecycleritem extends RecyclerView.Adapter<Per
                     Navigation.findNavController(itemView).navigate(R.id.action_mainFragment_to_chatRoomScreenFragmentPopupVer);
                 }
             });
-            chatprofile = itemView.findViewById(R.id.addTeam_BTN);
-            memberlist = itemView.findViewById(R.id.addTeamTextView);
+            chatprofile = itemView.findViewById(R.id.chatprofile);
+            memberlist = itemView.findViewById(R.id.memberlist);
 
         }
     }

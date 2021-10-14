@@ -58,8 +58,8 @@ public class FriendsListAdapterRecycleritem extends RecyclerView.Adapter<Friends
         public viewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
-            F_chatprofile = itemView.findViewById(R.id.addTeam_BTN);
-            F_memberlist = itemView.findViewById(R.id.addTeamTextView);
+            F_chatprofile = itemView.findViewById(R.id.chatprofile);
+            F_memberlist = itemView.findViewById(R.id.memberlist);
             itemView.setClickable(true);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

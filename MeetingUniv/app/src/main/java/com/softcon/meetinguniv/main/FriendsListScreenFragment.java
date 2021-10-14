@@ -112,7 +112,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_friends_list_screen, container, false);
         this.inviteFriends = rootView.findViewById(R.id.invitingfriends);
-        this.PersonalProfile = rootView.findViewById(R.id.addTeam_BTN);
+        this.PersonalProfile = rootView.findViewById(R.id.chatprofile);
         this.inviteFriends.setOnClickListener(this);
         this.PersonalProfile.setOnClickListener(this);
         return rootView;
@@ -124,7 +124,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
             case R.id.invitingfriends:
                 InviteFriendDialog(v);
                 break;
-            case R.id.addTeam_BTN:
+            case R.id.chatprofile:
                 movetoPersonalProfile(v);
                 break;
         }

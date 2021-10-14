@@ -243,5 +243,10 @@
         android:name="com.softcon.meetinguniv.ChatRoomMembersDialogFragment"
         android:label="fragment_chat_room_members_dialog"
         tools:layout="@layout/fragment_chat_room_members_dialog" />
+    <fragment
+        android:id="@+id/addTeamElementFragment"
+        android:name="com.softcon.meetinguniv.AddTeamElementFragment"
+        android:label="fragment_add_team_element"
+        tools:layout="@layout/fragment_add_team_element" />
 
 </navigation>

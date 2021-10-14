@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
+import com.softcon.meetinguniv.AddTeamElementFragment;
 import com.softcon.meetinguniv.R;
 
 import java.util.ArrayList;
@@ -112,6 +113,7 @@ public class chooseteamElementFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         MatchingContentFragment fragment1 = new MatchingContentFragment();
+        AddTeamElementFragment addTeamElementFragment = new AddTeamElementFragment();
         View view = inflater.inflate(R.layout.fragment_chooseteam_element, container, false);
         this.backbtn = view.findViewById(R.id.backbtn);
         this.editSearch = view.findViewById(R.id.searchTeamEditText);
@@ -130,7 +132,10 @@ public class chooseteamElementFragment extends Fragment {
         this.addTeamLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
+                        .replace(R.id.Framecontainer, addTeamElementFragment)
+                        .commit();
             }
         });
 
