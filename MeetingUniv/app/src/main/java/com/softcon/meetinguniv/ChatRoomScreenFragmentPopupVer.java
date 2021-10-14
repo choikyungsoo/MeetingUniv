@@ -7,6 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -14,8 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,11 +29,15 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
     private TextView numOfChatRoomMembers;
     private EditText chatRoomEditText;
     private LinearLayout inputChatRoom;
+    private Button backFromChatRoomPop_BTN;
 
     private ConstraintLayout ChatRoomScreen;
     private int keyboardheight;
     private boolean isKeyboardShowing = false;
     private View rootView;
+
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +48,7 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+//        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         return inflater.inflate(R.layout.fragment_chat_room_screen_popup_ver, container, false);
     }
 
@@ -48,23 +57,39 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
         super.onViewCreated(view, savedInstanceState);
         this.chatRoomMembers = view.findViewById(R.id.chatRoomMembers);
         this.numOfChatRoomMembers = view.findViewById(R.id.join_selectAreaText);
-        this.chatRoomEditText = view.findViewById(R.id.join_selectUnivText);
-        this.inputChatRoom = view.findViewById(R.id.inputChatRoom);
+//        this.chatRoomEditText = view.findViewById(R.id.join_selectUnivText);
+//        this.inputChatRoom = view.findViewById(R.id.inputChatRoom);
         this.ChatRoomScreen = view.findViewById(R.id.constraintLayoutOfchatRoomPopup);
+        this.backFromChatRoomPop_BTN = view.findViewById(R.id.backFromChatRoomPop_BTN);
 
         this.chatRoomMembers.setOnClickListener(this);
-        this.chatRoomEditText.setOnClickListener(this);
+        this.backFromChatRoomPop_BTN.setOnClickListener(this);
+//        this.chatRoomEditText.setOnClickListener(this);
 
+        setChatRoomScreen();
+    }
+//
+    public void setChatRoomScreen() {
+        this.fragmentManager = this.getActivity().getSupportFragmentManager();
+        this.fragmentTransaction = this.fragmentManager.beginTransaction();
+
+        ChatRoomScreenPopup2Fragment chatRoomScreenPopup2Fragment = new ChatRoomScreenPopup2Fragment();
+        fragmentTransaction.replace(R.id.chatRoomScreenPopFragmentContainer, chatRoomScreenPopup2Fragment);
+
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.join_selectUnivText:
-                break;
             case R.id.chatRoomMembers:
                 ChatRoomMembersDialogFragment chatRoomMembersDialogFragment = new ChatRoomMembersDialogFragment(getActivity());
                 chatRoomMembersDialogFragment.showThisChatRoomMembers(numOfChatRoomMembers);
+                break;
+            case R.id.backFromChatRoomPop_BTN:
+                Navigation.findNavController(v).navigate(R.id.action_chatRoomScreenFragmentPopupVer_to_mainFragment);
+                break;
         }
     }
 }

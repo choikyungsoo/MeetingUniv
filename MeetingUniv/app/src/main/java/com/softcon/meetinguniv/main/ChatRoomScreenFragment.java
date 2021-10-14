@@ -79,7 +79,7 @@ public class ChatRoomScreenFragment extends Fragment implements View.OnClickList
 
 //        this.editText = view.findViewById(R.id.textView14);
 
-        this.backFromChatRoom_BTN = view.findViewById(R.id.backFromChatRoom_BTN);
+        this.backFromChatRoom_BTN = view.findViewById(R.id.backFromChatRoomPop_BTN);
 
         this.menubtn.setOnClickListener(this);
         this.basePage.setOnClickListener(this);
@@ -125,7 +125,7 @@ public class ChatRoomScreenFragment extends Fragment implements View.OnClickList
             case R.id.menuPage:
                 menuPage.setVisibility(View.VISIBLE);
                 break;
-            case R.id.backFromChatRoom_BTN:
+            case R.id.backFromChatRoomPop_BTN:
                 Navigation.findNavController(v).navigate(R.id.action_chatRoomScreenFragment_to_mainFragment);
                 break;
 //            case R.id.textView14:
