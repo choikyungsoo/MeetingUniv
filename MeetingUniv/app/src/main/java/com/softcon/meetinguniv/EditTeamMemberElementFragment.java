@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     private ArrayList<TeamMemberRecyclerItem> storage = new ArrayList<TeamMemberRecyclerItem>();
 
     private ArrayList<Integer> ImageSource2 = new ArrayList<Integer>();
+    private ArrayList<Integer> ImageSource1 = new ArrayList<Integer>();
 
     private RecyclerView allfriends;
     private RecyclerView currentfriends;
@@ -50,6 +52,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 
     private MatchingContentFragment fragment;
 
+    private Boolean checkok = false;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +94,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
                DeleteCurrentDialog(position);
             }
         });
+
         //////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -103,15 +107,29 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         this.currentfriends.setLayoutManager(linearLayoutManager2);
 
         //DB연결 시 addRecyclerItem2를 통해 친구목록 가져오기!
-        for(int i =0; i<15; i++) {
-            addRecyclerItem2(R.drawable.prot, "테스트용 입니다");
-        }
+
+        addRecyclerItem2(R.drawable.prot, "친구 1");
+        addRecyclerItem2(R.drawable.prot2, "친구 2");
+        addRecyclerItem2(R.drawable.prot3, "친구 3");
+
+        recyclerItemAdapter2.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                AddCurrentDialog(position);
+            }
+        });
         /////////////////////////////////////////////////////////////////////////////////////////
 
 
         recyclerItemAdapter.notifyDataSetChanged();
         recyclerItemAdapter2.notifyDataSetChanged();
         return view;
+    }
+
+    private void AddCurrentDialog(int position) {
+        for(EditTeamRecycleritem etr: this.currentlist){
+            this.ImageSource1.add(etr.getE_memporife());
+        } 
     }
 
     private void DeleteCurrentDialog(int position) {
@@ -160,6 +178,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
                 moveToMachingcontent();
                 break;
             case R.id.TCCheck:
+                this.checkok = true;
                 savechangememberInfo();
                 givechangememberInfo();
                 moveToMachingcontent();
@@ -182,7 +201,6 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 
     private void givechangememberInfo() {
         Bundle bundle = new Bundle();
-
         bundle.putIntegerArrayList("changemember", this.ImageSource2);
         this.fragment.setArguments(bundle);
     }
