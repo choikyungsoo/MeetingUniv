@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,8 +19,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.softcon.meetinguniv.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -115,7 +112,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_friends_list_screen, container, false);
         this.inviteFriends = rootView.findViewById(R.id.invitingfriends);
-        this.PersonalProfile = rootView.findViewById(R.id.chatprofile);
+        this.PersonalProfile = rootView.findViewById(R.id.addTeam_BTN);
         this.inviteFriends.setOnClickListener(this);
         this.PersonalProfile.setOnClickListener(this);
         return rootView;
@@ -127,7 +124,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
             case R.id.invitingfriends:
                 InviteFriendDialog(v);
                 break;
-            case R.id.chatprofile:
+            case R.id.addTeam_BTN:
                 movetoPersonalProfile(v);
                 break;
         }
