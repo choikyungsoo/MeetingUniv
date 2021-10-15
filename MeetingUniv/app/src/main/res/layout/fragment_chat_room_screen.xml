@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/chatRoomTopBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -24,7 +24,7 @@
             app:layout_constraintVertical_bias="0.0">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/backFromChatRoom_BTN"
+                android:id="@+id/backFromChatRoomPop_BTN"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorCenter"
@@ -65,7 +65,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/chatRoomTopBar"
             app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/recycleritem_otherchat" />
 

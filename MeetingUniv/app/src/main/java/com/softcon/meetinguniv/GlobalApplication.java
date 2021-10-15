@@ -11,7 +11,7 @@ public class GlobalApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-//        Log.d("getKeyHash",Utility.INSTANCE.getKeyHash(this));
+        Log.d("getKeyHash",Utility.INSTANCE.getKeyHash(this));
 
         // Kakao Sdk 초기화
         KakaoSdk.init(this, "e73b9463cb4d98b9d5460cc48a8fabb0");
