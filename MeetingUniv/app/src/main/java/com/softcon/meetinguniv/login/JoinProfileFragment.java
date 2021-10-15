@@ -87,7 +87,7 @@ public class JoinProfileFragment extends Fragment {
 
                 String inviteCode = makeInviteCode();
                 //추천인 코드 업로드
-//                userInfo.setInviteCode();
+                userInfo.setInviteCode(inviteCode);
 
                 //내가 초대된 코드는 바로 코드 주인에게 +1 하트
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").setValue(userInfo.isMeetingUnivAgreementCheckbox());
@@ -125,7 +125,18 @@ public class JoinProfileFragment extends Fragment {
 
     private String makeInviteCode() {
         //난수 작업
-        return null;
+        char[] english = new char[4];
+        int[] number = new int[4];
+        String numberValue = "";
+        String englishC;
+        for(int i =0; i < 4; i++) {
+            english[i] = (char)((int)(Math.random()*26)+97);
+            number[i] = (int) (Math.random() * 10);
+            numberValue += Integer.toString(number[i]);
+        }
+        englishC = new String(english);
+        System.out.println(englishC + numberValue);
+        return englishC + numberValue;
     }
 
     @Override
