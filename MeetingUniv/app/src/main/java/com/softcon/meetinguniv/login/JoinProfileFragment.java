@@ -135,7 +135,6 @@ public class JoinProfileFragment extends Fragment {
             numberValue += Integer.toString(number[i]);
         }
         englishC = new String(english);
-        System.out.println(englishC + numberValue);
         return englishC + numberValue;
     }
 
