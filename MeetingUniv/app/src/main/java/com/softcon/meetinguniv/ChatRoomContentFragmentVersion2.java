@@ -33,29 +33,29 @@ public class ChatRoomContentFragmentVersion2 extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        setChatRoomTopBar();
-        setChatRoomScreen();
+//        setChatRoomTopBar();
+//        setChatRoomScreen();
     }
 
-    public void setChatRoomScreen() {
-        this.fragmentManager = this.getActivity().getSupportFragmentManager();
-        this.fragmentTransaction = this.fragmentManager.beginTransaction();
-
-        ChatRoomScreenPopup2Fragment chatRoomScreenPopup2Fragment = new ChatRoomScreenPopup2Fragment();
-        fragmentTransaction.replace(R.id.chatRoomScreenPopFragmentContainer, chatRoomScreenPopup2Fragment);
-
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }
-
-    public void setChatRoomTopBar() {
-        this.fragmentManager = this.getActivity().getSupportFragmentManager();
-        this.fragmentTransaction = this.fragmentManager.beginTransaction();
-
-        ChatRoomScreenPopup2Fragment chatRoomScreenPopup2Fragment = new ChatRoomScreenPopup2Fragment();
-        fragmentTransaction.replace(R.id.chatRoomScreenPopFragmentContainer, chatRoomScreenPopup2Fragment);
-
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }
+//    public void setChatRoomScreen() {
+//        this.fragmentManager = this.getActivity().getSupportFragmentManager();
+//        this.fragmentTransaction = this.fragmentManager.beginTransaction();
+//
+//        ChatRoomScreenPopup2Fragment chatRoomScreenPopup2Fragment = new ChatRoomScreenPopup2Fragment();
+//        fragmentTransaction.replace(R.id.chatRoomScreenPopFragmentContainer, chatRoomScreenPopup2Fragment);
+//
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
+//    }
+//
+//    public void setChatRoomTopBar() {
+//        this.fragmentManager = this.getActivity().getSupportFragmentManager();
+//        this.fragmentTransaction = this.fragmentManager.beginTransaction();
+//
+//        ChatRoomScreenPopup2Fragment chatRoomScreenPopup2Fragment = new ChatRoomScreenPopup2Fragment();
+//        fragmentTransaction.replace(R.id.chatRoomScreenPopFragmentContainer, chatRoomScreenPopup2Fragment);
+//
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
+//    }
 }

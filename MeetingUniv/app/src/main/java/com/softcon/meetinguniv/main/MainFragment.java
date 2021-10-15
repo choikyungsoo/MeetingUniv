@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,6 +40,8 @@ public class MainFragment extends Fragment {
 
     private int statusBarHeight;
 
+    private long userID;
+
     public MainFragment() {
         // Required empty public constructor
     }
@@ -53,6 +56,9 @@ public class MainFragment extends Fragment {
         this.chattingScreenFragment = new ChattingScreenFragment();
         this.shopScreenFragment = new ShopScreenFragment();
         this.settingsScreenFragment = new SettingsScreenFragment();
+
+        this.userID = getActivity().getIntent().getLongExtra("userID",1);
+        Log.d("회원아이디", String.valueOf(this.userID));
 
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
@@ -120,29 +126,36 @@ public class MainFragment extends Fragment {
     public void setFragment(int n) {
         this.fragmentManager = this.getActivity().getSupportFragmentManager();
         this.fragmentTransaction = this.fragmentManager.beginTransaction();
+        Bundle bundle = new Bundle();
         switch (n){
             case 0:
                 this.mainScreenFragment = new MainScreenFragment();
+                bundle.putLong("userID", this.userID);
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.mainScreenFragment);
                 break;
             case 1:
                 this.friendsListScreenFragment = new FriendsListScreenFragment();
+                bundle.putLong("userID", this.userID);
+                this.friendsListScreenFragment.setArguments(bundle);
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.friendsListScreenFragment);
                 break;
             case 2:
                 this.chattingScreenFragment = new ChattingScreenFragment();
+                bundle.putLong("userID", this.userID);
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.chattingScreenFragment);
                 break;
             case 3:
                 this.shopScreenFragment = new ShopScreenFragment();
+                bundle.putLong("userID", this.userID);
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.shopScreenFragment);
                 break;
             case 4:
                 this.settingsScreenFragment = new SettingsScreenFragment();
+                bundle.putLong("userID", this.userID);
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.settingsScreenFragment);
                 break;
         }
-        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 }

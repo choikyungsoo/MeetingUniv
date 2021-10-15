@@ -48,6 +48,7 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        AndroidBug5497Workaround.assistActivity(this.getActivity());
 //        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         return inflater.inflate(R.layout.fragment_chat_room_screen_popup_ver, container, false);
     }
@@ -66,19 +67,19 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
         this.backFromChatRoomPop_BTN.setOnClickListener(this);
 //        this.chatRoomEditText.setOnClickListener(this);
 
-        setChatRoomScreen();
+//        setChatRoomScreen();
     }
 //
-    public void setChatRoomScreen() {
-        this.fragmentManager = this.getActivity().getSupportFragmentManager();
-        this.fragmentTransaction = this.fragmentManager.beginTransaction();
-
-        ChatRoomScreenPopup2Fragment chatRoomScreenPopup2Fragment = new ChatRoomScreenPopup2Fragment();
-        fragmentTransaction.replace(R.id.chatRoomScreenPopFragmentContainer, chatRoomScreenPopup2Fragment);
-
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }
+//    public void setChatRoomScreen() {
+//        this.fragmentManager = this.getActivity().getSupportFragmentManager();
+//        this.fragmentTransaction = this.fragmentManager.beginTransaction();
+//
+//        ChatRoomScreenPopup2Fragment chatRoomScreenPopup2Fragment = new ChatRoomScreenPopup2Fragment();
+//        fragmentTransaction.replace(R.id.chatRoomScreenPopFragmentContainer, chatRoomScreenPopup2Fragment);
+//
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
+//    }
 
     @Override
     public void onClick(View v) {
