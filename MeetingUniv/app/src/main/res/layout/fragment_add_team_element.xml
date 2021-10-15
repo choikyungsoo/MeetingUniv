@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/framecontainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context="com.softcon.meetinguniv.EditTeamMemberElementFragment">
+    tools:context="com.softcon.meetinguniv.AddTeamElementFragment">
 
     <Space
         android:layout_width="match_parent"
@@ -18,7 +17,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/EditbackBTN"
+            android:id="@+id/addTeamBack_BTN"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -44,7 +43,7 @@
             android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/CheckTC"
+            android:id="@+id/addTeamOk_BTN"
             android:layout_width="6dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -58,7 +57,7 @@
         android:layout_height="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/editFriendsList"
+        android:id="@+id/addFriendsList"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:paddingLeft="10dp"
@@ -69,7 +68,7 @@
         android:layout_height="16dp" />
 
     <SearchView
-        android:id="@+id/editsearch"
+        android:id="@+id/addTeamSearch"
         android:layout_width="382dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -81,7 +80,7 @@
         android:layout_height="16dp" />
 
     <TextView
-        android:id="@+id/editTeamFriendsList"
+        android:id="@+id/addTeamFriendsList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
@@ -94,7 +93,7 @@
         android:layout_height="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/editPresentFriendsList"
+        android:id="@+id/addPresentFriendsList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="10dp"

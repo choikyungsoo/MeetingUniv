@@ -21,14 +21,14 @@ import android.widget.TextView;
 import com.softcon.meetinguniv.main.MatchingContentFragment;
 import com.softcon.meetinguniv.main.TeamMemberAdapterRecycleritem;
 import com.softcon.meetinguniv.main.TeamMemberRecyclerItem;
+import com.softcon.meetinguniv.main.chooseteamElementFragment;
 
 import java.util.ArrayList;
 
-
-public class EditTeamMemberElementFragment extends Fragment implements View.OnClickListener{
-    private Button EditbackBTN;
-    private TextView CheckTC;
-    private SearchView editsearch;
+public class AddTeamElementFragment extends Fragment implements View.OnClickListener {
+    private Button addTeamBack_BTN;
+    private TextView addTeamOk_BTN;
+    private SearchView addTeamSearch;
     private InputMethodManager imm;
 
     private ArrayList<EditTeamRecycleritem1> alllist = new ArrayList<EditTeamRecycleritem1>();
@@ -43,27 +43,31 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 
     private EditTeamAdapterRecycleritem recyclerItemAdapter;
 
-    private MatchingContentFragment fragment;
+    private chooseteamElementFragment fragment;
 
     private Boolean checkok = false;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_edit_team_member_element, container, false);
-        this.EditbackBTN = view.findViewById(R.id.EditbackBTN);
-        this.CheckTC = view.findViewById(R.id.CheckTC);
-        this.editsearch = view.findViewById(R.id.editsearch);
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_add_team_element, container, false);
+
+        this.addTeamBack_BTN = view.findViewById(R.id.addTeamBack_BTN);
+        this.addTeamOk_BTN = view.findViewById(R.id.addTeamOk_BTN);
+        this.addTeamSearch = view.findViewById(R.id.addTeamSearch);
         this.imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        this.EditbackBTN.setOnClickListener(this);
-        this.fragment = new MatchingContentFragment();
+        this.addTeamBack_BTN.setOnClickListener(this);
+        this.fragment = new chooseteamElementFragment();
 
         //리사이클러뷰 - 현재 팀원   /////////////////////////////////////////////////////////////
-        this.allfriends = view.findViewById(R.id.editFriendsList);
+        this.allfriends = view.findViewById(R.id.addFriendsList);
         this.recyclerItemAdapter = new EditTeamAdapterRecycleritem(this.alllist);
         this.allfriends.setAdapter(recyclerItemAdapter) ;
 
@@ -72,34 +76,30 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         this.allfriends.setLayoutManager(linearLayoutManager);
 
 
-        this.CheckTC.setOnClickListener(this);
-        Bundle bundle = getArguments();
-        if(bundle != null){
-            ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
-            for(int i=0; i<takeData.size(); i++){
-                addRecyclerItem(takeData.get(i));
-            }
-        }
+        this.addTeamOk_BTN.setOnClickListener(this);
+//        Bundle bundle = getArguments();
+//        if(bundle != null){
+//            ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
+//            for(int i=0; i<takeData.size(); i++){
+//                addRecyclerItem(takeData.get(i));
+//            }
+//        }
 
         recyclerItemAdapter.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-               DeleteCurrentDialog(position);
+                DeleteCurrentDialog(position);
             }
         });
 
-        //////////////////////////////////////////////////////////////////////////////////////
-
-
-        //리사이클러뷰 - 친구목록///////////////////////////////////////////////////////////////////
-        this.currentfriends = view.findViewById(R.id.editPresentFriendsList);
+        this.currentfriends = view.findViewById(R.id.addPresentFriendsList);
         EditTeamAdapterRecycleritem2 recyclerItemAdapter2 = new EditTeamAdapterRecycleritem2(this.currentlist);
         this.currentfriends.setAdapter(recyclerItemAdapter2) ;
 
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
         this.currentfriends.setLayoutManager(linearLayoutManager2);
 
-        //DB연결 시 addRecyclerItem2를 통해 친구목록 가져오기!
+        //DB연결 시 addRecyclerItem2를 통해 친구목록 가져오기
 
         addRecyclerItem2(R.drawable.prot, "친구 1");
         addRecyclerItem2(R.drawable.prot2, "친구 2");
@@ -113,7 +113,6 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         });
         /////////////////////////////////////////////////////////////////////////////////////////
 
-
         recyclerItemAdapter.notifyDataSetChanged();
         recyclerItemAdapter2.notifyDataSetChanged();
         return view;
@@ -122,7 +121,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     private void AddCurrentDialog(int position) {
         for(EditTeamRecycleritem etr: this.currentlist){
             this.ImageSource1.add(etr.getE_memporife());
-        } 
+        }
     }
 
     private void DeleteCurrentDialog(int position) {
@@ -167,23 +166,23 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.EditbackBTN:
-                moveToMachingcontent();
+            case R.id.addTeamBack_BTN:
+                moveToChooseTeamElement();
                 break;
-            case R.id.CheckTC:
+            case R.id.addTeamOk_BTN:
                 this.checkok = true;
                 savechangememberInfo();
                 givechangememberInfo();
-                moveToMachingcontent();
+                moveToChooseTeamElement();
                 break;
         }
     }
 
-    private void moveToMachingcontent() {
+    private void moveToChooseTeamElement() {
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.Framecontainer, this.fragment)
                 .commit();
-        imm.hideSoftInputFromWindow(editsearch.getWindowToken(),0);
+        imm.hideSoftInputFromWindow(addTeamSearch.getWindowToken(),0);
     }
 
     private void savechangememberInfo() {
@@ -197,5 +196,4 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         bundle.putIntegerArrayList("changemember", this.ImageSource2);
         this.fragment.setArguments(bundle);
     }
-
 }

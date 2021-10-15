@@ -64,9 +64,19 @@ public class Intro extends AppCompatActivity {
                                             && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").getValue().equals(true)
                                             && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("위치정보 이용약관 동의").getValue().equals(true)) {
                                         Log.d("카카오톡", "로그인 성공");
-                                        Intent intent = new Intent(Intro.this, MainActivity.class);
-                                        startActivity(intent);
-                                        finish();
+                                        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+                                            @Override
+                                            public Unit invoke(User user, Throwable throwable) {
+                                                if(user != null) {
+                                                    Log.d("카카오톡","로그인 성공");
+                                                    Intent intent = new Intent(Intro.this, MainActivity.class);
+                                                    intent.putExtra("userID", user.getId());
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                                return null;
+                                            }
+                                        });
                                     }
                                     else {
                                         Log.d("카카오톡","로그인은 되어있으나 가입 시 문제가 발생한 적이 있음");

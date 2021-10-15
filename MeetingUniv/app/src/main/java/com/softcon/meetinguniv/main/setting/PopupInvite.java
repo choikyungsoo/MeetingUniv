@@ -22,9 +22,9 @@ public class PopupInvite extends Fragment {
     private TextView inviteCode;
     private UserInfo userInfo;
 
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference("회원정보");
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -7,9 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -30,6 +32,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.softcon.meetinguniv.JoinSelectUnivDialogFragment;
 
 import com.google.firebase.database.DatabaseReference;
@@ -38,7 +45,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.softcon.meetinguniv.R;
 import com.pedro.library.AutoPermissionsListener;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
@@ -79,6 +90,9 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference("회원정보");
 
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    private StorageReference storageReference = storage.getReference().child("학생증");
+
     final private static String TAG = "GILBOMI"; Button btn_photo; ImageView iv_photo; final static int TAKE_PICTURE = 1; String mCurrentPhotoPath; final static int REQUEST_TAKE_PHOTO = 1;
 
     @Override
@@ -98,6 +112,14 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
             }
         }
 
+        // bundle 데이터 받기
+        this.userInfo = (UserInfo) (getArguments().getSerializable("Obj"));
+//        Log.d("bundledata0",String.valueOf(this.userInfo.getUserID()));
+//        Log.d("bundledata1",String.valueOf(this.userInfo.isPromotionInfoAgreementCheckbox()));
+//        Log.d("bundledata2",String.valueOf(this.userInfo.isMeetingUnivAgreementCheckbox()));
+//        Log.d("bundledata3",String.valueOf(this.userInfo.isPersonalInfoAgreementCheckbox()));
+//        Log.d("bundledata4",String.valueOf(this.userInfo.isLocationInfoAgreementCheckbox()));
+
         studentIDImage = this.view.findViewById(R.id.studentIDImage);
         studentIDImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,13 +131,7 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
             }
         });
 
-        // bundle 데이터 받기
-        this.userInfo = (UserInfo) (getArguments().getSerializable("Obj"));
-//        Log.d("bundledata0",String.valueOf(this.userInfo.getUserID()));
-//        Log.d("bundledata1",String.valueOf(this.userInfo.isPromotionInfoAgreementCheckbox()));
-//        Log.d("bundledata2",String.valueOf(this.userInfo.isMeetingUnivAgreementCheckbox()));
-//        Log.d("bundledata3",String.valueOf(this.userInfo.isPersonalInfoAgreementCheckbox()));
-//        Log.d("bundledata4",String.valueOf(this.userInfo.isLocationInfoAgreementCheckbox()));
+
 
 //        AutoPermissions.Companion.loadAllPermissions(getActivity(), 101);
         return this.view;
@@ -191,6 +207,30 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
             public void onClick(View v) {
                 // 학교 정보
                 userInfo.setSchoolName(String.valueOf(join_univ.getText()));
+
+                StorageReference studentIDCardReference = storageReference.child(String.valueOf(userInfo.getUserID())+".jpg");
+
+                studentIDImage.setDrawingCacheEnabled(true);
+                studentIDImage.buildDrawingCache();
+                Bitmap bitmap = ((BitmapDrawable) studentIDImage.getDrawable()).getBitmap();
+//                FileOutputStream outputStream = new FileOutputStream();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] data = baos.toByteArray();
+
+                UploadTask uploadTask = studentIDCardReference.putBytes(data);
+                uploadTask.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("학생증 사진", "실패");
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Log.d("학생증 사진", "성공");
+                    }
+                });
+
 //                databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").setValue(userInfo.isMeetingUnivAgreementCheckbox());
 //                databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").setValue(userInfo.isPersonalInfoAgreementCheckbox());
 //                databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("위치정보 이용약관 동의").setValue(userInfo.isLocationInfoAgreementCheckbox());
