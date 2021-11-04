@@ -57,13 +57,25 @@
         android:singleLine="true"
         android:textSize="20sp" />
 
+    <EditText
+        android:id="@+id/editTextTextPersonName5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="추천인 코드"
+        android:inputType="textPersonName" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/go_start"
         android:layout_width="300dp"
         android:layout_height="70dp"
         android:layout_gravity="center"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/pink_round"
         android:text="시작하러 가기"
         android:textSize="20sp" />
+
 </LinearLayout>

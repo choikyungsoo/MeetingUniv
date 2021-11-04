@@ -40,6 +40,9 @@ public class JoinProfileFragment extends Fragment {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();;
     private DatabaseReference databaseReference = database.getReference("회원정보");
 
+    private Boolean notDuplicated = true;
+    private String InviteCode;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -84,10 +87,16 @@ public class JoinProfileFragment extends Fragment {
                 //닉네임 등록
                 userInfo.setNickname(String.valueOf(settingNickName.getText()));
                 //추천인 코드 생성(난수 작업)
-
-                String inviteCode = makeInviteCode();
+                while(notDuplicated) {
+                    InviteCode = makeInviteCode();
+                    if(!InviteCode.equals(databaseReference.getDatabase().getReference().child("추천인코드"))){
+                        notDuplicated =false;
+                    }
+                }
                 //추천인 코드 업로드
-                userInfo.setInviteCode(inviteCode);
+
+                    userInfo.setInviteCode(InviteCode);
+
 
                 //내가 초대된 코드는 바로 코드 주인에게 +1 하트
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").setValue(userInfo.isMeetingUnivAgreementCheckbox());
