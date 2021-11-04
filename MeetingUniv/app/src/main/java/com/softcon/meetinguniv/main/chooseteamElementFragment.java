@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,11 +41,13 @@ public class chooseteamElementFragment extends Fragment {
     private List<chooseteamRecycleritem> list;
     private chooseteamAdapterRecyleritem recyclerItemAdapter;
     private LinearLayout addTeamLinear;
+    private RecyclerView recyclerView;
+    private ConstraintLayout chooseteamConstraint;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerView recyclerView = view.findViewById(R.id.teamrecycler) ;
+        this.recyclerView = view.findViewById(R.id.teamrecycler) ;
 
 //        chooseteamAdapterRecyleritem recyclerItemAdapter = new chooseteamAdapterRecyleritem(this.list);
 //        recyclerView.setAdapter(recyclerItemAdapter) ;
@@ -119,6 +122,7 @@ public class chooseteamElementFragment extends Fragment {
         this.editSearch = view.findViewById(R.id.searchTeamEditText);
         this.imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         this.addTeamLinear = view.findViewById(R.id.addTeamLinear);
+        this.chooseteamConstraint = view.findViewById(R.id.chooseteamConstraint);
 
         this.backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,8 +138,11 @@ public class chooseteamElementFragment extends Fragment {
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
-                        .replace(R.id.Framecontainer, addTeamElementFragment)
+                        .replace(R.id.chooseteamFrame, addTeamElementFragment)
                         .commit();
+                recyclerView.setVisibility(View.GONE);
+                addTeamLinear.setVisibility(View.GONE);
+                chooseteamConstraint.setVisibility(View.GONE);
             }
         });
 
