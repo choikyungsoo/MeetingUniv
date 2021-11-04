@@ -89,7 +89,7 @@ public class JoinProfileFragment extends Fragment {
                 //추천인 코드 생성(난수 작업)
                 while(notDuplicated) {
                     InviteCode = makeInviteCode();
-                    if(!InviteCode.equals("")){
+                    if(!InviteCode.equals(databaseReference.getDatabase().getReference().child("추천인코드"))){
                         notDuplicated =false;
                     }
                 }
