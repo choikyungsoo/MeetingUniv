@@ -48,12 +48,8 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-<<<<<<< Updated upstream
         AndroidBug5497Workaround.assistActivity(this.getActivity());
 //        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-=======
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
->>>>>>> Stashed changes
         return inflater.inflate(R.layout.fragment_chat_room_screen_popup_ver, container, false);
     }
 
