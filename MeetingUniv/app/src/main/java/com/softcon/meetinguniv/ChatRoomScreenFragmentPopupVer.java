@@ -29,7 +29,7 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
     private TextView numOfChatRoomMembers;
     private EditText chatRoomEditText;
     private LinearLayout inputChatRoom;
-    private Button backFromChatRoomPop_BTN;
+    private Button backFromChatRoomPop_BTN, leaveChatRoom_BTN;
 
     private ConstraintLayout ChatRoomScreen;
     private int keyboardheight;
@@ -62,9 +62,11 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
 //        this.inputChatRoom = view.findViewById(R.id.inputChatRoom);
         this.ChatRoomScreen = view.findViewById(R.id.constraintLayoutOfchatRoomPopup);
         this.backFromChatRoomPop_BTN = view.findViewById(R.id.backFromChatRoomPop_BTN);
+        this.leaveChatRoom_BTN = view.findViewById(R.id.leaveChatRoom_BTN);
 
         this.chatRoomMembers.setOnClickListener(this);
         this.backFromChatRoomPop_BTN.setOnClickListener(this);
+        this.leaveChatRoom_BTN.setOnClickListener(this);
 //        this.chatRoomEditText.setOnClickListener(this);
 
 //        setChatRoomScreen();
@@ -90,6 +92,8 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
                 break;
             case R.id.backFromChatRoomPop_BTN:
                 Navigation.findNavController(v).navigate(R.id.action_chatRoomScreenFragmentPopupVer_to_mainFragment);
+                break;
+            case R.id.leaveChatRoom_BTN:
                 break;
         }
     }
