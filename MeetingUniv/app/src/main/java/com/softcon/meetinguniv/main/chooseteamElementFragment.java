@@ -17,8 +17,10 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 
+import com.softcon.meetinguniv.AddTeamElementFragment;
 import com.softcon.meetinguniv.R;
 
 import java.util.ArrayList;
@@ -37,6 +39,7 @@ public class chooseteamElementFragment extends Fragment {
 //    private ArrayList<chooseteamRecycleritem> list = new ArrayList<chooseteamRecycleritem>();
     private List<chooseteamRecycleritem> list;
     private chooseteamAdapterRecyleritem recyclerItemAdapter;
+    private LinearLayout addTeamLinear;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -110,10 +113,13 @@ public class chooseteamElementFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         MatchingContentFragment fragment1 = new MatchingContentFragment();
+        AddTeamElementFragment addTeamElementFragment = new AddTeamElementFragment();
         View view = inflater.inflate(R.layout.fragment_chooseteam_element, container, false);
         this.backbtn = view.findViewById(R.id.backbtn);
         this.editSearch = view.findViewById(R.id.searchTeamEditText);
         this.imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        this.addTeamLinear = view.findViewById(R.id.addTeamLinear);
+
         this.backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,6 +129,16 @@ public class chooseteamElementFragment extends Fragment {
                 imm.hideSoftInputFromWindow(editSearch.getWindowToken(),0);
             }
         });
+        this.addTeamLinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
+                        .replace(R.id.Framecontainer, addTeamElementFragment)
+                        .commit();
+            }
+        });
+
         return view;
     }
 }

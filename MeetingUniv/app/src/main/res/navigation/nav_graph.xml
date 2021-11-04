@@ -237,11 +237,25 @@
         android:id="@+id/chatRoomScreenFragmentPopupVer"
         android:name="com.softcon.meetinguniv.ChatRoomScreenFragmentPopupVer"
         android:label="fragment_chat_room_screen_popup_ver"
-        tools:layout="@layout/fragment_chat_room_screen_popup_ver" />
+        tools:layout="@layout/fragment_chat_room_screen_popup_ver" >
+        <action
+            android:id="@+id/action_chatRoomScreenFragmentPopupVer_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/chatRoomMembersDialogFragment"
         android:name="com.softcon.meetinguniv.ChatRoomMembersDialogFragment"
         android:label="fragment_chat_room_members_dialog"
         tools:layout="@layout/fragment_chat_room_members_dialog" />
+    <fragment
+        android:id="@+id/addTeamElementFragment"
+        android:name="com.softcon.meetinguniv.AddTeamElementFragment"
+        android:label="fragment_add_team_element"
+        tools:layout="@layout/fragment_add_team_element" />
+    <fragment
+        android:id="@+id/chatRoomScreenPopup2Fragment"
+        android:name="com.softcon.meetinguniv.ChatRoomScreenPopup2Fragment"
+        android:label="fragment_chat_room_screen_popup2"
+        tools:layout="@layout/fragment_chat_room_screen_popup2" />
 
 </navigation>
