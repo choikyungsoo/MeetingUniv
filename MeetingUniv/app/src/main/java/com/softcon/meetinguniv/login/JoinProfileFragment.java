@@ -87,7 +87,12 @@ public class JoinProfileFragment extends Fragment {
 
                 String inviteCode = makeInviteCode();
                 //추천인 코드 업로드
-                userInfo.setInviteCode(inviteCode);
+                if(!(databaseReference.child(String.valueOf(userInfo.getUserID())).equals(inviteCode)))
+                {
+                    userInfo.setInviteCode(inviteCode);
+                } else{
+                    userInfo.setNickname(String.valueOf(settingNickName.getText()));
+                }
 
                 //내가 초대된 코드는 바로 코드 주인에게 +1 하트
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").setValue(userInfo.isMeetingUnivAgreementCheckbox());
