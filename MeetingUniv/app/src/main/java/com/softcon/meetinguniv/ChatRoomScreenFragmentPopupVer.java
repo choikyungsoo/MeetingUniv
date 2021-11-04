@@ -19,17 +19,21 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.softcon.meetinguniv.main.PersonalProfileScreenFragment;
 
 public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnClickListener {
     private TextView chatRoomMembers;
     private TextView numOfChatRoomMembers;
     private EditText chatRoomEditText;
     private LinearLayout inputChatRoom;
-    private Button backFromChatRoomPop_BTN, leaveChatRoom_BTN;
+    private Button backFromChatRoomPop_BTN;
+    private ImageView leaveChatRoom_BTN;
 
     private ConstraintLayout ChatRoomScreen;
     private int keyboardheight;
@@ -38,6 +42,7 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
+    private InviteFriendElementFragment inviteFriendElementFragment;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,13 +93,27 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
         switch (v.getId()) {
             case R.id.chatRoomMembers:
                 ChatRoomMembersDialogFragment chatRoomMembersDialogFragment = new ChatRoomMembersDialogFragment(getActivity());
-                chatRoomMembersDialogFragment.showThisChatRoomMembers(numOfChatRoomMembers);
+                ClickHandler clickHandler = new ClickHandler();
+                chatRoomMembersDialogFragment.showThisChatRoomMembers(numOfChatRoomMembers, clickHandler);
                 break;
             case R.id.backFromChatRoomPop_BTN:
                 Navigation.findNavController(v).navigate(R.id.action_chatRoomScreenFragmentPopupVer_to_mainFragment);
                 break;
             case R.id.leaveChatRoom_BTN:
                 break;
+        }
+    }
+
+    public class ClickHandler implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.chatRoomInvite_BTN) {
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
+                            .replace(R.id.constraintLayoutOfchatRoomPopup, inviteFriendElementFragment)
+                            .commit();
+            }
+            v.getRootView().setVisibility(View.GONE);
         }
     }
 }
