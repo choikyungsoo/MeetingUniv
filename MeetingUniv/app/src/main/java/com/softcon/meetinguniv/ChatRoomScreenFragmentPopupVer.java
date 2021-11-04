@@ -25,9 +25,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.softcon.meetinguniv.main.ChattingScreenFragment;
+import com.softcon.meetinguniv.main.MainFragment;
 import com.softcon.meetinguniv.main.PersonalProfileScreenFragment;
 
-public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnClickListener {
+import java.util.Objects;
+
+public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnClickListener, onBackPressedListener {
     private TextView chatRoomMembers;
     private TextView numOfChatRoomMembers;
     private EditText chatRoomEditText;
@@ -43,6 +47,7 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private InviteFriendElementFragment inviteFriendElementFragment;
+    private ChattingScreenFragment chattingScreenFragment;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +73,8 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
         this.ChatRoomScreen = view.findViewById(R.id.constraintLayoutOfchatRoomPopup);
         this.backFromChatRoomPop_BTN = view.findViewById(R.id.backFromChatRoomPop_BTN);
         this.leaveChatRoom_BTN = view.findViewById(R.id.leaveChatRoom_BTN);
+
+        chattingScreenFragment = new ChattingScreenFragment();
 
         this.chatRoomMembers.setOnClickListener(this);
         this.backFromChatRoomPop_BTN.setOnClickListener(this);
@@ -102,6 +109,14 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
             case R.id.leaveChatRoom_BTN:
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
+                .replace(R.id.constraintLayoutOfchatRoomPopup, chattingScreenFragment)
+                .commit();
     }
 
     public class ClickHandler implements View.OnClickListener {

@@ -6,14 +6,21 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.softcon.meetinguniv.R;
+import com.softcon.meetinguniv.main.MainFragment;
+import com.softcon.meetinguniv.onBackPressedListener;
 
-public class AlertSettingElementFragment extends PreferenceFragmentCompat {
+import java.util.Objects;
+
+public class AlertSettingElementFragment extends PreferenceFragmentCompat implements onBackPressedListener {
 
     private Preference alarmsong;
+    private MainFragment mainFragment;
+
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         this.alarmsong = this.findPreference("alarm_Setting");
@@ -65,6 +72,11 @@ public class AlertSettingElementFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.fragment_alert_setting_element, rootKey);
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }
 
