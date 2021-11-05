@@ -1,5 +1,7 @@
 package com.softcon.meetinguniv.login;
 
+import android.net.Uri;
+
 import java.io.Serializable;
 
 public class UserInfo implements Serializable {
@@ -11,9 +13,9 @@ public class UserInfo implements Serializable {
     private boolean promotionInfoAgreementCheckbox;
 
     private String schoolName;
-//    private studentCard;
+    private byte[] studentCard;
 
-//    private profileImage;
+    private byte[] profileImage;
     private String nickname;
 
     private String inviteCode;
@@ -72,5 +74,15 @@ public class UserInfo implements Serializable {
     public String getInviteCode() { return inviteCode; }
     public void setInviteCode(String inviteCode) {
         this.inviteCode = inviteCode;
+    }
+
+    public byte[] getStudentCard() { return studentCard; }
+    public void setStudentCard(byte[] studentCard) {
+        this.studentCard = studentCard;
+    }
+
+    public byte[] getProfileImage() { return profileImage; }
+    public void setProfileImage(byte[] profileImage) {
+        this.profileImage = profileImage;
     }
 }
