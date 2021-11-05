@@ -1,8 +1,12 @@
 package com.softcon.meetinguniv.main;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,7 +25,9 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +49,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
     private ImageView PersonalProfile;
     private EditText editSearch;
     private TextView inviteCode;
+    private LinearLayout inviting_code;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference("회원정보");
@@ -174,6 +181,21 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
 
             }
         });
+
+        this.inviting_code = dialog.findViewById(R.id.inviting_code);
+        this.inviting_code.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(CLIPBOARD_SERVICE);
+                ClipData clipData = ClipData.newPlainText("ID",inviteCode.getText()); //클립보드에 ID라는 이름표로 id 값을 복사하여 저장
+                clipboardManager.setPrimaryClip(clipData);
+
+                //복사가 되었다면 토스트메시지 노출
+                Toast.makeText(getContext(),"ID가 복사되었습니다.",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
 //        String invite = databaseReference.child(String.valueOf(userInfo.getUserID())).child("추천인코드").get().toString();
 //        System.out.println(invite);
 //        this.inviteCode.setText();

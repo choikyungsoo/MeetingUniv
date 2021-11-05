@@ -120,7 +120,7 @@ public class JoinProfileFragment extends Fragment {
                 }
                 //추천인 코드 업로드
 
-                    userInfo.setInviteCode(InviteCode);
+                userInfo.setInviteCode(InviteCode);
 
 
                 //내가 초대된 코드는 바로 코드 주인에게 +1 하트
@@ -129,7 +129,7 @@ public class JoinProfileFragment extends Fragment {
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("위치정보 이용약관 동의").setValue(userInfo.isLocationInfoAgreementCheckbox());
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("선택").child("프로모션 정보 수신 동의").setValue(userInfo.isPromotionInfoAgreementCheckbox());
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("학교").setValue(userInfo.getSchoolName());
-                StorageReference studentIDCardReference = storageReference.child("학생증").child(String.valueOf(userInfo.getUserID())+".jpg");
+                StorageReference studentIDCardReference = storageReference.child(String.valueOf(userInfo.getUserID())).child("학생증").child(String.valueOf(userInfo.getUserID())+".jpg");
 
                 UploadTask uploadTask = studentIDCardReference.putBytes(userInfo.getStudentCard());
                 uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -146,17 +146,17 @@ public class JoinProfileFragment extends Fragment {
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("닉네임").setValue(userInfo.getNickname());
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("추천인코드").setValue(userInfo.getInviteCode());
 
-                StorageReference profileImageReference = storageReference.child("프로필사진").child(String.valueOf(userInfo.getUserID())+".jpg");
+                StorageReference profileImageReference = storageReference.child(String.valueOf(userInfo.getUserID())).child("프로필 사진").child(String.valueOf(userInfo.getUserID())+".jpg");
                 UploadTask uploadTask2 = profileImageReference.putBytes(data);
                 uploadTask2.addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.d("학생증 사진", "실패");
+                        Log.d("프로필 사진", "실패");
                     }
                 }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Log.d("학생증 사진", "성공");
+                        Log.d("프로필 사진", "성공");
                     }
                 });
 

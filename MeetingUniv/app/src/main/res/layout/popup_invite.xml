@@ -26,6 +26,7 @@
         android:layout_height="20dp" />
 
     <LinearLayout
+        android:id="@+id/inviting_code"
         android:layout_width="299dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
