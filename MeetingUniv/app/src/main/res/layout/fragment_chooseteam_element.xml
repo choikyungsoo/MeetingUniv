@@ -9,7 +9,13 @@
     android:orientation="vertical"
     tools:context="com.softcon.meetinguniv.main.chooseteamElementFragment">
 
+    <FrameLayout
+        android:id="@+id/chooseteamFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></FrameLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/chooseteamConstraint"
         android:layout_width="match_parent"
         android:layout_height="69dp">
 
@@ -74,6 +80,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="20dp"
-        tools:listitem="@layout/recycleritem_chooseteam" />
+        tools:listitem="@layout/recycleritem_chooseteam" >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

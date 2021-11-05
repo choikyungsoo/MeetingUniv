@@ -257,5 +257,10 @@
         android:name="com.softcon.meetinguniv.ChatRoomScreenPopup2Fragment"
         android:label="fragment_chat_room_screen_popup2"
         tools:layout="@layout/fragment_chat_room_screen_popup2" />
+    <fragment
+        android:id="@+id/inviteFriendElementFragment"
+        android:name="com.softcon.meetinguniv.InviteFriendElementFragment"
+        android:label="fragment_invite_friend_element"
+        tools:layout="@layout/fragment_invite_friend_element" />
 
 </navigation>
