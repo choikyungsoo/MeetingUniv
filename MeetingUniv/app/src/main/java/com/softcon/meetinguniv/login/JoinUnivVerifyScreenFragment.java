@@ -66,7 +66,9 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
     private InputMethodManager inputMethodManager;
 
     private Button gotoJoinProfileScreen_BTN, skip_BTN, selectUniv_BTN;
+    private Button joinSelectUnivOk_button;
     private TextView join_univ;
+    private Dialog dialog;
 
     //popup
     private View dialogView;
@@ -191,8 +193,34 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                 } else {
                     // 학교 정보
                     userInfo.setSchoolName(String.valueOf(join_univ.getText()));
-                    databaseReference.child(String.valueOf(userInfo.getUserID())).child("학교").setValue(userInfo.getSchoolName());
+//                    databaseReference.child(String.valueOf(userInfo.getUserID())).child("학교").setValue(userInfo.getSchoolName());
                     // 학생증 정보
+                    userInfo.setSchoolName(String.valueOf(join_univ.getText()));
+
+//                    StorageReference studentIDCardReference = storageReference.child(String.valueOf(userInfo.getUserID())+".jpg");
+
+                    studentIDImage.setDrawingCacheEnabled(true);
+                    studentIDImage.buildDrawingCache();
+                    Bitmap bitmap = ((BitmapDrawable) studentIDImage.getDrawable()).getBitmap();
+//                FileOutputStream outputStream = new FileOutputStream();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] data = baos.toByteArray();
+
+                    userInfo.setStudentCard(data);
+
+//                    UploadTask uploadTask = studentIDCardReference.putBytes(data);
+//                    uploadTask.addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            Log.d("학생증 사진", "실패");
+//                        }
+//                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                            Log.d("학생증 사진", "성공");
+//                        }
+//                    });
                     // 데이터 보내기
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("Obj", (Serializable) userInfo);
@@ -206,30 +234,30 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
             @Override
             public void onClick(View v) {
                 // 학교 정보
-                userInfo.setSchoolName(String.valueOf(join_univ.getText()));
-
-                StorageReference studentIDCardReference = storageReference.child(String.valueOf(userInfo.getUserID())+".jpg");
-
-                studentIDImage.setDrawingCacheEnabled(true);
-                studentIDImage.buildDrawingCache();
-                Bitmap bitmap = ((BitmapDrawable) studentIDImage.getDrawable()).getBitmap();
-//                FileOutputStream outputStream = new FileOutputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                byte[] data = baos.toByteArray();
-
-                UploadTask uploadTask = studentIDCardReference.putBytes(data);
-                uploadTask.addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("학생증 사진", "실패");
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Log.d("학생증 사진", "성공");
-                    }
-                });
+//                userInfo.setSchoolName(String.valueOf(join_univ.getText()));
+//
+//                StorageReference studentIDCardReference = storageReference.child(String.valueOf(userInfo.getUserID())+".jpg");
+//
+//                studentIDImage.setDrawingCacheEnabled(true);
+//                studentIDImage.buildDrawingCache();
+//                Bitmap bitmap = ((BitmapDrawable) studentIDImage.getDrawable()).getBitmap();
+////                FileOutputStream outputStream = new FileOutputStream();
+//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//                byte[] data = baos.toByteArray();
+//
+//                UploadTask uploadTask = studentIDCardReference.putBytes(data);
+//                uploadTask.addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.d("학생증 사진", "실패");
+//                    }
+//                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                    @Override
+//                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                        Log.d("학생증 사진", "성공");
+//                    }
+//                });
 
 //                databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").setValue(userInfo.isMeetingUnivAgreementCheckbox());
 //                databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").setValue(userInfo.isPersonalInfoAgreementCheckbox());
@@ -253,6 +281,17 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                 popUp();
 
                 join_UnivSpinner = dialogView.findViewById(R.id.join_UnivSpinner);
+                joinSelectUnivOk_button = dialogView.findViewById(R.id.joinSelectUnivOk_button);
+
+                joinSelectUnivOk_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        selected_univ = (String) join_UnivSpinner.getSelectedItem();
+//                        System.out.println(selected_univ);
+                        join_univ.setText((CharSequence) join_UnivSpinner.getSelectedItem());
+                        dialog.dismiss();
+                    }
+                });
 
                 getSchoolNameXmlData();
 
@@ -266,15 +305,16 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
 //                dialog.show();
             }
         });
+
+
     }
 
     private void popUp() {
-        Dialog dialog;
         this.dialogView = requireActivity().getLayoutInflater().inflate(R.layout.fragment_join_select_univ_dialog, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 //                builder.setTitle("조건 선택");
         builder.setView(this.dialogView);
-        dialog = builder.create();
+        this.dialog = builder.create();
         dialog.show();
     }
 

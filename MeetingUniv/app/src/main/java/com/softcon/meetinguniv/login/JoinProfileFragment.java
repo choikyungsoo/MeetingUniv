@@ -2,9 +2,12 @@ package com.softcon.meetinguniv.login;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -16,6 +19,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.softcon.meetinguniv.Intro;
 import com.softcon.meetinguniv.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -24,6 +32,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.softcon.meetinguniv.main.MainActivity;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -37,8 +47,11 @@ public class JoinProfileFragment extends Fragment {
 
     private UserInfo userInfo;
 
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference("회원정보");
+
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    private StorageReference storageReference = storage.getReference();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -81,6 +94,19 @@ public class JoinProfileFragment extends Fragment {
 //                Navigation.findNavController(view).navigate(R.id.action_join_profile_to_login);
                 // 조건 추가해야됨
                 //프로필 사진 작업 필요
+
+                join_profile_image.setDrawingCacheEnabled(true);
+                join_profile_image.buildDrawingCache();
+                Bitmap bitmap = ((BitmapDrawable) join_profile_image.getDrawable()).getBitmap();
+//                FileOutputStream outputStream = new FileOutputStream();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] data = baos.toByteArray();
+
+                userInfo.setProfileImage(data);
+
+//                join_profile_image.
+//                userInfo.setProfileImage();
                 //닉네임 등록
                 userInfo.setNickname(String.valueOf(settingNickName.getText()));
                 //추천인 코드 생성(난수 작업)
@@ -95,8 +121,36 @@ public class JoinProfileFragment extends Fragment {
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("위치정보 이용약관 동의").setValue(userInfo.isLocationInfoAgreementCheckbox());
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("선택").child("프로모션 정보 수신 동의").setValue(userInfo.isPromotionInfoAgreementCheckbox());
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("학교").setValue(userInfo.getSchoolName());
+                StorageReference studentIDCardReference = storageReference.child("학생증").child(String.valueOf(userInfo.getUserID())+".jpg");
+
+                UploadTask uploadTask = studentIDCardReference.putBytes(userInfo.getStudentCard());
+                uploadTask.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("학생증 사진", "실패");
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Log.d("학생증 사진", "성공");
+                    }
+                });
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("닉네임").setValue(userInfo.getNickname());
                 databaseReference.child(String.valueOf(userInfo.getUserID())).child("추천인코드").setValue(userInfo.getInviteCode());
+
+                StorageReference profileImageReference = storageReference.child("프로필사진").child(String.valueOf(userInfo.getUserID())+".jpg");
+                UploadTask uploadTask2 = profileImageReference.putBytes(data);
+                uploadTask2.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("학생증 사진", "실패");
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Log.d("학생증 사진", "성공");
+                    }
+                });
 
 //                ArrayList<Integer> arrayList = new ArrayList<Integer>();
 //                arrayList.add(0);
