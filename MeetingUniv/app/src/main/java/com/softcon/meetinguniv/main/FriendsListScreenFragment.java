@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -161,40 +162,43 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
     }
 
     private void InviteFriendDialog(View v) {
-        Dialog dialog;
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = requireActivity().getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.popup_invite, null));
 
-        dialog = builder.create();
-        dialog.show();
-
-        this.inviteCode = dialog.findViewById(R.id.invitecode);
-        this.databaseReference.child(String.valueOf(this.userID)).child("추천인코드").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                inviteCode.setText((CharSequence) snapshot.getValue());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        this.inviting_code = dialog.findViewById(R.id.inviting_code);
-        this.inviting_code.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(CLIPBOARD_SERVICE);
-                ClipData clipData = ClipData.newPlainText("ID",inviteCode.getText()); //클립보드에 ID라는 이름표로 id 값을 복사하여 저장
-                clipboardManager.setPrimaryClip(clipData);
-
-                //복사가 되었다면 토스트메시지 노출
-                Toast.makeText(getContext(),"ID가 복사되었습니다.",Toast.LENGTH_SHORT).show();
-
-            }
-        });
+            Snackbar.make(v, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+//        Dialog dialog;
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        LayoutInflater inflater = requireActivity().getLayoutInflater();
+//        builder.setView(inflater.inflate(R.layout.popup_invite, null));
+//
+//        dialog = builder.create();
+//        dialog.show();
+//
+//        this.inviteCode = dialog.findViewById(R.id.invitecode);
+//        this.databaseReference.child(String.valueOf(this.userID)).child("추천인코드").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                inviteCode.setText((CharSequence) snapshot.getValue());
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//        this.inviting_code = dialog.findViewById(R.id.inviting_code);
+//        this.inviting_code.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(CLIPBOARD_SERVICE);
+//                ClipData clipData = ClipData.newPlainText("ID",inviteCode.getText()); //클립보드에 ID라는 이름표로 id 값을 복사하여 저장
+//                clipboardManager.setPrimaryClip(clipData);
+//
+//                //복사가 되었다면 토스트메시지 노출
+//                Toast.makeText(getContext(),"ID가 복사되었습니다.",Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
 
 //        String invite = databaseReference.child(String.valueOf(userInfo.getUserID())).child("추천인코드").get().toString();
 //        System.out.println(invite);
