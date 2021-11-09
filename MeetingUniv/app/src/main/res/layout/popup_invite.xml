@@ -65,7 +65,7 @@
         android:layout_height="20dp" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/kakaoshare"
         android:layout_width="299dp"
         android:layout_height="59dp"
         android:layout_gravity="center"
