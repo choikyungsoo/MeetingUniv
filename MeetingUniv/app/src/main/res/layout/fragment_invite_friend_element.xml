@@ -57,7 +57,7 @@
             android:src="?android:attr/actionModeWebSearchDrawable" />
 
         <EditText
-            android:id="@+id/textView14"
+            android:id="@+id/inviteSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
