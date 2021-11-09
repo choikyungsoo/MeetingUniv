@@ -32,12 +32,12 @@
     </fragment>
 
     <fragment
-        android:id="@+id/join_profile"
+        android:id="@+id/joinProfileFragment"
         android:name="com.softcon.meetinguniv.login.JoinProfileFragment"
         android:label="join_profile"
         tools:layout="@layout/fragment_join_profile" >
         <action
-            android:id="@+id/action_join_profile_to_login"
+            android:id="@+id/action_joinProfileFragment_to_login"
             app:destination="@id/login" />
     </fragment>
     <fragment
@@ -84,15 +84,15 @@
         tools:layout="@layout/fragment_join_agreement_screen" >
         <action
             android:id="@+id/action_joinAgreementScreenFragment_to_joinPersonalInfoScreenFragment"
-            app:destination="@id/joinPersonalInfoScreenFragment" />
+            app:destination="@id/joinUnivVerifyScreenFragment" />
     </fragment>
     <fragment
-        android:id="@+id/joinPersonalInfoScreenFragment"
+        android:id="@+id/joinUnivVerifyScreenFragment"
         android:name="com.softcon.meetinguniv.login.JoinUnivVerifyScreenFragment"
         android:label="fragment_show_i_d_screen"
-        tools:layout="@layout/fragment_join_univ_verify_screen" >
+        tools:layout="@layout/fragment_join_univ_verify_screen">
         <action
-            android:id="@+id/action_joinPersonalInfoScreenFragment_to_join_profile"
-            app:destination="@id/join_profile" />
+            android:id="@+id/action_joinUnivVerifyScreenFragment_to_joinProfileFragment"
+            app:destination="@id/joinProfileFragment" />
     </fragment>
 </navigation>

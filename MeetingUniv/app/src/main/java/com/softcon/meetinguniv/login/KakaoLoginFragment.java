@@ -160,21 +160,22 @@ public class KakaoLoginFragment extends Fragment {
                             if(snapshot.child(String.valueOf(user.getId())).child("약관동의").child("선택").hasChild("프로모션 정보 수신 동의")
                                     && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("개인정보 수집 및 이용 동의")
                                     && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("미팅대학 이용약관 동의")
-                                    && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("위치정보 이용약관 동의")) {
+                                    && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("위치정보 이용약관 동의")
+                                    && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").getValue().equals(true)
+                                    && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").getValue().equals(true)
+                                    && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("위치정보 이용약관 동의").getValue().equals(true)
+                                    && snapshot.child(String.valueOf(user.getId())).child("닉네임").exists()
+                                    && snapshot.child(String.valueOf(user.getId())).child("추천인코드").exists()) {
 //                                Log.d("프로모션 정보 수신 동의", String.valueOf(snapshot.child(String.valueOf(user.getId())).child("약관동의").child("선택").child("프로모션 정보 수신 동의").getValue().equals(true)));
-                                if(snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").getValue().equals(true)
-                                        && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").getValue().equals(true)
-                                        && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("위치정보 이용약관 동의").getValue().equals(true)) {
 //----------------------------------학생증 인증 여부 확인 필요------------------------------------------------------------------------------------------------------------------------
                                     //if(){}
 //----------------------------------닉네임 설정 여부 확인 필요------------------------------------------------------------------------------------------------------------------------
 //                                    if(){}
-                                    Log.d("Comment", "goooooooood~");
-                                    Log.d("카카오톡","로그인 성공");
-                                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                                    startActivity(intent);
-                                    getActivity().finish();
-                                }
+                                Log.d("Comment", "goooooooood~");
+                                Log.d("카카오톡","로그인 성공");
+                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                startActivity(intent);
+                                getActivity().finish();
                             }
 //                            Log.d("프로모션 정보 수신 동의", String.valueOf(snapshot.child(String.valueOf(user.getId())).child("약관동의").child("선택").hasChild("프로모션 정보 수신 동의")));
 //                            Log.d("개인정보 수집 및 이용 동의", String.valueOf(snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("개인정보 수집 및 이용 동의")));

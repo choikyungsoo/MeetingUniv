@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
 import com.softcon.meetinguniv.R;
@@ -26,8 +28,10 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
 public class Intro extends AppCompatActivity {
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference("회원정보");
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    private StorageReference storageReference = storage.getReference();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,35 +59,31 @@ public class Intro extends AppCompatActivity {
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            Log.d("aaaaaa", storageReference.child(String.valueOf(user.getId())).
                             if (snapshot.hasChild(String.valueOf(user.getId()))) {
                                 if(snapshot.child(String.valueOf(user.getId())).child("약관동의").child("선택").hasChild("프로모션 정보 수신 동의")
                                         && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("개인정보 수집 및 이용 동의")
                                         && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("미팅대학 이용약관 동의")
-                                        && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("위치정보 이용약관 동의")) {
-                                    if (snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").getValue().equals(true)
-                                            && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").getValue().equals(true)
-                                            && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("위치정보 이용약관 동의").getValue().equals(true)) {
-                                        Log.d("카카오톡", "로그인 성공");
-                                        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
-                                            @Override
-                                            public Unit invoke(User user, Throwable throwable) {
-                                                if(user != null) {
-                                                    Log.d("카카오톡","로그인 성공");
-                                                    Intent intent = new Intent(Intro.this, MainActivity.class);
-                                                    intent.putExtra("userID", user.getId());
-                                                    startActivity(intent);
-                                                    finish();
-                                                }
-                                                return null;
+                                        && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("위치정보 이용약관 동의")
+                                        && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").getValue().equals(true)
+                                        && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").getValue().equals(true)
+                                        && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("위치정보 이용약관 동의").getValue().equals(true)
+                                        && snapshot.child(String.valueOf(user.getId())).child("닉네임").exists()
+                                        && snapshot.child(String.valueOf(user.getId())).child("추천인코드").exists()) {
+                                    Log.d("카카오톡", "로그인 성공");
+                                    UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+                                        @Override
+                                        public Unit invoke(User user, Throwable throwable) {
+                                            if(user != null) {
+                                                Log.d("카카오톡","로그인 성공");
+                                                Intent intent = new Intent(Intro.this, MainActivity.class);
+                                                intent.putExtra("userID", user.getId());
+                                                startActivity(intent);
+                                                finish();
                                             }
-                                        });
-                                    }
-                                    else {
-                                        Log.d("카카오톡","로그인은 되어있으나 가입 시 문제가 발생한 적이 있음");
-                                        Intent intent = new Intent(Intro.this, LoginActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }
+                                            return null;
+                                        }
+                                    });
                                 }
                                 else {
                                     Log.d("카카오톡","로그인은 되어있으나 가입 시 문제가 발생한 적이 있음");
