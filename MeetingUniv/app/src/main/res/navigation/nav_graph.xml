@@ -262,5 +262,10 @@
         android:name="com.softcon.meetinguniv.InviteFriendElementFragment"
         android:label="fragment_invite_friend_element"
         tools:layout="@layout/fragment_invite_friend_element" />
+    <fragment
+        android:id="@+id/leaveChatRoomDialogFragment"
+        android:name="com.softcon.meetinguniv.leaveChatRoomDialogFragment"
+        android:label="fragment_leave_chat_room_dialog"
+        tools:layout="@layout/fragment_leave_chat_room_dialog" />
 
 </navigation>

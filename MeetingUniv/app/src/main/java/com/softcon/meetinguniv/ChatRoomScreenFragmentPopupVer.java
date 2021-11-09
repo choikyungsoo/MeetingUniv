@@ -1,5 +1,7 @@
 package com.softcon.meetinguniv;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Rect;
 import android.os.Bundle;
 
@@ -46,7 +48,7 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
-    private InviteFriendElementFragment inviteFriendElementFragment;
+    private InviteFriendElementFragment inviteFriendElementFragment = new InviteFriendElementFragment();
     private ChattingScreenFragment chattingScreenFragment;
 
     @Override
@@ -107,6 +109,17 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
                 Navigation.findNavController(v).navigate(R.id.action_chatRoomScreenFragmentPopupVer_to_mainFragment);
                 break;
             case R.id.leaveChatRoom_BTN:
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("채팅방을 나가면 대화내용이 모두 사라집니다.\n퇴장하시겠습니까?");
+                builder.setPositiveButton("나가기", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 채팅방 나가는 코드 추가하기
+                        Navigation.findNavController(v).navigate(R.id.action_chatRoomScreenFragmentPopupVer_to_mainFragment);
+                    }
+                });
+                builder.setNegativeButton("취소", null);
+                builder.create().show();
                 break;
         }
     }
