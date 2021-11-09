@@ -46,10 +46,10 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
 //    private ArrayList<FriendsListRecycleritem> list = new ArrayList<FriendsListRecycleritem>();
     private List<FriendsListRecycleritem> list;
     private FriendsListAdapterRecycleritem recyclerItemAdapter;
-    private FloatingActionButton inviteFriends;
+    private FloatingActionButton inviteFriends, sub1_invite, sub2_add;
     private ImageView PersonalProfile;
     private EditText editSearch;
-    private TextView inviteCode;
+    private TextView inviteCode,sub1Text, sub2Text;
     private LinearLayout inviting_code;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -139,6 +139,10 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_friends_list_screen, container, false);
         this.inviteFriends = rootView.findViewById(R.id.invitingfriends);
+        this.sub1_invite = rootView.findViewById(R.id.sub1_invite);
+        this.sub2_add = rootView.findViewById(R.id.sub2_add);
+        this.sub1Text = rootView.findViewById(R.id.friendinvitetext);
+        this.sub2Text = rootView.findViewById(R.id.friendaddtext);
         this.PersonalProfile = rootView.findViewById(R.id.chatprofile);
         this.inviteFriends.setOnClickListener(this);
         this.PersonalProfile.setOnClickListener(this);
