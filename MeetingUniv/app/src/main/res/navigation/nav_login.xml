@@ -16,9 +16,6 @@
         <action
             android:id="@+id/action_login_to_findingPWScreenFragment"
             app:destination="@id/findingPWScreenFragment" />
-        <action
-            android:id="@+id/action_login_to_joinAgreementScreenFragment"
-            app:destination="@id/joinAgreementScreenFragment" />
     </fragment>
 
     <fragment
@@ -35,11 +32,7 @@
         android:id="@+id/joinProfileFragment"
         android:name="com.softcon.meetinguniv.login.JoinProfileFragment"
         android:label="join_profile"
-        tools:layout="@layout/fragment_join_profile" >
-        <action
-            android:id="@+id/action_joinProfileFragment_to_login"
-            app:destination="@id/login" />
-    </fragment>
+        tools:layout="@layout/fragment_join_profile" />
     <fragment
         android:id="@+id/findIDScreenFragment"
         android:name="com.softcon.meetinguniv.login.FindingIDScreenFragment"
