@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/friendlistbackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -22,24 +23,20 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="?android:attr/actionModeWebSearchDrawable" />
-
             <EditText
                 android:id="@+id/searchFriendsListEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:iconifiedByDefault="false"
                 android:singleLine="true" />
-        </LinearLayout>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="?android:attr/actionModeWebSearchDrawable" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,6 +71,10 @@
             android:layout_width="match_parent"
             android:layout_height="15dp" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/F_chatinglist"
             android:layout_width="match_parent"
@@ -85,12 +86,39 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/friendinvitetext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="친구초대"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sub1_invite"
+        app:layout_constraintHorizontal_bias="0.945"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.82" />
+
+    <TextView
+        android:id="@+id/friendaddtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="친구추가"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sub2_add"
+        app:layout_constraintHorizontal_bias="0.943"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.724" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/invitingfriends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:src="@android:drawable/ic_menu_upload"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.909"
@@ -99,58 +127,36 @@
         app:layout_constraintVertical_bias="0.957" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/sub1_invite"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:clickable="true"
-        android:src="@android:drawable/ic_menu_help"
-        app:backgroundTint="#FFFBFB"
-        app:layout_constraintBottom_toTopOf="@+id/invitingfriends"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
-
-    <TextView
-        android:id="@+id/friendinvitetext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="친구초대"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/sub1_invite"
-        app:layout_constraintHorizontal_bias="0.945"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.82" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/sub2_add"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:clickable="true"
-        android:src="?attr/actionModeSelectAllDrawable"
+        android:visibility="invisible"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/sub1_invite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.961" />
+        app:layout_constraintVertical_bias="0.961"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"/>
 
-    <TextView
-        android:id="@+id/friendaddtext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="친구추가"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/sub2_add"
-        app:layout_constraintHorizontal_bias="0.943"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/sub1_invite"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:clickable="true"
+        android:visibility="invisible"
+        app:backgroundTint="#FFFBFB"
+        app:layout_constraintBottom_toTopOf="@+id/invitingfriends"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.724" />
+        app:layout_constraintVertical_bias="0.95"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

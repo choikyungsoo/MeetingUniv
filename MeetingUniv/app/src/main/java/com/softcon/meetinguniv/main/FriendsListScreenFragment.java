@@ -7,9 +7,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -51,6 +53,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
     private EditText editSearch;
     private TextView inviteCode,sub1Text, sub2Text;
     private LinearLayout inviting_code;
+    private ConstraintLayout friendlistbackground;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference("회원정보");
@@ -66,9 +69,6 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         Log.d("FriendsListScreenFragment - 회원아이디", String.valueOf(this.userID));
 
         RecyclerView recyclerView = view.findViewById(R.id.F_chatinglist);
-
-//        this.recyclerItemAdapter = new FriendsListAdapterRecycleritem(this.list);
-
         this.list = new ArrayList<FriendsListRecycleritem>();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -79,8 +79,6 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
 
         this.recyclerItemAdapter = new FriendsListAdapterRecycleritem(this.getActivity(), this.list);
         recyclerView.setAdapter(this.recyclerItemAdapter);
-
-//        recyclerItemAdapter.notifyDataSetChanged();
 
         this.editSearch = (EditText) view.findViewById(R.id.searchFriendsListEditText);
 
@@ -103,28 +101,12 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
                 String text = editSearch.getText().toString().toLowerCase(Locale.getDefault());
                 recyclerItemAdapter.filter(text);
             }
-
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
     }
-
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//
-//    }
-//
-//    private void init() {
-//    }
 
     private void addRecyclerItem(int profile, String memberlist){
         FriendsListRecycleritem recyclerItem = new FriendsListRecycleritem();
@@ -138,6 +120,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_friends_list_screen, container, false);
+        this.friendlistbackground = rootView.findViewById(R.id.friendlistbackground);
         this.inviteFriends = rootView.findViewById(R.id.invitingfriends);
         this.sub1_invite = rootView.findViewById(R.id.sub1_invite);
         this.sub2_add = rootView.findViewById(R.id.sub2_add);
@@ -145,6 +128,8 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         this.sub2Text = rootView.findViewById(R.id.friendaddtext);
         this.PersonalProfile = rootView.findViewById(R.id.chatprofile);
         this.inviteFriends.setOnClickListener(this);
+        this.sub1_invite.setOnClickListener(this);
+        this.sub2_add.setOnClickListener(this);
         this.PersonalProfile.setOnClickListener(this);
         return rootView;
     }
@@ -153,7 +138,14 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.invitingfriends:
-                InviteFriendDialog(v);
+                action();
+//                InviteFriendDialog(v);
+                break;
+            case R.id.sub1_invite:
+                action();
+                break;
+            case R.id.sub2_add:
+                action();
                 break;
             case R.id.chatprofile:
                 movetoPersonalProfile(v);
@@ -165,10 +157,11 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_personalProfileScreenFragment);
     }
 
-    private void InviteFriendDialog(View v) {
+    private void action(){
 
-            Snackbar.make(v, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+    }
+    private void InviteFriendDialog(View v){
+        this.friendlistbackground.setBackgroundColor(77000000);
 //        Dialog dialog;
 //        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 //        LayoutInflater inflater = requireActivity().getLayoutInflater();
