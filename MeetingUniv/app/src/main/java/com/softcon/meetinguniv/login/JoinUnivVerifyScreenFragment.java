@@ -224,7 +224,7 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                     // 데이터 보내기
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("Obj", (Serializable) userInfo);
-                    Navigation.findNavController(view).navigate(R.id.action_joinPersonalInfoScreenFragment_to_join_profile, bundle);
+                    Navigation.findNavController(view).navigate(R.id.action_joinUnivVerifyScreenFragment_to_joinProfileFragment, bundle);
 //                    gotoJoinProfileScreen();
                 }
             }
@@ -268,7 +268,7 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                 // 데이터 보내기
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("Obj", (Serializable) userInfo);
-                Navigation.findNavController(view).navigate(R.id.action_joinPersonalInfoScreenFragment_to_join_profile, bundle);
+                Navigation.findNavController(view).navigate(R.id.action_joinUnivVerifyScreenFragment_to_joinProfileFragment, bundle);
             }
         });
 
