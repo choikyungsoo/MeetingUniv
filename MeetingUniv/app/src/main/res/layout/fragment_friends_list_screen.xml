@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
         android:orientation="vertical"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -79,7 +80,7 @@
             android:id="@+id/F_chatinglist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             tools:listitem="@layout/recycleritem_chatmembers">
 
         </androidx.recyclerview.widget.RecyclerView>
@@ -114,11 +115,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.71" />
 
+    <View
+        android:id="@+id/floatingbg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#3E000000"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/invitingfriends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:src="@drawable/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.909"

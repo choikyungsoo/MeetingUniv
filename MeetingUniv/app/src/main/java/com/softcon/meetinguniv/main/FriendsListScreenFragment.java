@@ -55,6 +55,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
     private ImageView PersonalProfile;
     private EditText editSearch;
     private TextView inviteCode,sub1Text, sub2Text;
+    private View floatingbg;
 
     private LinearLayout inviting_code;
     private ConstraintLayout friendlistbackground;
@@ -87,7 +88,6 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         recyclerView.setAdapter(this.recyclerItemAdapter);
 
         this.editSearch = (EditText) view.findViewById(R.id.searchFriendsListEditText);
-
         // 엔터 눌렀을 때 키보드 숨기기
         this.editSearch.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -135,10 +135,12 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         this.sub1Text = rootView.findViewById(R.id.friendinvitetext);
         this.sub2Text = rootView.findViewById(R.id.friendaddtext);
         this.PersonalProfile = rootView.findViewById(R.id.chatprofile);
+        this.floatingbg = rootView.findViewById(R.id.floatingbg);
         this.inviteFriends.setOnClickListener(this);
         this.sub1_invite.setOnClickListener(this);
         this.sub2_add.setOnClickListener(this);
         this.PersonalProfile.setOnClickListener(this);
+
         return rootView;
     }
 
@@ -146,14 +148,16 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.invitingfriends:
-                action();
+                action(v);
 //                InviteFriendDialog(v);
                 break;
             case R.id.sub1_invite:
-                action();
+                action(v);
+                showsub1Dialog(v);
                 break;
             case R.id.sub2_add:
-                action();
+                action(v);
+                showsub2Dialog(v);
                 break;
             case R.id.chatprofile:
                 movetoPersonalProfile(v);
@@ -161,12 +165,65 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         }
     }
 
+    private void showsub2Dialog(View v) {
+        Dialog dialog;
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.popup_addfriend, null));
+
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    private void showsub1Dialog(View v) {
+        Dialog dialog;
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.popup_invite, null));
+
+        dialog = builder.create();
+        dialog.show();
+
+        this.inviteCode = dialog.findViewById(R.id.invitecode);
+        this.databaseReference.child(String.valueOf(this.userID)).child("추천인코드").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                inviteCode.setText((CharSequence) snapshot.getValue());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        this.inviting_code = dialog.findViewById(R.id.inviting_code);
+        this.inviting_code.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(CLIPBOARD_SERVICE);
+                ClipData clipData = ClipData.newPlainText("ID",inviteCode.getText()); //클립보드에 ID라는 이름표로 id 값을 복사하여 저장
+                clipboardManager.setPrimaryClip(clipData);
+
+                //복사가 되었다면 토스트메시지 노출
+                Toast.makeText(getContext(),"ID가 복사되었습니다.",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+//
+//        String invite = databaseReference.child(String.valueOf(userInfo.getUserID())).child("추천인코드").get().toString();
+//        System.out.println(invite);
+//        this.inviteCode.setText();
+    }
+
     private void movetoPersonalProfile(View v) {
         Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_personalProfileScreenFragment);
     }
 
-    private void action(){
+    private void action(View v){
         if (isFloatOpen) {
+            inviteFriends.setImageResource(R.drawable.add);
+            floatingbg.setVisibility(v.INVISIBLE);
             sub1_invite.startAnimation(float_close);
             sub2_add.startAnimation(float_close);
             sub1Text.startAnimation(float_close);
@@ -175,6 +232,8 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
             sub2_add.setClickable(false);
             isFloatOpen = false;
         } else {
+            inviteFriends.setImageResource(R.drawable.cancel);
+            floatingbg.setVisibility(v.VISIBLE);
             sub1_invite.startAnimation(float_open);
             sub2_add.startAnimation(float_open);
             sub1Text.startAnimation(float_open);
@@ -186,43 +245,6 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
     }
     private void InviteFriendDialog(View v){
         this.friendlistbackground.setBackgroundColor(77000000);
-//        Dialog dialog;
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//        LayoutInflater inflater = requireActivity().getLayoutInflater();
-//        builder.setView(inflater.inflate(R.layout.popup_invite, null));
-//
-//        dialog = builder.create();
-//        dialog.show();
-//
-//        this.inviteCode = dialog.findViewById(R.id.invitecode);
-//        this.databaseReference.child(String.valueOf(this.userID)).child("추천인코드").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                inviteCode.setText((CharSequence) snapshot.getValue());
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//
-//        this.inviting_code = dialog.findViewById(R.id.inviting_code);
-//        this.inviting_code.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(CLIPBOARD_SERVICE);
-//                ClipData clipData = ClipData.newPlainText("ID",inviteCode.getText()); //클립보드에 ID라는 이름표로 id 값을 복사하여 저장
-//                clipboardManager.setPrimaryClip(clipData);
-//
-//                //복사가 되었다면 토스트메시지 노출
-//                Toast.makeText(getContext(),"ID가 복사되었습니다.",Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
 
-//        String invite = databaseReference.child(String.valueOf(userInfo.getUserID())).child("추천인코드").get().toString();
-//        System.out.println(invite);
-//        this.inviteCode.setText();
     }
 }
