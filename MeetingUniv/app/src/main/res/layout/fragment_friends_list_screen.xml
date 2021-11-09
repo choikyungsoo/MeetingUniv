@@ -95,10 +95,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sub1_invite"
-        app:layout_constraintHorizontal_bias="0.945"
+        app:layout_constraintHorizontal_bias="0.943"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.82" />
+        app:layout_constraintVertical_bias="0.818" />
 
     <TextView
         android:id="@+id/friendaddtext"
@@ -112,7 +112,7 @@
         app:layout_constraintHorizontal_bias="0.943"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.724" />
+        app:layout_constraintVertical_bias="0.71" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/invitingfriends"
@@ -128,35 +128,37 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/sub2_add"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:clickable="true"
+        android:src="@android:drawable/ic_menu_add"
         android:visibility="invisible"
         app:backgroundTint="#FFFFFF"
+        app:elevation="6dp"
         app:layout_constraintBottom_toTopOf="@+id/sub1_invite"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.909"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.961"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"/>
+        app:layout_constraintVertical_bias="0.964"
+        app:pressedTranslationZ="12dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/sub1_invite"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:clickable="true"
+        android:src="@android:drawable/ic_menu_set_as"
         android:visibility="invisible"
         app:backgroundTint="#FFFBFB"
+        app:elevation="6dp"
         app:layout_constraintBottom_toTopOf="@+id/invitingfriends"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.909"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"/>
+        app:layout_constraintVertical_bias="0.954"
+        app:pressedTranslationZ="12dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

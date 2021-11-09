@@ -24,6 +24,8 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -47,13 +49,17 @@ import java.util.Locale;
 public class FriendsListScreenFragment extends Fragment implements View.OnClickListener {
 //    private ArrayList<FriendsListRecycleritem> list = new ArrayList<FriendsListRecycleritem>();
     private List<FriendsListRecycleritem> list;
+    private Boolean isFloatOpen = false;
     private FriendsListAdapterRecycleritem recyclerItemAdapter;
     private FloatingActionButton inviteFriends, sub1_invite, sub2_add;
     private ImageView PersonalProfile;
     private EditText editSearch;
     private TextView inviteCode,sub1Text, sub2Text;
+
     private LinearLayout inviting_code;
     private ConstraintLayout friendlistbackground;
+
+    private Animation float_open, float_close;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference("회원정보");
@@ -120,6 +126,8 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_friends_list_screen, container, false);
+        this.float_open = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.floating_open);
+        this.float_close = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.flaoting_close);
         this.friendlistbackground = rootView.findViewById(R.id.friendlistbackground);
         this.inviteFriends = rootView.findViewById(R.id.invitingfriends);
         this.sub1_invite = rootView.findViewById(R.id.sub1_invite);
@@ -158,7 +166,23 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
     }
 
     private void action(){
-
+        if (isFloatOpen) {
+            sub1_invite.startAnimation(float_close);
+            sub2_add.startAnimation(float_close);
+            sub1Text.startAnimation(float_close);
+            sub2Text.startAnimation(float_close);
+            sub1_invite.setClickable(false);
+            sub2_add.setClickable(false);
+            isFloatOpen = false;
+        } else {
+            sub1_invite.startAnimation(float_open);
+            sub2_add.startAnimation(float_open);
+            sub1Text.startAnimation(float_open);
+            sub2Text.startAnimation(float_open);
+            sub1_invite.setClickable(true);
+            sub2_add.setClickable(true);
+            isFloatOpen = true;
+        }
     }
     private void InviteFriendDialog(View v){
         this.friendlistbackground.setBackgroundColor(77000000);
