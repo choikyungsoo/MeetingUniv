@@ -1,5 +1,6 @@
 package com.softcon.meetinguniv;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 
@@ -17,7 +20,9 @@ public class InviteFriendElementFragment extends Fragment implements View.OnClic
     private ArrayList<EditTeamRecycleritem> currentlist = new ArrayList<EditTeamRecycleritem>();
     private RecyclerView currentfriends;
     private Button inviteFriendBack_BTN;
-
+    private InputMethodManager imm;
+    private EditText inviteSearch;
+    private ChatRoomScreenFragmentPopupVer chatRoomScreenFragmentPopupVer;
     private EditTeamAdapterRecycleritem recyclerItemAdapter;
 
     @Override
@@ -26,6 +31,9 @@ public class InviteFriendElementFragment extends Fragment implements View.OnClic
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_invite_friend_element, container, false);
         this.inviteFriendBack_BTN = view.findViewById(R.id.inviteFriendBack_BTN);
+        this.imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        this.inviteSearch = view.findViewById(R.id.inviteSearch);
+        this.chatRoomScreenFragmentPopupVer = new ChatRoomScreenFragmentPopupVer();
         this.inviteFriendBack_BTN.setOnClickListener(this);
 
         //리사이클러뷰 - 현재 팀원   /////////////////////////////////////////////////////////////
@@ -58,9 +66,9 @@ public class InviteFriendElementFragment extends Fragment implements View.OnClic
         switch (v.getId()){
             case R.id.inviteFriendBack_BTN:
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(this, this)
+                        .replace(R.id.mainFragment, this.chatRoomScreenFragmentPopupVer)
                         .commit();
-                imm.hideSoftInputFromWindow(addTeamSearch.getWindowToken(),0);
+                imm.hideSoftInputFromWindow(inviteSearch.getWindowToken(),0);
                 break;
         }
     }
