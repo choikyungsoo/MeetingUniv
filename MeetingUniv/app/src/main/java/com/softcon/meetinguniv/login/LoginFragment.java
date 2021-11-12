@@ -47,7 +47,7 @@ public class LoginFragment extends Fragment {
         this.join_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Navigation.findNavController(view).navigate(R.id.action_login_to_joinAgreementScreenFragment);
+                Navigation.findNavController(view).navigate(R.id.action_login_to_joinAgreementScreenFragment);
             }
         });
 
