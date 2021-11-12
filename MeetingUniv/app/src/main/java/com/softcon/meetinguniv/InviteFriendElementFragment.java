@@ -22,6 +22,7 @@ public class InviteFriendElementFragment extends Fragment implements View.OnClic
     private Button inviteFriendBack_BTN;
     private InputMethodManager imm;
     private EditText inviteSearch;
+
     private ChatRoomScreenFragmentPopupVer chatRoomScreenFragmentPopupVer;
     private EditTeamAdapterRecycleritem recyclerItemAdapter;
 
