@@ -126,10 +126,15 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
 
     @Override
     public void onBackPressed() {
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
-                .replace(R.id.constraintLayoutOfchatRoomPopup, chattingScreenFragment)
-                .commit();
+        Toast.makeText(getActivity(), "왜 안 돼!!!", Toast.LENGTH_SHORT).show();
+//        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+//        fragmentManager.beginTransaction().remove(ChatRoomScreenFragmentPopupVer.this).commit();
+//        fragmentManager.popBackStack();
+        /////////////////////
+//        getActivity().getSupportFragmentManager().beginTransaction()
+//                .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
+//                .replace(R.id.constraintLayoutOfchatRoomPopup, chattingScreenFragment)
+//                .commit();
     }
 
     public class ClickHandler implements View.OnClickListener {

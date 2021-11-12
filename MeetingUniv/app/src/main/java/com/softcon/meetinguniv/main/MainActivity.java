@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         //프래그먼트 onBackPressedListener사용
         List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
         for(Fragment fragment : fragmentList){
@@ -78,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         lastTimeBackPressed = System.currentTimeMillis();
-        Toast.makeText(this,"뒤로 가기 버튼을 한 번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+        super.onBackPressed();
+//        Toast.makeText(this,"뒤로 가기 버튼을 한 번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
 
     }
 }
