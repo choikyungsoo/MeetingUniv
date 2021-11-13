@@ -22,6 +22,7 @@ public class InviteFriendElementFragment extends Fragment implements View.OnClic
     private Button inviteFriendBack_BTN;
     private InputMethodManager imm;
     private EditText inviteSearch;
+
     private ChatRoomScreenFragmentPopupVer chatRoomScreenFragmentPopupVer;
     private EditTeamAdapterRecycleritem recyclerItemAdapter;
 
@@ -30,7 +31,7 @@ public class InviteFriendElementFragment extends Fragment implements View.OnClic
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_invite_friend_element, container, false);
-        this.inviteFriendBack_BTN = view.findViewById(R.id.inviteFriendBack_BTN);
+        this.inviteFriendBack_BTN = view.findViewById(R.id.inviteFriendClose_BTN);
         this.imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         this.inviteSearch = view.findViewById(R.id.inviteSearch);
         this.chatRoomScreenFragmentPopupVer = new ChatRoomScreenFragmentPopupVer();
@@ -64,9 +65,9 @@ public class InviteFriendElementFragment extends Fragment implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.inviteFriendBack_BTN:
+            case R.id.inviteFriendClose_BTN:
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.mainFragment, this.chatRoomScreenFragmentPopupVer)
+                        .replace(R.id.constraintLayoutOfchatRoomPopup, chatRoomScreenFragmentPopupVer)
                         .commit();
                 imm.hideSoftInputFromWindow(inviteSearch.getWindowToken(),0);
                 break;
