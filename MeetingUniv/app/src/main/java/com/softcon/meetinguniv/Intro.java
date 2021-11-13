@@ -4,11 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +34,7 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
 public class Intro extends AppCompatActivity {
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference("회원정보");
     private FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -41,15 +48,43 @@ public class Intro extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                checkLogin();
+
 //                Intent intent = new Intent(Intro.this, LoginActivity.class);
 //                startActivity(intent);
+                FirebaseUser currentUser = auth.getCurrentUser();
+                checkLogin(currentUser);
                 finish();
             }
         }, 1000);
     }
 
-    private void checkLogin() {
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        FirebaseUser currentUser = this.auth.getCurrentUser();
+//        updateUI();
+//    }
+
+    private void checkLogin(FirebaseUser currentUser) {
+        if(currentUser == null) {
+            this.auth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d("TAG", "signInAnonymously:success");
+                        FirebaseUser user = auth.getCurrentUser();
+                        checkLogin(user);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w("TAG", "signInAnonymously:failure", task.getException());
+//                        Toast.makeText(getContext, "Authentication failed.",
+//                                Toast.LENGTH_SHORT).show();
+                        checkLogin(null);
+                    }
+                }
+            });
+        }
         UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
             @Override
             public Unit invoke(User user, Throwable throwable) {
