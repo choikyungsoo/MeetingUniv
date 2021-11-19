@@ -1,9 +1,12 @@
 package com.softcon.meetinguniv.main;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Space;
 import android.widget.Toast;
 

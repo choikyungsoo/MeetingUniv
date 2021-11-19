@@ -100,7 +100,6 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
         this.currentfriends.setLayoutManager(linearLayoutManager2);
 
         //DB연결 시 addRecyclerItem2를 통해 친구목록 가져오기
-
         addRecyclerItem2(R.drawable.prot, "친구 1");
         addRecyclerItem2(R.drawable.prot2, "친구 2");
         addRecyclerItem2(R.drawable.prot3, "친구 3");
@@ -149,7 +148,7 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
     }
 
     //현재 팀원
-    private void addRecyclerItem(int profile){
+    private void addRecyclerItem(int profile) {
         EditTeamRecycleritem1 recyclerItem = new EditTeamRecycleritem1();
         recyclerItem.setE_memporife(profile);
         this.alllist.add(recyclerItem);
