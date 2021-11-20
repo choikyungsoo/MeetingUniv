@@ -1,5 +1,7 @@
 package com.softcon.meetinguniv;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Rect;
@@ -14,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,7 +129,9 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(getActivity(), "왜 안 돼!!!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "왜 안 돼!!!", Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "안되나??---------------------------------------------------------------------");
+
 //        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
 //        fragmentManager.beginTransaction().remove(ChatRoomScreenFragmentPopupVer.this).commit();
 //        fragmentManager.popBackStack();

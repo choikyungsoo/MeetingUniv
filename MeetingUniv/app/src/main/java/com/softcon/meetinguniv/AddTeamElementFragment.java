@@ -1,5 +1,7 @@
 package com.softcon.meetinguniv;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.softcon.meetinguniv.main.MatchingContentFragment;
 import com.softcon.meetinguniv.main.TeamMemberAdapterRecycleritem;
@@ -100,7 +104,6 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
         this.currentfriends.setLayoutManager(linearLayoutManager2);
 
         //DB연결 시 addRecyclerItem2를 통해 친구목록 가져오기
-
         addRecyclerItem2(R.drawable.prot, "친구 1");
         addRecyclerItem2(R.drawable.prot2, "친구 2");
         addRecyclerItem2(R.drawable.prot3, "친구 3");
@@ -149,7 +152,7 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
     }
 
     //현재 팀원
-    private void addRecyclerItem(int profile){
+    private void addRecyclerItem(int profile) {
         EditTeamRecycleritem1 recyclerItem = new EditTeamRecycleritem1();
         recyclerItem.setE_memporife(profile);
         this.alllist.add(recyclerItem);
