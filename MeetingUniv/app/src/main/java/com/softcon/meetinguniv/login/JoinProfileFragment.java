@@ -175,11 +175,11 @@ public class JoinProfileFragment extends Fragment {
 //                databaseReference.child(String.valueOf(userInfo.getUserID())).child("팀").setValue(arrayList);
 
                     // 아직 보낼 필요 없음?
-//                Bundle bundle = new Bundle();
-//                bundle.putSerializable("Obj", (Serializable) userInfo);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Obj", (Serializable) userInfo);
 
                     Intent intent = new Intent(getActivity(), Intro.class);
-                    startActivity(intent);
+                    startActivity(intent, bundle);
                     getActivity().finish();
                 }
             }
