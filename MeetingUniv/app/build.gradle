@@ -37,6 +37,8 @@ allprojects {
 
 dependencies {
 
+    implementation "com.github.parse-community.Parse-SDK-Android:parse:2.0.6"
+
     implementation "com.kakao.sdk:v2-user:2.6.0" // 카카오 로그인
     implementation "com.kakao.sdk:v2-link:2.6.0" // 메세지(카카오 링크)
 

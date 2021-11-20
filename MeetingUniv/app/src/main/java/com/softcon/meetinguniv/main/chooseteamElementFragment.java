@@ -115,8 +115,8 @@ public class chooseteamElementFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        MatchingContentFragment fragment1 = new MatchingContentFragment();
-        AddTeamElementFragment addTeamElementFragment = new AddTeamElementFragment();
+
+
         View view = inflater.inflate(R.layout.fragment_chooseteam_element, container, false);
         this.backbtn = view.findViewById(R.id.backbtn);
         this.editSearch = view.findViewById(R.id.searchTeamEditText);
@@ -127,6 +127,7 @@ public class chooseteamElementFragment extends Fragment {
         this.backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MatchingContentFragment fragment1 = new MatchingContentFragment();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.Framecontainer, fragment1)
                         .commit();
@@ -134,15 +135,13 @@ public class chooseteamElementFragment extends Fragment {
             }
         });
         this.addTeamLinear.setOnClickListener(new View.OnClickListener() {
+            AddTeamElementFragment addTeamElementFragment = new AddTeamElementFragment();
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
                         .replace(R.id.chooseteamFrame, addTeamElementFragment)
                         .commit();
-                recyclerView.setVisibility(View.GONE);
-                addTeamLinear.setVisibility(View.GONE);
-                chooseteamConstraint.setVisibility(View.GONE);
             }
         });
 

@@ -2,6 +2,10 @@
     <string name="app_name">MeetingUniv.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+    <string name="back4app_app_id">BtbftWTEmBq7y16AfcV5YXG0UYdeIqfeYMrtrjsE</string>
+    <string name="back4app_client_key">QzxTuah8iOY8Qw8G35DBiLGcQfrJ6r2SimcUNVfY</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>

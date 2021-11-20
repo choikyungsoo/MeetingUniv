@@ -26,10 +26,17 @@ import com.google.firebase.storage.StorageReference;
 import com.kakao.sdk.auth.AuthApiClient;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
+import com.parse.FunctionCallback;
+import com.parse.ParseCloud;
+import com.parse.ParseException;
 import com.softcon.meetinguniv.R;
 import com.softcon.meetinguniv.login.JoinAgreementScreenFragment;
 import com.softcon.meetinguniv.login.LoginActivity;
+import com.softcon.meetinguniv.login.UserInfo;
 import com.softcon.meetinguniv.main.MainActivity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
@@ -41,15 +48,35 @@ public class Intro extends AppCompatActivity {
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference = storage.getReference();
 
+    private UserInfo userInfo;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_intro);
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                // Use this map to send parameters to your Cloud Code function
+                // Just push the parameters you want into it
+                Map<String, String> parameters = new HashMap<String, String>();
 
+                // This calls the function in the Cloud Code
+                ParseCloud.callFunctionInBackground("test", parameters, new FunctionCallback<Map<String, Object>>() {
+                    @Override
+                    public void done(Map<String, Object> mapObject, ParseException e) {
+                        if (e == null) {
+                            // Everything is alright
+                            Toast.makeText(Intro.this, "Answer = " + mapObject.get("answer").toString(), Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            // Something went wrong
+                        }
+                    }
+                });
 //                Intent intent = new Intent(Intro.this, LoginActivity.class);
 //                startActivity(intent);
                 FirebaseUser currentUser = auth.getCurrentUser();

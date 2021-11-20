@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chooseteamFrame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -9,79 +10,155 @@
     android:orientation="vertical"
     tools:context="com.softcon.meetinguniv.main.chooseteamElementFragment">
 
-    <FrameLayout
-        android:id="@+id/chooseteamFrame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></FrameLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/chooseteamConstraint"
-        android:layout_width="match_parent"
-        android:layout_height="69dp">
-
-        <EditText
-            android:id="@+id/searchTeamEditText"
-            android:layout_width="340dp"
-            android:layout_height="40dp"
-            android:iconifiedByDefault="false"
-            android:singleLine="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.774"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.551" />
-
-        <ImageButton
-            android:id="@+id/backbtn"
-            android:layout_width="46dp"
-            android:layout_height="45dp"
-            android:src="@android:drawable/ic_delete"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/searchTeamEditText"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.666" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <LinearLayout
-        android:id="@+id/addTeamLinear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="5dp">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="300dp">
-
-            <ImageView
-                android:id="@+id/addTeam_BTN"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center_vertical"
-                tools:srcCompat="@android:drawable/btn_plus" />
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/addTeamTextView"
-            android:layout_width="352dp"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:text="팀 추가하기" />
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/teamrecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp"
-        tools:listitem="@layout/recycleritem_chooseteam" >
+        android:orientation="vertical">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/chooseteamConstraint"
+            android:layout_width="match_parent"
+            android:layout_height="69dp">
 
-</LinearLayout>
+            <EditText
+                android:id="@+id/searchTeamEditText"
+                android:layout_width="340dp"
+                android:layout_height="40dp"
+                android:iconifiedByDefault="false"
+                android:singleLine="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.774"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.551" />
+
+            <ImageButton
+                android:id="@+id/backbtn"
+                android:layout_width="46dp"
+                android:layout_height="45dp"
+                android:src="@android:drawable/ic_delete"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/searchTeamEditText"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.666" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/addTeamLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="300dp">
+
+                <ImageView
+                    android:id="@+id/addTeam_BTN"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    tools:srcCompat="@android:drawable/btn_plus" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/addTeamTextView"
+                android:layout_width="352dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="팀 추가하기" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/teamrecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp"
+            tools:listitem="@layout/recycleritem_chooseteam">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/chooseteamFrame"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"></FrameLayout>-->
+
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:id="@+id/chooseteamConstraint"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="69dp">-->
+
+    <!--        <EditText-->
+    <!--            android:id="@+id/searchTeamEditText"-->
+    <!--            android:layout_width="340dp"-->
+    <!--            android:layout_height="40dp"-->
+    <!--            android:iconifiedByDefault="false"-->
+    <!--            android:singleLine="true"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintHorizontal_bias="0.774"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            app:layout_constraintVertical_bias="0.551" />-->
+
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/backbtn"-->
+    <!--            android:layout_width="46dp"-->
+    <!--            android:layout_height="45dp"-->
+    <!--            android:src="@android:drawable/ic_delete"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintEnd_toStartOf="@+id/searchTeamEditText"-->
+    <!--            app:layout_constraintHorizontal_bias="1.0"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            app:layout_constraintVertical_bias="0.666" />-->
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/addTeamLinear"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:paddingHorizontal="10dp"-->
+    <!--        android:paddingVertical="5dp">-->
+
+    <!--        <androidx.cardview.widget.CardView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            app:cardCornerRadius="300dp">-->
+
+    <!--            <ImageView-->
+    <!--                android:id="@+id/addTeam_BTN"-->
+    <!--                android:layout_width="40dp"-->
+    <!--                android:layout_height="40dp"-->
+    <!--                android:layout_gravity="center_vertical"-->
+    <!--                tools:srcCompat="@android:drawable/btn_plus" />-->
+    <!--        </androidx.cardview.widget.CardView>-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/addTeamTextView"-->
+    <!--            android:layout_width="352dp"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:gravity="center_vertical"-->
+    <!--            android:paddingLeft="10dp"-->
+    <!--            android:text="팀 추가하기" />-->
+    <!--    </LinearLayout>-->
+
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--        android:id="@+id/teamrecycler"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:padding="20dp"-->
+    <!--        tools:listitem="@layout/recycleritem_chooseteam">-->
+
+    <!--    </androidx.recyclerview.widget.RecyclerView>-->
+
+</FrameLayout>

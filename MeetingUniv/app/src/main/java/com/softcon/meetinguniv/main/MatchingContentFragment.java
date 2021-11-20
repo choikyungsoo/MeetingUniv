@@ -247,6 +247,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                         .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
                         .replace(R.id.Framecontainer, fragment)
                         .commit();
+
                 break;
             case R.id.matchbtn:
                 //매칭하기 버튼
