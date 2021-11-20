@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.kakao.sdk.auth.AuthApiClient;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
 import com.softcon.meetinguniv.R;
@@ -85,10 +86,24 @@ public class Intro extends AppCompatActivity {
                 }
             });
         }
+//        if(AuthApiClient.getInstance().hasToken()) {
+//            Log.d("사용자 토큰", String.valueOf(AuthApiClient.getInstance().hasToken()));
+//            UserApiClient.getInstance().accessTokenInfo((accessTokenInfo, throwable) -> {
+//                if (throwable != null) {
+//                    Log.d("카카오 로그인", "에러");
+//                }
+//                else {
+//                    Log.d("사용자 토큰", String.valueOf(accessTokenInfo));
+////                    if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(this.getApplicationContext()))
+//                }
+//                return null;
+//            });
+//        }
         UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
             @Override
             public Unit invoke(User user, Throwable throwable) {
                 if(user != null) {
+                    Log.d("사용자 정보", user.toString());
                     Log.d("카카오톡","로그인 되어 있음");
                     Log.d("로그인된 사용자 아이디", String.valueOf(user.getId()));
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
