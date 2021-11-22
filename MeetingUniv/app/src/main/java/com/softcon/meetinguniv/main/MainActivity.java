@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Space status_bar_space;
 
     private int statusBarHeight;
+    public onBackPressedListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
     private long lastTimeBackPressed;
+    public void setOnBackPressedListener(onBackPressedListener listener){
+        this.listener = listener;
+    }
 
     @Override
     public void onBackPressed() {
@@ -82,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         lastTimeBackPressed = System.currentTimeMillis();
-        super.onBackPressed();
-//        Toast.makeText(this,"뒤로 가기 버튼을 한 번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+//        super.onBackPressed();
+        Toast.makeText(this,"뒤로 가기 버튼을 한 번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
 
     }
 }
