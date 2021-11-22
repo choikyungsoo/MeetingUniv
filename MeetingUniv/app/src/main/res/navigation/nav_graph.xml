@@ -163,6 +163,9 @@
         <action
             android:id="@+id/action_friendsProfileScreenFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_friendsProfileScreenFragment_to_chatRoomScreenFragmentPopupVer"
+            app:destination="@id/chatRoomScreenFragmentPopupVer" />
     </fragment>
     <fragment
         android:id="@+id/personalProfileScreenFragment"
