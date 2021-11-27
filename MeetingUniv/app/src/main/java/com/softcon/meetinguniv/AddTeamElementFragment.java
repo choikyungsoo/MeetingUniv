@@ -98,6 +98,7 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
 
         this.currentfriends = view.findViewById(R.id.addPresentFriendsList);
 
+        /////////////////////////////////////////////////////////////////////////////////////////
 
         //DB연결 시 addRecyclerItem2를 통해 친구목록 가져오기
         addRecyclerItem2(R.drawable.prot, "친구 1");
@@ -118,10 +119,6 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
 
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
         this.currentfriends.setLayoutManager(linearLayoutManager2);
-
-
-
-        /////////////////////////////////////////////////////////////////////////////////////////
 
         recyclerItemAdapter.notifyDataSetChanged();
         recyclerItemAdapter2.notifyDataSetChanged();
