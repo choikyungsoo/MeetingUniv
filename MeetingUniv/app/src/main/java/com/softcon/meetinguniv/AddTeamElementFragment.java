@@ -110,7 +110,7 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
         recyclerItemAdapter2.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                Toast.makeText(getContext(), "왜안돼", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "왜안돼"+position, Toast.LENGTH_SHORT).show();
                 AddCurrentDialog(position);
             }
         });
@@ -126,9 +126,11 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
     }
 
     private void AddCurrentDialog(int position) {
-        for(EditTeamRecycleritem etr: this.currentlist){
-            this.ImageSource1.add(etr.getE_memporife());
-        }
+//        EditTeamRecycleritem1 itemview = alllist.get(position);
+//        EditTeamRecycleritem etr = new EditTeamRecycleritem();
+//        for(EditTeamRecycleritem etr: this.currentlist){
+//            this.ImageSource1.add(etr.getE_memporife());
+//        }
     }
 
     private void DeleteCurrentDialog(int position) {

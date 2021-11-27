@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.softcon.meetinguniv.R;
@@ -32,27 +33,69 @@ public class EditTeamAdapterRecycleritem2 extends  RecyclerView.Adapter<EditTeam
 
     public class viewHolder extends RecyclerView.ViewHolder {
 
+        private LinearLayout E_friendslist;
         private ImageView E_memProfile;
         private CheckBox E_memberlist;
         private int RecyclerCount;
 
         public viewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
+            E_friendslist = itemView.findViewById(R.id.friendsList);
             E_memProfile = itemView.findViewById(R.id.memprofile3);
             E_memberlist = itemView.findViewById(R.id.memberlist3);
-            RecyclerCount = 0;
-            itemView.setClickable(true);
-            itemView.setOnClickListener(new View.OnClickListener() {
+
+//            E_friendslist.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    int pos = getAdapterPosition();
+//                    if(pos != RecyclerView.NO_POSITION){
+//                        if(mListener != null){
+//                            mListener.onItemClick(v,pos);
+//                            System.out.println("클릭"+pos);
+//                        }
+//                    }
+//                }
+//            });
+
+            E_memProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
                         if(mListener != null){
                             mListener.onItemClick(v,pos);
+                            System.out.println("클릭"+pos);
                         }
                     }
                 }
             });
+
+            E_memberlist.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        if(mListener != null){
+                            mListener.onItemClick(v,pos);
+                            System.out.println("클릭"+pos);
+                        }
+                    }
+                }
+            });
+            RecyclerCount = 0;
+//            itemView.setClickable(true);
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    int pos = getAdapterPosition();
+//                    if(pos != RecyclerView.NO_POSITION){
+//                        if(mListener != null){
+//                            mListener.onItemClick(v,pos);
+//                            System.out.println("클릭"+pos);
+//                        }
+//                    }
+//                }
+//            });
 //            itemView.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
