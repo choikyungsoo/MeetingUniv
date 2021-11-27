@@ -97,23 +97,30 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
         });
 
         this.currentfriends = view.findViewById(R.id.addPresentFriendsList);
-        EditTeamAdapterRecycleritem2 recyclerItemAdapter2 = new EditTeamAdapterRecycleritem2(this.currentlist);
-        this.currentfriends.setAdapter(recyclerItemAdapter2) ;
 
-        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
-        this.currentfriends.setLayoutManager(linearLayoutManager2);
 
         //DB연결 시 addRecyclerItem2를 통해 친구목록 가져오기
         addRecyclerItem2(R.drawable.prot, "친구 1");
         addRecyclerItem2(R.drawable.prot2, "친구 2");
         addRecyclerItem2(R.drawable.prot3, "친구 3");
 
+        EditTeamAdapterRecycleritem2 recyclerItemAdapter2 = new EditTeamAdapterRecycleritem2(this.currentlist);
+
         recyclerItemAdapter2.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
+                Toast.makeText(getContext(), "왜안돼", Toast.LENGTH_SHORT).show();
                 AddCurrentDialog(position);
             }
         });
+
+        this.currentfriends.setAdapter(recyclerItemAdapter2) ;
+
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
+        this.currentfriends.setLayoutManager(linearLayoutManager2);
+
+
+
         /////////////////////////////////////////////////////////////////////////////////////////
 
         recyclerItemAdapter.notifyDataSetChanged();
@@ -190,6 +197,7 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
 
     private void savechangememberInfo() {
         for(EditTeamRecycleritem1 etr1: this.alllist){
+            Toast.makeText(getContext(), "savechangememberInfo 실행", Toast.LENGTH_SHORT).show();
             this.ImageSource2.add(etr1.getE_memporife());
         }
     }
