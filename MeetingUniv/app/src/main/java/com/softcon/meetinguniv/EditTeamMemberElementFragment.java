@@ -71,7 +71,6 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         this.allfriends.setLayoutManager(linearLayoutManager);
 
-
         this.CheckTC.setOnClickListener(this);
         Bundle bundle = getArguments();
         if(bundle != null){
@@ -122,7 +121,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     private void AddCurrentDialog(int position) {
         for(EditTeamRecycleritem etr: this.currentlist){
             this.ImageSource1.add(etr.getE_memporife());
-        } 
+        }
     }
 
     private void DeleteCurrentDialog(int position) {
