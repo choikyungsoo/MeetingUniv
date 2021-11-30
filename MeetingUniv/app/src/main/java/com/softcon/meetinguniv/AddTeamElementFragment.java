@@ -88,6 +88,13 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
 //                addRecyclerItem(takeData.get(i));
 //            }
 //        }
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
+            for(int i=0; i<takeData.size(); i++){
+                addRecyclerItem(takeData.get(i));
+            }
+        }
 
         recyclerItemAdapter.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
@@ -126,7 +133,9 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
     }
 
     private void AddCurrentDialog(int position) {
-//        EditTeamRecycleritem1 itemview = alllist.get(position);
+        EditTeamRecycleritem itemview = this.currentlist.get(position);
+        this.ImageSource1.add(itemview.getE_memporife());
+
 //        EditTeamRecycleritem etr = new EditTeamRecycleritem();
 //        for(EditTeamRecycleritem etr: this.currentlist){
 //            this.ImageSource1.add(etr.getE_memporife());
