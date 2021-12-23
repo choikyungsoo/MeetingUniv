@@ -28,6 +28,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -52,6 +53,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
     private Boolean isFloatOpen = false;
     private FriendsListAdapterRecycleritem recyclerItemAdapter;
     private FloatingActionButton inviteFriends, sub1_invite, sub2_add;
+    private ImageButton kakaoshare;
     private ImageView PersonalProfile;
     private EditText editSearch;
     private TextView inviteCode,sub1Text, sub2Text;
@@ -208,6 +210,14 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
                 //복사가 되었다면 토스트메시지 노출
                 Toast.makeText(getContext(),"ID가 복사되었습니다.",Toast.LENGTH_SHORT).show();
 
+            }
+        });
+
+        this.kakaoshare = dialog.findViewById(R.id.kakaoshare);
+        this.kakaoshare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //카카오톡 공유하기 기능 구현 부분
             }
         });
 //
