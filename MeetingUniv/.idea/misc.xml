@@ -4,9 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_add_team_element.xml" value="0.30416666666666664" />
+        <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_change_nick_content.xml" value="0.3555253623188406" />
         <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_chat_room_bottomedittext.xml" value="0.25052083333333336" />
         <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_friends_list_screen.xml" value="0.30416666666666664" />
+        <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_matching_content.xml" value="0.3605072463768116" />
         <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_personal_chatting_content.xml" value="0.30416666666666664" />
+        <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_settings_screen.xml" value="0.22291666666666668" />
+        <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/popup_addfriend.xml" value="0.3555253623188406" />
         <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/popup_invite.xml" value="0.30416666666666664" />
         <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/drawable/gradient.xml" value="0.35625" />
         <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/drawable/ic___1.xml" value="0.35625" />
