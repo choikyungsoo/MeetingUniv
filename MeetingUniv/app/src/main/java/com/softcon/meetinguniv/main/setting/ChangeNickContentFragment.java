@@ -29,7 +29,8 @@ public class ChangeNickContentFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_change_nick_content, container, false);
         this.nickname = rootView.findViewById(R.id.currentnick);
-//        this.userID = getArguments().getLong("CuserID");
+        Bundle bundle = getArguments();
+        this.userID = bundle.getLong("userID");
 //        Log.d("ChangNickContentFragment - 회원아이디", String.valueOf(this.userID));
 //        this.databaseReference.child(String.valueOf(this.userID)).child("닉네임").addValueEventListener(new ValueEventListener() {
 //            @Override

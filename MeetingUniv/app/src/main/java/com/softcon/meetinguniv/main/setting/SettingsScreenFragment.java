@@ -15,16 +15,20 @@ import com.softcon.meetinguniv.R;
 
 public class SettingsScreenFragment extends Fragment {
     private long userID;
+    private Bundle bundle1;
+    private Bundle bundle2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_settings_screen, container, false);
-//        userID = getArguments().getLong("userID");
-//        Bundle bundle = new Bundle();
-//        bundle.putLong("userID", this.userID);
-
+        this.bundle1 = getArguments();
+        this.bundle2 = new Bundle();
+        this.userID = bundle1.getLong("userID");
+        bundle2.putLong("userID", this.userID);
+        ChangeNickContentFragment changeNickContentFragment = new ChangeNickContentFragment();
+        changeNickContentFragment.setArguments(bundle2);
         return view;
     }
 }

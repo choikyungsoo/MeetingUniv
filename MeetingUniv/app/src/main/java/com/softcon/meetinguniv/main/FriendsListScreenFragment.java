@@ -151,7 +151,6 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         switch (v.getId()){
             case R.id.invitingfriends:
                 action(v);
-//                InviteFriendDialog(v);
                 break;
             case R.id.sub1_invite:
                 action(v);
@@ -220,10 +219,6 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
                 //카카오톡 공유하기 기능 구현 부분
             }
         });
-//
-//        String invite = databaseReference.child(String.valueOf(userInfo.getUserID())).child("추천인코드").get().toString();
-//        System.out.println(invite);
-//        this.inviteCode.setText();
     }
 
     private void movetoPersonalProfile(View v) {

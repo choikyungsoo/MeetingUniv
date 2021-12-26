@@ -154,6 +154,7 @@ public class MainFragment extends Fragment {
             case 4:
                 this.settingsScreenFragment = new SettingsScreenFragment();
                 bundle.putLong("userID", this.userID);
+                this.settingsScreenFragment.setArguments(bundle);
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.settingsScreenFragment);
                 break;
         }
