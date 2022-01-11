@@ -16,6 +16,8 @@ import com.softcon.meetinguniv.R;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
+
 public class ServiceInfoContentFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

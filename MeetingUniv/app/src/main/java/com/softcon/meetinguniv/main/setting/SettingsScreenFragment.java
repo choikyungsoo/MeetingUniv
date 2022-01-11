@@ -26,9 +26,9 @@ public class SettingsScreenFragment extends Fragment {
         this.bundle1 = getArguments();
         this.bundle2 = new Bundle();
         this.userID = bundle1.getLong("userID");
-        bundle2.putLong("userID", this.userID);
-        ChangeNickContentFragment changeNickContentFragment = new ChangeNickContentFragment();
-        changeNickContentFragment.setArguments(bundle2);
+//        bundle2.putLong("userID", this.userID);
+//        SettingsContentFragment settingsContentFragment = new SettingsContentFragment();
+//        settingsContentFragment.setArguments(bundle2);
         return view;
     }
 }

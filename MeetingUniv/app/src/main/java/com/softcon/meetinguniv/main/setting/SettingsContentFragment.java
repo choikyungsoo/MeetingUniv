@@ -36,6 +36,9 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
     private CustomSwitchPreference CSP;
     private int onoff;
 
+    private long userID;
+    private Bundle bundle;
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.fragment_settings_content, rootKey);
@@ -57,6 +60,8 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
 
         this.CSP.verfiyonoff(checkedChangeHandler);
 
+//        this.bundle = getArguments();
+//        this.userID = bundle.getLong("userID");
 //        this.alarmTest = this.findPreference("alarmsettingtest");
 //        this.alarmTest.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 //            @Override

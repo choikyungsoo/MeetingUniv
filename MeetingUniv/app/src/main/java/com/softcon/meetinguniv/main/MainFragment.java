@@ -17,6 +17,7 @@ import android.widget.Space;
 
 import com.softcon.meetinguniv.R;
 import com.softcon.meetinguniv.main.setting.ChangeNickContentFragment;
+import com.softcon.meetinguniv.main.setting.SettingsContentFragment;
 import com.softcon.meetinguniv.main.setting.SettingsScreenFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
