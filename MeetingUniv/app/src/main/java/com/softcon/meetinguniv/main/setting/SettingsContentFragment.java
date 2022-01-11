@@ -5,7 +5,9 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
@@ -41,9 +43,20 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+
         setPreferencesFromResource(R.xml.fragment_settings_content, rootKey);
+        this.bundle = getArguments();
+        this.userID = bundle.getLong("userID");
     }
 
+//    @Override
+//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//        this.bundle = getArguments();
+//        this.userID = bundle.getLong("userID");
+//        View view = inflater.inflate(R.xml.fragment_settings_content, container, false);
+//        return view;
+////        return super.onCreateView(inflater, container, savedInstanceState);
+//    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
