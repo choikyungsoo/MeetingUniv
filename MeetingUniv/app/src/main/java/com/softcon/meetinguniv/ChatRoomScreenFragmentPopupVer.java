@@ -173,4 +173,5 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
             v.getRootView().setVisibility(View.GONE);
         }
     }
+
 }

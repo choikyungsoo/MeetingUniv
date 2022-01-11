@@ -135,11 +135,19 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
     private void AddCurrentDialog(int position) {
         EditTeamRecycleritem itemview = this.currentlist.get(position);
         this.ImageSource1.add(itemview.getE_memporife());
+//        Toast.makeText(getContext(), "됏니?"+position, Toast.LENGTH_SHORT).show();
 
+        EditTeamRecycleritem1 recyclerItem = new EditTeamRecycleritem1();
+        Bundle bundle = getArguments();
+        if(bundle != null) {
+            ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
+
+            recyclerItem.setE_memporife(takeData.get(position));
+            this.alllist.add(recyclerItem);
+        }
 //        EditTeamRecycleritem etr = new EditTeamRecycleritem();
 //        for(EditTeamRecycleritem etr: this.currentlist){
 //            this.ImageSource1.add(etr.getE_memporife());
-//        }
     }
 
     private void DeleteCurrentDialog(int position) {

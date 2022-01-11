@@ -66,6 +66,7 @@ public class InviteFriendElementFragment extends Fragment implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.inviteFriendClose_BTN:
+            case R.id.inviteFriendOk_BTN:
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.constraintLayoutOfchatRoomPopup, chatRoomScreenFragmentPopupVer)
                         .commit();
