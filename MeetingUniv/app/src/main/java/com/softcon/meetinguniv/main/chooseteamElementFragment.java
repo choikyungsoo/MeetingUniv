@@ -44,6 +44,9 @@ public class chooseteamElementFragment extends Fragment {
     private RecyclerView recyclerView;
     private ConstraintLayout chooseteamConstraint;
 
+    private AddTeamElementFragment ATEfragment;
+    private ArrayList<Integer> ImageSource = new ArrayList<Integer>();
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -103,6 +106,7 @@ public class chooseteamElementFragment extends Fragment {
 
             }
         });
+        this.ATEfragment = new AddTeamElementFragment();
     }
 
     private void addRecyclerItem( String name, String member){
@@ -135,16 +139,23 @@ public class chooseteamElementFragment extends Fragment {
             }
         });
         this.addTeamLinear.setOnClickListener(new View.OnClickListener() {
-            AddTeamElementFragment addTeamElementFragment = new AddTeamElementFragment();
+//            AddTeamElementFragment addTeamElementFragment = new AddTeamElementFragment();
             @Override
             public void onClick(View v) {
+                giveRecycleritemData();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
-                        .replace(R.id.chooseteamFrame, addTeamElementFragment)
+                        .replace(R.id.chooseteamFrame, ATEfragment)
                         .commit();
             }
         });
 
         return view;
+    }
+
+    private void giveRecycleritemData() {
+        Bundle bundle = new Bundle();
+        bundle.putIntegerArrayList("currentteam", this.ImageSource);
+        this.ATEfragment.setArguments(bundle);
     }
 }
