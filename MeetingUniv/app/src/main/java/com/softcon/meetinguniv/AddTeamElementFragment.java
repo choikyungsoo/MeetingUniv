@@ -142,7 +142,6 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
 //        Bundle bundle = getArguments();
 //        if(bundle != null) {
 //            ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
-//            /////////여기서 bundle의 size는 1인데 takeData의 size가 0임. getIntegerArrayList로 하면 안될듯?
 //
 //            recyclerItem.setE_memporife(takeData.get(position));
 //            this.alllist.add(recyclerItem);

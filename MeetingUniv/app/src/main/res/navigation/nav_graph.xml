@@ -76,9 +76,6 @@
             android:id="@+id/action_matchingContentsFragment_to_editTeamMemberElementFragment"
             app:destination="@id/editTeamMemberElementFragment"
             app:enterAnim="@anim/translate_up" />
-        <action
-            android:id="@+id/action_matchingContentsFragment_to_addTeamElementFragment"
-            app:destination="@id/addTeamElementFragment" />
     </fragment>
     <fragment
         android:id="@+id/currentContentsFragment"
@@ -89,7 +86,11 @@
         android:id="@+id/chooseteamElementFragment"
         android:name="com.softcon.meetinguniv.main.chooseteamElementFragment"
         android:label="fragment_chooseteam_element"
-        tools:layout="@layout/fragment_chooseteam_element" />
+        tools:layout="@layout/fragment_chooseteam_element" >
+        <action
+            android:id="@+id/action_chooseteamElementFragment_to_addTeamElementFragment"
+            app:destination="@id/addTeamElementFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/settingsScreenFragment"
