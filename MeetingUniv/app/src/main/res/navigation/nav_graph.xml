@@ -76,6 +76,9 @@
             android:id="@+id/action_matchingContentsFragment_to_editTeamMemberElementFragment"
             app:destination="@id/editTeamMemberElementFragment"
             app:enterAnim="@anim/translate_up" />
+        <action
+            android:id="@+id/action_matchingContentsFragment_to_addTeamElementFragment"
+            app:destination="@id/addTeamElementFragment" />
     </fragment>
     <fragment
         android:id="@+id/currentContentsFragment"
