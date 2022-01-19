@@ -149,13 +149,12 @@ public class chooseteamElementFragment extends Fragment {
                         .commit();
             }
         });
-
         return view;
     }
 
     private void giveRecycleritemData() {
-        Bundle bundle = new Bundle();
-        bundle.putIntegerArrayList("currentteam", this.ImageSource);
+        Bundle bundle = getArguments();
+//        bundle.putIntegerArrayList("currentteam", this.ImageSource);
         this.ATEfragment.setArguments(bundle);
     }
 }
