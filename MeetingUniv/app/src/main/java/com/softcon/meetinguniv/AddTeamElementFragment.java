@@ -90,7 +90,10 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
 //        }
         Bundle bundle = getArguments();
         if(bundle != null){
+//            Toast.makeText(getContext(), bundle.size() + "개", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), bundle.toString() + "", Toast.LENGTH_SHORT).show();
             ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
+            Toast.makeText(getContext(), takeData.size() + "개!!", Toast.LENGTH_SHORT).show();
             for(int i=0; i<takeData.size(); i++){
                 addRecyclerItem(takeData.get(i));
             }
@@ -103,16 +106,19 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
             }
         });
 
-        this.currentfriends = view.findViewById(R.id.addPresentFriendsList);
-
         /////////////////////////////////////////////////////////////////////////////////////////
+        this.currentfriends = view.findViewById(R.id.addPresentFriendsList);
+        EditTeamAdapterRecycleritem2 recyclerItemAdapter2 = new EditTeamAdapterRecycleritem2(this.currentlist);
+        this.currentfriends.setAdapter(recyclerItemAdapter2) ;
+
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
+        this.currentfriends.setLayoutManager(linearLayoutManager2);
 
         //DB연결 시 addRecyclerItem2를 통해 친구목록 가져오기
         addRecyclerItem2(R.drawable.prot, "친구 1");
         addRecyclerItem2(R.drawable.prot2, "친구 2");
         addRecyclerItem2(R.drawable.prot3, "친구 3");
 
-        EditTeamAdapterRecycleritem2 recyclerItemAdapter2 = new EditTeamAdapterRecycleritem2(this.currentlist);
 
         recyclerItemAdapter2.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
@@ -122,32 +128,29 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
             }
         });
 
-        this.currentfriends.setAdapter(recyclerItemAdapter2) ;
-
-        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
-        this.currentfriends.setLayoutManager(linearLayoutManager2);
-
         recyclerItemAdapter.notifyDataSetChanged();
         recyclerItemAdapter2.notifyDataSetChanged();
         return view;
     }
 
     private void AddCurrentDialog(int position) {
-        EditTeamRecycleritem itemview = this.currentlist.get(position);
-        this.ImageSource1.add(itemview.getE_memporife());
-//        Toast.makeText(getContext(), "됏니?"+position, Toast.LENGTH_SHORT).show();
-
-        EditTeamRecycleritem1 recyclerItem = new EditTeamRecycleritem1();
-        Bundle bundle = getArguments();
-        if(bundle != null) {
-            ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
-
-            recyclerItem.setE_memporife(takeData.get(position));
-            this.alllist.add(recyclerItem);
+//        EditTeamRecycleritem itemview = this.currentlist.get(position);
+//        this.ImageSource1.add(itemview.getE_memporife());
+////        Toast.makeText(getContext(), "됏니?"+position, Toast.LENGTH_SHORT).show();
+//
+//        EditTeamRecycleritem1 recyclerItem = new EditTeamRecycleritem1();
+//        Bundle bundle = getArguments();
+//        if(bundle != null) {
+//            ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
+//            /////////여기서 bundle의 size는 1인데 takeData의 size가 0임. getIntegerArrayList로 하면 안될듯?
+//
+//            recyclerItem.setE_memporife(takeData.get(position));
+//            this.alllist.add(recyclerItem);
+//        }
+////        EditTeamRecycleritem etr = new EditTeamRecycleritem();
+        for(EditTeamRecycleritem etr: this.currentlist) {
+            this.ImageSource1.add(etr.getE_memporife());
         }
-//        EditTeamRecycleritem etr = new EditTeamRecycleritem();
-//        for(EditTeamRecycleritem etr: this.currentlist){
-//            this.ImageSource1.add(etr.getE_memporife());
     }
 
     private void DeleteCurrentDialog(int position) {

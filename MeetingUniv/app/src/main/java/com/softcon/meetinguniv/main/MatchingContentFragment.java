@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.softcon.meetinguniv.AddTeamElementFragment;
 import com.softcon.meetinguniv.EditTeamMemberElementFragment;
 import com.softcon.meetinguniv.MTeamMemberRecyclerItem;
 import com.softcon.meetinguniv.R;
@@ -70,6 +71,9 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
 
     private EditTeamMemberElementFragment ETMfragment;
+    private AddTeamElementFragment ATEfragment;
+    private chooseteamElementFragment CTEfragment;
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -80,6 +84,9 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         recyclerView.setAdapter(recyclerItemAdapter) ;
 
         this.ETMfragment = new EditTeamMemberElementFragment();
+        this.ATEfragment = new AddTeamElementFragment();
+        this.CTEfragment = new chooseteamElementFragment();
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -121,6 +128,8 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         Bundle bundle = new Bundle();
         bundle.putIntegerArrayList("currentteam", this.ImageSource);
         this.ETMfragment.setArguments(bundle);
+        this.CTEfragment.setArguments(bundle);
+
     }
 
     private void addRecyclerItem(int profile, int verfiycode){
@@ -238,14 +247,15 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        chooseteamElementFragment fragment = new chooseteamElementFragment();
+//        chooseteamElementFragment fragment = new chooseteamElementFragment();
         CurrentContentsFragment test = new CurrentContentsFragment();
         switch (v.getId()){
             case R.id.teambtn:
                 //팀선택 버튼
+                giveRecycleritemData();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
-                        .replace(R.id.Framecontainer, fragment)
+                        .replace(R.id.Framecontainer, this.CTEfragment)
                         .commit();
 
                 break;
