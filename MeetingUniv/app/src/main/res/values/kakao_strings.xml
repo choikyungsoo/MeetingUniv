@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--kakaolink-->
+    <string name = "kakao_app_key">e73b9463cb4d98b9d5460cc48a8fabb0</string>
+    <string name ="kakao_scheme">kakaoe73b9463cb4d98b9d5460cc48a8fabb0</string>
+    <string name="kakaolink_host">kakaolink</string>
+</resources>
