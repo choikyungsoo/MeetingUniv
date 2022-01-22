@@ -40,13 +40,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.kakao.sdk.template.model.Content;
 import com.kakao.sdk.template.model.FeedTemplate;
+import com.kakao.sdk.template.model.Link;
 import com.kakao.sdk.template.model.TextTemplate;
 import com.softcon.meetinguniv.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -226,7 +231,16 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
     }
 
     private void sendkakaomessage() {
-//        //FeedTemplate Message
+        Toast.makeText(getActivity().getApplicationContext(), "카카오톡 공유하기", Toast.LENGTH_SHORT).show();
+        FeedTemplate feedTemplate = new FeedTemplate(
+                new Content("오늘의 디저트",
+                        "http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
+                        new Link("https://developers.kakao.com",
+                                "https://developers.kakao.com"),
+                        "#케익 #딸기 #삼평동 #카페 #분위기 #소개팅"
+                )
+        );
+        //FeedTemplate Message
 //        FeedTemplate params = FeedTemplate
 //                .newBuilder(ContentObject.newBuilder("디저트 사진",
 //                        "http://mud-kage.kakao.co.kr/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg",
@@ -260,7 +274,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
 //                // 템플릿 밸리데이션과 쿼터 체크가 성공적으로 끝남. 톡에서 정상적으로 보내졌는지 보장은 할 수 없다. 전송 성공 유무는 서버콜백 기능을 이용하여야 한다.
 //            }
 //        });
-//        //Text Template
+        //Text Template
     }
 
     private void movetoPersonalProfile(View v) {
