@@ -75,9 +75,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         this.CheckTC.setOnClickListener(this);
         Bundle bundle = getArguments();
         if(bundle != null){
-            Toast.makeText(getContext(), bundle.toString() + "", Toast.LENGTH_SHORT).show();
             ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
-            Toast.makeText(getContext(), takeData.size() + "개!!", Toast.LENGTH_SHORT).show();
             for(int i=0; i<takeData.size(); i++){
                 addRecyclerItem(takeData.get(i));
             }

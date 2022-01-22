@@ -91,9 +91,9 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
         Bundle bundle = getArguments();
         if(bundle != null){
 //            Toast.makeText(getContext(), bundle.size() + "개", Toast.LENGTH_SHORT).show();
-            Toast.makeText(getContext(), bundle.toString() + "", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), bundle.toString() + "", Toast.LENGTH_SHORT).show();
             ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
-            Toast.makeText(getContext(), takeData.size() + "개!!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), takeData.size() + "개!!", Toast.LENGTH_SHORT).show();
             for(int i=0; i<takeData.size(); i++){
                 addRecyclerItem(takeData.get(i));
             }
@@ -135,6 +135,19 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
 
     private void AddCurrentDialog(int position) {
 //        EditTeamRecycleritem itemview = this.currentlist.get(position);
+//        addRecyclerItem(itemview.getE_memporife());
+
+//        addRecyclerItem(position);
+
+          Bundle bundle = getArguments();
+          if(bundle != null){
+              ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
+              for(int i=0; i<takeData.size(); i++){
+                  if (takeData.get(i) == position)
+                    addRecyclerItem(takeData.get(i));
+              }
+          }
+
 //        this.ImageSource1.add(itemview.getE_memporife());
 ////        Toast.makeText(getContext(), "됏니?"+position, Toast.LENGTH_SHORT).show();
 //
@@ -147,28 +160,31 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
 //            this.alllist.add(recyclerItem);
 //        }
 ////        EditTeamRecycleritem etr = new EditTeamRecycleritem();
-        for(EditTeamRecycleritem etr: this.currentlist) {
-            this.ImageSource1.add(etr.getE_memporife());
-        }
+
+        ///
+//        for(EditTeamRecycleritem etr: this.currentlist) {
+//            this.ImageSource1.add(etr.getE_memporife());
+//        }
     }
 
     private void DeleteCurrentDialog(int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("팀원 삭제");
-        builder.setMessage("팀원을 삭제하시겠습니까?");
-        builder.setNegativeButton("예", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                DeleteCurrentTeam(position);
-            }
-        });
-        builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        builder.show();
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//        builder.setTitle("팀원 삭제");
+//        builder.setMessage("팀원을 삭제하시겠습니까?");
+//        builder.setNegativeButton("예", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                DeleteCurrentTeam(position);
+//            }
+//        });
+//        builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//            }
+//        });
+//        builder.show();
+        DeleteCurrentTeam(position);
     }
 
     private void DeleteCurrentTeam(int position) {
