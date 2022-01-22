@@ -46,6 +46,7 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
     private RecyclerView currentfriends;
 
     private EditTeamAdapterRecycleritem recyclerItemAdapter;
+    private EditTeamAdapterRecycleritem2 recyclerItemAdapter2;
 
     private chooseteamElementFragment fragment;
 
@@ -99,7 +100,7 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
             }
         }
 
-        recyclerItemAdapter.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
+        this.recyclerItemAdapter.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 DeleteCurrentDialog(position);
@@ -108,7 +109,7 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
 
         /////////////////////////////////////////////////////////////////////////////////////////
         this.currentfriends = view.findViewById(R.id.addPresentFriendsList);
-        EditTeamAdapterRecycleritem2 recyclerItemAdapter2 = new EditTeamAdapterRecycleritem2(this.currentlist);
+        this.recyclerItemAdapter2 = new EditTeamAdapterRecycleritem2(this.currentlist);
         this.currentfriends.setAdapter(recyclerItemAdapter2) ;
 
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
@@ -120,7 +121,7 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
         addRecyclerItem2(R.drawable.prot3, "친구 3");
 
 
-        recyclerItemAdapter2.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
+        this.recyclerItemAdapter2.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 Toast.makeText(getContext(), "왜안돼"+position, Toast.LENGTH_SHORT).show();
@@ -128,8 +129,8 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
             }
         });
 
-        recyclerItemAdapter.notifyDataSetChanged();
-        recyclerItemAdapter2.notifyDataSetChanged();
+        this.recyclerItemAdapter.notifyDataSetChanged();
+        this.recyclerItemAdapter2.notifyDataSetChanged();
         return view;
     }
 
@@ -137,16 +138,27 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
 //        EditTeamRecycleritem itemview = this.currentlist.get(position);
 //        addRecyclerItem(itemview.getE_memporife());
 
-//        addRecyclerItem(position);
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
+            addRecyclerItem(takeData.get(position));
+        }
 
-          Bundle bundle = getArguments();
-          if(bundle != null){
-              ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
-              for(int i=0; i<takeData.size(); i++){
-                  if (takeData.get(i) == position)
-                    addRecyclerItem(takeData.get(i));
-              }
-          }
+//        addRecyclerItem(position);
+        this.recyclerItemAdapter.notifyDataSetChanged();
+
+//          Bundle bundle = getArguments();
+//          if(bundle != null){
+//              ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
+//              for(int i=0; i<takeData.size(); i++){
+////                  addRecyclerItem(takeData.get(i));
+//                  if (takeData.get(i) == position) {
+//                      System.out.println("통과");
+//                      addRecyclerItem(takeData.get(i));
+//                      this.recyclerItemAdapter.notifyDataSetChanged();
+//                  }
+//              }
+//          }
 
 //        this.ImageSource1.add(itemview.getE_memporife());
 ////        Toast.makeText(getContext(), "됏니?"+position, Toast.LENGTH_SHORT).show();

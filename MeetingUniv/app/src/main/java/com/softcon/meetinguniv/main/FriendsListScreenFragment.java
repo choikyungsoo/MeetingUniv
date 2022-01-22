@@ -43,6 +43,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.kakao.sdk.template.model.Content;
 import com.kakao.sdk.template.model.FeedTemplate;
 import com.kakao.sdk.template.model.Link;
+import com.kakao.sdk.template.model.Social;
 import com.kakao.sdk.template.model.TextTemplate;
 import com.softcon.meetinguniv.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -238,7 +239,18 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
                         new Link("https://developers.kakao.com",
                                 "https://developers.kakao.com"),
                         "#케익 #딸기 #삼평동 #카페 #분위기 #소개팅"
-                )
+                ),
+//                new ItemContent("Kakao",
+//                        "http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
+//                        "Cheese cake",
+//                        "http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
+//                        "Cake",
+//                        Arrays.asList(new ItemInfo("cake1", "1000원")),
+//                        "Total",
+//                        "15000원"
+//                ),
+                new Social(286, 45, 845),
+                Arrays.asList(new com.kakao.sdk.template.model.Button("웹으로 보기", new Link("https://developers.kakao.com", "https://developers.kakao.com")))
         );
         //FeedTemplate Message
 //        FeedTemplate params = FeedTemplate
