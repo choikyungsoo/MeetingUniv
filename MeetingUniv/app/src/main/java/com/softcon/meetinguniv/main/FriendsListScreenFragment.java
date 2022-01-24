@@ -40,6 +40,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.kakao.sdk.link.LinkClient;
 import com.kakao.sdk.template.model.Content;
 import com.kakao.sdk.template.model.FeedTemplate;
 import com.kakao.sdk.template.model.Link;
@@ -78,6 +79,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
 
     private long userID;
 
+    private FeedTemplate feedTemplate;
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -233,7 +235,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
 
     private void sendkakaomessage() {
         Toast.makeText(getActivity().getApplicationContext(), "카카오톡 공유하기", Toast.LENGTH_SHORT).show();
-        FeedTemplate feedTemplate = new FeedTemplate(
+         this.feedTemplate = new FeedTemplate(
                 new Content("오늘의 디저트",
                         "http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
                         new Link("https://developers.kakao.com",
@@ -287,8 +289,26 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
 //            }
 //        });
         //Text Template
+        sendingkakaolink();
     }
 
+    public void sendingkakaolink(){
+        String TAG = "kakaoLink()";
+        // 카카오톡으로 카카오링크 공유 가능
+        LinkClient.getInstance().defaultTemplate(getContext(), feedTemplate, null, (linkResult, error) -> {
+            if (error != null) {
+                Log.e("TAG", "카카오링크 보내기 실패", error);
+            } else if (linkResult != null) {
+                Log.d(TAG, "카카오링크 보내기 성공 ${linkResult.intent}");
+                this.startActivity(linkResult.getIntent());
+
+                // 카카오링크 보내기에 성공했지만 아래 경고 메시지가 존재할 경우 일부 컨텐츠가 정상 동작하지 않을 수 있습니다.
+                Log.w("TAG", "Warning Msg: " + linkResult.getWarningMsg());
+                Log.w("TAG", "Argument Msg: " + linkResult.getArgumentMsg());
+            }
+            return null;
+        });
+    }
     private void movetoPersonalProfile(View v) {
         Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_personalProfileScreenFragment);
     }
