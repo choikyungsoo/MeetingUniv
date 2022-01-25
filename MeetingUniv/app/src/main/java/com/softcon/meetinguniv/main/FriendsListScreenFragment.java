@@ -43,6 +43,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.kakao.sdk.common.util.KakaoCustomTabsClient;
+import com.kakao.sdk.link.KakaoLinkIntentClient;
 import com.kakao.sdk.link.LinkClient;
 import com.kakao.sdk.link.WebSharerClient;
 import com.kakao.sdk.template.model.Content;
@@ -60,6 +61,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+
+import javax.xml.transform.Templates;
 
 public class FriendsListScreenFragment extends Fragment implements View.OnClickListener {
 //    private ArrayList<FriendsListRecycleritem> list = new ArrayList<FriendsListRecycleritem>();
@@ -235,26 +238,26 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
                 //카카오톡 공유하기 기능 구현 부분
                 sendkakaomessage();
                 sendingkakaolink();
-//        sendingwebkakakolink();
+                sendingwebkakakolink();
             }
         });
     }
 
     private void sendkakaomessage() {
-        Toast.makeText(getActivity().getApplicationContext(), "카카오톡 공유하기", Toast.LENGTH_SHORT).show();
+        String code = "아래 코드를 통해 친구를 추가하세요."+"\n" + "친구 추가 코드는 " + (String) this.inviteCode.getText() + "입니다." ;
          this.feedTemplate = new FeedTemplate(
-                new Content("미팅대학 테스트",
-                        "http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
-                        new Link("https://developers.kakao.com",
-                                "https://developers.kakao.com"),
-                        "this.inviteCode.getText()"
+                new Content("미팅대학에서 당신을 초대합니다.",
+                        "https://blogger.googleusercontent.com/img/a/AVvXsEgFqGhp0Xo0BdLQn3soDesJMb3xk4A0l-i-wpV01Ejkun2Ref6keAZNcZmDJIloEoVrk-hu2roMO9EuhishsZOdflpg69H_FoiPZnr_gJD1CTzX0tjQYrrnByxN-aFef2SzAujRiStAN2X7uCLW4Mu7gMicJhYyC4S43VZeFXGJtAWeR9famN2QmG_-=s320",
+                        new Link(),
+                        code
                 ),
-                new Social(286, 45, 845),
-                Arrays.asList(new com.kakao.sdk.template.model.Button("웹으로 보기", new Link("https://developers.kakao.com", "https://developers.kakao.com")))
+                new Social(),
+                Arrays.asList(new com.kakao.sdk.template.model.Button("앱으로 보기", new Link("https://play.google.com/store", "https://play.google.com/store")))
         );
         //Text Template
-
+        //custom Template
     }
+
 
     public void sendingkakaolink(){
         String TAG = "kakaoLink()";
