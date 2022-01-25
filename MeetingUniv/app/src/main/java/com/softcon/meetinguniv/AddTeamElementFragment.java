@@ -132,15 +132,15 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
                         Bundle bundle = getArguments();
                         if (bundle != null) {
                             ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
-                            for (int j=0; j<takeData.size(); j++) {
+//                            for (int j=0; j<takeData.size(); j++) {
                                 Toast.makeText(getContext(), "position:" + position, Toast.LENGTH_SHORT).show();
-                                Toast.makeText(getContext(), "takeData:" + takeData.get(j) + "all" + alllist.get(i).getE_memporife(), Toast.LENGTH_SHORT).show();
-                                if (takeData.get(j) == alllist.get(i).getE_memporife()) {
-                                    DeleteCurrentDialog(j);
+                                Toast.makeText(getContext(), "takeData:" + takeData.get(position) + "all" + alllist.get(i).getE_memporife(), Toast.LENGTH_SHORT).show();
+                                if (takeData.get(position) == alllist.get(i).getE_memporife()) {
+                                    DeleteCurrentDialog(i);
                                     break;
                                 }
-                            }
-                            break;
+//                            }
+//                            break;
                         }
                     }
                     v.setSelected(false);
@@ -219,10 +219,11 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
     }
 
     private void DeleteCurrentTeam(int position) {
-        if (this.alllist.size() == 1) {
-            Toast.makeText(getContext(), "x", Toast.LENGTH_SHORT).show();
-        }
-        else this.alllist.remove(position);
+//        if (this.alllist.size() == 1) {
+//            Toast.makeText(getContext(), "x", Toast.LENGTH_SHORT).show();
+//        }
+//        else this.alllist.remove(position);
+        this.alllist.remove(position);
         recyclerItemAdapter.notifyDataSetChanged();
     }
 

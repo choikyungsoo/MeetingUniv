@@ -62,6 +62,11 @@ public class MainFragment extends Fragment {
         this.userID = getActivity().getIntent().getLongExtra("userID",1);
         Log.d("회원아이디", String.valueOf(this.userID));
 
+        Bundle bundle = new Bundle();
+        this.mainScreenFragment = new MainScreenFragment();
+        bundle.putLong("userID", this.userID);
+        this.mainScreenFragment.setArguments(bundle);
+
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
@@ -70,6 +75,8 @@ public class MainFragment extends Fragment {
         
         this.bottomNavigationView = view.findViewById(R.id.bottomNavigationView);
         this.needmoreheart_btn = view.findViewById(R.id.needmoreheartBTN);
+
+//        this.bottomNavigationView.setSelectedItemId(R.id.main);
 
         getActivity().getSupportFragmentManager().beginTransaction().add(R.id.screenfragmentContainer, this.mainScreenFragment).commit();
         this.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

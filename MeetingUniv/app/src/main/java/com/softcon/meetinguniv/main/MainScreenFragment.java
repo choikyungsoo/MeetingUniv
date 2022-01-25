@@ -2,6 +2,8 @@ package com.softcon.meetinguniv.main;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -67,5 +69,12 @@ public class MainScreenFragment extends Fragment {
 
         });
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        this.userID = getArguments().getLong("userID");
+        Log.d("MainScreenFragment - 회원아이디", String.valueOf(this.userID));
     }
 }
