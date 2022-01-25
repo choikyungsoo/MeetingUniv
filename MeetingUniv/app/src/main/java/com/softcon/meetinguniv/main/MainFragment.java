@@ -130,10 +130,12 @@ public class MainFragment extends Fragment {
         this.fragmentManager = this.getActivity().getSupportFragmentManager();
         this.fragmentTransaction = this.fragmentManager.beginTransaction();
         Bundle bundle = new Bundle();
+        Bundle bundle2 = new Bundle();
         switch (n){
             case 0:
                 this.mainScreenFragment = new MainScreenFragment();
-                bundle.putLong("userID", this.userID);
+                bundle2.putLong("userID", this.userID);
+                this.mainScreenFragment.setArguments(bundle2);
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.mainScreenFragment);
                 break;
             case 1:
