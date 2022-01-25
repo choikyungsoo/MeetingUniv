@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ public class MainScreenFragment extends Fragment {
     private MatchingContentFragment fragment1;
     private CurrentContentsFragment fragment2;
 
+    private long userID;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -27,6 +29,9 @@ public class MainScreenFragment extends Fragment {
         this.fragment2 = new CurrentContentsFragment();
 
         tabs = view.findViewById(R.id.tabs2);
+
+//        this.userID = getArguments().getLong("userID");
+//        Log.d("MainScreenFragment - 회원아이디", String.valueOf(this.userID));
 
         getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container2, fragment1).commit();
 

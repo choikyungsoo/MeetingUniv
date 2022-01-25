@@ -5,9 +5,11 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.graphics.ColorSpace;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -40,6 +42,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.kakao.sdk.common.util.KakaoCustomTabsClient;
+import com.kakao.sdk.link.KakaoLinkIntentClient;
+import com.kakao.sdk.link.LinkClient;
+import com.kakao.sdk.link.WebSharerClient;
 import com.kakao.sdk.template.model.Content;
 import com.kakao.sdk.template.model.FeedTemplate;
 import com.kakao.sdk.template.model.Link;
@@ -55,6 +61,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+
+import javax.xml.transform.Templates;
 
 public class FriendsListScreenFragment extends Fragment implements View.OnClickListener {
 //    private ArrayList<FriendsListRecycleritem> list = new ArrayList<FriendsListRecycleritem>();
@@ -78,6 +86,8 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
 
     private long userID;
 
+    private FeedTemplate feedTemplate;
+    private TextTemplate textTemplate;
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -227,68 +237,68 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
             public void onClick(View view) {
                 //카카오톡 공유하기 기능 구현 부분
                 sendkakaomessage();
+                sendingkakaolink();
+                sendingwebkakakolink();
             }
         });
     }
 
     private void sendkakaomessage() {
-        Toast.makeText(getActivity().getApplicationContext(), "카카오톡 공유하기", Toast.LENGTH_SHORT).show();
-        FeedTemplate feedTemplate = new FeedTemplate(
-                new Content("오늘의 디저트",
-                        "http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
-                        new Link("https://developers.kakao.com",
-                                "https://developers.kakao.com"),
-                        "#케익 #딸기 #삼평동 #카페 #분위기 #소개팅"
+        String code = "아래 코드를 통해 친구를 추가하세요."+"\n" + "친구 추가 코드는 " + (String) this.inviteCode.getText() + "입니다." ;
+         this.feedTemplate = new FeedTemplate(
+                new Content("미팅대학에서 당신을 초대합니다.",
+                        "https://blogger.googleusercontent.com/img/a/AVvXsEgFqGhp0Xo0BdLQn3soDesJMb3xk4A0l-i-wpV01Ejkun2Ref6keAZNcZmDJIloEoVrk-hu2roMO9EuhishsZOdflpg69H_FoiPZnr_gJD1CTzX0tjQYrrnByxN-aFef2SzAujRiStAN2X7uCLW4Mu7gMicJhYyC4S43VZeFXGJtAWeR9famN2QmG_-=s320",
+                        new Link(),
+                        code
                 ),
-//                new ItemContent("Kakao",
-//                        "http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
-//                        "Cheese cake",
-//                        "http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
-//                        "Cake",
-//                        Arrays.asList(new ItemInfo("cake1", "1000원")),
-//                        "Total",
-//                        "15000원"
-//                ),
-                new Social(286, 45, 845),
-                Arrays.asList(new com.kakao.sdk.template.model.Button("웹으로 보기", new Link("https://developers.kakao.com", "https://developers.kakao.com")))
+                new Social(),
+                Arrays.asList(new com.kakao.sdk.template.model.Button("앱으로 보기", new Link("https://play.google.com/store", "https://play.google.com/store")))
         );
-        //FeedTemplate Message
-//        FeedTemplate params = FeedTemplate
-//                .newBuilder(ContentObject.newBuilder("디저트 사진",
-//                        "http://mud-kage.kakao.co.kr/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg",
-//                        LinkObject.newBuilder().setWebUrl("https://developers.kakao.com")
-//                                .setMobileWebUrl("https://developers.kakao.com").build())
-//                        .setDescrption("아메리카노, 빵, 케익")
-//                        .build())
-//                .setSocial(SocialObject.newBuilder().setLikeCount(10).setCommentCount(20)
-//                        .setSharedCount(30).setViewCount(40).build())
-//                .addButton(new ButtonObject("웹에서 보기", LinkObject.newBuilder().setWebUrl("'https://developers.kakao.com").setMobileWebUrl("'https://developers.kakao.com").build()))
-//                .addButton(new ButtonObject("앱에서 보기", LinkObject.newBuilder()
-//                        .setWebUrl("'https://developers.kakao.com")
-//                        .setMobileWebUrl("'https://developers.kakao.com")
-//                        .setAndroidExecutionParams("key1=value1")
-//                        .setIosExecutionParams("key1=value1")
-//                        .build()))
-//                .build();
-//
-//        Map<String, String> serverCallbackArgs = new HashMap<String, String>();
-//        serverCallbackArgs.put("user_id", "${current_user_id}");
-//        serverCallbackArgs.put("product_id", "${shared_product_id}");
-//
-//        KakaoLinkService.getInstance().sendDefault(this, params, serverCallbackArgs, new ResponseCallback<KakaoLinkResponse>() {
-//            @Override
-//            public void onFailure(ErrorResult errorResult) {
-//                Logger.e(errorResult.toString());
-//            }
-//
-//            @Override
-//            public void onSuccess(KakaoLinkResponse result) {
-//                // 템플릿 밸리데이션과 쿼터 체크가 성공적으로 끝남. 톡에서 정상적으로 보내졌는지 보장은 할 수 없다. 전송 성공 유무는 서버콜백 기능을 이용하여야 한다.
-//            }
-//        });
         //Text Template
+        //custom Template
     }
 
+
+    public void sendingkakaolink(){
+        String TAG = "kakaoLink()";
+        // 카카오톡으로 카카오링크 공유 가능
+        LinkClient.getInstance().defaultTemplate(getContext(), feedTemplate, null, (linkResult, error) -> {
+            if (error != null) {
+                Log.e("TAG", "카카오링크 보내기 실패", error);
+            } else if (linkResult != null) {
+                Log.d(TAG, "카카오링크 보내기 성공 ${linkResult.intent}");
+                this.startActivity(linkResult.getIntent());
+
+                // 카카오링크 보내기에 성공했지만 아래 경고 메시지가 존재할 경우 일부 컨텐츠가 정상 동작하지 않을 수 있습니다.
+                Log.w("TAG", "Warning Msg: " + linkResult.getWarningMsg());
+                Log.w("TAG", "Argument Msg: " + linkResult.getArgumentMsg());
+            }
+            return null;
+        });
+    }
+
+    public void sendingwebkakakolink(){
+        String TAG = "webKakaoLink()";
+
+        // 카카오톡 미설치: 웹 공유 사용 권장
+        // 웹 공유 예시 코드
+        Uri sharerUrl = WebSharerClient.getInstance().defaultTemplateUri(feedTemplate);
+
+        // CustomTabs으로 웹 브라우저 열기
+        // 1. CustomTabs으로 Chrome 브라우저 열기
+        try {
+            KakaoCustomTabsClient.INSTANCE.openWithDefault(getContext(), sharerUrl);
+        } catch (UnsupportedOperationException e) {
+            // Chrome 브라우저가 없을 때 예외처리
+        }
+
+        // 2. CustomTabs으로 디바이스 기본 브라우저 열기
+        try {
+            KakaoCustomTabsClient.INSTANCE.open(getContext(), sharerUrl);
+        } catch (ActivityNotFoundException e) {
+            // 인터넷 브라우저가 없을 때 예외처리
+        }
+    }
     private void movetoPersonalProfile(View v) {
         Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_personalProfileScreenFragment);
     }
