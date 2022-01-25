@@ -95,9 +95,9 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
 //            Toast.makeText(getContext(), bundle.toString() + "", Toast.LENGTH_SHORT).show();
             ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
 //            Toast.makeText(getContext(), takeData.size() + "개!!", Toast.LENGTH_SHORT).show();
-            for(int i=0; i<takeData.size(); i++){
-                addRecyclerItem(takeData.get(i));
-            }
+//            for(int i=0; i<takeData.size(); i++){
+//                addRecyclerItem(takeData.get(i));
+//            }
         }
 
         this.recyclerItemAdapter.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
@@ -124,8 +124,27 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
         this.recyclerItemAdapter2.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                Toast.makeText(getContext(), "왜안돼"+position, Toast.LENGTH_SHORT).show();
-                AddCurrentDialog(position);
+                if (!v.isSelected()) {
+                    AddCurrentDialog(position);
+                    v.setSelected(true);
+                } else {
+                    for (int i=0; i<alllist.size(); i++) {
+                        Bundle bundle = getArguments();
+                        if (bundle != null) {
+                            ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
+                            for (int j=0; j<takeData.size(); j++) {
+                                Toast.makeText(getContext(), "position:" + position, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "takeData:" + takeData.get(j) + "all" + alllist.get(i).getE_memporife(), Toast.LENGTH_SHORT).show();
+                                if (takeData.get(j) == alllist.get(i).getE_memporife()) {
+                                    DeleteCurrentDialog(j);
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                    v.setSelected(false);
+                }
             }
         });
 
@@ -200,7 +219,10 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
     }
 
     private void DeleteCurrentTeam(int position) {
-        this.alllist.remove(position);
+        if (this.alllist.size() == 1) {
+            Toast.makeText(getContext(), "x", Toast.LENGTH_SHORT).show();
+        }
+        else this.alllist.remove(position);
         recyclerItemAdapter.notifyDataSetChanged();
     }
 
@@ -208,6 +230,12 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
     private void addRecyclerItem(int profile) {
         EditTeamRecycleritem1 recyclerItem = new EditTeamRecycleritem1();
         recyclerItem.setE_memporife(profile);
+//        for (int i=0; i<this.alllist.size(); i++) {
+//            if (this.alllist.get(i)==recyclerItem) {
+//                Toast.makeText(getContext(), "지워져라", Toast.LENGTH_SHORT).show();
+//                DeleteCurrentDialog(i);
+//            }
+//        }
         this.alllist.add(recyclerItem);
     }
 
