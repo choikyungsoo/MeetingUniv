@@ -5,7 +5,7 @@ import android.net.Uri;
 import java.io.Serializable;
 
 public class UserInfo implements Serializable {
-    private long userID;
+    private String userID;
 
     private boolean meetingUnivAgreementCheckbox;
     private boolean personalInfoAgreementCheckbox;
@@ -28,8 +28,8 @@ public class UserInfo implements Serializable {
 //        this.promotionInfoAgreementCheckbox = false;
     }
 
-    public long getUserID() { return userID; }
-    public void setUserID(long userID) {
+    public String getUserID() { return userID; }
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 

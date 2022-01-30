@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.kakao.sdk.auth.AuthApiClient;
+import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
 import com.parse.FunctionCallback;
@@ -62,26 +63,26 @@ public class Intro extends AppCompatActivity {
             public void run() {
                 // Use this map to send parameters to your Cloud Code function
                 // Just push the parameters you want into it
-                Map<String, String> parameters = new HashMap<String, String>();
-
-                // This calls the function in the Cloud Code
-                ParseCloud.callFunctionInBackground("test", parameters, new FunctionCallback<Map<String, Object>>() {
-                    @Override
-                    public void done(Map<String, Object> mapObject, ParseException e) {
-                        if (e == null) {
-                            // Everything is alright
-                            Toast.makeText(Intro.this, "Answer = " + mapObject.get("answer").toString(), Toast.LENGTH_LONG).show();
-                        }
-                        else {
-                            // Something went wrong
-                        }
-                    }
-                });
+//                Map<String, String> parameters = new HashMap<String, String>();
+//
+//                // This calls the function in the Cloud Code
+//                ParseCloud.callFunctionInBackground("verifyToken", parameters, new FunctionCallback<Map<String, Object>>() {
+//                    @Override
+//                    public void done(Map<String, Object> mapObject, ParseException e) {
+//                        if (e == null) {
+//                            // Everything is alright
+//                            Toast.makeText(Intro.this, "Answer = " + mapObject.get("answer").toString(), Toast.LENGTH_LONG).show();
+//                        }
+//                        else {
+//                            // Something went wrong
+//                        }
+//                    }
+//                });
 //                Intent intent = new Intent(Intro.this, LoginActivity.class);
 //                startActivity(intent);
                 FirebaseUser currentUser = auth.getCurrentUser();
                 checkLogin(currentUser);
-                finish();
+//                finish();
             }
         }, 1000);
     }
@@ -93,26 +94,39 @@ public class Intro extends AppCompatActivity {
 //        updateUI();
 //    }
 
+
+
     private void checkLogin(FirebaseUser currentUser) {
         if(currentUser == null) {
-            this.auth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d("TAG", "signInAnonymously:success");
-                        FirebaseUser user = auth.getCurrentUser();
-                        checkLogin(user);
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w("TAG", "signInAnonymously:failure", task.getException());
-//                        Toast.makeText(getContext, "Authentication failed.",
-//                                Toast.LENGTH_SHORT).show();
-                        checkLogin(null);
-                    }
-                }
-            });
+            Intent intent = new Intent(Intro.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
+
+
+//        System.out.println("111111111111111111111");
+//        System.out.println(currentUser.getUid());
+//        currentUser.delete();
+//        if(currentUser == null) {
+//            this.auth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                @Override
+//                public void onComplete(@NonNull Task<AuthResult> task) {
+//                    if (task.isSuccessful()) {
+//                        // Sign in success, update UI with the signed-in user's information
+//                        Log.d("TAG", "signInAnonymously:success");
+//                        FirebaseUser user = auth.getCurrentUser();
+//                        checkLogin(user);
+//                    } else {
+//                        // If sign in fails, display a message to the user.
+//                        Log.w("TAG", "signInAnonymously:failure", task.getException());
+////                        Toast.makeText(getContext, "Authentication failed.",
+////                                Toast.LENGTH_SHORT).show();
+//                        checkLogin(null);
+//                    }
+//                }
+//            });
+//        }
+
 //        if(AuthApiClient.getInstance().hasToken()) {
 //            Log.d("사용자 토큰", String.valueOf(AuthApiClient.getInstance().hasToken()));
 //            UserApiClient.getInstance().accessTokenInfo((accessTokenInfo, throwable) -> {
@@ -137,30 +151,31 @@ public class Intro extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                            Log.d("aaaaaa", storageReference.child(String.valueOf(user.getId())).
-                            if (snapshot.hasChild(String.valueOf(user.getId()))) {
-                                if(snapshot.child(String.valueOf(user.getId())).child("약관동의").child("선택").hasChild("프로모션 정보 수신 동의")
-                                        && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("개인정보 수집 및 이용 동의")
-                                        && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("미팅대학 이용약관 동의")
-                                        && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").hasChild("위치정보 이용약관 동의")
-                                        && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").getValue().equals(true)
-                                        && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").getValue().equals(true)
-                                        && snapshot.child(String.valueOf(user.getId())).child("약관동의").child("필수").child("위치정보 이용약관 동의").getValue().equals(true)
-                                        && snapshot.child(String.valueOf(user.getId())).child("닉네임").exists()
-                                        && snapshot.child(String.valueOf(user.getId())).child("추천인코드").exists()) {
+                            if (snapshot.hasChild(auth.getUid())) {
+                                if(snapshot.child(auth.getUid()).child("약관동의").child("선택").hasChild("프로모션 정보 수신 동의")
+                                        && snapshot.child(auth.getUid()).child("약관동의").child("필수").hasChild("개인정보 수집 및 이용 동의")
+                                        && snapshot.child(auth.getUid()).child("약관동의").child("필수").hasChild("미팅대학 이용약관 동의")
+                                        && snapshot.child(auth.getUid()).child("약관동의").child("필수").hasChild("위치정보 이용약관 동의")
+                                        && snapshot.child(auth.getUid()).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").getValue().equals(true)
+                                        && snapshot.child(auth.getUid()).child("약관동의").child("필수").child("미팅대학 이용약관 동의").getValue().equals(true)
+                                        && snapshot.child(auth.getUid()).child("약관동의").child("필수").child("위치정보 이용약관 동의").getValue().equals(true)
+                                        && snapshot.child(auth.getUid()).child("닉네임").exists()
+                                        && snapshot.child(auth.getUid()).child("추천인코드").exists()) {
                                     Log.d("카카오톡", "로그인 성공");
-                                    UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
-                                        @Override
-                                        public Unit invoke(User user, Throwable throwable) {
-                                            if(user != null) {
-                                                Log.d("카카오톡","로그인 성공");
-                                                Intent intent = new Intent(Intro.this, MainActivity.class);
-                                                intent.putExtra("userID", user.getId());
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                            return null;
-                                        }
-                                    });
+                                    updateToken();
+//                                    UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+//                                        @Override
+//                                        public Unit invoke(User user, Throwable throwable) {
+//                                            if(user != null) {
+//                                                Log.d("카카오톡","로그인 성공");
+//                                                Intent intent = new Intent(Intro.this, MainActivity.class);
+//                                                intent.putExtra("userID", user.getId());
+//                                                startActivity(intent);
+//                                                finish();
+//                                            }
+//                                            return null;
+//                                        }
+//                                    });
                                 }
                                 else {
                                     Log.d("카카오톡","로그인은 되어있으나 가입 시 문제가 발생한 적이 있음");
@@ -196,4 +211,103 @@ public class Intro extends AppCompatActivity {
             }
         });
     }
+
+    private void updateToken() {
+        if(AuthApiClient.getInstance().hasToken()) {
+            UserApiClient.getInstance().accessTokenInfo((accessTokenInfo, throwable) -> {
+                if (throwable != null) {
+                    System.out.println("error");
+                    Log.d("카카오 로그인", "에러");
+                }
+                else if (accessTokenInfo !=  null){
+                    System.out.println("accesTokenInfo");
+                    if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(this.getApplicationContext())) {
+                        System.out.println("checkLogin2");
+                        //                        Auth.creat
+//                        UserApiClient.getInstance().loginWithKakaoTalk()
+                        Log.d("카카오톡", "카카오톡 설치됨");
+                        UserApiClient.getInstance().loginWithKakaoTalk(this.getBaseContext(), new Function2<OAuthToken, Throwable, Unit>() {
+                            @Override
+                            public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
+                                if (throwable != null) {
+                                    Log.e("error", throwable.getLocalizedMessage());
+                                }
+                                if (oAuthToken != null) {
+                                    String accessToken = oAuthToken.getAccessToken();
+                                    System.out.println(accessToken);
+                                    switchtoJWT(accessToken);
+
+//                                    updateUserInfo(view);
+
+                                }
+//                            checkLogin();
+                                return null;
+                            }
+                        });
+                    } else {
+                        System.out.println("checkLogin2");
+                        //                        Auth.creat
+//                        UserApiClient.getInstance().loginWithKakaoTalk()
+                        Log.d("카카오톡", "카카오톡 설치됨");
+                        UserApiClient.getInstance().loginWithKakaoAccount(this.getApplicationContext(), new Function2<OAuthToken, Throwable, Unit>() {
+                            @Override
+                            public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
+                                if (throwable != null) {
+                                    Log.e("error", throwable.getLocalizedMessage());
+                                }
+                                if (oAuthToken != null) {
+                                    String accessToken = oAuthToken.getAccessToken();
+                                    System.out.println(accessToken);
+                                    switchtoJWT(accessToken);
+
+//                                    updateUserInfo(view);
+
+                                }
+//                            checkLogin();
+                                return null;
+                            }
+                        });
+                    }
+                }
+                return null;
+            });
+        }
+    }
+
+    private void switchtoJWT(String accessToken) {
+        System.out.println("A"+accessToken);
+        Map<String, String> parameters = new HashMap<String, String>();
+//        parameters.put("token", accessToken);
+        parameters.put("token", accessToken);
+//
+//                // This calls the function in the Cloud Code
+        ParseCloud.callFunctionInBackground("verifyToken", parameters, new FunctionCallback<Map<String, Object>>() {
+            @Override
+            public void done(Map<String, Object> mapObject, ParseException e) {
+                if (e == null) {
+                    // Everything is alright
+                    String answer = mapObject.get("answer").toString();
+                    System.out.println("success");
+                    System.out.println(answer);
+                    Toast.makeText(Intro.this, "Answer = " + answer, Toast.LENGTH_LONG).show();
+                    auth.signInWithCustomToken(answer);
+
+                    Log.d("카카오톡","로그인 성공");
+                    Intent intent = new Intent(Intro.this, MainActivity.class);
+                    intent.putExtra("userID", auth.getUid());
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    // Something went wrong
+                    System.out.println("fail");
+                    System.out.println(e.getLocalizedMessage());
+                }
+            }
+
+        });
+    }
+
+
+
 }
