@@ -130,12 +130,12 @@ public class JoinProfileFragment extends Fragment {
 
 
                     //내가 초대된 코드는 바로 코드 주인에게 +1 하트
-                    databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("미팅대학 이용약관 동의").setValue(userInfo.isMeetingUnivAgreementCheckbox());
-                    databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").setValue(userInfo.isPersonalInfoAgreementCheckbox());
-                    databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("필수").child("위치정보 이용약관 동의").setValue(userInfo.isLocationInfoAgreementCheckbox());
-                    databaseReference.child(String.valueOf(userInfo.getUserID())).child("약관동의").child("선택").child("프로모션 정보 수신 동의").setValue(userInfo.isPromotionInfoAgreementCheckbox());
-                    databaseReference.child(String.valueOf(userInfo.getUserID())).child("학교").setValue(userInfo.getSchoolName());
-                    StorageReference studentIDCardReference = storageReference.child(String.valueOf(userInfo.getUserID())).child("학생증.jpg");
+                    databaseReference.child(userInfo.getUserID()).child("약관동의").child("필수").child("미팅대학 이용약관 동의").setValue(userInfo.isMeetingUnivAgreementCheckbox());
+                    databaseReference.child(userInfo.getUserID()).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").setValue(userInfo.isPersonalInfoAgreementCheckbox());
+                    databaseReference.child(userInfo.getUserID()).child("약관동의").child("필수").child("위치정보 이용약관 동의").setValue(userInfo.isLocationInfoAgreementCheckbox());
+                    databaseReference.child(userInfo.getUserID()).child("약관동의").child("선택").child("프로모션 정보 수신 동의").setValue(userInfo.isPromotionInfoAgreementCheckbox());
+                    databaseReference.child(userInfo.getUserID()).child("학교").setValue(userInfo.getSchoolName());
+                    StorageReference studentIDCardReference = storageReference.child(userInfo.getUserID()).child("학생증.jpg");
 
                     UploadTask uploadTask = studentIDCardReference.putBytes(userInfo.getStudentCard());
                     uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -147,13 +147,13 @@ public class JoinProfileFragment extends Fragment {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Log.d("학생증 사진", "성공");
-                            databaseReference.child(String.valueOf(userInfo.getUserID())).child("학생증").setValue(1);
+                            databaseReference.child(userInfo.getUserID()).child("학생증").setValue(1);
                         }
                     });
-                    databaseReference.child(String.valueOf(userInfo.getUserID())).child("닉네임").setValue(userInfo.getNickname());
-                    databaseReference.child(String.valueOf(userInfo.getUserID())).child("추천인코드").setValue(userInfo.getInviteCode());
+                    databaseReference.child(userInfo.getUserID()).child("닉네임").setValue(userInfo.getNickname());
+                    databaseReference.child(userInfo.getUserID()).child("추천인코드").setValue(userInfo.getInviteCode());
 
-                    StorageReference profileImageReference = storageReference.child(String.valueOf(userInfo.getUserID())).child("프로필 사진.jpg");
+                    StorageReference profileImageReference = storageReference.child(userInfo.getUserID()).child("프로필 사진.jpg");
                     UploadTask uploadTask2 = profileImageReference.putBytes(userInfo.getProfileImage());
                     uploadTask2.addOnFailureListener(new OnFailureListener() {
                         @Override

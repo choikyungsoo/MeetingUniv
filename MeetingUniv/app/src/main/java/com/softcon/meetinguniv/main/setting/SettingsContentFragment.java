@@ -45,8 +45,8 @@ public class SettingsContentFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 
         setPreferencesFromResource(R.xml.fragment_settings_content, rootKey);
-        this.bundle = getArguments();
-        this.userID = bundle.getLong("userID");
+//        this.bundle = getArguments();
+//        this.userID = bundle.getLong("userID");
     }
 
 //    @Override

@@ -129,7 +129,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         bundle.putIntegerArrayList("currentteam", this.ImageSource);
         this.ETMfragment.setArguments(bundle);
         this.CTEfragment.setArguments(bundle);
-
     }
 
     private void addRecyclerItem(int profile, int verfiycode){
