@@ -21,7 +21,7 @@ public class MainScreenFragment extends Fragment {
     private MatchingContentFragment fragment1;
     private CurrentContentsFragment fragment2;
 
-    private long userID;
+    private String userID;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,7 +74,7 @@ public class MainScreenFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.userID = getArguments().getLong("userID");
-        Log.d("MainScreenFragment - 회원아이디", String.valueOf(this.userID));
+        this.userID = getArguments().getString("userID");
+        Log.d("MainScreenFragment - 회원아이디", this.userID);
     }
 }

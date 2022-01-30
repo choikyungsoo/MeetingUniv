@@ -118,6 +118,7 @@ public class chooseteamElementFragment extends Fragment {
         recyclerItem.setName(name);
         recyclerItem.setMember(member);
         list.add(recyclerItem);
+        System.out.println("제발 좀 돼라"+name);
 
     }
     @Override
