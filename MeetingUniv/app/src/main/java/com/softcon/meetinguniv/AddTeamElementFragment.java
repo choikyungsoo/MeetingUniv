@@ -1,10 +1,6 @@
 package com.softcon.meetinguniv;
 
-import static android.content.ContentValues.TAG;
-
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -12,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +17,6 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.softcon.meetinguniv.main.MatchingContentFragment;
 import com.softcon.meetinguniv.main.TeamMemberAdapterRecycleritem;
 import com.softcon.meetinguniv.main.TeamMemberRecyclerItem;
 import com.softcon.meetinguniv.main.chooseteamElementFragment;
@@ -51,6 +45,11 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
     private chooseteamElementFragment fragment;
 
     private Boolean checkok = false;
+    private chooseteamElementFragment.ClickHandler clickHandler;
+
+    public AddTeamElementFragment(chooseteamElementFragment.ClickHandler clickHandler) {
+        this.clickHandler = clickHandler;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -256,8 +255,10 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
                 break;
             case R.id.addTeamOk_BTN:
                 this.checkok = true;
-                savechangememberInfo();
-                givechangememberInfo();
+//                savechangememberInfo();
+//                givechangememberInfo();
+                AddTeamOkDialog addTeamOkDialog = new AddTeamOkDialog(getActivity());
+                addTeamOkDialog.showDialog(clickHandler);
                 moveToChooseTeamElement();
                 break;
         }

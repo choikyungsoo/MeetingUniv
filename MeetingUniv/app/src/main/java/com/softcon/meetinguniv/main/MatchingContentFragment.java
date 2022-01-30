@@ -30,7 +30,6 @@ import org.jetbrains.annotations.NotNull;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.Console;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -84,7 +83,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         recyclerView.setAdapter(recyclerItemAdapter) ;
 
         this.ETMfragment = new EditTeamMemberElementFragment();
-        this.ATEfragment = new AddTeamElementFragment();
+//        this.ATEfragment = new AddTeamElementFragment(clickHandler);
         this.CTEfragment = new chooseteamElementFragment();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
