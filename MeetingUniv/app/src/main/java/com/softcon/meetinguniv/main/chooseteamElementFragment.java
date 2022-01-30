@@ -1,5 +1,7 @@
 package com.softcon.meetinguniv.main;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.softcon.meetinguniv.AddTeamElementFragment;
 import com.softcon.meetinguniv.R;
@@ -106,7 +109,8 @@ public class chooseteamElementFragment extends Fragment {
 
             }
         });
-        this.ATEfragment = new AddTeamElementFragment();
+        ClickHandler clickHandler = new ClickHandler();
+        this.ATEfragment = new AddTeamElementFragment(clickHandler);
     }
 
     private void addRecyclerItem( String name, String member){
@@ -147,6 +151,7 @@ public class chooseteamElementFragment extends Fragment {
                         .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
                         .replace(R.id.chooseteamFrame, ATEfragment)
                         .commit();
+                imm.hideSoftInputFromWindow(editSearch.getWindowToken(),0);
             }
         });
         return view;
@@ -156,5 +161,17 @@ public class chooseteamElementFragment extends Fragment {
         Bundle bundle = getArguments();
 //        bundle.putIntegerArrayList("currentteam", this.ImageSource);
         this.ATEfragment.setArguments(bundle);
+    }
+
+    public class ClickHandler implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.addTeamOk_okBTN) {
+                addRecyclerItem("추가됨", "ㄱㄱ,ㄴㄴ,ㄷㄷ");
+                recyclerItemAdapter.notifyDataSetChanged();
+                Log.d(TAG, "-------------------------dsfsfsf---------------------");
+                v.getRootView().setVisibility(View.GONE);
+            }
+        }
     }
 }

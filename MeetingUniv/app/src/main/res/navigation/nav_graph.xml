@@ -274,5 +274,10 @@
         android:name="com.softcon.meetinguniv.leaveChatRoomDialogFragment"
         android:label="fragment_leave_chat_room_dialog"
         tools:layout="@layout/fragment_leave_chat_room_dialog" />
+    <fragment
+        android:id="@+id/addTeamOkDialog"
+        android:name="com.softcon.meetinguniv.AddTeamOkDialog"
+        android:label="fragment_add_team_ok_dialog"
+        tools:layout="@layout/dialog_add_team_ok" />
 
 </navigation>
