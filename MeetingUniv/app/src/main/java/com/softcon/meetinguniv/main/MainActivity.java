@@ -8,6 +8,8 @@ import androidx.navigation.Navigation;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Space;
 import android.widget.Toast;
 
@@ -28,6 +30,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+//        inputMethodManager.hideSoftInputFromWindow(Context.getWindowToken(), 0);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         this.statusBarHeight = 0;
         int resId = getResources().getIdentifier("status_bar_height", "dimen", "android");
         if(resId>0){
