@@ -259,7 +259,7 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
 //                givechangememberInfo();
                 AddTeamOkDialog addTeamOkDialog = new AddTeamOkDialog(getActivity());
                 addTeamOkDialog.showDialog(clickHandler);
-                moveToChooseTeamElement();
+//                moveToChooseTeamElement();
                 break;
         }
     }
