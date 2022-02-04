@@ -74,7 +74,11 @@ public class MainScreenFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Bundle bundle = new Bundle();
         this.userID = getArguments().getString("userID");
-//        Log.d("MainScreenFragment - 회원아이디", this.userID);
+        bundle.putString("userID", this.userID);
+        this.fragment1.setArguments(bundle);
+        Log.d("MainScreenFragment - 회원아이디", this.userID);
+
     }
 }
