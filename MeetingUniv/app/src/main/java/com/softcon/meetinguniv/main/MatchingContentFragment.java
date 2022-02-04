@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,11 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.softcon.meetinguniv.AddTeamElementFragment;
 import com.softcon.meetinguniv.EditTeamMemberElementFragment;
 import com.softcon.meetinguniv.MTeamMemberRecyclerItem;
@@ -62,6 +68,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     private View dialogView;
 
     private String schoolName;
+    private String userID;
 
     private ArrayList<String> schoolNames = new ArrayList<String>();
     private boolean inSchoolName = false;
@@ -72,6 +79,11 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     private EditTeamMemberElementFragment ETMfragment;
     private AddTeamElementFragment ATEfragment;
     private chooseteamElementFragment CTEfragment;
+
+
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference M_databaseReference = database.getReference("회원정보");
+    private DatabaseReference T_databaseReference = database.getReference("팀정보");
 
 
     @Override
@@ -90,15 +102,21 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        this.userID = getArguments().getString("userID");
+        System.out.println("MacthingContent"+ this.userID);
+
+        //파이어베이스에서 팀정보 데이터 가져오기
+        TakeDataFromFirebaseDatabase();
+
         this.settingposition = 0;
 //        addRecyclerItem(123);
         //팀원 수와 편집에 따라 변함(유동적으로 변함)
         Bundle bundle = getArguments();
         if(bundle != null){
-            ArrayList<Integer> takeData = bundle.getIntegerArrayList("changemember");
-            for(int i=0; i<takeData.size(); i++){
-                addRecyclerItem(takeData.get(i),0);
-            }
+//            ArrayList<Integer> takeData = bundle.getIntegerArrayList("changemember");
+//            for(int i=0; i<takeData.size(); i++){
+//                addRecyclerItem(takeData.get(i),0);
+//            }
         } else {
             addRecyclerItem(R.drawable.prot, 0);
             addRecyclerItem(R.drawable.prot2, 0);
@@ -121,6 +139,33 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         });
         recyclerItemAdapter.notifyDataSetChanged();
 
+    }
+
+    private void TakeDataFromFirebaseDatabase() {
+        ArrayList<String> TeamMember = new ArrayList<String>();
+        this.M_databaseReference.child(String.valueOf(this.userID)).child("팀").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                System.out.println("경수의 팀 데이터:" + snapshot.getValue());
+//                T_databaseReference.child(String.valueOf(snapshot.getValue(String.class))).child("팀원").addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        System.out.println("경수의 세부 팀 데이터:" + snapshot.getValue());
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void giveRecycleritemData() {

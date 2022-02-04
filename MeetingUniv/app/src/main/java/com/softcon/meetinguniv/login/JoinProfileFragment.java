@@ -1,6 +1,7 @@
 package com.softcon.meetinguniv.login;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -177,7 +179,8 @@ public class JoinProfileFragment extends Fragment {
                     // 아직 보낼 필요 없음?
 //                Bundle bundle = new Bundle();
 //                bundle.putSerializable("Obj", (Serializable) userInfo);
-
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(settingNickName.getWindowToken(),0);
                     Intent intent = new Intent(getActivity(), Intro.class);
                     startActivity(intent);
 //                    startActivity(intent, bundle);

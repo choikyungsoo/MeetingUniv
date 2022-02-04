@@ -248,7 +248,7 @@ public class Intro extends AppCompatActivity {
                         System.out.println("checkLogin2");
                         //                        Auth.creat
 //                        UserApiClient.getInstance().loginWithKakaoTalk()
-                        Log.d("카카오톡", "카카오톡 설치됨");
+                        Log.d("카카오톡", "카카오톡 설치안됨");
                         UserApiClient.getInstance().loginWithKakaoAccount(this.getApplicationContext(), new Function2<OAuthToken, Throwable, Unit>() {
                             @Override
                             public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
