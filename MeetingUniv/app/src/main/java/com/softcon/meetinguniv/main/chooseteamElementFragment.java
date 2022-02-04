@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.softcon.meetinguniv.AddTeamElementFragment;
 import com.softcon.meetinguniv.R;
 
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -120,12 +121,18 @@ public class chooseteamElementFragment extends Fragment {
         list.add(recyclerItem);
         System.out.println("제발 좀 돼라"+name);
 
+        Log.d(TAG, "-------------------------addRecyclerItem---------------------");
+        System.out.println(list.size() + "");
+        for (int i=0; i<list.size(); i++) {
+            System.out.print(list.get(i) + " ");
+        }
+//        this.recyclerItemAdapter = new chooseteamAdapterRecyleritem(this.getActivity(), this.list);
+//        recyclerView.setAdapter(this.recyclerItemAdapter);
+//        recyclerItemAdapter.notifyDataSetChanged();
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         View view = inflater.inflate(R.layout.fragment_chooseteam_element, container, false);
         this.backbtn = view.findViewById(R.id.backbtn);
         this.editSearch = view.findViewById(R.id.searchTeamEditText);
@@ -168,9 +175,14 @@ public class chooseteamElementFragment extends Fragment {
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.addTeamOk_okBTN) {
+//                chooseteamElementFragment CTEFragment = new chooseteamElementFragment();
+//                CTEFragment.addRecyclerItem("추가됨", "ㄱㄱ,ㄴㄴ,ㄷㄷ");
                 addRecyclerItem("추가됨", "ㄱㄱ,ㄴㄴ,ㄷㄷ");
-                recyclerItemAdapter.notifyDataSetChanged();
+//                recyclerItemAdapter.notifyDataSetChanged();
                 Log.d(TAG, "-------------------------dsfsfsf---------------------");
+                recyclerItemAdapter = new chooseteamAdapterRecyleritem(getActivity(), list);
+                recyclerView.setAdapter(recyclerItemAdapter);
+                recyclerItemAdapter.notifyDataSetChanged();
                 v.getRootView().setVisibility(View.GONE);
             }
         }
