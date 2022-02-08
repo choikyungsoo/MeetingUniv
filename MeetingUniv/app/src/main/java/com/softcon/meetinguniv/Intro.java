@@ -25,6 +25,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.kakao.sdk.auth.AuthApiClient;
 import com.kakao.sdk.auth.model.OAuthToken;
+import com.kakao.sdk.common.KakaoSdk;
+import com.kakao.sdk.common.model.KakaoSdkError;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
 import com.parse.FunctionCallback;
@@ -162,7 +164,7 @@ public class Intro extends AppCompatActivity {
                                         && snapshot.child(auth.getUid()).child("닉네임").exists()
                                         && snapshot.child(auth.getUid()).child("추천인코드").exists()) {
                                     Log.d("카카오톡", "로그인 성공");
-                                    updateToken();
+                                    updateToken(currentUser);
 //                                    UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
 //                                        @Override
 //                                        public Unit invoke(User user, Throwable throwable) {
@@ -212,101 +214,122 @@ public class Intro extends AppCompatActivity {
         });
     }
 
-    private void updateToken() {
+    private void updateToken(FirebaseUser currentUser) {
         if(AuthApiClient.getInstance().hasToken()) {
             UserApiClient.getInstance().accessTokenInfo((accessTokenInfo, throwable) -> {
                 if (throwable != null) {
                     System.out.println("error");
                     Log.d("카카오 로그인", "에러");
+//                    AuthApiClient.getInstance().refreshAccessToken(accessTokenInfo, (oAuthToken, throwable1) -> {
+//                       auth.
+//                    });
+//                    if (error is KakaoSdkError && error.isInvalidTokenError() == true) {
+//                        //로그인 필요
+//                    }
+//                    else {
+//                        //기타 에러
+//                    }
+//                    if(throwable.equals(throwable.))
+//                    Intent intent = new Intent(Intro.this, LoginActivity.class);
+//                    startActivity(intent);
+//                    finish();
                 }
-                else if (accessTokenInfo !=  null){
-                    System.out.println("accesTokenInfo");
-                    if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(this.getApplicationContext())) {
-                        System.out.println("checkLogin2");
-                        //                        Auth.creat
-//                        UserApiClient.getInstance().loginWithKakaoTalk()
-                        Log.d("카카오톡", "카카오톡 설치됨");
-                        UserApiClient.getInstance().loginWithKakaoTalk(this.getBaseContext(), new Function2<OAuthToken, Throwable, Unit>() {
-                            @Override
-                            public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
-                                if (throwable != null) {
-                                    Log.e("error", throwable.getLocalizedMessage());
-                                }
-                                if (oAuthToken != null) {
-                                    String accessToken = oAuthToken.getAccessToken();
-                                    System.out.println(accessToken);
-                                    switchtoJWT(accessToken);
+                else if (accessTokenInfo !=  null) {
+//                    accessTokenInfo.get
+                    System.out.println("accessTokenInfo");
 
-//                                    updateUserInfo(view);
+                    Intent intent = new Intent(Intro.this, MainActivity.class);
+                    intent.putExtra("userID", currentUser.getUid());
+                    startActivity(intent);
 
-                                }
-//                            checkLogin();
-                                return null;
-                            }
-                        });
-                    } else {
-                        System.out.println("checkLogin2");
-                        //                        Auth.creat
-//                        UserApiClient.getInstance().loginWithKakaoTalk()
-                        Log.d("카카오톡", "카카오톡 설치안됨");
-                        UserApiClient.getInstance().loginWithKakaoAccount(this.getApplicationContext(), new Function2<OAuthToken, Throwable, Unit>() {
-                            @Override
-                            public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
-                                if (throwable != null) {
-                                    Log.e("error", throwable.getLocalizedMessage());
-                                }
-                                if (oAuthToken != null) {
-                                    String accessToken = oAuthToken.getAccessToken();
-                                    System.out.println(accessToken);
-                                    switchtoJWT(accessToken);
 
-//                                    updateUserInfo(view);
-
-                                }
-//                            checkLogin();
-                                return null;
-                            }
-                        });
-                    }
+//                    if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(this.getApplicationContext())) {
+//                    if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(this)) {
+//                        System.out.println("checkLogin2");
+//                        //                        Auth.creat
+////                        UserApiClient.getInstance().loginWithKakaoTalk()
+//                        Log.d("카카오톡", "카카오톡 설치됨");
+//                        UserApiClient.getInstance().loginWithKakaoTalk(this.getBaseContext(), new Function2<OAuthToken, Throwable, Unit>() {
+//                            @Override
+//                            public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
+//                                if (throwable != null) {
+//                                    Log.e("error", throwable.getLocalizedMessage());
+//                                }
+//                                if (oAuthToken != null) {
+//                                    String accessToken = oAuthToken.getAccessToken();
+//                                    System.out.println(accessToken);
+//                                    switchtoJWT(accessToken);
+//
+////                                    updateUserInfo(view);
+//
+//                                }
+////                            checkLogin();
+//                                return null;
+//                            }
+//                        });
+//                    } else {
+//                        System.out.println("checkLogin2");
+//                        //                        Auth.creat
+////                        UserApiClient.getInstance().loginWithKakaoTalk()
+//                        Log.d("카카오톡", "카카오톡 설치안됨");
+//                        UserApiClient.getInstance().loginWithKakaoAccount(this.getApplicationContext(), new Function2<OAuthToken, Throwable, Unit>() {
+//                            @Override
+//                            public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
+//                                if (throwable != null) {
+//                                    Log.e("error", throwable.getLocalizedMessage());
+//                                }
+//                                if (oAuthToken != null) {
+//                                    String accessToken = oAuthToken.getAccessToken();
+//                                    System.out.println(accessToken);
+//                                    switchtoJWT(accessToken);
+//
+////                                    updateUserInfo(view);
+//
+//                                }
+////                            checkLogin();
+//                                return null;
+//                            }
+//                        });
+//                    }
                 }
                 return null;
             });
         }
     }
 
-    private void switchtoJWT(String accessToken) {
-        System.out.println("A"+accessToken);
-        Map<String, String> parameters = new HashMap<String, String>();
+//    private void switchtoJWT(String accessToken) {
+//        System.out.println("A"+accessToken);
+//        Map<String, String> parameters = new HashMap<String, String>();
+////        parameters.put("token", accessToken);
 //        parameters.put("token", accessToken);
-        parameters.put("token", accessToken);
+////
+////                // This calls the function in the Cloud Code
+//        ParseCloud.callFunctionInBackground("verifyToken", parameters, new FunctionCallback<Map<String, Object>>() {
+//            @Override
+//            public void done(Map<String, Object> mapObject, ParseException e) {
+//                if (e == null) {
+//                    // Everything is alright
+//                    String answer = mapObject.get("answer").toString();
+//                    System.out.println("success");
+//                    System.out.println(answer);
+//                    Toast.makeText(Intro.this, "Answer = " + answer, Toast.LENGTH_LONG).show();
+//                    auth.signInWithCustomToken(answer);
 //
-//                // This calls the function in the Cloud Code
-        ParseCloud.callFunctionInBackground("verifyToken", parameters, new FunctionCallback<Map<String, Object>>() {
-            @Override
-            public void done(Map<String, Object> mapObject, ParseException e) {
-                if (e == null) {
-                    // Everything is alright
-                    String answer = mapObject.get("answer").toString();
-                    System.out.println("success");
-                    System.out.println(answer);
-                    Toast.makeText(Intro.this, "Answer = " + answer, Toast.LENGTH_LONG).show();
-                    auth.signInWithCustomToken(answer);
-
-                    Log.d("카카오톡","로그인 성공");
-                    Intent intent = new Intent(Intro.this, MainActivity.class);
-                    intent.putExtra("userID", auth.getUid());
-                    startActivity(intent);
-                    finish();
-                }
-                else {
-                    // Something went wrong
-                    System.out.println("fail");
-                    System.out.println(e.getLocalizedMessage());
-                }
-            }
-
-        });
-    }
+//                    Log.d("카카오톡","로그인 성공");
+//                    Intent intent = new Intent(Intro.this, MainActivity.class);
+//                    intent.putExtra("userID", auth.getUid());
+//                    startActivity(intent);
+//                    finish();
+//                }
+//                else {
+//                    // Something went wrong
+//                    System.out.println("fail");
+//                    System.out.println(e.getLocalizedMessage());
+//                }
+//            }
+//
+//        });
+//    }
 
 
 
