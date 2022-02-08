@@ -80,6 +80,7 @@ public class KakaoLoginFragment extends Fragment {
                             }
                             if (oAuthToken != null) {
                                 String accessToken = oAuthToken.getAccessToken();
+//                                String accessToken = oAuthToken.getRefreshToken();
                                 System.out.println(accessToken);
                                 switchtoJWT(accessToken);
 

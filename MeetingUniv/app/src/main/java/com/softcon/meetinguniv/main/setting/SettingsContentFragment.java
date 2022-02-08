@@ -18,6 +18,8 @@ import androidx.navigation.Navigation;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.kakao.sdk.user.UserApiClient;
 import com.softcon.meetinguniv.Intro;
 import com.softcon.meetinguniv.R;
@@ -27,6 +29,8 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
 public class SettingsContentFragment extends PreferenceFragmentCompat {
+
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     private Preference my_information;
     private Preference alarm;

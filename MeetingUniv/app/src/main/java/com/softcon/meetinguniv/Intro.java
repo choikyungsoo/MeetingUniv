@@ -220,6 +220,9 @@ public class Intro extends AppCompatActivity {
                 if (throwable != null) {
                     System.out.println("error");
                     Log.d("카카오 로그인", "에러");
+//                    AuthApiClient.getInstance().refreshAccessToken(accessTokenInfo, (oAuthToken, throwable1) -> {
+//                       auth.
+//                    });
 //                    if (error is KakaoSdkError && error.isInvalidTokenError() == true) {
 //                        //로그인 필요
 //                    }
@@ -232,7 +235,9 @@ public class Intro extends AppCompatActivity {
 //                    finish();
                 }
                 else if (accessTokenInfo !=  null) {
-                    System.out.println("accesTokenInfo");
+//                    accessTokenInfo.get
+                    System.out.println("accessTokenInfo");
+
                     Intent intent = new Intent(Intro.this, MainActivity.class);
                     intent.putExtra("userID", currentUser.getUid());
                     startActivity(intent);
