@@ -139,6 +139,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         }
 
         //팀원 편집 아이콘(필수적으로 고정)
+        // 설정 아이콘 추가를 위한 RecyclerItem 하나더 만들기
         addRecyclerItem(R.drawable.settingicon, 1);
         recyclerItemAdapter.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
@@ -204,6 +205,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         this.CTEfragment.setArguments(bundle);
     }
 
+    // -> 여기부터는 int를 URI로 바꾸기
     private void addRecyclerItem(int profile, int verfiycode){
         TeamMemberRecyclerItem recyclerItem = new TeamMemberRecyclerItem();
         recyclerItem.setMemProfile(profile);

@@ -1,5 +1,7 @@
 package com.softcon.meetinguniv.main;
 
+import android.net.Uri;
+
 import java.io.Serializable;
 
 public class TeamMemberRecyclerItem implements Serializable {
