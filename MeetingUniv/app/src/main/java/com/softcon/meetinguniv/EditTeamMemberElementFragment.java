@@ -108,7 +108,31 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         recyclerItemAdapter2.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                AddCurrentDialog(position);
+//                AddCurrentDialog(position);
+//            }
+//        });
+
+                if (!v.isSelected()) {
+                    AddCurrentDialog(position);
+                    v.setSelected(true);
+                } else {
+                    for (int i=0; i<alllist.size(); i++) {
+                        Bundle bundle = getArguments();
+                        if (bundle != null) {
+                            ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
+//                            for (int j=0; j<takeData.size(); j++) {
+                            Toast.makeText(getContext(), "position:" + position, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "takeData:" + takeData.get(position) + "all" + alllist.get(i).getE_memporife(), Toast.LENGTH_SHORT).show();
+                            if (takeData.get(position) == alllist.get(i).getE_memporife()) {
+                                DeleteCurrentDialog(i);
+                                break;
+                            }
+//                            }
+//                            break;
+                        }
+                    }
+                    v.setSelected(false);
+                }
             }
         });
         /////////////////////////////////////////////////////////////////////////////////////////

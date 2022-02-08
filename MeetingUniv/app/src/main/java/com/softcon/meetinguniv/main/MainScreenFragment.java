@@ -79,7 +79,7 @@ public class MainScreenFragment extends Fragment {
 
         bundle.putString("userID", this.userID);
         this.fragment1.setArguments(bundle);
-        Log.d("MainScreenFragment - 회원아이디", this.userID);
+//        Log.d("MainScreenFragment - 회원아이디", this.userID);
 
     }
 }
