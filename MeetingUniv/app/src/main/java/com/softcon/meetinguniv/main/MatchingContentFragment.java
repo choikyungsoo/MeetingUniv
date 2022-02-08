@@ -2,6 +2,8 @@ package com.softcon.meetinguniv.main;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +24,14 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.softcon.meetinguniv.AddTeamElementFragment;
 import com.softcon.meetinguniv.EditTeamMemberElementFragment;
 import com.softcon.meetinguniv.MTeamMemberRecyclerItem;
@@ -42,6 +48,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class MatchingContentFragment extends Fragment implements View.OnClickListener, RangeSlider.OnChangeListener {
 
@@ -65,6 +72,11 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     private ArrayList<Integer> ImageSource = new ArrayList<Integer>();
 
     private ArrayList<Float> ageRange = new ArrayList<Float>();
+
+    //팀에 대한 정보, 팀 추가를 하면 팀 번호가 여기로 들어와야 함
+    private ArrayList<String> TeamMember;
+    //선택한 팀에 대한 팀원의 번호 혹은 개인 식별번호가 여기로 들어와야 함
+    private ArrayList<String> TeamPersonalMember;
     private View dialogView;
 
     private String schoolName;
@@ -80,7 +92,8 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     private AddTeamElementFragment ATEfragment;
     private chooseteamElementFragment CTEfragment;
 
-
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference M_databaseReference = database.getReference("회원정보");
     private DatabaseReference T_databaseReference = database.getReference("팀정보");
@@ -142,22 +155,36 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     }
 
     private void TakeDataFromFirebaseDatabase() {
-        ArrayList<String> TeamMember = new ArrayList<String>();
+        this.TeamMember = new ArrayList<String>();
+        this.TeamPersonalMember = new ArrayList<String>();
+        //현재 로그인 한 사용자의 팀 번호를 가져오는 것
         this.M_databaseReference.child(String.valueOf(this.userID)).child("팀").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                System.out.println("경수의 팀 데이터:" + snapshot.getValue());
-//                T_databaseReference.child(String.valueOf(snapshot.getValue(String.class))).child("팀원").addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        System.out.println("경수의 세부 팀 데이터:" + snapshot.getValue());
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
+                TeamMember.addAll((Collection<? extends String>) snapshot.getValue());
+                T_databaseReference.child(String.valueOf(TeamMember.get(0))).child("팀원").addValueEventListener(new ValueEventListener() {
+                    //팀번호에 대한 팀원 정보를 가져오는 것
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        System.out.println("경수의 세부 팀 데이터:" + snapshot.getValue());
+                        TeamPersonalMember.addAll((Collection<? extends String>) snapshot.getValue());
+                        //팀원 프로필 사진을 다운로드 해서 가져옴
+                        storageRef.child(TeamPersonalMember.get(0)+"/"+"프로필 사진.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                System.out.println("팀 원 프로필:" + uri);
+//                                Bitmap bm = MediaStore.Images.Media.getBitmap(uri)
+//                                addRecyclerItem(uri,0);
+                            }
+                        });
+                        System.out.println("TeamPersonalMember : " + TeamPersonalMember);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
             }
 
