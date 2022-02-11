@@ -127,7 +127,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 //        addRecyclerItem(123);
         //팀원 수와 편집에 따라 변함(유동적으로 변함)
         Bundle bundle = getArguments();
-        if(bundle != null){
+        if(bundle == null){
 //            ArrayList<Integer> takeData = bundle.getIntegerArrayList("changemember");
 //            for(int i=0; i<takeData.size(); i++){
 //                addRecyclerItem(takeData.get(i),0);
@@ -176,7 +176,8 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                             @Override
                             public void onSuccess(Uri uri) {
                                 System.out.println("팀 원 프로필:" + uri);
-//                                Bitmap bm = MediaStore.Images.Media.getBitmap(uri)
+//                                Bitmap bm = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
+
 //                                addRecyclerItem(uri,0);
                             }
                         });
