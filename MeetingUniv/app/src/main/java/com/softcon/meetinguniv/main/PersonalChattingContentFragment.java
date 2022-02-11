@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.softcon.meetinguniv.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -33,6 +34,8 @@ public class PersonalChattingContentFragment extends Fragment implements View.On
     private PersonalChatingAdapterRecycleritem recyclerItemAdapter;
     private EditText editSearch;
     private FloatingActionButton invitingBTN;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
