@@ -188,7 +188,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
                     }
                 });
-
             }
 
             @Override

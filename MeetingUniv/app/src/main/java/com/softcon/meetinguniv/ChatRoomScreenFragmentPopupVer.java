@@ -149,16 +149,16 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
     @Override
     public void onBackPressed() {
         Toast.makeText(getContext(), "왜 안 돼!!!", Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "안되나??---------------------------------------------------------------------");
-
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        fragmentManager.beginTransaction().remove(ChatRoomScreenFragmentPopupVer.this).commit();
-        fragmentManager.popBackStack();
-        /////////////////////
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
-                .replace(R.id.constraintLayoutOfchatRoomPopup, chattingScreenFragment)
-                .commit();
+//        Log.d(TAG, "안되나??---------------------------------------------------------------------");
+//
+//        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+//        fragmentManager.beginTransaction().remove(ChatRoomScreenFragmentPopupVer.this).commit();
+//        fragmentManager.popBackStack();
+//        /////////////////////
+//        getActivity().getSupportFragmentManager().beginTransaction()
+//                .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
+//                .replace(R.id.constraintLayoutOfchatRoomPopup, chattingScreenFragment)
+//                .commit();
     }
 
     public class ClickHandler implements View.OnClickListener {
