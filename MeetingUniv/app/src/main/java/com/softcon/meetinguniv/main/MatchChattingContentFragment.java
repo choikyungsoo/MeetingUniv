@@ -3,12 +3,14 @@ package com.softcon.meetinguniv.main;
 import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +20,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SearchView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.softcon.meetinguniv.R;
 
 import java.util.ArrayList;
@@ -30,6 +37,8 @@ public class MatchChattingContentFragment extends Fragment {
     private List<MatchingChatingRecycleritem> list;
     private MatchingChatingAdapterRecycleritem recyclerItemAdapter;
     private EditText editSearch;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -43,6 +52,22 @@ public class MatchChattingContentFragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
+
+        // 데이터 읽는 방법
+//        db.collection("users")
+//        .get()
+//        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        Log.d("TAG", document.getId() + " => " + document.getData());
+//                    }
+//                } else {
+//                    Log.w("TAG", "Error getting documents.", task.getException());
+//                }
+//            }
+//        });
 
         addRecyclerItem(R.drawable.prot, "테스트용 입니다");
         addRecyclerItem(R.drawable.prot, "aaa1234");
