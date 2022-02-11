@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
 
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Space;
 import android.widget.Toast;
 
+import com.softcon.meetinguniv.ChatRoomScreenFragmentPopupVer;
 import com.softcon.meetinguniv.R;
 import com.softcon.meetinguniv.onBackPressedListener;
 
@@ -77,25 +79,41 @@ public class MainActivity extends AppCompatActivity {
         this.listener = listener;
     }
 
+//    @Override
+//    public void onBackPressed() {
+//        //프래그먼트 onBackPressedListener사용
+//        List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
+//        for(Fragment fragment : fragmentList){
+//            if(fragment instanceof onBackPressedListener){
+//                ((onBackPressedListener)fragment).onBackPressed();
+//                return;
+//            }
+//        }
+//
+//        //두 번 클릭시 어플 종료
+//        if(System.currentTimeMillis() - lastTimeBackPressed < 1500){
+//            finish();
+//            return;
+//        }
+//        lastTimeBackPressed = System.currentTimeMillis();
+////        super.onBackPressed();
+//        Toast.makeText(this,"뒤로 가기 버튼을 한 번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+//
+//    }
+
     @Override
     public void onBackPressed() {
-        //프래그먼트 onBackPressedListener사용
         List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
-        for(Fragment fragment : fragmentList){
-            if(fragment instanceof onBackPressedListener){
-                ((onBackPressedListener)fragment).onBackPressed();
-                return;
+        if (fragmentList != null) {
+            //TODO: Perform your logic to pass back press here
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().remove(fragmentList.get(1)).commit();
+            fragmentManager.popBackStack();
+            for(Fragment fragment : fragmentList){
+                if(fragment instanceof onBackPressedListener){
+                    ((onBackPressedListener)fragment).onBackPressed();
+                }
             }
         }
-
-        //두 번 클릭시 어플 종료
-        if(System.currentTimeMillis() - lastTimeBackPressed < 1500){
-            finish();
-            return;
-        }
-        lastTimeBackPressed = System.currentTimeMillis();
-//        super.onBackPressed();
-        Toast.makeText(this,"뒤로 가기 버튼을 한 번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
-
     }
 }
