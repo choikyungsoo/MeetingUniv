@@ -71,7 +71,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     private ArrayList<MTeamMemberRecyclerItem> mlist = new ArrayList<MTeamMemberRecyclerItem>();
     ////
 
-    private ArrayList<Integer> ImageSource = new ArrayList<Integer>();
+    private ArrayList<Uri> ImageSource = new ArrayList<Uri>();
 
     private ArrayList<Float> ageRange = new ArrayList<Float>();
 
@@ -127,20 +127,20 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 //        addRecyclerItem(123);
         //팀원 수와 편집에 따라 변함(유동적으로 변함)
         Bundle bundle = getArguments();
-        if(bundle == null){
-//            ArrayList<Integer> takeData = bundle.getIntegerArrayList("changemember");
-//            for(int i=0; i<takeData.size(); i++){
-//                addRecyclerItem(takeData.get(i),0);
-//            }
-        } else {
-            addRecyclerItem(R.drawable.prot, 0);
-            addRecyclerItem(R.drawable.prot2, 0);
-            addRecyclerItem(R.drawable.prot3, 0);
-        }
+//        if(bundle == null){
+////            ArrayList<Integer> takeData = bundle.getIntegerArrayList("changemember");
+////            for(int i=0; i<takeData.size(); i++){
+////                addRecyclerItem(takeData.get(i),0);
+////            }
+//        } else {
+//            addRecyclerItem(R.drawable.prot, 0);
+//            addRecyclerItem(R.drawable.prot2, 0);
+//            addRecyclerItem(R.drawable.prot3, 0);
+//        }
 
         //팀원 편집 아이콘(필수적으로 고정)
         // 설정 아이콘 추가를 위한 RecyclerItem 하나더 만들기
-        addRecyclerItem(R.drawable.settingicon, 1);
+//        addRecyclerItem(R.drawable.settingicon, 1);
         recyclerItemAdapter.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
@@ -178,7 +178,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                                 System.out.println("팀 원 프로필:" + uri);
 //                                Bitmap bm = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
 
-//                                addRecyclerItem(uri,0);
+                                addRecyclerItem(uri,0);
                             }
                         });
                         System.out.println("TeamPersonalMember : " + TeamPersonalMember);
@@ -199,14 +199,14 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     }
 
     private void giveRecycleritemData() {
-        Bundle bundle = new Bundle();
-        bundle.putIntegerArrayList("currentteam", this.ImageSource);
-        this.ETMfragment.setArguments(bundle);
-        this.CTEfragment.setArguments(bundle);
+//        Bundle bundle = new Bundle();
+//        bundle.putIntegerArrayList("currentteam", this.ImageSource);
+//        this.ETMfragment.setArguments(bundle);
+//        this.CTEfragment.setArguments(bundle);
     }
 
     // -> 여기부터는 int를 URI로 바꾸기
-    private void addRecyclerItem(int profile, int verfiycode){
+    private void addRecyclerItem(Uri profile, int verfiycode){
         TeamMemberRecyclerItem recyclerItem = new TeamMemberRecyclerItem();
         recyclerItem.setMemProfile(profile);
         list.add(recyclerItem);

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.softcon.meetinguniv.R;
 
 public class TeamMemberAdapterRecycleritem extends RecyclerView.Adapter<TeamMemberAdapterRecycleritem.viewHolder> {
@@ -73,7 +74,9 @@ public class TeamMemberAdapterRecycleritem extends RecyclerView.Adapter<TeamMemb
     @Override
     public void onBindViewHolder(@NonNull @NotNull viewHolder holder, int position) {
         TeamMemberRecyclerItem recyclerItem = mData.get(position) ;
-        holder.memProfile.setImageResource(recyclerItem.getMemProfile()); ;
+//        holder.memProfile.setImageResource(recyclerItem.getMemProfile());
+        System.out.println("어탭터 부분 : " +  recyclerItem.getMemProfile());
+        Glide.with(holder.memProfile).load(recyclerItem.getMemProfile()).into(holder.memProfile);
     }
 
     @Override

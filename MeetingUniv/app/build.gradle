@@ -95,4 +95,8 @@ dependencies {
     //이미지 둥글게 만들어주는 라이브러리.
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    //Uri를 Glide를 통해서 이미지뷰에 적용할 수 있도록 함
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
 }

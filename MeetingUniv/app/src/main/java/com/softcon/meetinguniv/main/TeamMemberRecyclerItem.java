@@ -6,13 +6,13 @@ import java.io.Serializable;
 
 public class TeamMemberRecyclerItem implements Serializable {
 
-    private int memProfile;
+    private Uri memProfile;
 
-    public void setMemProfile(int memProfile) {
+    public void setMemProfile(Uri memProfile) {
         this.memProfile = memProfile;
     }
 
-    public int getMemProfile() {
+    public Uri getMemProfile() {
         return memProfile;
     }
 }
