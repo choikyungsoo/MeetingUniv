@@ -122,6 +122,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
         //파이어베이스에서 팀정보 데이터 가져오기
         TakeDataFromFirebaseDatabase();
+        System.out.println("+++++++++++++++++++++++++");
 
         this.settingposition = 0;
 //        addRecyclerItem(123);
@@ -179,6 +180,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 //                                Bitmap bm = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
 
                                 addRecyclerItem(uri,0);
+//                                System.out.println("**************************");
                             }
                         });
                         System.out.println("TeamPersonalMember : " + TeamPersonalMember);
@@ -196,6 +198,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
             }
         });
+        System.out.println("**************************");
     }
 
     private void giveRecycleritemData() {
@@ -211,17 +214,8 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         recyclerItem.setMemProfile(profile);
         list.add(recyclerItem);
         System.out.println("프로필프로필프로필"+ profile);
-        if(verfiycode == 0) {
-            try {
-                PrintWriter printWriter = new PrintWriter(new FileWriter(new File("Test")));
-
-                printWriter.println(profile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            this.settingposition++;
-            this.ImageSource.add(profile);
-        }
+        this.settingposition++;
+        this.ImageSource.add(profile);
         ///Test
     }
     private void moveToEditFriends(View v) {

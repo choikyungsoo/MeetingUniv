@@ -73,6 +73,7 @@ public class TeamMemberAdapterRecycleritem extends RecyclerView.Adapter<TeamMemb
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull viewHolder holder, int position) {
+//        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         TeamMemberRecyclerItem recyclerItem = mData.get(position) ;
 //        holder.memProfile.setImageResource(recyclerItem.getMemProfile());
         System.out.println("어탭터 부분 : " +  recyclerItem.getMemProfile());
