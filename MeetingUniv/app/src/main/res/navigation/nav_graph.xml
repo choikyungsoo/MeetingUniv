@@ -46,6 +46,12 @@
         <action
             android:id="@+id/action_mainFragment_to_chatRoomScreenFragmentPopupVer"
             app:destination="@id/chatRoomScreenFragmentPopupVer" />
+        <action
+            android:id="@+id/action_mainFragment_to_chattingScreen2Fragment"
+            app:destination="@id/chattingScreen2Fragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_matchChattingContentsFragment2"
+            app:destination="@id/matchChattingContentsFragment2" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
@@ -279,5 +285,10 @@
         android:name="com.softcon.meetinguniv.AddTeamOkDialog"
         android:label="fragment_add_team_ok_dialog"
         tools:layout="@layout/dialog_add_team_ok" />
+    <fragment
+        android:id="@+id/chattingScreen2Fragment"
+        android:name="com.softcon.meetinguniv.chattingScreen2Fragment"
+        android:label="fragment_chatting_screen2"
+        tools:layout="@layout/fragment_chatting_screen2" />
 
 </navigation>
