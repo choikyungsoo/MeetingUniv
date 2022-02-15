@@ -121,7 +121,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         System.out.println("MacthingContent"+ this.userID);
 
         //파이어베이스에서 팀정보 데이터 가져오기
-        TakeDataFromFirebaseDatabase();
+//        TakeDataFromFirebaseDatabase();
 
         this.settingposition = 0;
 //        addRecyclerItem(123);
@@ -157,46 +157,46 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
     }
 
-    private void TakeDataFromFirebaseDatabase() {
-        this.TeamMember = new ArrayList<String>();
-        this.TeamPersonalMember = new ArrayList<String>();
-        //현재 로그인 한 사용자의 팀 번호를 가져오는 것
-        this.M_databaseReference.child(String.valueOf(this.userID)).child("팀").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                TeamMember.addAll((Collection<? extends String>) snapshot.getValue());
-                T_databaseReference.child(String.valueOf(TeamMember.get(0))).child("팀원").addValueEventListener(new ValueEventListener() {
-                    //팀번호에 대한 팀원 정보를 가져오는 것
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        System.out.println("경수의 세부 팀 데이터:" + snapshot.getValue());
-                        TeamPersonalMember.addAll((Collection<? extends String>) snapshot.getValue());
-                        //팀원 프로필 사진을 다운로드 해서 가져옴
-                        storageRef.child(TeamPersonalMember.get(0)+"/"+"프로필 사진.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                System.out.println("팀 원 프로필:" + uri);
-//                                Bitmap bm = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
-
-//                                addRecyclerItem(uri,0);
-                            }
-                        });
-                        System.out.println("TeamPersonalMember : " + TeamPersonalMember);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
+//    private void TakeDataFromFirebaseDatabase() {
+//        this.TeamMember = new ArrayList<String>();
+//        this.TeamPersonalMember = new ArrayList<String>();
+//        //현재 로그인 한 사용자의 팀 번호를 가져오는 것
+//        this.M_databaseReference.child(String.valueOf(this.userID)).child("팀").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                TeamMember.addAll((Collection<? extends String>) snapshot.getValue());
+//                T_databaseReference.child(String.valueOf(TeamMember.get(0))).child("팀원").addValueEventListener(new ValueEventListener() {
+//                    //팀번호에 대한 팀원 정보를 가져오는 것
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        System.out.println("경수의 세부 팀 데이터:" + snapshot.getValue());
+//                        TeamPersonalMember.addAll((Collection<? extends String>) snapshot.getValue());
+//                        //팀원 프로필 사진을 다운로드 해서 가져옴
+//                        storageRef.child(TeamPersonalMember.get(0)+"/"+"프로필 사진.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                            @Override
+//                            public void onSuccess(Uri uri) {
+//                                System.out.println("팀 원 프로필:" + uri);
+////                                Bitmap bm = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
+//
+////                                addRecyclerItem(uri,0);
+//                            }
+//                        });
+//                        System.out.println("TeamPersonalMember : " + TeamPersonalMember);
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
 
     private void giveRecycleritemData() {
         Bundle bundle = new Bundle();
