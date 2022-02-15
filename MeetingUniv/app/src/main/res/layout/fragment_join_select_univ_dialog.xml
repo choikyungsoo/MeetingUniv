@@ -41,7 +41,7 @@
                 android:textSize="20sp" />
 
             <Spinner
-                android:id="@+id/join_spinner4"
+                android:id="@+id/province_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="25"
@@ -53,7 +53,7 @@
                 android:layout_weight="1" />
 
             <Spinner
-                android:id="@+id/join_spinner5"
+                android:id="@+id/city_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="25" />
