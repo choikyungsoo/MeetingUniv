@@ -63,9 +63,9 @@ public class MatchingChatingAdapterRecycleritem extends RecyclerView.Adapter<Mat
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
 
         View view = inflater.inflate(R.layout.recycleritem_chatmembers, parent, false) ;
-        MatchingChatingAdapterRecycleritem.viewHolder vh = new MatchingChatingAdapterRecycleritem.viewHolder(view) ;
-
-        return vh;
+//        MatchingChatingAdapterRecycleritem.viewHolder vh = new MatchingChatingAdapterRecycleritem.viewHolder(view) ;
+//        return vh;
+        return new MatchingChatingAdapterRecycleritem.viewHolder(view);
     }
 
     @Override
@@ -94,7 +94,8 @@ public class MatchingChatingAdapterRecycleritem extends RecyclerView.Adapter<Mat
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Navigation.findNavController(itemView).navigate(R.id.action_mainFragment_to_chatRoomScreenFragment);
+//                    Navigation.findNavController(itemView).navigate(R.id.action_mainFragment_to_chatRoomScreenFragment);
+                    Navigation.findNavController(itemView).navigate(R.id.action_mainFragment_to_chatRoomScreenFragmentPopupVer);
                 }
             });
             chatprofile = itemView.findViewById(R.id.chatprofile);

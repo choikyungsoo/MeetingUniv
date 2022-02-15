@@ -117,8 +117,9 @@ public class MatchChattingContentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_match_chatting_content, container, false);
-        return rootView;
+//        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_match_chatting_content, container, false);
+//        return rootView;
+        return inflater.inflate(R.layout.fragment_match_chatting_content, container, false);
     }
 
     private void addRecyclerItem(int profile, String memberlist){

@@ -33,6 +33,8 @@
         <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_chat_room_screen_popup2.xml" value="0.359375" />
         <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_chat_room_screen_popup_ver.xml" value="0.3333333333333333" />
         <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_chat_room_screen_version2.xml" value="0.3333333333333333" />
+        <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_chat_room_screen_version3.xml" value="0.27239583333333334" />
+        <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_chat_room_screen_version4.xml" value="0.27239583333333334" />
         <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_chatting_screen.xml" value="0.26766304347826086" />
         <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_chooseteam_element.xml" value="0.19369894982497082" />
         <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_current_content.xml" value="0.2630208333333333" />
@@ -96,7 +98,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15_PREVIEW" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

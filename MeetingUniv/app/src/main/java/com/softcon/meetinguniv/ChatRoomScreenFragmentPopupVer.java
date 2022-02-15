@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.softcon.meetinguniv.main.ChattingScreenFragment;
 import com.softcon.meetinguniv.main.MainFragment;
+import com.softcon.meetinguniv.main.MatchChattingContentFragment;
 import com.softcon.meetinguniv.main.PersonalProfileScreenFragment;
 
 import java.util.Objects;
@@ -53,6 +54,7 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
     private FragmentTransaction fragmentTransaction;
     private InviteFriendElementFragment inviteFriendElementFragment = new InviteFriendElementFragment();
     private ChattingScreenFragment chattingScreenFragment;
+    private MatchChattingContentFragment matchChattingContentFragment;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -148,17 +150,17 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
 //    }
     @Override
     public void onBackPressed() {
-        Toast.makeText(getContext(), "왜 안 돼!!!", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "왜 안 돼!!!", Toast.LENGTH_SHORT).show();
 //        Log.d(TAG, "안되나??---------------------------------------------------------------------");
 //
 //        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
 //        fragmentManager.beginTransaction().remove(ChatRoomScreenFragmentPopupVer.this).commit();
 //        fragmentManager.popBackStack();
 //        /////////////////////
-//        getActivity().getSupportFragmentManager().beginTransaction()
-//                .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
-//                .replace(R.id.constraintLayoutOfchatRoomPopup, chattingScreenFragment)
-//                .commit();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
+                .replace(R.id.constraintLayoutOfchatRoomPopup, matchChattingContentFragment)
+                .commit();
     }
 
     public class ClickHandler implements View.OnClickListener {

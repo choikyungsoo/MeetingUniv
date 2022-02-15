@@ -1,5 +1,6 @@
 package com.softcon.meetinguniv.main;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -30,7 +31,9 @@ public class MainFragment extends Fragment {
 
     private MainScreenFragment mainScreenFragment;
     private FriendsListScreenFragment friendsListScreenFragment;
-    private ChattingScreenFragment chattingScreenFragment;
+//    private ChattingScreenFragment chattingScreenFragment;
+    // 일반 채팅 제거
+    private MatchChattingContentFragment matchChattingContentFragment;
     private ShopScreenFragment shopScreenFragment;
     private SettingsScreenFragment settingsScreenFragment;
 
@@ -55,7 +58,7 @@ public class MainFragment extends Fragment {
         this.mainScreenFragment = new MainScreenFragment();
         this.friendsListScreenFragment = new FriendsListScreenFragment();
 //        this.chattingScreenFragment = new ChattingScreenFragment();
-        this.chattingScreenFragment = new ChattingScreenFragment();
+        this.matchChattingContentFragment = new MatchChattingContentFragment();
         this.shopScreenFragment = new ShopScreenFragment();
         this.settingsScreenFragment = new SettingsScreenFragment();
 
@@ -152,9 +155,10 @@ public class MainFragment extends Fragment {
                 fragmentTransaction.replace(R.id.screenfragmentContainer, this.friendsListScreenFragment);
                 break;
             case 2:
-                this.chattingScreenFragment = new ChattingScreenFragment();
+//                this.chattingScreenFragment = new ChattingScreenFragment();
+                this.matchChattingContentFragment = new MatchChattingContentFragment();
                 bundle.putString("userID", this.userID);
-                fragmentTransaction.replace(R.id.screenfragmentContainer, this.chattingScreenFragment);
+                fragmentTransaction.replace(R.id.screenfragmentContainer, this.matchChattingContentFragment);
                 break;
             case 3:
                 this.shopScreenFragment = new ShopScreenFragment();
