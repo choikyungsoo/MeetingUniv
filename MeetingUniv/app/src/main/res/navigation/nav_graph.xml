@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_mainFragment_to_chattingScreen2Fragment"
             app:destination="@id/chattingScreen2Fragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_matchChattingContentsFragment2"
+            app:destination="@id/matchChattingContentsFragment2" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
