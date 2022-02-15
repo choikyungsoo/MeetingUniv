@@ -303,6 +303,15 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_personalProfileScreenFragment);
     }
 
+
+
+
+
+
+
+
+
+
     private void action(View v){
         if (isFloatOpen) {
             inviteFriends.setImageResource(R.drawable.add);

@@ -72,6 +72,9 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
 
     //popup
     private View dialogView;
+
+    private Spinner province_spinner;
+    private Spinner city_spinner;
     private Spinner join_UnivSpinner;
 
     private FragmentManager fragmentManager;
@@ -80,7 +83,25 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
     private JoinProfileFragment joinProfileFragment;
     private UserInfo userInfo;
 
-    // for parsing
+    // for province name parsing
+    private String provinceName;
+    private ArrayList<String> provinceNames = new ArrayList<String>();
+    private boolean inCtp_kor_nm = false;
+    private String provinceCode;
+    private ArrayList<String> provinceCodes = new ArrayList<String>();
+    private boolean inCtprvn_cd = false;
+    private String provinceCodeForResult;
+
+    // for city name parsing
+    private String cityName;
+    private ArrayList<String> cityNames = new ArrayList<String>();
+    private boolean inSig_kor_nm = false;
+    private String cityCode;
+    private ArrayList<String> cityCodes = new ArrayList<String>();
+    private boolean inSig_cd = false;
+    private String cityCodeForResult;
+
+    // for school name parsing
     private String schoolName;
     private ArrayList<String> schoolNames = new ArrayList<String>();
     private boolean inSchoolName = false;
@@ -280,6 +301,10 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
 
                 popUp();
 
+
+                province_spinner = dialogView.findViewById(R.id.province_spinner);
+                city_spinner = dialogView.findViewById(R.id.city_spinner);
+
                 join_UnivSpinner = dialogView.findViewById(R.id.join_UnivSpinner);
                 joinSelectUnivOk_button = dialogView.findViewById(R.id.joinSelectUnivOk_button);
 
@@ -293,6 +318,8 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                     }
                 });
 
+                getProvinceNameXmlData();
+//                getCityNameXmlData();
                 getSchoolNameXmlData();
 
 
@@ -316,6 +343,173 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
         builder.setView(this.dialogView);
         this.dialog = builder.create();
         dialog.show();
+    }
+
+    private void getProvinceNameXmlData() {
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            //your codes here
+            try {
+
+                URL url = new URL("https://api.vworld.kr/req/data?key=6E466C16-C44E-3029-89F0-EB726855EEAC&service=data&version=2.0&request=getfeature&format=xml&size=1000&page=1&geometry=false&attribute=true&crs=EPSG:3857&geomfilter=BOX(13663271.680031825,3894007.9689600193,14817776.555251127,4688953.0631258525)&data=LT_C_ADSIDO_INFO");
+//            InputStream is= url.openStream();
+
+                XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
+                XmlPullParser parser = parserCreator.newPullParser();
+
+//            parser.setInput(new InputStreamReader(is, "UTF-8"));
+                parser.setInput(url.openStream(), "UTF-8"); //문제 발생
+//            parser.next();
+                int parserEvent = parser.getEventType();
+                Log.i("parsing", "광역시도 파싱 시작");
+
+                while (parserEvent != XmlPullParser.END_DOCUMENT) {
+                    switch(parserEvent) {
+                        case XmlPullParser.START_DOCUMENT:
+                            System.out.println("A");
+                            break;
+                        case XmlPullParser.START_TAG:
+                            if(parser.getName().equals("ctprvn_cd")) {
+                                this.inCtprvn_cd = true;
+                                System.out.println("b");
+                            }
+                            else if(parser.getName().equals("ctp_kor_nm")) {
+                                this.inCtp_kor_nm = true;
+                                System.out.println("B");
+                            }
+                            break;
+
+                        case XmlPullParser.TEXT:
+                            if(this.inCtprvn_cd) {
+                                this.provinceCode = parser.getText();
+                                this.inCtprvn_cd = false;
+                                System.out.println("c");
+                            }
+                            else if(this.inCtp_kor_nm) {
+                                this.provinceName = parser.getText();
+                                this.inCtp_kor_nm = false;
+                                System.out.println("C");
+                            }
+                            break;
+
+                        case XmlPullParser.END_TAG:
+                            if(parser.getName().equals("gml:featureMember")) {
+                                this.provinceCodes.add(this.provinceCode);
+                                System.out.println("d");
+                                this.provinceNames.add(this.provinceName);
+                                System.out.println("D");
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, this.provinceNames);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                                this.province_spinner.setAdapter(adapter);
+                                this.province_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                        provinceCodeForResult = provinceCodes.get(position);
+                                        getCityNameXmlData();
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    parserEvent = parser.next();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    private void getCityNameXmlData() {
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            //your codes here
+            try {
+
+                URL url = new URL("https://api.vworld.kr/req/data?key=6E466C16-C44E-3029-89F0-EB726855EEAC&service=data&version=2.0&request=getfeature&format=xml&size=1000&page=1&geometry=false&attribute=true&crs=EPSG:3857&geomfilter=BOX(13663271.680031825,3894007.9689600193,14817776.555251127,4688953.0631258525)&data=LT_C_ADSIGG_INFO");
+//            InputStream is= url.openStream();
+
+                XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
+                XmlPullParser parser = parserCreator.newPullParser();
+
+//            parser.setInput(new InputStreamReader(is, "UTF-8"));
+                parser.setInput(url.openStream(), "UTF-8"); //문제 발생
+//            parser.next();
+                int parserEvent = parser.getEventType();
+                Log.i("parsing", "시군구 파싱 시작");
+
+                while (parserEvent != XmlPullParser.END_DOCUMENT) {
+                    switch(parserEvent) {
+                        case XmlPullParser.START_DOCUMENT:
+                            System.out.println("AA");
+                            break;
+                        case XmlPullParser.START_TAG:
+                            if(parser.getName().equals("sig_cd")) {
+                                this.inSig_cd = true;
+                                System.out.println("bb");
+                            }
+                            else if(parser.getName().equals("sig_kor_nm")) {
+                                this.inSig_kor_nm = true;
+                                System.out.println("BB");
+                            }
+                            break;
+
+                        case XmlPullParser.TEXT:
+                            if(this.inSig_cd && parser.getText().matches(this.provinceCodeForResult+".*")) {
+                                this.cityCode = parser.getText();
+                                this.inSig_cd = false;
+                                System.out.println("cc");
+                            }
+                            else if(this.inSig_kor_nm && this.cityCode.matches(this.provinceCodeForResult+".*")) {
+                                this.cityName = parser.getText();
+                                this.inSig_kor_nm = false;
+                                System.out.println("CC");
+                            }
+                            break;
+
+                        case XmlPullParser.END_TAG:
+                            System.out.println(this.cityCode+" "+this.provinceCodeForResult);
+                            if(parser.getName().equals("gml:featureMember") && this.cityCode.matches(this.provinceCodeForResult+".*")) {
+                                System.out.println("********"+this.cityCode+" "+this.provinceCodeForResult);
+                                System.out.println("DD");
+                                this.cityNames.add(this.cityName);
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, this.cityNames);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                                this.city_spinner.setAdapter(adapter);
+                                this.city_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                                        cityCodeForResult = cityCodes.get(position);
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    parserEvent = parser.next();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     private void getSchoolNameXmlData() {
