@@ -107,8 +107,9 @@ public class MainActivity extends AppCompatActivity {
         if (fragmentList != null) {
             //TODO: Perform your logic to pass back press here
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().remove(fragmentList.get(1)).commit();
-            fragmentManager.popBackStack();
+//            Toast.makeText(this, fragmentList.size() + "", Toast.LENGTH_SHORT).show();
+//            fragmentManager.beginTransaction().remove(fragmentList.get(1)).commit();
+//            fragmentManager.popBackStack();
             for(Fragment fragment : fragmentList){
                 if(fragment instanceof onBackPressedListener){
                     ((onBackPressedListener)fragment).onBackPressed();
