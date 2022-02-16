@@ -51,10 +51,10 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     private ArrayList<Integer> ImageSource2 = new ArrayList<Integer>();
     private ArrayList<Integer> ImageSource1 = new ArrayList<Integer>();
 
-    //팀에 대한 정보, 팀 추가를 하면 팀 번호가 여기로 들어와야 함
     private ArrayList<String> TeamMember = new ArrayList<String>();
-    //선택한 팀에 대한 팀원의 번호 혹은 개인 식별번호가 여기로 들어와야 함
     private ArrayList<String> TeamPersonalMember = new ArrayList<String>();
+
+    private ArrayList<String> FriendList = new ArrayList<String>();
 
     private RecyclerView allfriends;
     private RecyclerView currentfriends;
@@ -76,10 +76,26 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         super.onViewCreated(view, savedInstanceState);
         this.userID = getArguments().getString("userID");
         System.out.println("ETM : " + this.userID);
-        TakeDataFromFirebase();
+        Current_TakeDataFromFirebase();
+        All_TakeDataFromFirebase();
     }
 
-    private void TakeDataFromFirebase() {
+    private void All_TakeDataFromFirebase() {
+        this.M_databaseReference.child(String.valueOf(this.userID)).child("친구목록").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                FriendList.addAll((Collection<? extends String>) snapshot.getValue());
+                System.out.println("ETM 친구 목록 : " + FriendList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void Current_TakeDataFromFirebase() {
         this.M_databaseReference.child(String.valueOf(this.userID)).child("팀").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -165,9 +181,9 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 
         //DB연결 시 addRecyclerItem2를 통해 친구목록 가져오기!
 
-        addRecyclerItem2(R.drawable.prot, "친구 1");
-        addRecyclerItem2(R.drawable.prot2, "친구 2");
-        addRecyclerItem2(R.drawable.prot3, "친구 3");
+//        addRecyclerItem2(R.drawable.prot, "친구 1");
+//        addRecyclerItem2(R.drawable.prot2, "친구 2");
+//        addRecyclerItem2(R.drawable.prot3, "친구 3");
 
         recyclerItemAdapter2.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
@@ -233,6 +249,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 
     private void DeleteCurrentTeam(int position) {
         this.alllist.remove(position);
+
         recyclerItemAdapter.notifyDataSetChanged();
     }
 
