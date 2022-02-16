@@ -69,7 +69,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
     ///test
     private ArrayList<MTeamMemberRecyclerItem> mlist = new ArrayList<MTeamMemberRecyclerItem>();
-    ////
 
     private ArrayList<Uri> ImageSource = new ArrayList<Uri>();
 
@@ -102,33 +101,30 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
     private TeamMemberAdapterRecycleritem recyclerItemAdapter;
 
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         RecyclerView recyclerView = view.findViewById(R.id.teamprofileRecycler) ;
         this.recyclerItemAdapter = new TeamMemberAdapterRecycleritem(this.list);
-        recyclerView.setAdapter(recyclerItemAdapter) ;
+        recyclerView.setAdapter(recyclerItemAdapter);
 
         this.ETMfragment = new EditTeamMemberElementFragment();
 //        this.ATEfragment = new AddTeamElementFragment(clickHandler);
         this.CTEfragment = new chooseteamElementFragment();
+        this.settingposition = 0;
+        this.userID = getArguments().getString("userID");
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        this.userID = getArguments().getString("userID");
-        System.out.println("MacthingContent"+ this.userID);
-
         //파이어베이스에서 팀정보 데이터 가져오기
         TakeDataFromFirebaseDatabase();
-        System.out.println("+++++++++++++++++++++++++");
 
-        this.settingposition = 0;
-//        addRecyclerItem(123);
         //팀원 수와 편집에 따라 변함(유동적으로 변함)
-        Bundle bundle = getArguments();
+//        Bundle bundle = getArguments();
 //        if(bundle == null){
 ////            ArrayList<Integer> takeData = bundle.getIntegerArrayList("changemember");
 ////            for(int i=0; i<takeData.size(); i++){
@@ -173,18 +169,20 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         System.out.println("경수의 세부 팀 데이터:" + snapshot.getValue());
                         TeamPersonalMember.addAll((Collection<? extends String>) snapshot.getValue());
+                        Uri Settinguri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/meetinguniv-d9983.appspot.com/o/TestSetting%2Fsettingicon.png?alt=media&token=0a096377-239f-405f-b923-9c3b796e59fc");
                         //팀원 프로필 사진을 다운로드 해서 가져옴
-                        storageRef.child(TeamPersonalMember.get(0)+"/"+"프로필 사진.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                System.out.println("팀 원 프로필:" + uri);
-//                                Bitmap bm = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
+                        for(int i = 0; i < TeamPersonalMember.size(); i++) {
+                            storageRef.child(TeamPersonalMember.get(i) + "/" + "프로필 사진.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    System.out.println("팀 원 프로필:" + uri);
+                                    addRecyclerItem(uri, 0);
 
-                                addRecyclerItem(uri,0);
-                                recyclerItemAdapter.notifyDataSetChanged();
-//                                System.out.println("**************************");
-                            }
-                        });
+                                    recyclerItemAdapter.notifyDataSetChanged();
+                                }
+                            });
+                        }
+                        addRecyclerItem(Settinguri, 1);
                         System.out.println("TeamPersonalMember : " + TeamPersonalMember);
                     }
 
@@ -215,11 +213,12 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         TeamMemberRecyclerItem recyclerItem = new TeamMemberRecyclerItem();
         recyclerItem.setMemProfile(profile);
         list.add(recyclerItem);
-        System.out.println("프로필프로필프로필"+ profile);
-        this.settingposition++;
-        this.ImageSource.add(profile);
-        ///Test
+        if(verfiycode == 0){
+            this.settingposition++;
+            this.ImageSource.add(profile);
+        }
     }
+
     private void moveToEditFriends(View v) {
         EditTeamMemberElementFragment fragment2 = new EditTeamMemberElementFragment();
         getActivity().getSupportFragmentManager().beginTransaction()
@@ -300,9 +299,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_matching_content, container, false);
-
-
-//
         collectBtn =  (Button)view.findViewById(R.id.teambtn);
         matchingBtn = (Button)view.findViewById(R.id.matchbtn);
 
@@ -310,14 +306,11 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         collectBtn.setOnClickListener(this);
         //팝업창 구현이 필요한 버튼
         matchingBtn.setOnClickListener(this);
-
-
         return view;
     }
 
     @Override
     public void onClick(View v) {
-//        chooseteamElementFragment fragment = new chooseteamElementFragment();
         CurrentContentsFragment test = new CurrentContentsFragment();
         switch (v.getId()){
             case R.id.teambtn:
