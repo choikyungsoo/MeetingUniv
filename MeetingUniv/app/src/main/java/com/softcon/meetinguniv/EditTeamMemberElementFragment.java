@@ -249,7 +249,6 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 
     private void DeleteCurrentTeam(int position) {
         this.alllist.remove(position);
-
         recyclerItemAdapter.notifyDataSetChanged();
     }
 
@@ -258,6 +257,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         EditTeamRecycleritem1 recyclerItem = new EditTeamRecycleritem1();
         recyclerItem.setE_memporife(profile);
         this.alllist.add(recyclerItem);
+        System.out.println("전체 목록 : " + this.alllist);
     }
 
     //모든 친구 목록

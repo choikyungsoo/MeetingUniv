@@ -55,6 +55,7 @@ import java.util.Collection;
 public class MatchingContentFragment extends Fragment implements View.OnClickListener, RangeSlider.OnChangeListener {
 
     private View view;
+    private TextView textView;
     private Button collectBtn;
     private Button matchingBtn;
     private RangeSlider rangeSlider;
@@ -115,6 +116,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         this.CTEfragment = new chooseteamElementFragment();
         this.settingposition = 0;
         this.userID = getArguments().getString("userID");
+        this.textView = view.findViewById(R.id.M_TeamName);
 
         Bundle bundle = new Bundle();
         bundle.putString("userID", this.userID);
@@ -123,7 +125,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-
         //파이어베이스에서 팀정보 데이터 가져오기
         TakeDataFromFirebaseDatabase();
 
@@ -142,6 +143,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
     }
 
+
     private void TakeDataFromFirebaseDatabase() {
         this.TeamMember = new ArrayList<String>();
         this.TeamPersonalMember = new ArrayList<String>();
@@ -150,6 +152,16 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 TeamMember.addAll((Collection<? extends String>) snapshot.getValue());
+                T_databaseReference.child(String.valueOf(TeamMember.get(0))).child("팀 이름").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        textView.setText((CharSequence) snapshot.getValue());
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 T_databaseReference.child(String.valueOf(TeamMember.get(0))).child("팀원").addValueEventListener(new ValueEventListener() {
                     //팀번호에 대한 팀원 정보를 가져오는 것
                     @Override
