@@ -41,10 +41,14 @@ public class MainScreenFragment extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
+                Bundle bundle = new Bundle();
                 Fragment selected = null;
                 if (position == 0) {
                     //////////////////////////////////
                     fragment1 = new MatchingContentFragment();
+                    userID = getArguments().getString("userID");
+                    bundle.putString("userID", userID);
+                    fragment1.setArguments(bundle);
                     //////////////////////////////////
                     selected = fragment1;
                 }
@@ -76,7 +80,6 @@ public class MainScreenFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = new Bundle();
         this.userID = getArguments().getString("userID");
-
         bundle.putString("userID", this.userID);
         this.fragment1.setArguments(bundle);
 //        Log.d("MainScreenFragment - 회원아이디", this.userID);

@@ -171,7 +171,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                         TeamPersonalMember.addAll((Collection<? extends String>) snapshot.getValue());
                         Uri Settinguri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/meetinguniv-d9983.appspot.com/o/TestSetting%2Fsettingicon.png?alt=media&token=0a096377-239f-405f-b923-9c3b796e59fc");
                         //팀원 프로필 사진을 다운로드 해서 가져옴
-                        for(int i = 0; i < TeamPersonalMember.size()-1; i++) {
+                        for(int i = 0; i < TeamPersonalMember.size(); i++) {
                             storageRef.child(TeamPersonalMember.get(i) + "/" + "프로필 사진.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
