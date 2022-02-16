@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.softcon.meetinguniv.main.FriendsListAdapterRecycleritem;
 import com.softcon.meetinguniv.main.FriendsListRecycleritem;
 import com.softcon.meetinguniv.main.TeamMemberAdapterRecycleritem;
@@ -25,7 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class EditTeamAdapterRecycleritem extends  RecyclerView.Adapter<EditTeamAdapterRecycleritem.viewHolder> {
     private ArrayList<EditTeamRecycleritem1> mData;
     private TeamMemberAdapterRecycleritem.OnItemClickListener mListener = null;
-
+    private View view;
     public interface OnItemClickListener{
         void onItemClick(View v, int position);
     }
@@ -66,7 +67,7 @@ public class EditTeamAdapterRecycleritem extends  RecyclerView.Adapter<EditTeamA
         Context context = parent.getContext() ;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
 
-        View view = inflater.inflate(R.layout.recycleritem_currentteammember, parent, false) ;
+        this.view = inflater.inflate(R.layout.recycleritem_currentteammember, parent, false) ;
         EditTeamAdapterRecycleritem.viewHolder vh = new EditTeamAdapterRecycleritem.viewHolder(view) ;
         return vh;
     }
@@ -74,7 +75,8 @@ public class EditTeamAdapterRecycleritem extends  RecyclerView.Adapter<EditTeamA
     @Override
     public void onBindViewHolder(@NonNull EditTeamAdapterRecycleritem.viewHolder holder, int position) {
         EditTeamRecycleritem1 recyclerItem = mData.get(position) ;
-        holder.E_memProfile.setImageResource(recyclerItem.getE_memporife());
+        Glide.with(this.view).load(recyclerItem.getE_memporife()).into(holder.E_memProfile);
+//        holder.E_memProfile.setImageResource(recyclerItem.getE_memporife());
     }
 
     @Override

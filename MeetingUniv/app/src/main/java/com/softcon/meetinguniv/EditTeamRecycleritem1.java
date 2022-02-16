@@ -1,15 +1,17 @@
 package com.softcon.meetinguniv;
 
+import android.net.Uri;
+
 public class EditTeamRecycleritem1 {
 
-    private int E_memporife;
+    private Uri E_memporife;
 
 
-    public int getE_memporife() {
+    public Uri getE_memporife() {
         return E_memporife;
     }
 
-    public void setE_memporife(int e_memporife) {
+    public void setE_memporife(Uri e_memporife) {
         E_memporife = e_memporife;
     }
 

@@ -97,6 +97,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     System.out.println("ETM 팀 원 프로필:" + uri);
+                                    addRecyclerItem(uri);
                                     recyclerItemAdapter.notifyDataSetChanged();
                                 }
                             });
@@ -185,10 +186,10 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 //                            for (int j=0; j<takeData.size(); j++) {
                             Toast.makeText(getContext(), "position:" + position, Toast.LENGTH_SHORT).show();
                             Toast.makeText(getContext(), "takeData:" + takeData.get(position) + "all" + alllist.get(i).getE_memporife(), Toast.LENGTH_SHORT).show();
-                            if (takeData.get(position) == alllist.get(i).getE_memporife()) {
-                                DeleteCurrentDialog(i);
-                                break;
-                            }
+//                            if (takeData.get(position) == alllist.get(i).getE_memporife()) {
+//                                DeleteCurrentDialog(i);
+//                                break;
+//                            }
 //                            }
 //                            break;
                         }
@@ -236,7 +237,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     }
 
     //현재 팀원
-    private void addRecyclerItem(int profile){
+    private void addRecyclerItem(Uri profile){
         EditTeamRecycleritem1 recyclerItem = new EditTeamRecycleritem1();
         recyclerItem.setE_memporife(profile);
         this.alllist.add(recyclerItem);
@@ -259,7 +260,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
             case R.id.CheckTC:
                 this.checkok = true;
                 savechangememberInfo();
-                givechangememberInfo();
+//                givechangememberInfo();
                 moveToMachingcontent();
                 break;
         }
@@ -274,7 +275,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 
     private void savechangememberInfo() {
         for(EditTeamRecycleritem1 etr1: this.alllist){
-            this.ImageSource2.add(etr1.getE_memporife());
+//            this.ImageSource2.add(etr1.getE_memporife());
         }
     }
 

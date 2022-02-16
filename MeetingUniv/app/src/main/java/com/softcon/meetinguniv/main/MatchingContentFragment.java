@@ -277,7 +277,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         view = inflater.inflate(R.layout.fragment_matching_content, container, false);
         collectBtn =  (Button)view.findViewById(R.id.teambtn);
         matchingBtn = (Button)view.findViewById(R.id.matchbtn);
-
         //슬라이딩 애니메이션이 필요한 버튼
         collectBtn.setOnClickListener(this);
         //팝업창 구현이 필요한 버튼

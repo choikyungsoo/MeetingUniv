@@ -134,10 +134,10 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
 //                            for (int j=0; j<takeData.size(); j++) {
                                 Toast.makeText(getContext(), "position:" + position, Toast.LENGTH_SHORT).show();
                                 Toast.makeText(getContext(), "takeData:" + takeData.get(position) + "all" + alllist.get(i).getE_memporife(), Toast.LENGTH_SHORT).show();
-                                if (takeData.get(position) == alllist.get(i).getE_memporife()) {
-                                    DeleteCurrentDialog(i);
-                                    break;
-                                }
+//                                if (takeData.get(position) == alllist.get(i).getE_memporife()) {
+//                                    DeleteCurrentDialog(i);
+//                                    break;
+//                                }
 //                            }
 //                            break;
                         }
@@ -229,7 +229,7 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
     //현재 팀원
     private void addRecyclerItem(int profile) {
         EditTeamRecycleritem1 recyclerItem = new EditTeamRecycleritem1();
-        recyclerItem.setE_memporife(profile);
+//        recyclerItem.setE_memporife(profile);
 //        for (int i=0; i<this.alllist.size(); i++) {
 //            if (this.alllist.get(i)==recyclerItem) {
 //                Toast.makeText(getContext(), "지워져라", Toast.LENGTH_SHORT).show();
@@ -274,7 +274,7 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
     private void savechangememberInfo() {
         for(EditTeamRecycleritem1 etr1: this.alllist){
             Toast.makeText(getContext(), "savechangememberInfo 실행", Toast.LENGTH_SHORT).show();
-            this.ImageSource2.add(etr1.getE_memporife());
+//            this.ImageSource2.add(etr1.getE_memporife());
         }
     }
 
