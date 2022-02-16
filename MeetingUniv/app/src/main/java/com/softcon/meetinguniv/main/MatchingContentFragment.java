@@ -171,19 +171,17 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                         TeamPersonalMember.addAll((Collection<? extends String>) snapshot.getValue());
                         Uri Settinguri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/meetinguniv-d9983.appspot.com/o/TestSetting%2Fsettingicon.png?alt=media&token=0a096377-239f-405f-b923-9c3b796e59fc");
                         //팀원 프로필 사진을 다운로드 해서 가져옴
-                        for(int i = 0; i < TeamPersonalMember.size(); i++) {
+                        for(int i = 0; i < TeamPersonalMember.size()-1; i++) {
                             storageRef.child(TeamPersonalMember.get(i) + "/" + "프로필 사진.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    System.out.println("팀 원 프로필:" + uri);
-                                    addRecyclerItem(uri, 0);
-
-                                    recyclerItemAdapter.notifyDataSetChanged();
-                                }
-                            });
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        System.out.println("팀 원 프로필:" + uri);
+                                        addRecyclerItem(uri, 0);
+                                        recyclerItemAdapter.notifyDataSetChanged();
+                                    }
+                                });
                         }
                         addRecyclerItem(Settinguri, 1);
-                        System.out.println("TeamPersonalMember : " + TeamPersonalMember);
                     }
 
                     @Override
@@ -202,6 +200,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     }
 
     private void giveRecycleritemData() {
+
 //        Bundle bundle = new Bundle();
 //        bundle.putIntegerArrayList("currentteam", this.ImageSource);
 //        this.ETMfragment.setArguments(bundle);
@@ -214,7 +213,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         recyclerItem.setMemProfile(profile);
         list.add(recyclerItem);
         if(verfiycode == 0){
-            this.settingposition++;
+//            this.settingposition++;
             this.ImageSource.add(profile);
         }
     }
