@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,6 +32,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     private TextView CheckTC;
     private SearchView editsearch;
     private InputMethodManager imm;
+    private String userId;
 
     private ArrayList<EditTeamRecycleritem1> alllist = new ArrayList<EditTeamRecycleritem1>();
     private ArrayList<EditTeamRecycleritem> currentlist = new ArrayList<EditTeamRecycleritem>();
@@ -47,11 +49,14 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     private MatchingContentFragment fragment;
 
     private Boolean checkok = false;
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        this.userId = getArguments().getString("userID");
+        System.out.println("ETM : " + this.userId);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,13 +78,13 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         this.allfriends.setLayoutManager(linearLayoutManager);
 
         this.CheckTC.setOnClickListener(this);
-        Bundle bundle = getArguments();
-        if(bundle != null){
-            ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
-            for(int i=0; i<takeData.size(); i++){
-                addRecyclerItem(takeData.get(i));
-            }
-        }
+//        Bundle bundle = getArguments();
+//        if(bundle != null){
+//            ArrayList<Integer> takeData = bundle.getIntegerArrayList("currentteam");
+//            for(int i=0; i<takeData.size(); i++){
+//                addRecyclerItem(takeData.get(i));
+//            }
+//        }
 
         recyclerItemAdapter.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
@@ -111,7 +116,6 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 //                AddCurrentDialog(position);
 //            }
 //        });
-
                 if (!v.isSelected()) {
                     AddCurrentDialog(position);
                     v.setSelected(true);

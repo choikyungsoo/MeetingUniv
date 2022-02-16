@@ -94,7 +94,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     private chooseteamElementFragment CTEfragment;
 
     private FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageRef = storage.getReference();
+    private StorageReference storageRef = storage.getReference();
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference M_databaseReference = database.getReference("회원정보");
     private DatabaseReference T_databaseReference = database.getReference("팀정보");
@@ -116,6 +116,10 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         this.settingposition = 0;
         this.userID = getArguments().getString("userID");
 
+        Bundle bundle = new Bundle();
+        bundle.putString("userID", this.userID);
+        this.ETMfragment.setArguments(bundle);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -123,27 +127,10 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         //파이어베이스에서 팀정보 데이터 가져오기
         TakeDataFromFirebaseDatabase();
 
-        //팀원 수와 편집에 따라 변함(유동적으로 변함)
-//        Bundle bundle = getArguments();
-//        if(bundle == null){
-////            ArrayList<Integer> takeData = bundle.getIntegerArrayList("changemember");
-////            for(int i=0; i<takeData.size(); i++){
-////                addRecyclerItem(takeData.get(i),0);
-////            }
-//        } else {
-//            addRecyclerItem(R.drawable.prot, 0);
-//            addRecyclerItem(R.drawable.prot2, 0);
-//            addRecyclerItem(R.drawable.prot3, 0);
-//        }
-
-        //팀원 편집 아이콘(필수적으로 고정)
-        // 설정 아이콘 추가를 위한 RecyclerItem 하나더 만들기
-//        addRecyclerItem(R.drawable.settingicon, 1);
         this.recyclerItemAdapter.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 if(position == settingposition){
-                    giveRecycleritemData();
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
                             .replace(R.id.Framecontainer, ETMfragment)
@@ -183,29 +170,19 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                         }
                         addRecyclerItem(Settinguri, 1);
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
                 });
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-        System.out.println("**************************");
     }
 
-    private void giveRecycleritemData() {
-
-//        Bundle bundle = new Bundle();
-//        bundle.putIntegerArrayList("currentteam", this.ImageSource);
-//        this.ETMfragment.setArguments(bundle);
-//        this.CTEfragment.setArguments(bundle);
-    }
 
     // -> 여기부터는 int를 URI로 바꾸기
     private void addRecyclerItem(Uri profile, int verfiycode){
@@ -314,7 +291,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         switch (v.getId()){
             case R.id.teambtn:
                 //팀선택 버튼
-                giveRecycleritemData();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
                         .replace(R.id.Framecontainer, this.CTEfragment)
