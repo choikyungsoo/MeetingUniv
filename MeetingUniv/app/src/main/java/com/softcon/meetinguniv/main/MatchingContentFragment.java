@@ -100,13 +100,14 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
     private DatabaseReference M_databaseReference = database.getReference("회원정보");
     private DatabaseReference T_databaseReference = database.getReference("팀정보");
 
+    private TeamMemberAdapterRecycleritem recyclerItemAdapter;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         RecyclerView recyclerView = view.findViewById(R.id.teamprofileRecycler) ;
-        TeamMemberAdapterRecycleritem recyclerItemAdapter = new TeamMemberAdapterRecycleritem(this.list);
+        this.recyclerItemAdapter = new TeamMemberAdapterRecycleritem(this.list);
         recyclerView.setAdapter(recyclerItemAdapter) ;
 
         this.ETMfragment = new EditTeamMemberElementFragment();
@@ -142,7 +143,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         //팀원 편집 아이콘(필수적으로 고정)
         // 설정 아이콘 추가를 위한 RecyclerItem 하나더 만들기
 //        addRecyclerItem(R.drawable.settingicon, 1);
-        recyclerItemAdapter.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
+        this.recyclerItemAdapter.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 if(position == settingposition){
@@ -154,7 +155,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                 }
             }
         });
-        recyclerItemAdapter.notifyDataSetChanged();
+        this.recyclerItemAdapter.notifyDataSetChanged();
 
     }
 
@@ -180,6 +181,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 //                                Bitmap bm = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
 
                                 addRecyclerItem(uri,0);
+                                recyclerItemAdapter.notifyDataSetChanged();
 //                                System.out.println("**************************");
                             }
                         });

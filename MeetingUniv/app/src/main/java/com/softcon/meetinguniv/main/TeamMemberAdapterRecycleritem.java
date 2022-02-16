@@ -23,6 +23,7 @@ public class TeamMemberAdapterRecycleritem extends RecyclerView.Adapter<TeamMemb
     private ArrayList<TeamMemberRecyclerItem> mData;
     private OnItemClickListener mListener = null;
     private Boolean settingc;
+    private View view;
 
     public interface OnItemClickListener{
         void onItemClick(View v, int position);
@@ -65,7 +66,7 @@ public class TeamMemberAdapterRecycleritem extends RecyclerView.Adapter<TeamMemb
         Context context = parent.getContext() ;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
 
-        View view = inflater.inflate(R.layout.recycleritem_members, parent, false) ;
+        this.view = inflater.inflate(R.layout.recycleritem_members, parent, false) ;
         TeamMemberAdapterRecycleritem.viewHolder vh = new TeamMemberAdapterRecycleritem.viewHolder(view) ;
 
         return vh;
@@ -73,11 +74,11 @@ public class TeamMemberAdapterRecycleritem extends RecyclerView.Adapter<TeamMemb
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull viewHolder holder, int position) {
-//        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         TeamMemberRecyclerItem recyclerItem = mData.get(position) ;
 //        holder.memProfile.setImageResource(recyclerItem.getMemProfile());
-        System.out.println("어탭터 부분 : " +  recyclerItem.getMemProfile());
-        Glide.with(holder.memProfile).load(recyclerItem.getMemProfile()).into(holder.memProfile);
+//        holder.memProfile.setImageURI(recyclerItem.getMemProfile());
+//        System.out.println("어탭터 부분 : " +  recyclerItem.getMemProfile());
+        Glide.with(this.view).load(recyclerItem.getMemProfile()).into(holder.memProfile);
     }
 
     @Override
