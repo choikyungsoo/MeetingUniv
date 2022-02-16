@@ -3,6 +3,7 @@ package com.softcon.meetinguniv;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,11 +21,20 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.softcon.meetinguniv.main.MatchingContentFragment;
 import com.softcon.meetinguniv.main.TeamMemberAdapterRecycleritem;
 import com.softcon.meetinguniv.main.TeamMemberRecyclerItem;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 
 public class EditTeamMemberElementFragment extends Fragment implements View.OnClickListener{
@@ -32,7 +42,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     private TextView CheckTC;
     private SearchView editsearch;
     private InputMethodManager imm;
-    private String userId;
+    private String userID;
 
     private ArrayList<EditTeamRecycleritem1> alllist = new ArrayList<EditTeamRecycleritem1>();
     private ArrayList<EditTeamRecycleritem> currentlist = new ArrayList<EditTeamRecycleritem>();
@@ -40,6 +50,11 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 
     private ArrayList<Integer> ImageSource2 = new ArrayList<Integer>();
     private ArrayList<Integer> ImageSource1 = new ArrayList<Integer>();
+
+    //팀에 대한 정보, 팀 추가를 하면 팀 번호가 여기로 들어와야 함
+    private ArrayList<String> TeamMember = new ArrayList<String>();
+    //선택한 팀에 대한 팀원의 번호 혹은 개인 식별번호가 여기로 들어와야 함
+    private ArrayList<String> TeamPersonalMember = new ArrayList<String>();
 
     private RecyclerView allfriends;
     private RecyclerView currentfriends;
@@ -50,11 +65,54 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 
     private Boolean checkok = false;
 
+    private FirebaseStorage ETM_storage = FirebaseStorage.getInstance();
+    private StorageReference storageRef = ETM_storage.getReference();
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference M_databaseReference = database.getReference("회원정보");
+    private DatabaseReference T_databaseReference = database.getReference("팀정보");
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.userId = getArguments().getString("userID");
-        System.out.println("ETM : " + this.userId);
+        this.userID = getArguments().getString("userID");
+        System.out.println("ETM : " + this.userID);
+        TakeDataFromFirebase();
+    }
+
+    private void TakeDataFromFirebase() {
+        this.M_databaseReference.child(String.valueOf(this.userID)).child("팀").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                TeamMember.addAll((Collection<? extends String>) snapshot.getValue());
+                T_databaseReference.child(String.valueOf(TeamMember.get(0))).child("팀원").addValueEventListener(new ValueEventListener() {
+                    //팀번호에 대한 팀원 정보를 가져오는 것
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        System.out.println("경수의 세부 팀 데이터:" + snapshot.getValue());
+                        TeamPersonalMember.addAll((Collection<? extends String>) snapshot.getValue());
+                        Uri Settinguri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/meetinguniv-d9983.appspot.com/o/TestSetting%2Fsettingicon.png?alt=media&token=0a096377-239f-405f-b923-9c3b796e59fc");
+                        //팀원 프로필 사진을 다운로드 해서 가져옴
+                        for(int i = 0; i < TeamPersonalMember.size(); i++) {
+                            storageRef.child(TeamPersonalMember.get(i) + "/" + "프로필 사진.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    System.out.println("ETM 팀 원 프로필:" + uri);
+                                    recyclerItemAdapter.notifyDataSetChanged();
+                                }
+                            });
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
