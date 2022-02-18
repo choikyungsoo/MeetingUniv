@@ -24,7 +24,16 @@
         android:id="@+id/memberlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
         android:text="참가자" />
+
+    <TextView
+        android:id="@+id/chatDDay"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:gravity="center|center_vertical"
+        android:text="3" />
+
 </LinearLayout>

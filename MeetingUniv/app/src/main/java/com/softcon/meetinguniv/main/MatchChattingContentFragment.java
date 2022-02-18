@@ -21,8 +21,10 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -39,6 +41,7 @@ public class MatchChattingContentFragment extends Fragment {
     private EditText editSearch;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -69,10 +72,28 @@ public class MatchChattingContentFragment extends Fragment {
 //            }
 //        });
 
-        addRecyclerItem(R.drawable.prot, "테스트용 입니다");
-        addRecyclerItem(R.drawable.prot, "aaa1234");
-        addRecyclerItem(R.drawable.prot, "chae");
-        addRecyclerItem(R.drawable.prot, "yun");
+        //////////////firestore 연결하면서 주석 처리 해둔 부분/////////////////////////////////
+//        addRecyclerItem(R.drawable.prot, "테스트용 입니다");
+//        addRecyclerItem(R.drawable.prot, "aaa1234");
+//        addRecyclerItem(R.drawable.prot, "chae");
+//        addRecyclerItem(R.drawable.prot, "yun");
+        /////////////////////////////////////////////////////////////////////////////////
+
+//        db.collection("Chatting").document("t5rqLmjoCuHPht1NkuYQ").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    DocumentSnapshot document = task.getResult();
+
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        MatchingChatingRecycleritem recyclerItem = new MatchingChatingRecycleritem();
+//                        recyclerItem.setChatingProfile(R.drawable.prot);
+//                        recyclerItem.setMemberlist(document.getDate("title").toString());
+//                        list.add(recyclerItem);
+//                    }
+//                }
+//            }
+//        });
 
         this.recyclerItemAdapter = new MatchingChatingAdapterRecycleritem(this.getActivity(), this.list);
         recyclerView.setAdapter(this.recyclerItemAdapter);
