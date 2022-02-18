@@ -468,12 +468,19 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                             break;
 
                         case XmlPullParser.TEXT:
-                            if(this.inSig_cd && parser.getText().matches(this.provinceCodeForResult+".*")) {
-                                this.cityCode = parser.getText();
+                            if(this.inSig_cd) {
+                                if(parser.getText().matches(this.provinceCodeForResult+".*")) {
+                                    this.cityCode = parser.getText();
+//                                    this.inSig_cd = false;
+                                    System.out.println("cc");
+                                }
+                                else {
+                                    this.inSig_kor_nm = false;
+                                }
                                 this.inSig_cd = false;
-                                System.out.println("cc");
+
                             }
-                            else if(this.inSig_kor_nm && this.cityCode.matches(this.provinceCodeForResult+".*")) {
+                            if(this.inSig_kor_nm) {
                                 this.cityName = parser.getText();
                                 this.inSig_kor_nm = false;
                                 System.out.println("CC");
@@ -482,7 +489,7 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
 
                         case XmlPullParser.END_TAG:
                             System.out.println(this.cityCode+" "+this.provinceCodeForResult);
-                            if(parser.getName().equals("gml:featureMember") && this.cityCode.matches(this.provinceCodeForResult+".*")) {
+                            if(parser.getName().equals("gml:featureMember")) {
                                 System.out.println("********"+this.cityCode+" "+this.provinceCodeForResult);
                                 System.out.println("DD");
                                 this.cityNames.add(this.cityName);

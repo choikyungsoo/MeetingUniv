@@ -58,6 +58,8 @@ public class JoinProfileFragment extends Fragment {
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference = storage.getReference();
 
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -168,6 +170,8 @@ public class JoinProfileFragment extends Fragment {
                             Log.d("프로필 사진", "성공");
                         }
                     });
+
+//                    auth.updateCurrentUser();
 
 //                ArrayList<Integer> arrayList = new ArrayList<Integer>();
 //                arrayList.add(0);
