@@ -168,21 +168,23 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                             //팀번호에 대한 팀원 정보를 가져오는 것
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                System.out.println("경수의 세부 팀 데이터:" + snapshot.getValue());
-                                TeamPersonalMember.addAll((Collection<? extends String>) snapshot.getValue());
-                                Uri Settinguri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/meetinguniv-d9983.appspot.com/o/TestSetting%2Fsettingicon.png?alt=media&token=0a096377-239f-405f-b923-9c3b796e59fc");
-                                //팀원 프로필 사진을 다운로드 해서 가져옴
-                                for (int i = 0; i < TeamPersonalMember.size(); i++) {
-                                    storageRef.child(TeamPersonalMember.get(i) + "/" + "프로필 사진.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            System.out.println("팀 원 프로필:" + uri);
-                                            addRecyclerItem(uri, 0);
-                                            recyclerItemAdapter.notifyDataSetChanged();
-                                        }
-                                    });
+                                if(snapshot.getValue() != "null") {
+                                    System.out.println("경수의 세부 팀 데이터:" + snapshot.getValue());
+                                    TeamPersonalMember.addAll((Collection<? extends String>) snapshot.getValue());
+                                    Uri Settinguri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/meetinguniv-d9983.appspot.com/o/TestSetting%2Fsettingicon.png?alt=media&token=0a096377-239f-405f-b923-9c3b796e59fc");
+                                    //팀원 프로필 사진을 다운로드 해서 가져옴
+                                    for (int i = 0; i < TeamPersonalMember.size(); i++) {
+                                        storageRef.child(TeamPersonalMember.get(i) + "/" + "프로필 사진.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+                                                System.out.println("팀 원 프로필:" + uri);
+                                                addRecyclerItem(uri, 0);
+                                                recyclerItemAdapter.notifyDataSetChanged();
+                                            }
+                                        });
+                                    }
+                                    addRecyclerItem(Settinguri, 1);
                                 }
-                                addRecyclerItem(Settinguri, 1);
                             }
 
                             @Override
