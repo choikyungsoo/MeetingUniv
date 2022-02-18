@@ -151,7 +151,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         this.M_databaseReference.child(String.valueOf(this.userID)).child("팀").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.getValue() != null) {
+                    if(snapshot.getValue() != "null") {
                         TeamMember.addAll((Collection<? extends String>) snapshot.getValue());
                         T_databaseReference.child(String.valueOf(TeamMember.get(0))).child("팀 이름").addValueEventListener(new ValueEventListener() {
                             @Override
