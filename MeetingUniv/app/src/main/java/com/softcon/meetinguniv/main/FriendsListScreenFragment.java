@@ -84,7 +84,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference("회원정보");
 
-    private long userID;
+    private String userID;
 
     private FeedTemplate feedTemplate;
     private TextTemplate textTemplate;
@@ -93,7 +93,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         super.onViewCreated(view, savedInstanceState);
 
         // bundle data 받기
-        this.userID = getArguments().getLong("userID");
+        this.userID = getArguments().getString("userID");
         Log.d("FriendsListScreenFragment - 회원아이디", String.valueOf(this.userID));
 
         RecyclerView recyclerView = view.findViewById(R.id.F_chatinglist);
