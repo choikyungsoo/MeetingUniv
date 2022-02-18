@@ -14,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -49,6 +52,8 @@ public class KakaoLoginFragment extends Fragment {
     private TextView logo;
 
     private View view;
+
+    private FirebaseUser currentUser;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -205,12 +210,32 @@ public class KakaoLoginFragment extends Fragment {
                     System.out.println("success");
                     System.out.println(answer);
 //                    Toast.makeText(Intro.this, "Answer = " + answer, Toast.LENGTH_LONG).show();
-                    auth.signInWithCustomToken(answer);
-                    System.out.println(auth.getUid());
+                    auth.signInWithCustomToken(answer).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()) {
+                                FirebaseUser user = task.getResult().getUser();
+                                auth.updateCurrentUser(user);
+//                                auth.updateCurrentUser()
+                                String uid = user.getUid();
+//                                String uid = task.getResult().getUser().getUid();
+                                System.out.println(uid);
+
+
+                                currentUser = auth.getCurrentUser();
+                                System.out.println(currentUser.getUid());
+
+                                updateUserInfo(view);
+                            }
+                        }
+                    });
+//                    FirebaseUser firebaseUser = auth.getCurrentUser();
+//                    System.out.println("firebaseUser : "+firebaseUser.getUid());
+
 //                    FirebaseUser user =
 //                    auth.updateCurrentUser();
 
-                    updateUserInfo(view);
+
 
 //                    Log.d("카카오톡","로그인 성공");
 //                    Intent intent = new Intent(Intro.this, MainActivity.class);
@@ -244,25 +269,25 @@ public class KakaoLoginFragment extends Fragment {
 
         UserInfo userInfo = new UserInfo();
 
-        userInfo.setUserID(auth.getUid());
+        userInfo.setUserID(this.currentUser.getUid());
 
-        Log.d("UserID", String.valueOf(auth.getUid()));
+        Log.d("UserID", String.valueOf(this.currentUser.getUid()));
         Log.d("StoredUserID", String.valueOf(userInfo.getUserID()));
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //약관 동의 여부 확인
-                if(snapshot.hasChild(auth.getUid())){
-                    if(snapshot.child(auth.getUid()).child("약관동의").child("선택").hasChild("프로모션 정보 수신 동의")
-                            && snapshot.child(auth.getUid()).child("약관동의").child("필수").hasChild("개인정보 수집 및 이용 동의")
-                            && snapshot.child(auth.getUid()).child("약관동의").child("필수").hasChild("미팅대학 이용약관 동의")
-                            && snapshot.child(auth.getUid()).child("약관동의").child("필수").hasChild("위치정보 이용약관 동의")
-                            && snapshot.child(auth.getUid()).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").getValue().equals(true)
-                            && snapshot.child(auth.getUid()).child("약관동의").child("필수").child("미팅대학 이용약관 동의").getValue().equals(true)
-                            && snapshot.child(auth.getUid()).child("약관동의").child("필수").child("위치정보 이용약관 동의").getValue().equals(true)
-                            && snapshot.child(auth.getUid()).child("닉네임").exists()
-                            && snapshot.child(auth.getUid()).child("추천인코드").exists()) {
+                if(snapshot.hasChild(currentUser.getUid())){
+                    if(snapshot.child(currentUser.getUid()).child("약관동의").child("선택").hasChild("프로모션 정보 수신 동의")
+                            && snapshot.child(currentUser.getUid()).child("약관동의").child("필수").hasChild("개인정보 수집 및 이용 동의")
+                            && snapshot.child(currentUser.getUid()).child("약관동의").child("필수").hasChild("미팅대학 이용약관 동의")
+                            && snapshot.child(currentUser.getUid()).child("약관동의").child("필수").hasChild("위치정보 이용약관 동의")
+                            && snapshot.child(currentUser.getUid()).child("약관동의").child("필수").child("개인정보 수집 및 이용 동의").getValue().equals(true)
+                            && snapshot.child(currentUser.getUid()).child("약관동의").child("필수").child("미팅대학 이용약관 동의").getValue().equals(true)
+                            && snapshot.child(currentUser.getUid()).child("약관동의").child("필수").child("위치정보 이용약관 동의").getValue().equals(true)
+                            && snapshot.child(currentUser.getUid()).child("닉네임").exists()
+                            && snapshot.child(currentUser.getUid()).child("추천인코드").exists()) {
 //                                Log.d("프로모션 정보 수신 동의", String.valueOf(snapshot.child(String.valueOf(user.getId())).child("약관동의").child("선택").child("프로모션 정보 수신 동의").getValue().equals(true)));
 //----------------------------------학생증 인증 여부 확인 필요------------------------------------------------------------------------------------------------------------------------
                             //if(){}
@@ -270,7 +295,7 @@ public class KakaoLoginFragment extends Fragment {
 //                                    if(){}
                         Log.d("Comment", "goooooooood~");
                         Log.d("카카오톡","로그인 성공");
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        Intent intent = new Intent(getActivity(), Intro.class);
                         startActivity(intent);
                         getActivity().finish();
                     }
