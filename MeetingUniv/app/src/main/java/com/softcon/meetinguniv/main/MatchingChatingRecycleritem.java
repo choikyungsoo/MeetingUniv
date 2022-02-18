@@ -3,6 +3,7 @@ package com.softcon.meetinguniv.main;
 public class MatchingChatingRecycleritem {
     private int chatingProfile;
     private String memberlist;
+    private String dDay;
 
     public int getChatingProfile() {
         return chatingProfile;
@@ -20,6 +21,11 @@ public class MatchingChatingRecycleritem {
         this.memberlist = memberlist;
     }
 
+    public String getDDay() {
+        return dDay;
+    }
 
-
+    public void setDDay(String dDay) {
+        this.dDay = dDay;
+    }
 }

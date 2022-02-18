@@ -73,6 +73,8 @@ public class MatchingChatingAdapterRecycleritem extends RecyclerView.Adapter<Mat
         MatchingChatingRecycleritem recyclerItem = items.get(position) ;
         holder.chatprofile.setImageResource(recyclerItem.getChatingProfile());
         holder.memberlist.setText(recyclerItem.getMemberlist()) ;
+
+
     }
 
     @Override
@@ -88,6 +90,7 @@ public class MatchingChatingAdapterRecycleritem extends RecyclerView.Adapter<Mat
 
         private ImageView chatprofile;
         private TextView memberlist;
+        private TextView dDay;
 
         public viewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -100,7 +103,7 @@ public class MatchingChatingAdapterRecycleritem extends RecyclerView.Adapter<Mat
             });
             chatprofile = itemView.findViewById(R.id.chatprofile);
             memberlist = itemView.findViewById(R.id.memberlist);
-
+            dDay = itemView.findViewById(R.id.chatDDay);
         }
     }
 }
