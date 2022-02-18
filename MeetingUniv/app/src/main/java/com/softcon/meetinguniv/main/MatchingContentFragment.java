@@ -151,42 +151,48 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         this.M_databaseReference.child(String.valueOf(this.userID)).child("팀").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                TeamMember.addAll((Collection<? extends String>) snapshot.getValue());
-                T_databaseReference.child(String.valueOf(TeamMember.get(0))).child("팀 이름").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        textView.setText((CharSequence) snapshot.getValue());
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                    if(snapshot.getValue() != null) {
+                        TeamMember.addAll((Collection<? extends String>) snapshot.getValue());
+                        T_databaseReference.child(String.valueOf(TeamMember.get(0))).child("팀 이름").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                textView.setText((CharSequence) snapshot.getValue());
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                        T_databaseReference.child(String.valueOf(TeamMember.get(0))).child("팀원").addValueEventListener(new ValueEventListener() {
+                            //팀번호에 대한 팀원 정보를 가져오는 것
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                System.out.println("경수의 세부 팀 데이터:" + snapshot.getValue());
+                                TeamPersonalMember.addAll((Collection<? extends String>) snapshot.getValue());
+                                Uri Settinguri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/meetinguniv-d9983.appspot.com/o/TestSetting%2Fsettingicon.png?alt=media&token=0a096377-239f-405f-b923-9c3b796e59fc");
+                                //팀원 프로필 사진을 다운로드 해서 가져옴
+                                for (int i = 0; i < TeamPersonalMember.size(); i++) {
+                                    storageRef.child(TeamPersonalMember.get(i) + "/" + "프로필 사진.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            System.out.println("팀 원 프로필:" + uri);
+                                            addRecyclerItem(uri, 0);
+                                            recyclerItemAdapter.notifyDataSetChanged();
+                                        }
+                                    });
+                                }
+                                addRecyclerItem(Settinguri, 1);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    } else{
 
                     }
-                });
-                T_databaseReference.child(String.valueOf(TeamMember.get(0))).child("팀원").addValueEventListener(new ValueEventListener() {
-                    //팀번호에 대한 팀원 정보를 가져오는 것
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        System.out.println("경수의 세부 팀 데이터:" + snapshot.getValue());
-                        TeamPersonalMember.addAll((Collection<? extends String>) snapshot.getValue());
-                        Uri Settinguri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/meetinguniv-d9983.appspot.com/o/TestSetting%2Fsettingicon.png?alt=media&token=0a096377-239f-405f-b923-9c3b796e59fc");
-                        //팀원 프로필 사진을 다운로드 해서 가져옴
-                        for(int i = 0; i < TeamPersonalMember.size(); i++) {
-                            storageRef.child(TeamPersonalMember.get(i) + "/" + "프로필 사진.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        System.out.println("팀 원 프로필:" + uri);
-                                        addRecyclerItem(uri, 0);
-                                        recyclerItemAdapter.notifyDataSetChanged();
-                                    }
-                                });
-                        }
-                        addRecyclerItem(Settinguri, 1);
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

@@ -27,19 +27,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/teambtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:backgroundTint="@color/white"
-            android:text="팀선택"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/teamprofileRecycler"
+            android:layout_width="310dp"
+            android:layout_height="68dp"
+            android:background="@drawable/border"
+            android:padding="9dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/teamprofileRecycler"
-            app:layout_constraintVertical_bias="0.097" />
+            app:layout_constraintTop_toBottomOf="@+id/M_TeamName"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/recycleritem_members" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/matchbtn"
@@ -56,19 +56,19 @@
             app:layout_constraintTop_toBottomOf="@+id/teambtn"
             app:layout_constraintVertical_bias="1.0" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/teamprofileRecycler"
-            android:layout_width="310dp"
-            android:layout_height="68dp"
-            android:background="@drawable/border"
-            android:padding="9dp"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/teambtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
+            android:text="팀선택"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/M_TeamName"
-            app:layout_constraintVertical_bias="0.0"
-            tools:listitem="@layout/recycleritem_members" />
+            app:layout_constraintTop_toBottomOf="@+id/teamprofileRecycler"
+            app:layout_constraintVertical_bias="0.097" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
