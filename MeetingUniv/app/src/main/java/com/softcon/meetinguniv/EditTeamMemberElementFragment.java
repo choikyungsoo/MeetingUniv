@@ -81,18 +81,18 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     }
 
     private void All_TakeDataFromFirebase() {
-        this.M_databaseReference.child(String.valueOf(this.userID)).child("친구목록").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                FriendList.addAll((Collection<? extends String>) snapshot.getValue());
-                System.out.println("ETM 친구 목록 : " + FriendList);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        this.M_databaseReference.child(String.valueOf(this.userID)).child("친구목록").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                FriendList.addAll((Collection<? extends String>) snapshot.getValue());
+//                System.out.println("ETM 친구 목록 : " + FriendList);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
     }
 
     private void Current_TakeDataFromFirebase() {
