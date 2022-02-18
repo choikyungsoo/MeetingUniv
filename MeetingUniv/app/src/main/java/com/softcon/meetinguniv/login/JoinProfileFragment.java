@@ -154,8 +154,8 @@ public class JoinProfileFragment extends Fragment {
                             databaseReference.child(userInfo.getUserID()).child("학생증").setValue(1);
                         }
                     });
-                    databaseReference.child(userInfo.getUserID()).child("팀").setValue("null");
-                    databaseReference.child(userInfo.getUserID()).child("친구목록").setValue("null");
+                    databaseReference.child(userInfo.getUserID()).child("팀").child("0").setValue("null");
+                    databaseReference.child(userInfo.getUserID()).child("친구목록").child("0").setValue("null");
                     databaseReference.child(userInfo.getUserID()).child("닉네임").setValue(userInfo.getNickname());
                     databaseReference.child(userInfo.getUserID()).child("추천인코드").setValue(userInfo.getInviteCode());
 
