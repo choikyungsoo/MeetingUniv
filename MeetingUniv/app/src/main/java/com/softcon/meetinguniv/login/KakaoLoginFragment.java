@@ -270,7 +270,7 @@ public class KakaoLoginFragment extends Fragment {
 //                                    if(){}
                         Log.d("Comment", "goooooooood~");
                         Log.d("카카오톡","로그인 성공");
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        Intent intent = new Intent(getActivity(), Intro.class);
                         startActivity(intent);
                         getActivity().finish();
                     }
