@@ -88,7 +88,7 @@ public class FriendsListAdapterRecycleritem extends RecyclerView.Adapter<Friends
         Context context = parent.getContext() ;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
 
-        View view = inflater.inflate(R.layout.recycleritem_chatmembers, parent, false) ;
+        View view = inflater.inflate(R.layout.recycleritem_friendslist, parent, false) ;
         FriendsListAdapterRecycleritem.viewHolder vh = new FriendsListAdapterRecycleritem.viewHolder(view) ;
 
         return vh;
