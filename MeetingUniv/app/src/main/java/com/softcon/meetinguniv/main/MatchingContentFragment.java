@@ -151,14 +151,11 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         this.M_databaseReference.child(String.valueOf(this.userID)).child("팀").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                System.out.println("1");
                     if(snapshot.getValue() != null) {
-                        System.out.println("2");
                         TeamMember.addAll((Collection<? extends String>) snapshot.getValue());
                         T_databaseReference.child(String.valueOf(TeamMember.get(0))).child("팀 이름").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                System.out.println("3");
                                 if(snapshot.getValue() != null)
                                     textView.setText((CharSequence) snapshot.getValue());
                                 else
@@ -171,7 +168,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
                             }
                         });
-                        System.out.println("4");
                         T_databaseReference.child(String.valueOf(TeamMember.get(0))).child("팀원").addValueEventListener(new ValueEventListener() {
                             //팀번호에 대한 팀원 정보를 가져오는 것
                             @Override

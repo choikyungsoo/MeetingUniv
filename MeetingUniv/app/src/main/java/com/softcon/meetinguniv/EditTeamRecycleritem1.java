@@ -5,6 +5,16 @@ import android.net.Uri;
 public class EditTeamRecycleritem1 {
 
     private Uri E_memporife;
+    private String userID;
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
 
 
     public Uri getE_memporife() {
