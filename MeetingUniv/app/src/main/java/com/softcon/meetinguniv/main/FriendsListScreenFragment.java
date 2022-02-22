@@ -8,7 +8,6 @@ import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.graphics.ColorSpace;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -36,14 +35,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.kakao.sdk.common.util.KakaoCustomTabsClient;
-import com.kakao.sdk.link.KakaoLinkIntentClient;
 import com.kakao.sdk.link.LinkClient;
 import com.kakao.sdk.link.WebSharerClient;
 import com.kakao.sdk.template.model.Content;
@@ -55,14 +52,10 @@ import com.softcon.meetinguniv.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-
-import javax.xml.transform.Templates;
 
 public class FriendsListScreenFragment extends Fragment implements View.OnClickListener {
 //    private ArrayList<FriendsListRecycleritem> list = new ArrayList<FriendsListRecycleritem>();
@@ -137,8 +130,8 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
 
     private void addRecyclerItem(int profile, String memberlist){
         FriendsListRecycleritem recyclerItem = new FriendsListRecycleritem();
-        recyclerItem.setF_chatingProfile(profile);
-        recyclerItem.setF_memberlist(memberlist);
+        recyclerItem.setFriendListProfile(profile);
+        recyclerItem.setFriendNameList(memberlist);
         list.add(recyclerItem);
     }
 

@@ -1,23 +1,23 @@
 package com.softcon.meetinguniv.main;
 
 public class FriendsListRecycleritem {
-    private int F_chatingProfile;
-    private String F_memberlist;
+    private int friendListProfile;
+    private String friendNameList;
 
-    public int getF_chatingProfile() {
-        return F_chatingProfile;
+    public int getFriendListProfile() {
+        return friendListProfile;
     }
 
-    public void setF_chatingProfile(int f_chatingProfile) {
-        F_chatingProfile = f_chatingProfile;
+    public void setFriendListProfile(int friendListProfile) {
+        this.friendListProfile = friendListProfile;
     }
 
-    public String getF_memberlist() {
-        return F_memberlist;
+    public String getFriendNameList() {
+        return friendNameList;
     }
 
-    public void setF_memberlist(String f_memberlist) {
-        F_memberlist = f_memberlist;
+    public void setFriendNameList(String friendNameList) {
+        this.friendNameList = friendNameList;
     }
 
 }
