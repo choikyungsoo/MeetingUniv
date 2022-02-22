@@ -108,6 +108,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
                         TeamPersonalMember.addAll((Collection<? extends String>) snapshot.getValue());
                         //팀원 프로필 사진을 다운로드 해서 가져옴
                         for(int i = 0; i < TeamPersonalMember.size(); i++) {
+                            System.out.println("TeamPersonalMember:" + TeamPersonalMember.get(i));
                             storageRef.child(TeamPersonalMember.get(i) + "/" + "프로필 사진.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
@@ -253,7 +254,6 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 
     private void DeleteCurrentTeam(int position) {
         this.alllist.remove(position);
-
         System.out.println("삭제될 팀원 : " + this.alllist.get(position));
         recyclerItemAdapter.notifyDataSetChanged();
     }

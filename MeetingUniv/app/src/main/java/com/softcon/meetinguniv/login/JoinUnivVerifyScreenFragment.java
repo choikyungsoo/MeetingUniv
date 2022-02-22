@@ -83,6 +83,12 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
     private JoinProfileFragment joinProfileFragment;
     private UserInfo userInfo;
 
+
+    // for popup
+    private ArrayAdapter<String> provinceAdapter;
+    private ArrayAdapter<String> cityAdapter;
+    private ArrayAdapter<String> univAdapter;
+
     // for province name parsing
     private String provinceName;
     private ArrayList<String> provinceNames = new ArrayList<String>();
@@ -91,6 +97,7 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
     private ArrayList<String> provinceCodes = new ArrayList<String>();
     private boolean inCtprvn_cd = false;
     private String provinceCodeForResult;
+    private String provinceNameForResult;
 
     // for city name parsing
     private String cityName;
@@ -100,11 +107,23 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
     private ArrayList<String> cityCodes = new ArrayList<String>();
     private boolean inSig_cd = false;
     private String cityCodeForResult;
+    private boolean matchProvinceCode = false;
 
     // for school name parsing
+    private String campusName;
+    private ArrayList<String> campusNames = new ArrayList<String>();
+    private boolean inCampusName = false;
+    private String schoolType;
+    private ArrayList<String> schoolTypes = new ArrayList<String>();
+    private boolean inSchoolType = false;
     private String schoolName;
+    private String dumpSchoolName;
     private ArrayList<String> schoolNames = new ArrayList<String>();
     private boolean inSchoolName = false;
+    private String schoolRegion;
+    private ArrayList<String> schoolRegions = new ArrayList<String>();
+    private boolean inRegion = false;
+    private boolean matchSchoolRegion = false;
 
     private ImageView studentIDImage;
     private File file;
@@ -320,8 +339,69 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
 
                 getProvinceNameXmlData();
 //                getCityNameXmlData();
-                getSchoolNameXmlData();
 
+
+//                provinceNames.add("선택");
+                provinceAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, provinceNames);
+                provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                province_spinner.setAdapter(provinceAdapter);
+
+//                cityNames.add("선택");
+//                cityAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, cityNames);
+//                cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+//                city_spinner.setAdapter(cityAdapter);
+
+                univAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, schoolNames);
+                univAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                join_UnivSpinner.setAdapter(univAdapter);
+
+
+                province_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        provinceNameForResult = provinceNames.get(position);
+//                        provinceCodeForResult = provinceCodes.get(position);
+//                        cityCodes.clear();
+//                        cityNames.clear();
+//                        getCityNameXmlData();
+//                        cityAdapter.notifyDataSetChanged();
+                        schoolNames.clear();
+                        getSchoolNameXmlData();
+                        univAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+
+
+//                city_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                    @Override
+//                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                        cityCodeForResult = cityCodes.get(position);
+////                        schoolNames.clear();
+//                        getSchoolNameXmlData();
+//                    }
+//
+//                    @Override
+//                    public void onNothingSelected(AdapterView<?> parent) {
+//
+//                    }
+//                });
+
+                join_UnivSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
 
 //                Dialog dialog;
 //                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -331,7 +411,9 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
 //                dialog = builder.create();
 //                dialog.show();
             }
+
         });
+
 
 
     }
@@ -373,50 +455,59 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                             System.out.println("A");
                             break;
                         case XmlPullParser.START_TAG:
-                            if(parser.getName().equals("ctprvn_cd")) {
-                                this.inCtprvn_cd = true;
-                                System.out.println("b");
-                            }
-                            else if(parser.getName().equals("ctp_kor_nm")) {
+                            if(parser.getName().equals("ctp_kor_nm")) {
                                 this.inCtp_kor_nm = true;
                                 System.out.println("B");
                             }
+//                            if(parser.getName().equals("ctprvn_cd")) {
+//                                this.inCtprvn_cd = true;
+//                                System.out.println("b");
+//                            }
+//                            else if(parser.getName().equals("ctp_kor_nm")) {
+//                                this.inCtp_kor_nm = true;
+//                                System.out.println("B");
+//                            }
                             break;
 
                         case XmlPullParser.TEXT:
-                            if(this.inCtprvn_cd) {
-                                this.provinceCode = parser.getText();
-                                this.inCtprvn_cd = false;
-                                System.out.println("c");
-                            }
-                            else if(this.inCtp_kor_nm) {
+                            if(this.inCtp_kor_nm) {
                                 this.provinceName = parser.getText();
                                 this.inCtp_kor_nm = false;
                                 System.out.println("C");
                             }
+//                            if(this.inCtprvn_cd) {
+//                                this.provinceCode = parser.getText();
+//                                this.inCtprvn_cd = false;
+//                                System.out.println("c");
+//                            }
+//                            else if(this.inCtp_kor_nm) {
+//                                this.provinceName = parser.getText();
+//                                this.inCtp_kor_nm = false;
+//                                System.out.println("C");
+//                            }
                             break;
 
                         case XmlPullParser.END_TAG:
                             if(parser.getName().equals("gml:featureMember")) {
-                                this.provinceCodes.add(this.provinceCode);
-                                System.out.println("d");
+//                                this.provinceCodes.add(this.provinceCode);
+//                                System.out.println("d");
                                 this.provinceNames.add(this.provinceName);
                                 System.out.println("D");
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, this.provinceNames);
-                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-                                this.province_spinner.setAdapter(adapter);
-                                this.province_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                        provinceCodeForResult = provinceCodes.get(position);
-                                        getCityNameXmlData();
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> parent) {
-
-                                    }
-                                });
+//                                ArrayAdapter<String> provinceAdapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, this.provinceNames);
+//                                provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+//                                this.province_spinner.setAdapter(provinceAdapter);
+//                                this.province_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                                    @Override
+//                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                                        provinceCodeForResult = provinceCodes.get(position);
+//                                        getCityNameXmlData();
+//                                    }
+//
+//                                    @Override
+//                                    public void onNothingSelected(AdapterView<?> parent) {
+//
+//                                    }
+//                                });
                             }
                             break;
                     }
@@ -471,16 +562,19 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                             if(this.inSig_cd) {
                                 if(parser.getText().matches(this.provinceCodeForResult+".*")) {
                                     this.cityCode = parser.getText();
+                                    this.matchProvinceCode = true;
 //                                    this.inSig_cd = false;
                                     System.out.println("cc");
                                 }
                                 else {
                                     this.inSig_kor_nm = false;
+                                    this.matchProvinceCode = false;
                                 }
                                 this.inSig_cd = false;
+//                                this.matchProvinceCode = false;
 
                             }
-                            if(this.inSig_kor_nm) {
+                            if(this.inSig_kor_nm && this.matchProvinceCode) {
                                 this.cityName = parser.getText();
                                 this.inSig_kor_nm = false;
                                 System.out.println("CC");
@@ -488,25 +582,28 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                             break;
 
                         case XmlPullParser.END_TAG:
-                            System.out.println(this.cityCode+" "+this.provinceCodeForResult);
-                            if(parser.getName().equals("gml:featureMember")) {
+                            if(parser.getName().equals("gml:featureMember") && this.matchProvinceCode) {
+                                System.out.println(this.cityCode+" "+this.provinceCodeForResult);
+                                this.cityCodes.add(this.cityCode);
+                                this.matchProvinceCode = false;
                                 System.out.println("********"+this.cityCode+" "+this.provinceCodeForResult);
                                 System.out.println("DD");
                                 this.cityNames.add(this.cityName);
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, this.cityNames);
-                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-                                this.city_spinner.setAdapter(adapter);
-                                this.city_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                                ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, this.cityNames);
+//                                cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+//                                this.city_spinner.setAdapter(cityAdapter);
+//                                this.city_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                                    @Override
+//                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 //                                        cityCodeForResult = cityCodes.get(position);
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> parent) {
-
-                                    }
-                                });
+//                                        getSchoolNameXmlData();
+//                                    }
+//
+//                                    @Override
+//                                    public void onNothingSelected(AdapterView<?> parent) {
+//
+//                                    }
+//                                });
                             }
                             break;
                     }
@@ -546,35 +643,81 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                         case XmlPullParser.START_DOCUMENT:
                             break;
                         case XmlPullParser.START_TAG:
-                            if(parser.getName().equals("schoolName")) {
+                            if(parser.getName().equals("campusName")) {
+                                this.inCampusName = true;
+                            }
+                            else if(parser.getName().equals("schoolType")) {
+                                this.inSchoolType = true;
+                            }
+                            else if(parser.getName().equals("schoolName")) {
+//                                System.out.println("schoolName");
                                 this.inSchoolName = true;
+                            }
+                            else if(parser.getName().equals("region")) {
+//                                System.out.println("region");
+                                this.inRegion = true;
                             }
                             break;
 
                         case XmlPullParser.TEXT:
+                            if(this.inCampusName) {
+                                System.out.println("inCampusName");
+                                this.campusName = parser.getText();
+                                System.out.println(this.campusName);
+//                                if(this.campusName == "본교") {
+//                                    this.campusName = null;
+//                                }
+                                this.inCampusName = false;
+                            }
+                            if(this.inSchoolType) {
+                                System.out.println("inSchoolType");
+                                this.schoolType = parser.getText();
+                                System.out.println(this.schoolType);
+                                this.inSchoolType = false;
+                            }
                             if(this.inSchoolName) {
+                                System.out.println("inSchoolName");
                                 this.schoolName = parser.getText();
+//                                if(this.campusName != null && this.schoolName.contains(this.campusName)) {
+//                                    this.campusName = null;
+//                                }
                                 this.inSchoolName = false;
+                            }
+                            if(this.inRegion) {
+                                System.out.println("inRegion");
+                                if(parser.getText().equals(this.provinceNameForResult))
+                                    this.matchSchoolRegion = true;
+//                                else
+//                                    this.campusName = null;
+//                                    this.schoolName = null;
+                                this.inRegion = false;
                             }
                             break;
 
                         case XmlPullParser.END_TAG:
-                            if(parser.getName().equals("content")) {
-                                this.schoolNames.add(this.schoolName);
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, this.schoolNames);
-                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-                                this.join_UnivSpinner.setAdapter(adapter);
-                                this.join_UnivSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            if(parser.getName().equals("content") && this.matchSchoolRegion) {
+                                if(this.campusName.equals("본교") || this.schoolType.equals("기능대학(폴리텍대학)") || this.schoolName.contains(this.campusName)) {
+                                    this.schoolNames.add(this.schoolName);
+                                }
+                                else {
+                                    this.schoolNames.add(this.schoolName+" "+this.campusName);
+                                }
 
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> parent) {
-
-                                    }
-                                });
+                                this.matchSchoolRegion = false;
+//                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, this.schoolNames);
+//                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+//                                this.join_UnivSpinner.setAdapter(adapter);
+//                                this.join_UnivSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                                    @Override
+//                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void onNothingSelected(AdapterView<?> parent) {
+//
+//                                    }
+//                                });
                             }
                             break;
                     }

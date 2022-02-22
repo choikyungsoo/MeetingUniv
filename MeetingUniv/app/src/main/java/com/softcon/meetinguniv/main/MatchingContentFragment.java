@@ -151,12 +151,16 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         this.M_databaseReference.child(String.valueOf(this.userID)).child("팀").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.getValue() != "null") {
+                    if(snapshot.getValue() != null) {
                         TeamMember.addAll((Collection<? extends String>) snapshot.getValue());
                         T_databaseReference.child(String.valueOf(TeamMember.get(0))).child("팀 이름").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                textView.setText((CharSequence) snapshot.getValue());
+                                if(snapshot.getValue() != null)
+                                    textView.setText((CharSequence) snapshot.getValue());
+                                else
+                                    textView.setText("팀을 결성하세요");
+
                             }
 
                             @Override
@@ -168,7 +172,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                             //팀번호에 대한 팀원 정보를 가져오는 것
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if(snapshot.getValue() != "null") {
+                                if(snapshot.getValue() != null) {
                                     System.out.println("경수의 세부 팀 데이터:" + snapshot.getValue());
                                     TeamPersonalMember.addAll((Collection<? extends String>) snapshot.getValue());
                                     Uri Settinguri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/meetinguniv-d9983.appspot.com/o/TestSetting%2Fsettingicon.png?alt=media&token=0a096377-239f-405f-b923-9c3b796e59fc");
@@ -193,7 +197,9 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                             }
                         });
                     } else{
-
+                        System.out.println("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddd성공0");
+                        textView.setText("팀을 결성하세요a");
+                        recyclerItemAdapter.notifyDataSetChanged();
                     }
             }
             @Override

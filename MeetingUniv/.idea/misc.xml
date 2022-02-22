@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../../layout/custom_preview.xml" value="0.9277777777777778" />
         <entry key="../../../../../Library/Android/sdk/platforms/android-30/data/res/layout/simple_spinner_item.xml" value="0.3072916666666667" />
         <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/activity_main.xml" value="0.3619791666666667" />
         <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_add_team_element.xml" value="0.30416666666666664" />
@@ -10,7 +11,7 @@
         <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_changing_p_w_screen.xml" value="0.34556159420289856" />
         <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_chat_room_bottomedittext.xml" value="0.25052083333333336" />
         <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_friends_list_screen.xml" value="0.30416666666666664" />
-        <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_matching_content.xml" value="0.33" />
+        <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_matching_content.xml" value="0.3605072463768116" />
         <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_personal_chatting_content.xml" value="0.30416666666666664" />
         <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_settings_screen.xml" value="0.22291666666666668" />
         <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/popup_addfriend.xml" value="0.3555253623188406" />
@@ -102,7 +103,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15_PREVIEW" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
