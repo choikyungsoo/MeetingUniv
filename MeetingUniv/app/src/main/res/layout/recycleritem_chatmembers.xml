@@ -12,12 +12,13 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="300dp">
 
-        <ImageView
-            android:id="@+id/chatprofile"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            tools:srcCompat="@tools:sample/avatars" />
+        <TextView
+            android:id="@+id/chatDDay"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:gravity="center|center_vertical"
+            android:text="D-3" />
+
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -25,15 +26,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:ellipsize="end"
+        android:ems="10"
         android:gravity="center_vertical"
+        android:maxLines="1"
         android:paddingLeft="10dp"
-        android:text="참가자" />
+        android:text="참가자, 참가자, 참가자, 참가자" />
 
     <TextView
-        android:id="@+id/chatDDay"
-        android:layout_width="30dp"
+        android:id="@+id/chatMemberNum"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center|center_vertical"
-        android:text="3" />
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:text="4"
+        android:textColor="#A5A4A4"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/newMessageNum"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="right|center_vertical"
+        android:text="6"
+        android:textColor="#FF0000" />
 
 </LinearLayout>

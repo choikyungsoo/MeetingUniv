@@ -41,7 +41,7 @@ public class FriendsListAdapterRecycleritem extends RecyclerView.Adapter<Friends
             items.addAll(arrayList);
         } else {
             for (FriendsListRecycleritem friendsListRecycleritem: arrayList) {
-                String name = friendsListRecycleritem.getF_memberlist();
+                String name = friendsListRecycleritem.getFriendNameList();
                 if (name.toLowerCase().contains(charText)) {
                     items.add(friendsListRecycleritem);
                 }
@@ -52,25 +52,26 @@ public class FriendsListAdapterRecycleritem extends RecyclerView.Adapter<Friends
 
     public class viewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView F_chatprofile;
-        private TextView F_memberlist;
+        private ImageView friendListProfile;
+        private TextView friendNameList;
 
         public viewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-
-            F_chatprofile = itemView.findViewById(R.id.chatprofile);
-            F_memberlist = itemView.findViewById(R.id.memberlist);
-            itemView.setClickable(true);
+//////////////////
+//            F_chatprofile = itemView.findViewById(R.id.chatprofile);
+//            F_memberlist = itemView.findViewById(R.id.memberlist);
+//            itemView.setClickable(true);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
                         moveToFPF(v);
-
                     }
                 }
             });
+            friendListProfile = itemView.findViewById(R.id.friendListProfile);
+            friendNameList = itemView.findViewById(R.id.friendNameList);
 
         }
     }
@@ -88,17 +89,17 @@ public class FriendsListAdapterRecycleritem extends RecyclerView.Adapter<Friends
         Context context = parent.getContext() ;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
 
-        View view = inflater.inflate(R.layout.recycleritem_chatmembers, parent, false) ;
-        FriendsListAdapterRecycleritem.viewHolder vh = new FriendsListAdapterRecycleritem.viewHolder(view) ;
-
-        return vh;
+        View view = inflater.inflate(R.layout.recycleritem_friendslist, parent, false) ;
+//        FriendsListAdapterRecycleritem.viewHolder vh = new FriendsListAdapterRecycleritem.viewHolder(view) ;
+        return new FriendsListAdapterRecycleritem.viewHolder(view);
+//        return vh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull FriendsListAdapterRecycleritem.viewHolder holder, int position) {
         FriendsListRecycleritem recyclerItem = items.get(position) ;
-        holder.F_chatprofile.setImageResource(recyclerItem.getF_chatingProfile());
-        holder.F_memberlist.setText(recyclerItem.getF_memberlist()) ;
+        holder.friendListProfile.setImageResource(recyclerItem.getFriendListProfile());
+        holder.friendNameList.setText(recyclerItem.getFriendNameList()) ;
     }
 
     @Override

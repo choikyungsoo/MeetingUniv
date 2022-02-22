@@ -145,7 +145,7 @@ public class MatchChattingContentFragment extends Fragment {
 
     private void addRecyclerItem(int profile, String memberlist){
         MatchingChatingRecycleritem recyclerItem = new MatchingChatingRecycleritem();
-        recyclerItem.setChatingProfile(profile);
+//        recyclerItem.setChatingProfile(profile);
         recyclerItem.setMemberlist(memberlist);
         list.add(recyclerItem);
 

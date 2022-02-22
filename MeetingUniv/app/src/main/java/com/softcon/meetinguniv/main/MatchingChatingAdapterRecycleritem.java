@@ -71,10 +71,11 @@ public class MatchingChatingAdapterRecycleritem extends RecyclerView.Adapter<Mat
     @Override
     public void onBindViewHolder(@NonNull @NotNull MatchingChatingAdapterRecycleritem.viewHolder holder, int position) {
         MatchingChatingRecycleritem recyclerItem = items.get(position) ;
-        holder.chatprofile.setImageResource(recyclerItem.getChatingProfile());
+//        holder.chatprofile.setImageResource(recyclerItem.getChatingProfile());
+        holder.dDay.setText(recyclerItem.getDDay()) ;
         holder.memberlist.setText(recyclerItem.getMemberlist()) ;
-
-
+        holder.chatMemberNum.setText(recyclerItem.getChatMemberNum());
+        holder.newMessageNum.setText(recyclerItem.getNewMessageNum());
     }
 
     @Override
@@ -88,9 +89,11 @@ public class MatchingChatingAdapterRecycleritem extends RecyclerView.Adapter<Mat
 
     public class viewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView chatprofile;
+//        private ImageView chatprofile;
         private TextView memberlist;
         private TextView dDay;
+        private TextView chatMemberNum;
+        private TextView newMessageNum;
 
         public viewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -101,9 +104,11 @@ public class MatchingChatingAdapterRecycleritem extends RecyclerView.Adapter<Mat
                     Navigation.findNavController(itemView).navigate(R.id.action_mainFragment_to_chatRoomScreenFragmentPopupVer);
                 }
             });
-            chatprofile = itemView.findViewById(R.id.chatprofile);
+//            chatprofile = itemView.findViewById(R.id.chatprofile);
             memberlist = itemView.findViewById(R.id.memberlist);
             dDay = itemView.findViewById(R.id.chatDDay);
+            chatMemberNum = itemView.findViewById(R.id.chatMemberNum);
+            newMessageNum = itemView.findViewById(R.id.newMessageNum);
         }
     }
 }
