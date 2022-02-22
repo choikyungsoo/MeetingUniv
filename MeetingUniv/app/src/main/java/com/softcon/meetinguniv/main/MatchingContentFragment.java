@@ -132,6 +132,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
             @Override
             public void onItemClick(View v, int position) {
                 if(position == settingposition){
+                    // 네비게이션으로 다시 구현
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
                             .replace(R.id.Framecontainer, ETMfragment)
