@@ -25,6 +25,7 @@ public class chattingScreen2Fragment extends Fragment {
     private String mParam2;
 
     public chattingScreen2Fragment() {
+
         // Required empty public constructor
     }
 

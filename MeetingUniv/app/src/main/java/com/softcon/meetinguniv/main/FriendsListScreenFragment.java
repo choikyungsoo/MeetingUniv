@@ -35,11 +35,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.kakao.sdk.common.util.KakaoCustomTabsClient;
 import com.kakao.sdk.link.LinkClient;
 import com.kakao.sdk.link.WebSharerClient;
@@ -76,6 +79,8 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference("회원정보");
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    private StorageReference storageRef = storage.getReference();
 
     private String userID;
 
@@ -91,6 +96,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
 
         RecyclerView recyclerView = view.findViewById(R.id.F_chatinglist);
         this.list = new ArrayList<FriendsListRecycleritem>();
+        this.PersonalProfile = view.findViewById(R.id.chatprofile);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -125,6 +131,14 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
+
+        //프로필 설정하는 부분
+        storageRef.child(this.userID+ "/" + "프로필 사진.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                PersonalProfile.setImageURI(uri);
+            }
         });
     }
 
