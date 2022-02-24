@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -94,6 +95,28 @@ public class MatchChattingContentFragment extends Fragment {
 //                }
 //            }
 //        });
+
+        db.collection("Chatting")
+        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d("TAG", document.getId() + " => " + document.getData());
+                        MatchingChatingRecycleritem recyclerItem = new MatchingChatingRecycleritem();
+//                        recyclerItem.setChatingProfile(R.drawable.prot);
+                        recyclerItem.setDDay(document.get("dDay").toString());
+                        recyclerItem.setMemberlist(document.get("title").toString());
+                        recyclerItem.setChatMemberNum(document.get("membernum").toString());
+                        recyclerItem.setNewMessageNum("4");
+                        list.add(recyclerItem);
+                    }
+                } else {
+                    Log.d("TAG", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+
 
         this.recyclerItemAdapter = new MatchingChatingAdapterRecycleritem(this.getActivity(), this.list);
         recyclerView.setAdapter(this.recyclerItemAdapter);
