@@ -70,7 +70,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
     private ImageButton kakaoshare;
     private ImageView PersonalProfile;
     private EditText editSearch;
-    private TextView inviteCode,sub1Text, sub2Text;
+    private TextView inviteCode,sub1Text, sub2Text, MyProfile;
     private View floatingbg;
 
     private LinearLayout inviting_code;
@@ -87,6 +87,8 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
 
     private FeedTemplate feedTemplate;
     private TextTemplate textTemplate;
+
+    private PersonalProfileScreenFragment PPS;
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -98,6 +100,11 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         RecyclerView recyclerView = view.findViewById(R.id.F_chatinglist);
         this.list = new ArrayList<FriendsListRecycleritem>();
         this.PersonalProfile = view.findViewById(R.id.chatprofile);
+        this.MyProfile = view.findViewById(R.id.memberlist);
+        this.PPS = new PersonalProfileScreenFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("userID", this.userID);
+        this.PPS.setArguments(bundle);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -139,6 +146,18 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
             @Override
             public void onSuccess(Uri uri) {
                 Glide.with(view).load(uri).into(PersonalProfile);
+            }
+        });
+        //프로필 닉네임 가져오기
+        databaseReference.child(String.valueOf(this.userID)).child("닉네임").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                MyProfile.setText((CharSequence) snapshot.getValue());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

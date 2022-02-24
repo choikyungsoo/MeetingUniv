@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'androidx.navigation.safeargs'
 }
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
@@ -34,7 +35,6 @@ allprojects {
         maven { url 'https://jitpack.io' }
     }
 }
-
 dependencies {
 
     implementation "com.github.parse-community.Parse-SDK-Android:parse:2.0.6"

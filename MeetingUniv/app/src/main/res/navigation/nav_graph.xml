@@ -185,6 +185,9 @@
         <action
             android:id="@+id/action_personalProfileScreenFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <argument
+            android:name="userID"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/floatingFriendsListContentFragment"

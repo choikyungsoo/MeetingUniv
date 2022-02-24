@@ -36,6 +36,7 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
     private CircleImageView personal_profile_image;
     private Button backToMainFromPersonalProfile_BTN;
     private TextView personal_name;
+    private String userID;
 
     final private static String TAG = "GILBOMI"; Button btn_photo; ImageView iv_photo; final static int TAKE_PICTURE = 1; String mCurrentPhotoPath; final static int REQUEST_TAKE_PHOTO = 1;
 
@@ -63,6 +64,9 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
 
         this.personal_name = view.findViewById(R.id.personal_name);
         this.personal_name.setOnClickListener(this);
+
+        this.userID = getArguments().getString("userID");
+        System.out.println("PPS" + this.userID);
     }
 
     @Override
