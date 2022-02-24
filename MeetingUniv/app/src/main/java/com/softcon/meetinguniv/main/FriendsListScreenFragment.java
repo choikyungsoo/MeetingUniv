@@ -35,6 +35,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -137,7 +138,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         storageRef.child(this.userID+ "/" + "프로필 사진.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                PersonalProfile.setImageURI(uri);
+                Glide.with(view).load(uri).into(PersonalProfile);
             }
         });
     }
