@@ -11,7 +11,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -32,12 +31,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.softcon.meetinguniv.JoinSelectUnivDialogFragment;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -47,13 +42,9 @@ import com.pedro.library.AutoPermissionsListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 // >>>>>>> inbae:MeetingUniv/app/src/main/java/com/softcon/meetinguniv/login/JoinPersonalInfoScreenFragment.java
 
 import static android.app.Activity.RESULT_OK;
@@ -73,9 +64,9 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
     //popup
     private View dialogView;
 
-    private Spinner province_spinner;
-    private Spinner city_spinner;
-    private Spinner join_UnivSpinner;
+    private Spinner join_provinceSpinner;
+    private Spinner join_univSpinner;
+    private Spinner join_majorSpinner;
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
@@ -86,8 +77,8 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
 
     // for popup
     private ArrayAdapter<String> provinceAdapter;
-    private ArrayAdapter<String> cityAdapter;
     private ArrayAdapter<String> univAdapter;
+    private ArrayAdapter<String> majorAdapter;
 
     // for province name parsing
     private String provinceName;
@@ -124,6 +115,19 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
     private ArrayList<String> schoolRegions = new ArrayList<String>();
     private boolean inRegion = false;
     private boolean matchSchoolRegion = false;
+    private String schoolNameForResult;
+
+    // for major name parsing
+    private String majorName;
+    private ArrayList<String> majorNames = new ArrayList<String>();
+    private boolean inMajorName = false;
+    private String majorStatus;
+    private ArrayList<String> majorStatuses = new ArrayList<String>();
+    private boolean inMajorStatus = false;
+    private String schoolNameOfMajor;
+    private ArrayList<String> schoolNamesOfMajor = new ArrayList<String>();
+    private boolean inSchoolNameOfMajor = false;
+
 
     private ImageView studentIDImage;
     private File file;
@@ -321,10 +325,12 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                 popUp();
 
 
-                province_spinner = dialogView.findViewById(R.id.province_spinner);
-                city_spinner = dialogView.findViewById(R.id.city_spinner);
+                join_provinceSpinner = dialogView.findViewById(R.id.join_provinceSpinner);
 
-                join_UnivSpinner = dialogView.findViewById(R.id.join_UnivSpinner);
+                join_univSpinner = dialogView.findViewById(R.id.join_univSpinner);
+
+                join_majorSpinner = dialogView.findViewById(R.id.join_majorSpinner);
+
                 joinSelectUnivOk_button = dialogView.findViewById(R.id.joinSelectUnivOk_button);
 
                 joinSelectUnivOk_button.setOnClickListener(new View.OnClickListener() {
@@ -332,31 +338,28 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                     public void onClick(View v) {
 //                        selected_univ = (String) join_UnivSpinner.getSelectedItem();
 //                        System.out.println(selected_univ);
-                        join_univ.setText((CharSequence) join_UnivSpinner.getSelectedItem());
+                        join_univ.setText((CharSequence) join_univSpinner.getSelectedItem());
                         dialog.dismiss();
                     }
                 });
 
                 getProvinceNameXmlData();
-//                getCityNameXmlData();
+//                getMajorNameXmlData();
 
-
-//                provinceNames.add("선택");
                 provinceAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, provinceNames);
                 provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-                province_spinner.setAdapter(provinceAdapter);
-
-//                cityNames.add("선택");
-//                cityAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, cityNames);
-//                cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-//                city_spinner.setAdapter(cityAdapter);
+                join_provinceSpinner.setAdapter(provinceAdapter);
 
                 univAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, schoolNames);
                 univAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-                join_UnivSpinner.setAdapter(univAdapter);
+                join_univSpinner.setAdapter(univAdapter);
+
+                majorAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, majorNames);
+                majorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                join_majorSpinner.setAdapter(majorAdapter);
 
 
-                province_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                join_provinceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         provinceNameForResult = provinceNames.get(position);
@@ -391,14 +394,30 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
 //                    }
 //                });
 
-                join_UnivSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                join_univSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                        schoolNameForResult = schoolNames.get(position);
+                        System.out.println(schoolNameForResult);
+                        majorNames.clear();
+                        getMajorNameXmlData();
+                        majorAdapter.notifyDataSetChanged();
                     }
 
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+
+                join_majorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
 
                     }
                 });
@@ -728,6 +747,159 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
             }
         }
 
+    }
+
+    private void getMajorNameXmlData() {
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            //your codes here
+            try {
+
+                URL url = new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=1&perPage=5000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D");
+//            InputStream is= url.openStream();
+
+                XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
+                XmlPullParser parser = parserCreator.newPullParser();
+
+//            parser.setInput(new InputStreamReader(is, "UTF-8"));
+                parser.setInput(url.openStream(), "UTF-8"); //문제 발생
+//            parser.next();
+                int parserEvent = parser.getEventType();
+                Log.i("parsing", "학과 정보 파싱 시작");
+
+                while (parserEvent != XmlPullParser.END_DOCUMENT) {
+                    switch (parserEvent) {
+                        case XmlPullParser.START_DOCUMENT:
+                            break;
+                        case XmlPullParser.START_TAG:
+                            if (parser.getName().equals("col")) {
+                                switch (parser.getAttributeName(0)) {
+                                    case "학부·과(전공)명":
+                                        System.out.println("학부·과(전공)명");
+                                        this.inMajorName = true;
+                                        break;
+                                    case "학과상태":
+                                        System.out.println("학과상태");
+                                        this.inMajorStatus = true;
+                                        break;
+                                    case "학교명":
+                                        System.out.println("학교명");
+                                        this.inSchoolNameOfMajor = true;
+                                        break;
+                                }
+//                                System.out.println("///////////////////////////////////////////////");
+//                                System.out.println(parser.getAttributeValue(0));
+                            }
+//                            if(parser.getAttributeName()) {
+//
+//                            }
+//                            if(parser.getName().equals("campusName")) {
+//                                this.inCampusName = true;
+//                            }
+//                            else if(parser.getName().equals("schoolType")) {
+//                                this.inSchoolType = true;
+//                            }
+//                            else if(parser.getName().equals("schoolName")) {
+////                                System.out.println("schoolName");
+//                                this.inSchoolName = true;
+//                            }
+//                            else if(parser.getName().equals("region")) {
+////                                System.out.println("region");
+//                                this.inRegion = true;
+//                            }
+                            break;
+
+                        case XmlPullParser.TEXT:
+                            if(this.inMajorName) {
+                                this.majorName = parser.getText();
+                                this.inMajorName = false;
+                            }
+                            if(this.inMajorStatus) {
+                                this.majorStatus = parser.getText();
+                                this.inMajorStatus = false;
+                            }
+                            if(this.inSchoolNameOfMajor) {
+                                this.schoolNameOfMajor = parser.getText();
+                                this.inSchoolNameOfMajor = false;
+                            }
+//                            if(this.inCampusName) {
+//                                System.out.println("inCampusName");
+//                                this.campusName = parser.getText();
+//                                System.out.println(this.campusName);
+////                                if(this.campusName == "본교") {
+////                                    this.campusName = null;
+////                                }
+//                                this.inCampusName = false;
+//                            }
+//                            if(this.inSchoolType) {
+//                                System.out.println("inSchoolType");
+//                                this.schoolType = parser.getText();
+//                                System.out.println(this.schoolType);
+//                                this.inSchoolType = false;
+//                            }
+//                            if(this.inSchoolName) {
+//                                System.out.println("inSchoolName");
+//                                this.schoolName = parser.getText();
+////                                if(this.campusName != null && this.schoolName.contains(this.campusName)) {
+////                                    this.campusName = null;
+////                                }
+//                                this.inSchoolName = false;
+//                            }
+//                            if(this.inRegion) {
+//                                System.out.println("inRegion");
+//                                if(parser.getText().equals(this.provinceNameForResult))
+//                                    this.matchSchoolRegion = true;
+////                                else
+////                                    this.campusName = null;
+////                                    this.schoolName = null;
+//                                this.inRegion = false;
+//                            }
+                            break;
+
+                        case XmlPullParser.END_TAG:
+                            if(parser.getName().equals("item")) {
+                                if(this.schoolNamesOfMajor.equals(this.schoolNameForResult) && (this.majorStatus.equals("기존") || (this.majorStatus.equals("변경[신설]")) || (this.majorStatus.equals("통합[기존]")) || (this.majorStatus.equals("통합[신설]")))) {
+                                    this.majorNames.add(this.majorName);
+                                }
+                            }
+
+//                            if(this.schoolNameOfMajor.equals(this))
+//                            if(parser.getName().equals("content") && this.matchSchoolRegion) {
+//                                if(this.campusName.equals("본교") || this.schoolType.equals("기능대학(폴리텍대학)") || this.schoolName.contains(this.campusName)) {
+//                                    this.schoolNames.add(this.schoolName);
+//                                }
+//                                else {
+//                                    this.schoolNames.add(this.schoolName+" "+this.campusName);
+//                                }
+//
+//                                this.matchSchoolRegion = false;
+//                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, this.schoolNames);
+//                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+//                                this.join_UnivSpinner.setAdapter(adapter);
+//                                this.join_UnivSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                                    @Override
+//                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void onNothingSelected(AdapterView<?> parent) {
+//
+//                                    }
+//                                });
+//                            }
+                            break;
+                    }
+                    parserEvent = parser.next();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 //    public void takePicture() {
