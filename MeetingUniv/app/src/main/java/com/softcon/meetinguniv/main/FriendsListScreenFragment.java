@@ -100,11 +100,6 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         this.list = new ArrayList<FriendsListRecycleritem>();
         this.PersonalProfile = view.findViewById(R.id.chatprofile);
         this.MyProfile = view.findViewById(R.id.memberlist);
-        PersonalProfileScreenFragment PPS = new PersonalProfileScreenFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("userID2", this.userID);
-        PPS.setArguments(bundle);
-//        Navigation.findNavController(view).navigate(R.id.personalProfileScreenFragment, bundle);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -148,6 +143,7 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
                 Glide.with(view).load(uri).into(PersonalProfile);
             }
         });
+
         //프로필 닉네임 가져오기
         databaseReference.child(String.valueOf(this.userID)).child("닉네임").addValueEventListener(new ValueEventListener() {
             @Override
@@ -327,7 +323,9 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         }
     }
     private void movetoPersonalProfile(View v) {
-        Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_personalProfileScreenFragment);
+        Bundle bundle = new Bundle();
+        bundle.putString("userID", this.userID);
+        Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_personalProfileScreenFragment, bundle);
     }
 
 

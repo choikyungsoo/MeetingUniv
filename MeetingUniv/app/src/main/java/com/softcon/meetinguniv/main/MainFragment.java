@@ -80,6 +80,10 @@ public class MainFragment extends Fragment {
         this.needmoreheart_btn = view.findViewById(R.id.needmoreheartBTN);
 
 //        this.bottomNavigationView.setSelectedItemId(R.id.main);
+        PersonalProfileScreenFragment PPS = new PersonalProfileScreenFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("userID", this.userID);
+        PPS.setArguments(bundle);
 
         getActivity().getSupportFragmentManager().beginTransaction().add(R.id.screenfragmentContainer, this.mainScreenFragment).commit();
         this.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
