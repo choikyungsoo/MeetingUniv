@@ -96,6 +96,15 @@ public class MatchChattingContentFragment extends Fragment {
 //            }
 //        });
 
+
+        this.recyclerItemAdapter = new MatchingChatingAdapterRecycleritem(this.getActivity(), this.list);
+        recyclerView.setAdapter(this.recyclerItemAdapter);
+
+//        recyclerItemAdapter.notifyDataSetChanged();
+
+//        addRecyclerItem2(2, "참가자, 참가자, 참가자, 참가자, 참가자, 참가자", 6, 10);
+//        addRecyclerItem2(2, "참가자, 참가자, 참가자, 참가자, 참가자, 참가자", 6, 4);
+
         db.collection("Chatting")
         .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -103,13 +112,20 @@ public class MatchChattingContentFragment extends Fragment {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d("TAG", document.getId() + " => " + document.getData());
-                        MatchingChatingRecycleritem recyclerItem = new MatchingChatingRecycleritem();
-//                        recyclerItem.setChatingProfile(R.drawable.prot);
-                        recyclerItem.setDDay(document.get("dDay").toString());
-                        recyclerItem.setMemberlist(document.get("title").toString());
-                        recyclerItem.setChatMemberNum(document.get("membernum").toString());
-                        recyclerItem.setNewMessageNum("4");
-                        list.add(recyclerItem);
+//                        MatchingChatingRecycleritem recyclerItem = new MatchingChatingRecycleritem();
+//                        recyclerItem.setDDay(document.get("dDay").toString());
+//                        recyclerItem.setMemberlist(document.get("title").toString());
+//                        recyclerItem.setChatMemberNum(document.get("membernum").toString());
+//                        recyclerItem.setNewMessageNum("4");
+//                        list.add(recyclerItem);
+//                        addRecyclerItem2(3, "참가자, 참가자, 참가자, 참가자, 참가자, 참가자", 6, 10);
+
+                        addRecyclerItem2(Integer.parseInt(document.getData().get("dDay").toString()),
+                                document.getData().get("title").toString(),
+                                Integer.parseInt(document.getData().get("membernum").toString()),
+                                6
+                                );
+//                        addRecyclerItem2(3, "참가자, 참가자, 참가자, 참가자, 참가자, 참가자", 6, 10);
                     }
                 } else {
                     Log.d("TAG", "Error getting documents: ", task.getException());
@@ -118,10 +134,6 @@ public class MatchChattingContentFragment extends Fragment {
         });
 
 
-        this.recyclerItemAdapter = new MatchingChatingAdapterRecycleritem(this.getActivity(), this.list);
-        recyclerView.setAdapter(this.recyclerItemAdapter);
-
-//        recyclerItemAdapter.notifyDataSetChanged();
 
         this.editSearch = (EditText) view.findViewById(R.id.searchMatchChattingEditText);
 
@@ -174,4 +186,13 @@ public class MatchChattingContentFragment extends Fragment {
 
     }
 
+    private void addRecyclerItem2(int dDay, String memberlist, int memberNum, int newMessageNum){
+        MatchingChatingRecycleritem recyclerItem = new MatchingChatingRecycleritem();
+        recyclerItem.setDDay("D-" + dDay);
+        recyclerItem.setMemberlist(memberlist);
+        recyclerItem.setChatMemberNum(memberNum + "");
+        recyclerItem.setNewMessageNum(newMessageNum + "");
+        list.add(recyclerItem);
+        recyclerItemAdapter.notifyDataSetChanged();
+    }
 }
