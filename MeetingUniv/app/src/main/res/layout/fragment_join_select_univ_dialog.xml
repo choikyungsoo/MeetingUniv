@@ -29,34 +29,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="60">
+            android:weightSum="20">
 
             <TextView
                 android:id="@+id/join_selectAreaText"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="9"
+                android:layout_weight="3"
                 android:text="지역"
                 android:textAlignment="textStart"
                 android:textSize="20sp" />
 
             <Spinner
-                android:id="@+id/province_spinner"
+                android:id="@+id/join_provinceSpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="25"
+                android:layout_weight="17"
                 tools:ignore="TouchTargetSizeCheck" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Spinner
-                android:id="@+id/city_spinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="25" />
 
         </LinearLayout>
 
@@ -80,7 +69,7 @@
                 android:textSize="20sp" />
 
             <Spinner
-                android:id="@+id/join_UnivSpinner"
+                android:id="@+id/join_univSpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="17" />
@@ -106,7 +95,7 @@
                 android:textSize="20sp" />
 
             <Spinner
-                android:id="@+id/join_spinner7"
+                android:id="@+id/join_majorSpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="17" />

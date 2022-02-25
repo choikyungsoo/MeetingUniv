@@ -2,18 +2,15 @@ package com.softcon.meetinguniv.main;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.StrictMode;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,12 +39,6 @@ import org.jetbrains.annotations.NotNull;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -326,7 +317,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                 this.ageFrom = this.dialogView.findViewById(R.id.chatRoomMembers);
                 this.ageTo = this.dialogView.findViewById(R.id.valueTo);
                 this.rangeSlider = this.dialogView.findViewById(R.id.rangeSlider);
-                this.univSpinner = this.dialogView.findViewById(R.id.join_UnivSpinner);
+                this.univSpinner = this.dialogView.findViewById(R.id.join_univSpinner);
 
                 this.rangeSlider.addOnChangeListener(this);
 
