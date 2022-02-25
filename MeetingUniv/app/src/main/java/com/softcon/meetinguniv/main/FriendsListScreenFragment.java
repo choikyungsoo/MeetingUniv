@@ -88,7 +88,6 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
     private FeedTemplate feedTemplate;
     private TextTemplate textTemplate;
 
-    private PersonalProfileScreenFragment PPS;
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -101,10 +100,11 @@ public class FriendsListScreenFragment extends Fragment implements View.OnClickL
         this.list = new ArrayList<FriendsListRecycleritem>();
         this.PersonalProfile = view.findViewById(R.id.chatprofile);
         this.MyProfile = view.findViewById(R.id.memberlist);
-        this.PPS = new PersonalProfileScreenFragment();
+        PersonalProfileScreenFragment PPS = new PersonalProfileScreenFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("userID", this.userID);
-        this.PPS.setArguments(bundle);
+        bundle.putString("userID2", this.userID);
+        PPS.setArguments(bundle);
+//        Navigation.findNavController(view).navigate(R.id.personalProfileScreenFragment, bundle);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);

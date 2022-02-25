@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -278,18 +279,22 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.EditbackBTN:
-                moveToMachingcontent();
+                moveToMachingcontent(v);
                 break;
             case R.id.CheckTC:
                 this.checkok = true;
                 savechangememberInfo();
 //                givechangememberInfo();
-                moveToMachingcontent();
+                moveToMachingcontent(v);
                 break;
         }
     }
 
-    private void moveToMachingcontent() {
+    private void moveToMachingcontent(View v) {
+        Bundle bundle = new Bundle();
+        bundle.putString("userID", this.userID);
+//        Navigation.findNavController(v).navigate(R.id.matchingContentsFragment,bundle);
+        this.fragment.setArguments(bundle);
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.Framecontainer, this.fragment)
                 .commit();

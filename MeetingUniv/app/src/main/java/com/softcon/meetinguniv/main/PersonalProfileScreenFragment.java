@@ -40,9 +40,6 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
 
     final private static String TAG = "GILBOMI"; Button btn_photo; ImageView iv_photo; final static int TAKE_PICTURE = 1; String mCurrentPhotoPath; final static int REQUEST_TAKE_PHOTO = 1;
 
-    private String mParam1;
-    private String mParam2;
-
     public PersonalProfileScreenFragment() {
         // Required empty public constructor
     }
@@ -51,7 +48,8 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_personal_profile_screen, container, false);
+        View view = inflater.inflate(R.layout.fragment_personal_profile_screen, container, false);
+        return view;
     }
 
     @Override
@@ -65,7 +63,7 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
         this.personal_name = view.findViewById(R.id.personal_name);
         this.personal_name.setOnClickListener(this);
 
-        this.userID = getArguments().getString("userID");
+        this.userID = getArguments().getString("userID2");
         System.out.println("PPS" + this.userID);
     }
 

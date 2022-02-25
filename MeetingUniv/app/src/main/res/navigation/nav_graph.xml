@@ -238,7 +238,11 @@
         android:id="@+id/editTeamMemberElementFragment"
         android:name="com.softcon.meetinguniv.EditTeamMemberElementFragment"
         android:label="fragment_edit_team_member_element"
-        tools:layout="@layout/fragment_edit_team_member_element" />
+        tools:layout="@layout/fragment_edit_team_member_element" >
+        <action
+            android:id="@+id/action_editTeamMemberElementFragment_to_matchingContentsFragment"
+            app:destination="@id/matchingContentsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/chatRoomBottomedittext"
         android:name="com.softcon.meetinguniv.ChatRoomBottomedittext"
