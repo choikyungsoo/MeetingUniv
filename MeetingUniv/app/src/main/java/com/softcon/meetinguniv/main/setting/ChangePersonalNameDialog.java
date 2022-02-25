@@ -65,7 +65,8 @@ public class ChangePersonalNameDialog {
         this.changePersonalName_okBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changePersonalName.setText(changePersonalNameInput.getText().toString());
+//                changePersonalName.setText(changePersonalNameInput.getText().toString());
+                changeNickName(changePersonalNameInput.getText().toString());
                 dlg.dismiss();
             }
         });
@@ -75,6 +76,10 @@ public class ChangePersonalNameDialog {
                 dlg.dismiss();
             }
         });
+    }
+
+    private void changeNickName(String changeNick) {
+        M_databaseReference.child(this.userID).child("닉네임").setValue(changeNick);
     }
 
     public void giveUserID(String userID) {
