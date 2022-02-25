@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -42,6 +43,8 @@ import com.softcon.meetinguniv.main.setting.ChangePersonalProfileImageDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
+
+import java.io.ByteArrayOutputStream;
 
 public class PersonalProfileScreenFragment extends Fragment implements View.OnClickListener {
     private CircleImageView personal_profile_image;
@@ -203,6 +206,29 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
             if (resultCode == RESULT_OK && data.hasExtra("data")) {
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 if (bitmap != null) {
+//                FileOutputStream outputStream = new FileOutputStream();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] bytedata = baos.toByteArray();
+                    storageRef.child(this.userID + "/" + "프로필 사진.jpg").delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                        }
+                    });
+                    storageRef.child(this.userID + "/" + "프로필 사진.jpg").putBytes(bytedata).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(getContext(), "프로필 사진이 변경되었습니다", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                     this.personal_profile_image.setImageBitmap(bitmap);
                 }
             }
