@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,6 +27,8 @@ public class ChangePersonalNameDialog {
     private Button changePersonalName_cancelBTN;
     private String userID;
 
+    private InputMethodManager imm;
+
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageRef = storage.getReference();
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -44,6 +47,8 @@ public class ChangePersonalNameDialog {
         this.changePersonalNameInput = dlg.findViewById(R.id.changePersonalNameInput);
         this.changePersonalName_okBTN = dlg.findViewById(R.id.changePersonalName_okBTN);
         this.changePersonalName_cancelBTN = dlg.findViewById(R.id.changePersonalName_cancelBTN);
+
+        this.imm = (InputMethodManager) this.context.getSystemService(Context.INPUT_METHOD_SERVICE);
 
         //프로필 이름 가져오기
         M_databaseReference.child(String.valueOf(this.userID)).child("닉네임").addValueEventListener(new ValueEventListener() {
@@ -67,12 +72,14 @@ public class ChangePersonalNameDialog {
             public void onClick(View view) {
 //                changePersonalName.setText(changePersonalNameInput.getText().toString());
                 changeNickName(changePersonalNameInput.getText().toString());
+                imm.hideSoftInputFromWindow(changePersonalName_okBTN.getWindowToken(),0);
                 dlg.dismiss();
             }
         });
         this.changePersonalName_cancelBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                imm.hideSoftInputFromWindow(changePersonalName_cancelBTN.getWindowToken(),0);
                 dlg.dismiss();
             }
         });
@@ -83,7 +90,6 @@ public class ChangePersonalNameDialog {
     }
 
     public void giveUserID(String userID) {
-
         this.userID = userID;
     }
 }
