@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,6 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.softcon.meetinguniv.R;
 import com.softcon.meetinguniv.main.setting.ChangePersonalNameDialog;
 import com.softcon.meetinguniv.main.setting.ChangePersonalProfileImageDialog;
@@ -195,6 +197,7 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 200 && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
             Uri selectedImageUri = data.getData();
+            changeProfileintoFirebase(selectedImageUri);
             this.personal_profile_image.setImageURI(selectedImageUri);
         } else if (requestCode == TAKE_PICTURE) {
             if (resultCode == RESULT_OK && data.hasExtra("data")) {
@@ -204,6 +207,29 @@ public class PersonalProfileScreenFragment extends Fragment implements View.OnCl
                 }
             }
         }
+    }
+
+    private void changeProfileintoFirebase(Uri selectedImageUri) {
+        //기존의 이미지 삭제
+        storageRef.child(this.userID + "/" + "프로필 사진.jpg").delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+            }
+        });
+        storageRef.child(this.userID + "/" + "프로필 사진.jpg").putFile(selectedImageUri).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(getContext(), "프로필 사진이 변경되었습니다", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

@@ -25,13 +25,13 @@
         android:orientation="horizontal">
 
         <Space
-            android:layout_width="22dp"
+            android:layout_width="23dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.01" />
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/backToMainFromPersonalProfile_BTN"
-            android:layout_width="65dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:drawable/ic_menu_close_clear_cancel" />
@@ -39,7 +39,7 @@
         <Space
             android:layout_width="342dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.01" />
+            android:layout_weight="1" />
 
     </LinearLayout>
 

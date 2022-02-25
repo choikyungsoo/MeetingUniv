@@ -50,6 +50,7 @@ public class chooseteamElementFragment extends Fragment {
     private AddTeamElementFragment ATEfragment;
     private ArrayList<Integer> ImageSource = new ArrayList<Integer>();
 
+    private String userID;
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -78,6 +79,8 @@ public class chooseteamElementFragment extends Fragment {
 //        recyclerItemAdapter.notifyDataSetChanged();
 
         this.editSearch = (EditText) view.findViewById(R.id.searchTeamEditText);
+
+        this.userID = getArguments().getString("userID");
 
         // 엔터 눌렀을 때 키보드 숨기기
         this.editSearch.setOnKeyListener(new View.OnKeyListener() {
@@ -137,6 +140,9 @@ public class chooseteamElementFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MatchingContentFragment fragment1 = new MatchingContentFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("userID", userID);
+                fragment1.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.Framecontainer, fragment1)
                         .commit();

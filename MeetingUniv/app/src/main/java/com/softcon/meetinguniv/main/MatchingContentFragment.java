@@ -121,6 +121,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         Bundle bundle = new Bundle();
         bundle.putString("userID", this.userID);
         this.ETMfragment.setArguments(bundle);
+        this.CTEfragment.setArguments(bundle);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -197,10 +198,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
                             }
                         });
-                    } else{
-                        System.out.println("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddd성공0");
-                        textView.setText("팀을 결성하세요a");
-                        recyclerItemAdapter.notifyDataSetChanged();
                     }
             }
             @Override
