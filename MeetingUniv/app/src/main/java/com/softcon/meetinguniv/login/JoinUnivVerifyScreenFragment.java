@@ -400,6 +400,7 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                         schoolNameForResult = schoolNames.get(position);
                         System.out.println(schoolNameForResult);
                         majorNames.clear();
+                        System.out.println("///////////////////////////////////////////////////");
                         getMajorNameXmlData();
                         majorAdapter.notifyDataSetChanged();
                     }
@@ -759,7 +760,7 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
             //your codes here
             try {
 
-                URL url = new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=1&perPage=5000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D");
+                URL url = new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=1&perPage=500&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D");
 //            InputStream is= url.openStream();
 
                 XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
