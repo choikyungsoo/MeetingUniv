@@ -36,6 +36,7 @@ import com.softcon.meetinguniv.AddTeamElementFragment;
 import com.softcon.meetinguniv.R;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
@@ -140,10 +141,37 @@ public class chooseteamElementFragment extends Fragment {
     private void TakeTeamDataFromFirebase() {
         this.TeamMember = new ArrayList<String>();
         this.TeamPersonalMember = new ArrayList<String>();
+
         this.M_databaseReference.child(String.valueOf(this.userID)).child("팀").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                TeamMember.addAll((Collection<? extends String>) snapshot.getValue());
+                for(int i = 0; i < TeamMember.size(); i++) {
+                    T_databaseReference.child(String.valueOf(TeamMember.get(i))).child("팀 이름").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(int j = 0; j < TeamMember.size(); j++){
+                                T_databaseReference.child(String.valueOf(TeamMember.get(j))).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        System.out.println(snapshot.getValue());
+                                    }
 
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                            }
+                            System.out.println(snapshot.getValue());
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
             }
 
             @Override
