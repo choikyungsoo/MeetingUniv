@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +25,13 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.softcon.meetinguniv.AddTeamElementFragment;
 import com.softcon.meetinguniv.R;
 
@@ -50,6 +58,17 @@ public class chooseteamElementFragment extends Fragment {
     private AddTeamElementFragment ATEfragment;
     private ArrayList<Integer> ImageSource = new ArrayList<Integer>();
 
+    //팀에 대한 정보, 팀 추가를 하면 팀 번호가 여기로 들어와야 함
+    private ArrayList<String> TeamMember;
+    //선택한 팀에 대한 팀원의 번호 혹은 개인 식별번호가 여기로 들어와야 함
+    private ArrayList<String> TeamPersonalMember;
+
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    private StorageReference storageRef = storage.getReference();
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference M_databaseReference = database.getReference("회원정보");
+    private DatabaseReference T_databaseReference = database.getReference("팀정보");
+
     private String userID;
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -60,9 +79,12 @@ public class chooseteamElementFragment extends Fragment {
 //        recyclerView.setAdapter(recyclerItemAdapter) ;
 
         this.list = new ArrayList<chooseteamRecycleritem>();
+        this.userID = getArguments().getString("userID");
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
+
+        TakeTeamDataFromFirebase();
 
         addRecyclerItem("명지대", "ㄱㄱ,ㄴㄴ,ㄷㄷ");
         addRecyclerItem("한양대", "1,2,3");
@@ -80,7 +102,6 @@ public class chooseteamElementFragment extends Fragment {
 
         this.editSearch = (EditText) view.findViewById(R.id.searchTeamEditText);
 
-        this.userID = getArguments().getString("userID");
 
         // 엔터 눌렀을 때 키보드 숨기기
         this.editSearch.setOnKeyListener(new View.OnKeyListener() {
@@ -114,6 +135,22 @@ public class chooseteamElementFragment extends Fragment {
         });
         ClickHandler clickHandler = new ClickHandler();
         this.ATEfragment = new AddTeamElementFragment(clickHandler);
+    }
+
+    private void TakeTeamDataFromFirebase() {
+        this.TeamMember = new ArrayList<String>();
+        this.TeamPersonalMember = new ArrayList<String>();
+        this.M_databaseReference.child(String.valueOf(this.userID)).child("팀").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void addRecyclerItem( String name, String member){
