@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -30,20 +33,31 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.softcon.meetinguniv.main.ChatRoomRecyclerAdapter;
+import com.softcon.meetinguniv.main.ChatRoomRecyclerItem;
 import com.softcon.meetinguniv.main.ChattingScreenFragment;
 import com.softcon.meetinguniv.main.MainFragment;
 import com.softcon.meetinguniv.main.MatchChattingContentFragment;
 import com.softcon.meetinguniv.main.PersonalProfileScreenFragment;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnClickListener, onBackPressedListener {
+
+    private ArrayList<ChatRoomRecyclerItem> list = new ArrayList<ChatRoomRecyclerItem>();
+
     private TextView chatRoomMembers;
     private TextView numOfChatRoomMembers;
     private EditText chatRoomEditText;
     private LinearLayout inputChatRoom;
     private Button backFromChatRoomPop_BTN;
     private ImageView leaveChatRoom_BTN;
+    private RecyclerView chatRecyclerView;
+
+    // for recyclerview
+    private ChatRoomRecyclerAdapter chatRoomRecyclerAdapter;
+    private ChatRoomRecyclerItem chatRoomRecyclerItem;
 
     private ConstraintLayout ChatRoomScreen;
     private int keyboardheight;
@@ -80,6 +94,7 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
         this.ChatRoomScreen = view.findViewById(R.id.constraintLayoutOfchatRoomPopup);
         this.backFromChatRoomPop_BTN = view.findViewById(R.id.backFromChatRoomPop_BTN);
         this.leaveChatRoom_BTN = view.findViewById(R.id.leaveChatRoom_BTN);
+        this.chatRecyclerView = view.findViewById(R.id.chatRecyclerView);
 
         chattingScreenFragment = new ChattingScreenFragment();
 
@@ -89,6 +104,18 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
 //        this.chatRoomEditText.setOnClickListener(this);
 
 //        setChatRoomScreen();
+
+        this.chatRoomRecyclerAdapter = new ChatRoomRecyclerAdapter(this.list);
+        this.chatRecyclerView.setAdapter(chatRoomRecyclerAdapter);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        this.chatRecyclerView.setLayoutManager(linearLayoutManager);
+
+        addRecyclerItem("2022-02-25", null, null, null, null, null, 0);
+        addRecyclerItem(null, null, null, "테스트 메세지입니다.1", "time", "3", 1);
+        addRecyclerItem(null, null, null, "테스트 메세지입니다.2", "time", "3", 2);
+        addRecyclerItem(null, null, null, "테스트 메세지입니다.3", "time", "3", 2);
+
     }
 //
 //    public void setChatRoomScreen() {
@@ -148,6 +175,21 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
 //        fragmentManager.beginTransaction().remove(this).commit();
 //        fragmentManager.popBackStack();
 //    }
+
+    private void addRecyclerItem(String date, Uri profileImage, String nickname, String message, String time, String uncheck, int viewType) {
+        this.chatRoomRecyclerItem = new ChatRoomRecyclerItem();
+        this.chatRoomRecyclerItem.setDate(date);
+        this.chatRoomRecyclerItem.setProfileImage(profileImage);
+        this.chatRoomRecyclerItem.setNickname(nickname);
+        this.chatRoomRecyclerItem.setMessage(message);
+        this.chatRoomRecyclerItem.setTime(time);
+        this.chatRoomRecyclerItem.setUncheck(uncheck);
+        this.chatRoomRecyclerItem.setViewType(viewType);
+        this.list.add(this.chatRoomRecyclerItem);
+    }
+
+
+
     @Override
     public void onBackPressed() {
 //        Toast.makeText(getContext(), "왜 안 돼!!!", Toast.LENGTH_SHORT).show();
