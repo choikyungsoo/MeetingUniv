@@ -163,7 +163,7 @@ public class chooseteamElementFragment extends Fragment {
                                     cteamDataModel.setTeamName(ds.getValue().toString());
                                     System.out.println("팀 이름 : " + ds.getValue());
                                 } else if(ds.getKey().toString().equals("팀원")){
-                                    String teamMember = null;
+                                    String teamMember = "";
                                     for(String TM : (ArrayList<String>)ds.getValue()){
                                         teamMember += TM + ",";
                                     }
