@@ -58,6 +58,7 @@ public class chooseteamElementFragment extends Fragment {
     private ConstraintLayout chooseteamConstraint;
 
     private AddTeamElementFragment ATEfragment;
+    private chooseteamDataModel cteamDataModel;
     private ArrayList<Integer> ImageSource = new ArrayList<Integer>();
 
     //팀에 대한 정보, 팀 추가를 하면 팀 번호가 여기로 들어와야 함
@@ -76,10 +77,6 @@ public class chooseteamElementFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.recyclerView = view.findViewById(R.id.teamrecycler) ;
-
-//        chooseteamAdapterRecyleritem recyclerItemAdapter = new chooseteamAdapterRecyleritem(this.list);
-//        recyclerView.setAdapter(recyclerItemAdapter) ;
-
         this.list = new ArrayList<chooseteamRecycleritem>();
         this.userID = getArguments().getString("userID");
 
@@ -88,19 +85,8 @@ public class chooseteamElementFragment extends Fragment {
 
         TakeTeamDataFromFirebase();
 
-//        addRecyclerItem("명지대", "ㄱㄱ,ㄴㄴ,ㄷㄷ");
-//        addRecyclerItem("한양대", "1,2,3");
-//        addRecyclerItem("연세대", "A,B,c");
-//        addRecyclerItem("고려대", "가,나,다");
-//        addRecyclerItem("명지대", "ㄱㄱ,ㄴㄴ,ㄷㄷ");
-//        addRecyclerItem("한양대", "1,2,3");
-//        addRecyclerItem("연세대", "A,B,c");
-//        addRecyclerItem("고려대", "가,나,다");
-
         this.recyclerItemAdapter = new chooseteamAdapterRecyleritem(this.getActivity(), this.list);
         recyclerView.setAdapter(this.recyclerItemAdapter);
-
-//        recyclerItemAdapter.notifyDataSetChanged();
 
         this.editSearch = (EditText) view.findViewById(R.id.searchTeamEditText);
 
@@ -142,10 +128,7 @@ public class chooseteamElementFragment extends Fragment {
     private void TakeTeamDataFromFirebase() {
         this.TeamMember = new ArrayList<String>();
         this.TeamPersonalMember = new ArrayList<String>();
-        chooseteamDataModel cteamDataModel = new chooseteamDataModel();
-        ArrayList<chooseteamDataModel> TeamAllData = new ArrayList<chooseteamDataModel>();
-
-        HashMap<String, Object> teamData = new HashMap<String, Object>();
+        this.cteamDataModel = new chooseteamDataModel();
 
         this.M_databaseReference.child(String.valueOf(this.userID)).child("팀").addValueEventListener(new ValueEventListener() {
             @Override
@@ -156,33 +139,21 @@ public class chooseteamElementFragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for(DataSnapshot ds : snapshot.getChildren()) {
-//                                System.out.println("칠드런 데이터 : " + ds.getKey().toString());
-//                                teamData.put("팀 이름",  ds.getValue());
-//                                System.out.println("팀 이름 : " + teamData.values());
                                 if(ds.getKey().toString().equals("팀 이름")){
                                     cteamDataModel.setTeamName(ds.getValue().toString());
-                                    System.out.println("팀 이름 : " + ds.getValue());
                                 } else if(ds.getKey().toString().equals("팀원")){
+                                    TakeTeamListDataFromFirebase((ArrayList<String>)ds.getValue());
                                     String teamMember = "";
                                     for(String TM : (ArrayList<String>)ds.getValue()){
                                         teamMember += TM + ",";
                                     }
                                     cteamDataModel.setTeamMember(teamMember);
-//                                    cteamDataModel.setTeamMember((ArrayList<String>) ds.getValue());
-                                    System.out.println("팀원 : " + ds.getValue());
                                 } else if(ds.getKey().toString().equals("대기")){
                                     cteamDataModel.setMatchingState(ds.getValue().toString());
                                 }
-
                             }
                             addRecyclerItem(cteamDataModel.getTeamName(), cteamDataModel.getTeamMember());
-                            System.out.println("전체 데이터 목록 : " + cteamDataModel.getTeamName());
                             recyclerItemAdapter.notifyDataSetChanged();
-//                            for(DataSnapshot ds : snapshot.getChildren()){
-//                                chooseteamDataModel cteamDataModel = ds.getValue(chooseteamDataModel.class);
-//                                TeamAllData.add(cteamDataModel);
-//                            }
-//                            System.out.println(TeamAllData);
                         }
 
                         @Override
@@ -190,42 +161,6 @@ public class chooseteamElementFragment extends Fragment {
 
                         }
                     });
-//                    T_databaseReference.child(String.valueOf(TeamMember.get(i))).addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-////                            System.out.println(snapshot.getValue());
-//                            System.out.println("팀 이름 나와야됨 " + teamData.get("팀 이름="));
-////                            TeamAll.addAll((Collection<? extends String>) snapshot.getValue());
-//                            System.out.println("팀전체 : " );
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
-//                    T_databaseReference.child(String.valueOf(TeamMember.get(i))).child("팀 이름").addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            System.out.println("팀 이름 : " + snapshot.getValue());
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
-//                    T_databaseReference.child(String.valueOf(TeamMember.get(i))).child("팀원").addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            System.out.println("팀원 : "+snapshot.getValue());
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
 
                 }
             }
@@ -237,14 +172,30 @@ public class chooseteamElementFragment extends Fragment {
         });
     }
 
+    private void TakeTeamListDataFromFirebase(ArrayList<String> TeamMember) {
+        for(int i =0; i < TeamMember.size(); i++) {
+            System.out.println("팀원에 대한 정보 : " + TeamMember.get(i));
+            this.M_databaseReference.child(TeamMember.get(i)).child("닉네임").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    System.out.println("팀원 차일드 : " + snapshot.getValue().toString());
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+    }
+
     private void addRecyclerItem( String name, String member){
         chooseteamRecycleritem recyclerItem = new chooseteamRecycleritem();
         recyclerItem.setName(name);
         recyclerItem.setMember(member);
         list.add(recyclerItem);
-        System.out.println("제발 좀 돼라"+name);
-
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
