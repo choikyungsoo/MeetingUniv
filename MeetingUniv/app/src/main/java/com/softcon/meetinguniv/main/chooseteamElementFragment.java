@@ -143,11 +143,11 @@ public class chooseteamElementFragment extends Fragment {
                                     cteamDataModel.setTeamName(ds.getValue().toString());
                                 } else if(ds.getKey().toString().equals("팀원")){
                                     TakeTeamListDataFromFirebase((ArrayList<String>)ds.getValue());
-                                    String teamMember = "";
-                                    for(String TM : (ArrayList<String>)ds.getValue()){
-                                        teamMember += TM + ",";
-                                    }
-                                    cteamDataModel.setTeamMember(teamMember);
+//                                    String teamMember = "";
+//                                    for(String TM : (ArrayList<String>)ds.getValue()){
+//                                        teamMember += TM + ",";
+//                                    }
+//                                    cteamDataModel.setTeamMember(teamMember);
                                 } else if(ds.getKey().toString().equals("대기")){
                                     cteamDataModel.setMatchingState(ds.getValue().toString());
                                 }
@@ -178,7 +178,14 @@ public class chooseteamElementFragment extends Fragment {
             this.M_databaseReference.child(TeamMember.get(i)).child("닉네임").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    System.out.println("팀원 차일드 : " + snapshot.getValue().toString());
+                    TeamPersonalMember.add(snapshot.getValue().toString());
+                    String teamMember = "";
+                    for(String TM : TeamPersonalMember){
+                        teamMember += TM + ",";
+                    }
+                   cteamDataModel.setTeamMember(teamMember);
+                    System.out.println("팀 멤버 : " + cteamDataModel.getTeamMember());
+                    recyclerItemAdapter.notifyDataSetChanged();
                 }
 
                 @Override
@@ -222,9 +229,12 @@ public class chooseteamElementFragment extends Fragment {
             }
         });
         this.addTeamLinear.setOnClickListener(new View.OnClickListener() {
-//            AddTeamElementFragment addTeamElementFragment = new AddTeamElementFragment();
             @Override
             public void onClick(View v) {
+                AddTeamElementFragment addTeamElementFragment = new AddTeamElementFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("userID", userID);
+                addTeamElementFragment.setArguments(bundle);
                 giveRecycleritemData();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)

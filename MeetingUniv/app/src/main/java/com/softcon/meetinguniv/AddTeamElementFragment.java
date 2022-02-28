@@ -3,6 +3,7 @@ package com.softcon.meetinguniv;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -47,6 +48,12 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
     private Boolean checkok = false;
     private chooseteamElementFragment.ClickHandler clickHandler;
 
+    private String userID;
+
+    public AddTeamElementFragment(){
+
+    }
+
     public AddTeamElementFragment(chooseteamElementFragment.ClickHandler clickHandler) {
         this.clickHandler = clickHandler;
     }
@@ -55,6 +62,15 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        chooseteamElementFragment ctE = new chooseteamElementFragment();
+        Bundle bundle2 = new Bundle();
+        bundle2.putString("userID", this.userID);
+        ctE.setArguments(bundle2);
     }
 
     @Override
@@ -79,7 +95,8 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         this.allfriends.setLayoutManager(linearLayoutManager);
 
-
+        this.userID = getArguments().getString("userID");
+        System.out.println("ATE Fragment UserID : " + this.userID);
         this.addTeamOk_BTN.setOnClickListener(this);
 //        Bundle bundle = getArguments();
 //        if(bundle != null){
