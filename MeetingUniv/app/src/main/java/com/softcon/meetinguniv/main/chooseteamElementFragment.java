@@ -143,11 +143,11 @@ public class chooseteamElementFragment extends Fragment {
                                     cteamDataModel.setTeamName(ds.getValue().toString());
                                 } else if(ds.getKey().toString().equals("팀원")){
                                     TakeTeamListDataFromFirebase((ArrayList<String>)ds.getValue());
-//                                    String teamMember = "";
-//                                    for(String TM : (ArrayList<String>)ds.getValue()){
-//                                        teamMember += TM + ",";
-//                                    }
-//                                    cteamDataModel.setTeamMember(teamMember);
+                                    String teamMember = "";
+                                    for(String TM : (ArrayList<String>)ds.getValue()){
+                                        teamMember += TM + ",";
+                                    }
+                                    cteamDataModel.setTeamMember(teamMember);
                                 } else if(ds.getKey().toString().equals("대기")){
                                     cteamDataModel.setMatchingState(ds.getValue().toString());
                                 }

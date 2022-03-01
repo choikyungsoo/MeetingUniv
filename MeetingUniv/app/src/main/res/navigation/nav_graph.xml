@@ -271,7 +271,11 @@
         android:id="@+id/addTeamElementFragment"
         android:name="com.softcon.meetinguniv.AddTeamElementFragment"
         android:label="fragment_add_team_element"
-        tools:layout="@layout/fragment_add_team_element" />
+        tools:layout="@layout/fragment_add_team_element" >
+        <action
+            android:id="@+id/action_addTeamElementFragment_to_chooseteamElementFragment"
+            app:destination="@id/chooseteamElementFragment" />
+    </fragment>
     <fragment
         android:id="@+id/chatRoomScreenPopup2Fragment"
         android:name="com.softcon.meetinguniv.ChatRoomScreenPopup2Fragment"

@@ -67,6 +67,7 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        this.userID = getArguments().getString("userID");
         chooseteamElementFragment ctE = new chooseteamElementFragment();
         Bundle bundle2 = new Bundle();
         bundle2.putString("userID", this.userID);
@@ -94,8 +95,8 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         this.allfriends.setLayoutManager(linearLayoutManager);
-
         this.userID = getArguments().getString("userID");
+
         System.out.println("ATE Fragment UserID : " + this.userID);
         this.addTeamOk_BTN.setOnClickListener(this);
 //        Bundle bundle = getArguments();
