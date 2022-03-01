@@ -113,8 +113,8 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
 
         addRecyclerItem("2022-02-25", null, null, null, null, null, 0);
         addRecyclerItem(null, null, null, "테스트 메세지입니다.1", "time", "3", 1);
-        addRecyclerItem(null, null, null, "테스트 메세지입니다.2", "time", "3", 2);
-        addRecyclerItem(null, null, null, "테스트 메세지입니다.3", "time", "3", 2);
+        addRecyclerItem(null, null, "채윤", "테스트 메세지입니다.2", "time", "3", 2);
+        addRecyclerItem(null, null, "채윤2", "테스트 메세지입니다.3", "time", "3", 2);
 
     }
 //
