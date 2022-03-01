@@ -104,6 +104,7 @@
         <entry key="..\:/softcongithub/MeetingUniv/MeetingUniv/app/src/main/res/xml/fragment_my_information_content.xml" value="0.28940217391304346" />
         <entry key="..\:/softcongithub/MeetingUniv/MeetingUniv/app/src/main/res/xml/fragment_settings_content.xml" value="0.3541666666666667" />
         <entry key="app/src/main/res/layout/fragment_join_select_univ_dialog.xml" value="0.3072916666666667" />
+        <entry key="app/src/main/res/layout/fragment_kakao_login.xml" value="0.5177083333333333" />
       </map>
     </option>
   </component>
