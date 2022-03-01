@@ -143,6 +143,7 @@ public class chooseteamElementFragment extends Fragment {
                                     cteamDataModel.setTeamName(ds.getValue().toString());
                                 } else if(ds.getKey().toString().equals("팀원")){
                                     TakeTeamListDataFromFirebase((ArrayList<String>)ds.getValue());
+                                    System.out.println("************************ 팀 멤버 : " + cteamDataModel.getTeamMember());
                                     String teamMember = "";
                                     for(String TM : (ArrayList<String>)ds.getValue()){
                                         teamMember += TM + ",";
@@ -183,8 +184,8 @@ public class chooseteamElementFragment extends Fragment {
                     for(String TM : TeamPersonalMember){
                         teamMember += TM + ",";
                     }
-                   cteamDataModel.setTeamMember(teamMember);
-                    System.out.println("팀 멤버 : " + cteamDataModel.getTeamMember());
+                    cteamDataModel.setTeamMember(teamMember);
+                    System.out.println("#################### 팀 멤버 : " + cteamDataModel.getTeamMember());
                     recyclerItemAdapter.notifyDataSetChanged();
                 }
 

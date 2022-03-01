@@ -117,7 +117,7 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
         addRecyclerItem(null, null, "채윤2", "테스트 메세지입니다.3", "time", "3", 2);
 
     }
-//
+
 //    public void setChatRoomScreen() {
 //        this.fragmentManager = this.getActivity().getSupportFragmentManager();
 //        this.fragmentTransaction = this.fragmentManager.beginTransaction();
