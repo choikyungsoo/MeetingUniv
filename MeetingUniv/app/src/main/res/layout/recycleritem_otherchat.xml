@@ -46,7 +46,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/otherChatTime"
+            android:id="@+id/otherChatUnCheck"
             android:layout_width="wrap_content"
             android:layout_height="34dp"
             android:layout_weight="1"
@@ -55,7 +55,7 @@
             android:textSize="8sp" />
 
         <TextView
-            android:id="@+id/otherChatUnCheck"
+            android:id="@+id/otherChatTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
