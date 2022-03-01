@@ -48,6 +48,7 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
     private Boolean checkok = false;
     private chooseteamElementFragment.ClickHandler clickHandler;
 
+
     private String userID;
 
     public AddTeamElementFragment(){
@@ -68,10 +69,9 @@ public class AddTeamElementFragment extends Fragment implements View.OnClickList
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.userID = getArguments().getString("userID");
-        chooseteamElementFragment ctE = new chooseteamElementFragment();
-        Bundle bundle2 = new Bundle();
-        bundle2.putString("userID", this.userID);
-        ctE.setArguments(bundle2);
+        Bundle bundle = new Bundle();
+        bundle.putString("userID", this.userID);
+        this.fragment.setArguments(bundle);
     }
 
     @Override
