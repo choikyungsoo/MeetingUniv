@@ -70,13 +70,12 @@
         <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/popup_match.xml" value="0.3333333333333333" />
         <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/recycleritem_chatmembers.xml" value="0.359375" />
         <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/recycleritem_chooseteamtojoin.xml" value="0.25" />
-        <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/recycleritem_date.xml" value="0.25" />
+        <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/recycleritem_date.xml" value="0.35520833333333335" />
         <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/recycleritem_friendslist.xml" value="0.259375" />
         <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/recycleritem_members.xml" value="0.259375" />
-        <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/recycleritem_mychat.xml" value="0.25" />
+        <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/recycleritem_mychat.xml" value="0.35520833333333335" />
+        <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/recycleritem_opensource.xml" value="0.35520833333333335" />
         <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/recycleritem_otherchat.xml" value="0.3776041666666667" />
-        <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/recycleritem_otherchat_type1.xml" value="0.2672239108409321" />
-        <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/recycleritem_otherchat_type2.xml" value="0.25" />
         <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/xml/fragment_alert_setting_element.xml" value="0.359375" />
         <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/xml/fragment_service_info_content.xml" value="0.16271442986881937" />
         <entry key="..\:/SoftConGitHub/MeetingUniv/MeetingUniv/app/src/main/res/xml/fragment_settings_content.xml" value="0.33" />
