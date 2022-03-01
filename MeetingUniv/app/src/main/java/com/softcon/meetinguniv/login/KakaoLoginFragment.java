@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +50,7 @@ public class KakaoLoginFragment extends Fragment {
 
     private static final String TAG = "유저";
     private ImageView kakao_login_btn;
+    private ProgressBar kakao_login_progressBar;
     private TextView logo;
 
     private View view;
@@ -69,9 +71,14 @@ public class KakaoLoginFragment extends Fragment {
 
         this.kakao_login_btn = view.findViewById(R.id.kakao_login_btn);
 
+        this.kakao_login_progressBar = view.findViewById(R.id.kakao_login_progressBar);
+
         this.kakao_login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                kakao_login_btn.setEnabled(false);
+                kakao_login_btn.setVisibility(View.INVISIBLE);
+                kakao_login_progressBar.setVisibility(View.VISIBLE);
                 if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(view.getContext())) {
                     System.out.println("checkLogin2");
                     //                        Auth.creat

@@ -775,10 +775,14 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                 while (parserEvent != XmlPullParser.END_DOCUMENT) {
                     switch (parserEvent) {
                         case XmlPullParser.START_DOCUMENT:
+                            System.out.println("START_DOCUMENT");
                             break;
                         case XmlPullParser.START_TAG:
+                            System.out.println("START_TAG");
                             if (parser.getName().equals("col")) {
-                                switch (parser.getAttributeName(0)) {
+                                System.out.println("in col tag");
+//                                System.out.println(parser.getAttributeValue(0));
+                                switch (parser.getAttributeValue(0)) {
                                     case "학부·과(전공)명":
                                         System.out.println("학부·과(전공)명");
                                         this.inMajorName = true;
