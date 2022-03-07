@@ -18,7 +18,7 @@
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
@@ -29,39 +29,45 @@
             android:paddingLeft="10dp"
             android:text="이름" />
 
-        <TextView
-            android:id="@+id/otherChatText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@drawable/white_round"
-            android:maxWidth="250dp"
-            android:padding="10dp"
-            android:text="상대방 톡" />
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+            <TextView
+                android:id="@+id/otherChatText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@drawable/white_round"
+                android:maxWidth="250dp"
+                android:padding="10dp"
+                android:text="상대방 톡" />
 
-        <TextView
-            android:id="@+id/otherChatUnCheck"
-            android:layout_width="wrap_content"
-            android:layout_height="34dp"
-            android:layout_weight="1"
-            android:gravity="bottom"
-            android:text="2"
-            android:textSize="8sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/otherChatTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:gravity="bottom"
-            android:text="오후 1:00"
-            android:textSize="8sp" />
+                <TextView
+                    android:id="@+id/otherChatUnCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="34dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:text="2"
+                    android:textSize="8sp" />
+
+                <TextView
+                    android:id="@+id/otherChatTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:gravity="bottom"
+                    android:text="오후 1:00"
+                    android:textSize="8sp" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
