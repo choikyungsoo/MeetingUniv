@@ -129,6 +129,7 @@ public class chooseteamElementFragment extends Fragment {
         this.TeamMember = new ArrayList<String>();
         this.TeamPersonalMember = new ArrayList<String>();
         this.cteamDataModel = new chooseteamDataModel();
+        ArrayList<String> TeamMemberID = new ArrayList<String>();
 
         this.M_databaseReference.child(String.valueOf(this.userID)).child("팀").addValueEventListener(new ValueEventListener() {
             @Override
@@ -186,7 +187,6 @@ public class chooseteamElementFragment extends Fragment {
                     }
                     cteamDataModel.setTeamMember(teamMember);
                     System.out.println("#################### 팀 멤버 : " + cteamDataModel.getTeamMember());
-                    recyclerItemAdapter.notifyDataSetChanged();
                 }
 
                 @Override
