@@ -819,15 +819,19 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                             break;
 
                         case XmlPullParser.TEXT:
+                            System.out.println("TEXT");
                             if(this.inMajorName) {
+                                System.out.println("inMajorName");
                                 this.majorName = parser.getText();
                                 this.inMajorName = false;
                             }
                             if(this.inMajorStatus) {
+                                System.out.println("inMajorStatus");
                                 this.majorStatus = parser.getText();
                                 this.inMajorStatus = false;
                             }
                             if(this.inSchoolNameOfMajor) {
+                                System.out.println("inSchoolNameOfMajor");
                                 this.schoolNameOfMajor = parser.getText();
                                 this.inSchoolNameOfMajor = false;
                             }
@@ -866,9 +870,14 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                             break;
 
                         case XmlPullParser.END_TAG:
+                            System.out.println("END_TAG");
+                            System.out.println(parser.getName());
                             if(parser.getName().equals("item")) {
-                                if(this.schoolNamesOfMajor.equals(this.schoolNameForResult) && (this.majorStatus.equals("기존") || (this.majorStatus.equals("변경[신설]")) || (this.majorStatus.equals("통합[기존]")) || (this.majorStatus.equals("통합[신설]")))) {
+                                System.out.println("in item");
+                                if(this.schoolNamesOfMajor.equals(this.schoolNameForResult) && (this.majorStatus.equals("기존") || this.majorStatus.equals("변경[신설]") || this.majorStatus.equals("통합[기존]") || this.majorStatus.equals("통합[신설]"))) {
+                                    System.out.println("pass");
                                     this.majorNames.add(this.majorName);
+                                    System.out.println(this.majorNames.size());
                                 }
                             }
 
