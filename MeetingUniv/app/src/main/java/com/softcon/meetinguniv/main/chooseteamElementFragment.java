@@ -62,9 +62,9 @@ public class chooseteamElementFragment extends Fragment {
     private ArrayList<Integer> ImageSource = new ArrayList<Integer>();
 
     //팀에 대한 정보, 팀 추가를 하면 팀 번호가 여기로 들어와야 함
-    private ArrayList<String> TeamMember;
+    private ArrayList<String> TeamMember  = new ArrayList<String>();
     //선택한 팀에 대한 팀원의 번호 혹은 개인 식별번호가 여기로 들어와야 함
-    private ArrayList<String> TeamPersonalMember;
+    private ArrayList<String> TeamPersonalMember = new ArrayList<String>();;
 
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageRef = storage.getReference();
@@ -126,9 +126,9 @@ public class chooseteamElementFragment extends Fragment {
     }
 
     private void TakeTeamDataFromFirebase() {
-        this.TeamMember = new ArrayList<String>();
-        this.TeamPersonalMember = new ArrayList<String>();
         this.cteamDataModel = new chooseteamDataModel();
+        ArrayList<String> TeamMemberID = new ArrayList<String>();
+        String nickTest;
 
         this.M_databaseReference.child(String.valueOf(this.userID)).child("팀").addValueEventListener(new ValueEventListener() {
             @Override
@@ -143,12 +143,7 @@ public class chooseteamElementFragment extends Fragment {
                                     cteamDataModel.setTeamName(ds.getValue().toString());
                                 } else if(ds.getKey().toString().equals("팀원")){
                                     TakeTeamListDataFromFirebase((ArrayList<String>)ds.getValue());
-                                    System.out.println("************************ 팀 멤버 : " + cteamDataModel.getTeamMember());
-                                    String teamMember = "";
-                                    for(String TM : (ArrayList<String>)ds.getValue()){
-                                        teamMember += TM + ",";
-                                    }
-                                    cteamDataModel.setTeamMember(teamMember);
+//                                    System.out.println("************************ 팀 멤버 : " + cteamDataModel.getTeamMember());
                                 } else if(ds.getKey().toString().equals("대기")){
                                     cteamDataModel.setMatchingState(ds.getValue().toString());
                                 }
@@ -179,14 +174,13 @@ public class chooseteamElementFragment extends Fragment {
             this.M_databaseReference.child(TeamMember.get(i)).child("닉네임").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    TeamPersonalMember.add(snapshot.getValue().toString());
-                    String teamMember = "";
-                    for(String TM : TeamPersonalMember){
-                        teamMember += TM + ",";
-                    }
-                    cteamDataModel.setTeamMember(teamMember);
+//                    TeamPersonalMember.add(snapshot.getValue().toString());
+//                    String teamMember = "";
+//                    for(String TM : TeamPersonalMember){
+//                        teamMember += TM + ",";
+//                    }
+                    cteamDataModel.setTeamMember(snapshot.getValue().toString());
                     System.out.println("#################### 팀 멤버 : " + cteamDataModel.getTeamMember());
-                    recyclerItemAdapter.notifyDataSetChanged();
                 }
 
                 @Override
