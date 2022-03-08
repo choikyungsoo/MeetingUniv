@@ -120,7 +120,7 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
         this.chatRecyclerView.setLayoutManager(linearLayoutManager);
 
         addRecyclerItem("2022-02-25", null, null, null, null, null, 0);
-        addRecyclerItem(null, null, null, "테스트 메세지입니다.1", "time", "3", 1);
+//        addRecyclerItem(null, null, null, "테스트 메세지입니다.1", "time", "3", 1);
 //        addRecyclerItem(null, null, "채윤", "테스트 메세지입니다.2", "time", "3", 2);
 //        addRecyclerItem(null, null, "채윤2", "테스트 메세지입니다.3", "time", "3", 2);
 
@@ -131,13 +131,22 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d("TAG", document.getId() + " => " + document.getData());
+                        if (document.getData().get("sender") != null) {
+                            addRecyclerItem(null, null, document.getData().get("sender").toString(),
+                                    document.getData().get("text").toString(),
+                                    document.getData().get("time").toString(),
+                                    document.getData().get("uncheck").toString(),
+                                    2
+                            );
+                        } else {
+                            addRecyclerItem(null, null, null,
+                                    document.getData().get("text").toString(),
+                                    document.getData().get("time").toString(),
+                                    document.getData().get("uncheck").toString(),
+                                    1
+                            );
+                        }
 
-                        addRecyclerItem(null, null, document.getData().get("sender").toString(),
-                                document.getData().get("text").toString(),
-                                document.getData().get("time").toString(),
-                                document.getData().get("uncheck").toString(),
-                                2
-                        );
 //                        addRecyclerItem2(3, "참가자, 참가자, 참가자, 참가자, 참가자, 참가자", 6, 10);
                     }
                 } else {
