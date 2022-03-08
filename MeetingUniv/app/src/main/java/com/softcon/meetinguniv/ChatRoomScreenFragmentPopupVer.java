@@ -33,6 +33,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.softcon.meetinguniv.main.ChatRoomRecyclerAdapter;
 import com.softcon.meetinguniv.main.ChatRoomRecyclerItem;
 import com.softcon.meetinguniv.main.ChattingScreenFragment;
@@ -69,6 +74,9 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
     private InviteFriendElementFragment inviteFriendElementFragment = new InviteFriendElementFragment();
     private ChattingScreenFragment chattingScreenFragment;
     private MatchChattingContentFragment matchChattingContentFragment;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -112,10 +120,40 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
         this.chatRecyclerView.setLayoutManager(linearLayoutManager);
 
         addRecyclerItem("2022-02-25", null, null, null, null, null, 0);
-        addRecyclerItem(null, null, null, "테스트 메세지입니다.1", "time", "3", 1);
-        addRecyclerItem(null, null, "채윤", "테스트 메세지입니다.2", "time", "3", 2);
-        addRecyclerItem(null, null, "채윤2", "테스트 메세지입니다.3", "time", "3", 2);
+//        addRecyclerItem(null, null, null, "테스트 메세지입니다.1", "time", "3", 1);
+//        addRecyclerItem(null, null, "채윤", "테스트 메세지입니다.2", "time", "3", 2);
+//        addRecyclerItem(null, null, "채윤2", "테스트 메세지입니다.3", "time", "3", 2);
 
+        db.collection("ChattingContents2")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d("TAG", document.getId() + " => " + document.getData());
+                        if (document.getData().get("sender") != null) {
+                            addRecyclerItem(null, null, document.getData().get("sender").toString(),
+                                    document.getData().get("text").toString(),
+                                    document.getData().get("time").toString(),
+                                    document.getData().get("uncheck").toString(),
+                                    2
+                            );
+                        } else {
+                            addRecyclerItem(null, null, null,
+                                    document.getData().get("text").toString(),
+                                    document.getData().get("time").toString(),
+                                    document.getData().get("uncheck").toString(),
+                                    1
+                            );
+                        }
+
+//                        addRecyclerItem2(3, "참가자, 참가자, 참가자, 참가자, 참가자, 참가자", 6, 10);
+                    }
+                } else {
+                    Log.d("TAG", "Error getting documents: ", task.getException());
+                }
+            }
+        });
     }
 
 //    public void setChatRoomScreen() {
@@ -186,6 +224,7 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
         this.chatRoomRecyclerItem.setUncheck(uncheck);
         this.chatRoomRecyclerItem.setViewType(viewType);
         this.list.add(this.chatRoomRecyclerItem);
+        chatRoomRecyclerAdapter.notifyDataSetChanged();
     }
 
 
