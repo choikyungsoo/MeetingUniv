@@ -874,7 +874,10 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                             System.out.println(parser.getName());
                             if(parser.getName().equals("item")) {
                                 System.out.println("in item");
-                                if(this.schoolNamesOfMajor.equals(this.schoolNameForResult) && (this.majorStatus.equals("기존") || this.majorStatus.equals("변경[신설]") || this.majorStatus.equals("통합[기존]") || this.majorStatus.equals("통합[신설]"))) {
+                                System.out.println(this.schoolNameForResult);
+                                System.out.println(this.schoolNameOfMajor);
+                                System.out.println(this.majorStatus);
+                                if(this.schoolNameOfMajor.equals(this.schoolNameForResult) && (this.majorStatus.equals("기존") || this.majorStatus.equals("신설")|| this.majorStatus.equals("변경[신설]") || this.majorStatus.equals("통합[기존]") || this.majorStatus.equals("통합[신설]"))) {
                                     System.out.println("pass");
                                     this.majorNames.add(this.majorName);
                                     System.out.println(this.majorNames.size());
