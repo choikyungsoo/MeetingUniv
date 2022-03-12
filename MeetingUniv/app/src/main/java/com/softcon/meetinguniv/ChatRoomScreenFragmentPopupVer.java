@@ -30,6 +30,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.kakao.sdk.common.json.MapToQueryAdapter;
 import com.softcon.meetinguniv.main.ChatRoomRecyclerAdapter;
 import com.softcon.meetinguniv.main.ChatRoomRecyclerItem;
 import com.softcon.meetinguniv.main.ChattingScreenFragment;
@@ -59,6 +61,8 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
     private Button backFromChatRoomPop_BTN;
     private ImageView leaveChatRoom_BTN;
     private RecyclerView chatRecyclerView;
+    private ScrollView chatScrollView;
+    private LinearLayout inputLinearChatRoom;
 
     // for recyclerview
     private ChatRoomRecyclerAdapter chatRoomRecyclerAdapter;
@@ -103,6 +107,8 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
         this.backFromChatRoomPop_BTN = view.findViewById(R.id.backFromChatRoomPop_BTN);
         this.leaveChatRoom_BTN = view.findViewById(R.id.leaveChatRoom_BTN);
         this.chatRecyclerView = view.findViewById(R.id.chatRecyclerView);
+        this.chatScrollView = view.findViewById(R.id.chatScrollView);
+        this.inputLinearChatRoom = view.findViewById(R.id.inputLinearChatRoom);
 
         chattingScreenFragment = new ChattingScreenFragment();
 
@@ -154,6 +160,17 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
                 }
             }
         });
+
+        this.chatRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (!recyclerView.canScrollVertically(-1)) {
+                    Toast.makeText(getContext(), "스크롤 올라감", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
 //    public void setChatRoomScreen() {
@@ -226,8 +243,6 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
         this.list.add(this.chatRoomRecyclerItem);
         chatRoomRecyclerAdapter.notifyDataSetChanged();
     }
-
-
 
     @Override
     public void onBackPressed() {
