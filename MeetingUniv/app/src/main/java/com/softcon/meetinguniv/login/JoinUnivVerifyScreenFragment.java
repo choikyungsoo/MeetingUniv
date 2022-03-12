@@ -27,6 +27,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListPopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,8 @@ import com.pedro.library.AutoPermissionsListener;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 // >>>>>>> inbae:MeetingUniv/app/src/main/java/com/softcon/meetinguniv/login/JoinPersonalInfoScreenFragment.java
@@ -118,6 +121,9 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
     private String schoolNameForResult;
 
     // for major name parsing
+    private boolean inTotalCount = false;
+    private int totalMajorNum;
+
     private String majorName;
     private ArrayList<String> majorNames = new ArrayList<String>();
     private boolean inMajorName = false;
@@ -343,6 +349,15 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                     }
                 });
 
+//                try {
+//                    Field popup = Spinner.class.getDeclaredField("mPopup");
+//                    popup.setAccessible(true);
+//                    ListPopupWindow window = (ListPopupWindow)popup.get(join_univSpinner);
+//                    window.setHeight(100);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+
                 getProvinceNameXmlData();
 //                getMajorNameXmlData();
 
@@ -401,6 +416,7 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                         System.out.println(schoolNameForResult);
                         majorNames.clear();
                         System.out.println("///////////////////////////////////////////////////");
+
                         getMajorNameXmlData();
                         majorAdapter.notifyDataSetChanged();
                     }
@@ -752,6 +768,78 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
 
     private void getMajorNameXmlData() {
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            //your codes here
+            try {
+
+                URL url = new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=1&perPage=1&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D");
+//            InputStream is= url.openStream();
+
+                XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
+                XmlPullParser parser = parserCreator.newPullParser();
+
+//            parser.setInput(new InputStreamReader(is, "UTF-8"));
+                parser.setInput(url.openStream(), "UTF-8"); //문제 발생
+//            parser.next();
+                int parserEvent = parser.getEventType();
+                Log.i("parsing", "파싱 시작");
+
+                while (parserEvent != XmlPullParser.END_DOCUMENT) {
+                    switch (parserEvent) {
+                        case XmlPullParser.START_DOCUMENT:
+                            break;
+                        case XmlPullParser.START_TAG:
+                            if (parser.getName().equals("totalCount")) {
+                                this.inTotalCount = true;
+                            }
+                            break;
+
+                        case XmlPullParser.TEXT:
+                            if (this.inTotalCount) {
+                                System.out.println("inTotalCount");
+                                this.totalMajorNum = Integer.parseInt(parser.getText());
+                                System.out.println(String.valueOf(this.totalMajorNum));
+                                this.inTotalCount = false;
+                            }
+                            break;
+                        case XmlPullParser.END_TAG:
+//                            System.out.println("E");
+                            break;
+                    }
+                    parserEvent = parser.next();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        int repeatCount = this.totalMajorNum/1000;
+        if(this.totalMajorNum%1000>0) {
+            repeatCount++;
+        }
+        for(int i=1; i<=repeatCount; i++){
+            try {
+                getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(i)+"&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+//        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=1&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+//        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=2&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+//        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=3&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+//        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=4&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+//        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=5&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+//        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=6&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+//        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=7&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+
+    }
+
+    private void getMajorNameEachXmlData(URL url) {
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8)
         {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
@@ -760,7 +848,7 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
             //your codes here
             try {
 
-                URL url = new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=1&perPage=500&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D");
+//                URL url = new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=1&perPage=500&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D");
 //            InputStream is= url.openStream();
 
                 XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
