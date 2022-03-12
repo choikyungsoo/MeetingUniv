@@ -27,6 +27,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListPopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,8 @@ import com.pedro.library.AutoPermissionsListener;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 // >>>>>>> inbae:MeetingUniv/app/src/main/java/com/softcon/meetinguniv/login/JoinPersonalInfoScreenFragment.java
@@ -118,6 +121,9 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
     private String schoolNameForResult;
 
     // for major name parsing
+    private boolean inTotalCount = false;
+    private int totalMajorNum;
+
     private String majorName;
     private ArrayList<String> majorNames = new ArrayList<String>();
     private boolean inMajorName = false;
@@ -343,6 +349,15 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                     }
                 });
 
+//                try {
+//                    Field popup = Spinner.class.getDeclaredField("mPopup");
+//                    popup.setAccessible(true);
+//                    ListPopupWindow window = (ListPopupWindow)popup.get(join_univSpinner);
+//                    window.setHeight(100);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+
                 getProvinceNameXmlData();
 //                getMajorNameXmlData();
 
@@ -399,11 +414,11 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         schoolNameForResult = schoolNames.get(position);
                         System.out.println(schoolNameForResult);
-                        majorNames.clear();
-                        System.out.println("///////////////////////////////////////////////////");
-
-                        getMajorNameXmlData();
-                        majorAdapter.notifyDataSetChanged();
+//                        majorNames.clear();
+//                        System.out.println("///////////////////////////////////////////////////");
+//
+//                        getMajorNameXmlData();
+//                        majorAdapter.notifyDataSetChanged();
                     }
 
                     @Override
@@ -760,7 +775,7 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
             //your codes here
             try {
 
-                URL url = new URL("https://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=39e99a147405ffbc1ef3a36fee8a8ac9&svcType=api&svcCode=SCHOOL&contentType=xml&gubun=univ_list&thisPage=1&perPage=433");
+                URL url = new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=1&perPage=1&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D");
 //            InputStream is= url.openStream();
 
                 XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
@@ -777,78 +792,21 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                         case XmlPullParser.START_DOCUMENT:
                             break;
                         case XmlPullParser.START_TAG:
-                            if (parser.getName().equals("campusName")) {
-                                this.inCampusName = true;
-                            } else if (parser.getName().equals("schoolType")) {
-                                this.inSchoolType = true;
-                            } else if (parser.getName().equals("schoolName")) {
-//                                System.out.println("schoolName");
-                                this.inSchoolName = true;
-                            } else if (parser.getName().equals("region")) {
-//                                System.out.println("region");
-                                this.inRegion = true;
+                            if (parser.getName().equals("totalCount")) {
+                                this.inTotalCount = true;
                             }
                             break;
 
                         case XmlPullParser.TEXT:
-                            if (this.inCampusName) {
-                                System.out.println("inCampusName");
-                                this.campusName = parser.getText();
-                                System.out.println(this.campusName);
-//                                if(this.campusName == "본교") {
-//                                    this.campusName = null;
-//                                }
-                                this.inCampusName = false;
-                            }
-                            if (this.inSchoolType) {
-                                System.out.println("inSchoolType");
-                                this.schoolType = parser.getText();
-                                System.out.println(this.schoolType);
-                                this.inSchoolType = false;
-                            }
-                            if (this.inSchoolName) {
-                                System.out.println("inSchoolName");
-                                this.schoolName = parser.getText();
-//                                if(this.campusName != null && this.schoolName.contains(this.campusName)) {
-//                                    this.campusName = null;
-//                                }
-                                this.inSchoolName = false;
-                            }
-                            if (this.inRegion) {
-                                System.out.println("inRegion");
-                                if (parser.getText().equals(this.provinceNameForResult))
-                                    this.matchSchoolRegion = true;
-//                                else
-//                                    this.campusName = null;
-//                                    this.schoolName = null;
-                                this.inRegion = false;
+                            if (this.inTotalCount) {
+                                System.out.println("inTotalCount");
+                                this.totalMajorNum = Integer.parseInt(parser.getText());
+                                System.out.println(String.valueOf(this.totalMajorNum));
+                                this.inTotalCount = false;
                             }
                             break;
-
                         case XmlPullParser.END_TAG:
-                            if (parser.getName().equals("content") && this.matchSchoolRegion) {
-                                if (this.campusName.equals("본교") || this.schoolType.equals("기능대학(폴리텍대학)") || this.schoolName.contains(this.campusName)) {
-                                    this.schoolNames.add(this.schoolName);
-                                } else {
-                                    this.schoolNames.add(this.schoolName + " " + this.campusName);
-                                }
-
-                                this.matchSchoolRegion = false;
-//                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, this.schoolNames);
-//                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-//                                this.join_UnivSpinner.setAdapter(adapter);
-//                                this.join_UnivSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                                    @Override
-//                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//
-//                                    }
-//
-//                                    @Override
-//                                    public void onNothingSelected(AdapterView<?> parent) {
-//
-//                                    }
-//                                });
-                            }
+//                            System.out.println("E");
                             break;
                     }
                     parserEvent = parser.next();
@@ -857,13 +815,26 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                 e.printStackTrace();
             }
         }
-        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=1&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
-        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=2&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
-        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=3&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
-        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=4&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
-        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=5&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
-        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=6&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
-        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=7&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+        int repeatCount = this.totalMajorNum/1000;
+        if(this.totalMajorNum%1000>0) {
+            repeatCount++;
+        }
+        for(int i=1; i<=repeatCount; i++){
+            try {
+                getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(i)+"&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+//        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=1&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+//        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=2&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+//        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=3&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+//        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=4&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+//        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=5&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+//        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=6&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+//        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=7&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
 
     }
 
