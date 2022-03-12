@@ -414,11 +414,11 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         schoolNameForResult = schoolNames.get(position);
                         System.out.println(schoolNameForResult);
-//                        majorNames.clear();
-//                        System.out.println("///////////////////////////////////////////////////");
-//
-//                        getMajorNameXmlData();
-//                        majorAdapter.notifyDataSetChanged();
+                        majorNames.clear();
+                        System.out.println("///////////////////////////////////////////////////");
+
+                        getMajorNameXmlData();
+                        majorAdapter.notifyDataSetChanged();
                     }
 
                     @Override
