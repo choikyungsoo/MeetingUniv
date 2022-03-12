@@ -63,8 +63,10 @@ public class chooseteamElementFragment extends Fragment {
 
     //팀에 대한 정보, 팀 추가를 하면 팀 번호가 여기로 들어와야 함
     private ArrayList<String> TeamMember  = new ArrayList<String>();
+    private ArrayList<String> TeamMemberID_V2;
     //선택한 팀에 대한 팀원의 번호 혹은 개인 식별번호가 여기로 들어와야 함
-    private ArrayList<String> TeamPersonalMember = new ArrayList<String>();;
+    private ArrayList<String> TeamPersonalMember = new ArrayList<String>();
+    private ArrayList<String> TeamPersonalMember_V2;
 
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageRef = storage.getReference();
@@ -73,6 +75,7 @@ public class chooseteamElementFragment extends Fragment {
     private DatabaseReference T_databaseReference = database.getReference("팀정보");
 
     private String userID;
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -82,9 +85,9 @@ public class chooseteamElementFragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-
+//
         TakeTeamDataFromFirebase();
-
+//        Test2();
         this.recyclerItemAdapter = new chooseteamAdapterRecyleritem(this.getActivity(), this.list);
         recyclerView.setAdapter(this.recyclerItemAdapter);
 
@@ -125,6 +128,73 @@ public class chooseteamElementFragment extends Fragment {
         this.ATEfragment = new AddTeamElementFragment(clickHandler);
     }
 
+    private void Test2() {
+        this.cteamDataModel = new chooseteamDataModel();
+        this.M_databaseReference.child(String.valueOf(this.userID)).child("팀").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                TeamMember.addAll((Collection<? extends String>) snapshot.getValue());
+                for(int i = 0; i < TeamMember.size(); i++) {
+                    T_databaseReference.child(String.valueOf(TeamMember.get(i))).child("팀 이름").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            cteamDataModel.setTeamName((String) snapshot.getValue());
+                            System.out.println("테스트의 값 : " + cteamDataModel.getTeamName());
+                            recyclerItemAdapter.notifyDataSetChanged();
+                        }
+
+                        
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                    T_databaseReference.child(String.valueOf(TeamMember.get(i))).child("팀원").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            TeamMemberID_V2 = new ArrayList<String>();
+
+                            TeamMemberID_V2.addAll((Collection<? extends String>) snapshot.getValue());
+                            System.out.println("팀 원의 초기값 : " + snapshot.getValue());
+                            System.out.println("팀원의 크기 : " + TeamMemberID_V2);
+                            for (int i = 0; i < TeamMemberID_V2.size(); i++) {
+                                M_databaseReference.child(TeamMemberID_V2.get(i)).child("닉네임").addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        System.out.println("팀원 닉네임 값 : " + snapshot.getValue());
+                                        TeamPersonalMember_V2 = new ArrayList<String>();
+                                        TeamPersonalMember_V2.add((String) snapshot.getValue());
+                                        String teamMember = "";
+                                        for(String TM : TeamPersonalMember_V2){
+                                            teamMember += TM + ",";
+                                        }
+                                        cteamDataModel.setTeamMember(teamMember);
+                                        addRecyclerItem(cteamDataModel.getTeamName(), cteamDataModel.getTeamMember());
+                                        recyclerItemAdapter.notifyDataSetChanged();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     private void TakeTeamDataFromFirebase() {
         this.cteamDataModel = new chooseteamDataModel();
         ArrayList<String> TeamMemberID = new ArrayList<String>();
@@ -141,9 +211,14 @@ public class chooseteamElementFragment extends Fragment {
                             for(DataSnapshot ds : snapshot.getChildren()) {
                                 if(ds.getKey().toString().equals("팀 이름")){
                                     cteamDataModel.setTeamName(ds.getValue().toString());
-                                } else if(ds.getKey().toString().equals("팀원")){
-                                    TakeTeamListDataFromFirebase((ArrayList<String>)ds.getValue());
-//                                    System.out.println("************************ 팀 멤버 : " + cteamDataModel.getTeamMember());
+                                } else if(ds.getKey().toString().equals("팀원 이름")){
+//                                    TakeTeamListDataFromFirebase((ArrayList<String>)ds.getValue());
+                                    String teamMember = "";
+                                    for(String TM : (ArrayList<String>)ds.getValue()){
+                                        teamMember += TM + " ";
+                                    }
+                                    cteamDataModel.setTeamMember(teamMember);
+                                    System.out.println("************************ 팀 멤버 : " + cteamDataModel.getTeamMember());
                                 } else if(ds.getKey().toString().equals("대기")){
                                     cteamDataModel.setMatchingState(ds.getValue().toString());
                                 }
@@ -174,12 +249,13 @@ public class chooseteamElementFragment extends Fragment {
             this.M_databaseReference.child(TeamMember.get(i)).child("닉네임").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                    TeamPersonalMember.add(snapshot.getValue().toString());
-//                    String teamMember = "";
-//                    for(String TM : TeamPersonalMember){
-//                        teamMember += TM + ",";
-//                    }
-                    cteamDataModel.setTeamMember(snapshot.getValue().toString());
+                    System.out.println("팀 닉네임에 대한 정보 : " + snapshot.getValue());
+                    TeamPersonalMember.add(snapshot.getValue().toString());
+                    String teamMember = "";
+                    for(String TM : TeamPersonalMember){
+                        teamMember += TM + ",";
+                    }
+                    cteamDataModel.setTeamMember(teamMember);
                     System.out.println("#################### 팀 멤버 : " + cteamDataModel.getTeamMember());
                 }
 
@@ -223,6 +299,7 @@ public class chooseteamElementFragment extends Fragment {
                 imm.hideSoftInputFromWindow(editSearch.getWindowToken(),0);
             }
         });
+
         this.addTeamLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
