@@ -22,7 +22,7 @@
     <ScrollView
         android:id="@+id/chatScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@+id/inputChatRoom"
         app:layout_constraintEnd_toEndOf="parent"
