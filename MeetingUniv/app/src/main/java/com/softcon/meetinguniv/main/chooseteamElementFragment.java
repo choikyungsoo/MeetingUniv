@@ -211,14 +211,18 @@ public class chooseteamElementFragment extends Fragment {
                             for(DataSnapshot ds : snapshot.getChildren()) {
                                 if(ds.getKey().toString().equals("팀 이름")){
                                     cteamDataModel.setTeamName(ds.getValue().toString());
-                                } else if(ds.getKey().toString().equals("팀원 이름")){
-//                                    TakeTeamListDataFromFirebase((ArrayList<String>)ds.getValue());
-                                    String teamMember = "";
-                                    for(String TM : (ArrayList<String>)ds.getValue()){
-                                        teamMember += TM + " ";
-                                    }
-                                    cteamDataModel.setTeamMember(teamMember);
-                                    System.out.println("************************ 팀 멤버 : " + cteamDataModel.getTeamMember());
+                                } else if(ds.getKey().toString().equals("팀원")){
+                                    //방법 1
+//                                  TakeTeamListDataFromFirebase((ArrayList<String>)ds.getValue());
+                                    //방법 2 --> 팀원 이름 저장시 사용 but 데이터 낭비가 있음
+//                                    String teamMember = "";
+//                                    for(String TM : (ArrayList<String>)ds.getValue()){
+//                                        teamMember += TM + " ";
+//                                    }
+//                                    cteamDataModel.setTeamMember(teamMember);
+//                                    System.out.println("************************ 팀 멤버 : " + cteamDataModel.getTeamMember());
+                                    //방법 3
+
                                 } else if(ds.getKey().toString().equals("대기")){
                                     cteamDataModel.setMatchingState(ds.getValue().toString());
                                 }
