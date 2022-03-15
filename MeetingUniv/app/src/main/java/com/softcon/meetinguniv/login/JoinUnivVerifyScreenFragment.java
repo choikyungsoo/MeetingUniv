@@ -121,6 +121,7 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
     private String schoolNameForResult;
 
     // for major name parsing
+//    private boolean inmajorName;
     private boolean inTotalCount = false;
     private int totalMajorNum;
 
@@ -133,6 +134,8 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
     private String schoolNameOfMajor;
     private ArrayList<String> schoolNamesOfMajor = new ArrayList<String>();
     private boolean inSchoolNameOfMajor = false;
+    private String pastTagName;
+    private String pastSchoolName;
 
 
     private ImageView studentIDImage;
@@ -662,7 +665,7 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
             //your codes here
             try {
 
-                URL url = new URL("https://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=39e99a147405ffbc1ef3a36fee8a8ac9&svcType=api&svcCode=SCHOOL&contentType=xml&gubun=univ_list&thisPage=1&perPage=433");
+                URL url = new URL("https://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=39e99a147405ffbc1ef3a36fee8a8ac9&svcType=api&svcCode=SCHOOL&contentType=xml&gubun=univ_list&thisPage=1&perPage=442");
 //            InputStream is= url.openStream();
 
                 XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
@@ -767,6 +770,7 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
     }
 
     private void getMajorNameXmlData() {
+//        schoolNameForResult
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
@@ -792,12 +796,21 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                         case XmlPullParser.START_DOCUMENT:
                             break;
                         case XmlPullParser.START_TAG:
+//                            if(parser.getName().equals("col")){
+//                                if(parser.getAttributeValue(0).equals("학교명")) {
+//                                    this.inSchoolNameOfMajor = true;
+//                                }
+//                            }
                             if (parser.getName().equals("totalCount")) {
                                 this.inTotalCount = true;
                             }
                             break;
 
                         case XmlPullParser.TEXT:
+//                            if(this.inSchoolNameOfMajor) {
+//                                this.schoolNameOfMajor = parser.getText();
+//                                this.inSchoolNameOfMajor = false;
+//                            }
                             if (this.inTotalCount) {
                                 System.out.println("inTotalCount");
                                 this.totalMajorNum = Integer.parseInt(parser.getText());
@@ -815,17 +828,64 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                 e.printStackTrace();
             }
         }
-        int repeatCount = this.totalMajorNum/1000;
-        if(this.totalMajorNum%1000>0) {
+
+//        System.out.println(schoolNameOfMajor.compareTo(schoolNameForResult)); // 더 크면 양수, 더 작으면 음수, 같으면 0
+
+//        if(schoolNameForResult.compareTo(schoolNameOfMajor) > 0) {
+//            getMajorNameXmlDataforSearch();
+//        }
+
+        int perpage = 1500;
+        int repeatCount = this.totalMajorNum/perpage;
+        if(this.totalMajorNum%perpage>0) {
             repeatCount++;
         }
-        for(int i=1; i<=repeatCount; i++){
+
+        for(int i=1; i<=repeatCount; i++) {
             try {
-                getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(i)+"&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+                System.out.println("88888888888888888888888888888888888888888888");
+                System.out.println(this.schoolNameForResult);
+                System.out.println(this.schoolNameOfMajor);
+                System.out.println("77777777777777777777777777777777777777777777");
+                getMajorNameXmlDataForSearch(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(i)+"&perPage="+String.valueOf(perpage)+"&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+                if (this.schoolNameForResult.compareTo(this.schoolNameOfMajor) <= 0) {
+                    try {
+                        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(i-1)+"&perPage="+String.valueOf(perpage)+"&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"), i);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
         }
+
+//        for(int i=1; i<=repeatCount; i++) {
+//            if (schoolNameForResult.compareTo(schoolNameOfMajor) > 0) {
+//                try {
+//                    getMajorNameXmlDataForSearch(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(i)+"&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+//                } catch (MalformedURLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            else if(schoolNameForResult.compareTo(schoolNameOfMajor) <= 0){
+//                try {
+//                    getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(i-1)+"&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"), i);
+//                } catch (MalformedURLException e) {
+//                    e.printStackTrace();
+//                }
+//                break;
+//            }
+//        }
+
+//        for(int i=1; i<=repeatCount; i++){
+//            try {
+//                getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(i)+"&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
 
 //        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=1&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
@@ -838,7 +898,74 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
 
     }
 
-    private void getMajorNameEachXmlData(URL url) {
+    private void getMajorNameXmlDataForSearch(URL url) {
+//        schoolNameForResult
+        System.out.println("66666666666666666666666666666666666666666666");
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            //your codes here
+            try {
+
+//                URL url = new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=1&perPage=1&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D");
+//            InputStream is= url.openStream();
+
+                XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
+                XmlPullParser parser = parserCreator.newPullParser();
+
+//            parser.setInput(new InputStreamReader(is, "UTF-8"));
+                parser.setInput(url.openStream(), "UTF-8"); //문제 발생
+//            parser.next();
+                int parserEvent = parser.getEventType();
+                Log.i("parsing", "파싱 시작");
+
+                while (parserEvent != XmlPullParser.END_DOCUMENT) {
+                    switch (parserEvent) {
+                        case XmlPullParser.START_DOCUMENT:
+                            break;
+                        case XmlPullParser.START_TAG:
+                            if (parser.getName().equals("col")) {
+//                                System.out.println()
+                                if (parser.getAttributeValue(0).equals("학교명")) {
+                                    this.inSchoolNameOfMajor = true;
+                                }
+                            }
+//                            if (parser.getName().equals("totalCount")) {
+//                                this.inTotalCount = true;
+//                            }
+                            break;
+
+                        case XmlPullParser.TEXT:
+                            if (this.inSchoolNameOfMajor) {
+                                this.schoolNameOfMajor = parser.getText();
+                                this.inSchoolNameOfMajor = false;
+                            }
+//                            if (this.inTotalCount) {
+//                                System.out.println("inTotalCount");
+//                                this.totalMajorNum = Integer.parseInt(parser.getText());
+//                                System.out.println(String.valueOf(this.totalMajorNum));
+//                                this.inTotalCount = false;
+//                            }
+                            break;
+                        case XmlPullParser.END_TAG:
+                            if(parser.getName().equals("item")) {
+                                return;
+                            }
+//                            System.out.println("E");
+                            break;
+                    }
+                    parserEvent = parser.next();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    private void getMajorNameEachXmlData(URL url, int i) {
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8)
         {
@@ -969,6 +1096,27 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                                     System.out.println("pass");
                                     this.majorNames.add(this.majorName);
                                     System.out.println(this.majorNames.size());
+                                }
+
+                                // 후처리
+                                if(this.schoolNameOfMajor.equals(this.schoolNameForResult)) {
+                                    this.pastSchoolName = this.schoolNameOfMajor;
+                                    System.out.println("pastSchoolName : "+this.pastSchoolName);
+                                    System.out.println("schoolNameOfMajor : "+this.schoolNameOfMajor);
+                                }
+                                else {
+                                    if(this.pastSchoolName != null) {
+                                        if (this.pastSchoolName.equals(this.schoolNameForResult)) {
+                                            return;
+                                        }
+                                    }
+                                }
+                            }
+                            if(parser.getName().equals("data")) {
+                                System.out.println("in data");
+                                if(this.pastSchoolName.equals(this.schoolNameForResult)) {
+                                    getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(i)+"&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"), i+i);
+                                    return;
                                 }
                             }
 
