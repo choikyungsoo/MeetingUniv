@@ -178,21 +178,24 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
 
     private void loadChattingContent(List<Map<String, Object>> contents) {
         for (int i=0; i<contents.size(); i++) {
-            if (contents.get(i).get("sender") != null) {
-                addRecyclerItem(null, null, contents.get(i).get("sender").toString(),
-                        contents.get(i).get("text").toString(),
-                        contents.get(i).get("time").toString(),
-                        contents.get(i).get("uncheck").toString(),
-                        2
-                );
+            Map<String, Object> content = contents.get(i);
+
+            String date = null;
+            Uri profileImage = null;
+            String nickname;
+            int viewType = 0;
+            if (content.get("sender") != null) {
+                nickname = content.get("sender").toString();
+                viewType = 2;
             } else {
-                addRecyclerItem(null, null, null,
-                        contents.get(i).get("text").toString(),
-                        contents.get(i).get("time").toString(),
-                        contents.get(i).get("uncheck").toString(),
-                        1
-                );
+                nickname = null;
+                viewType = 1;
             }
+            String message = content.get("text").toString();
+            String time = content.get("time").toString();
+            String uncheck = content.get("uncheck").toString();
+
+            addRecyclerItem(date, profileImage, nickname, message, time, uncheck, viewType);
         }
 
     }
