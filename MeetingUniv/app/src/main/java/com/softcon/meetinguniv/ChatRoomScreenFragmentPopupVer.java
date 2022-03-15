@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -128,7 +129,7 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
         contents_get = new ArrayList<java.util.Map<String, Object>>();
         oldPost_get = new ArrayList<String>();
 
-        db.collection("ChattingContent").limitToLast(20).get()
+        db.collection("ChattingContent").limitToLast(20).orderBy(FieldPath.documentId()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
