@@ -1,10 +1,7 @@
 package com.softcon.meetinguniv;
 
-import static android.content.ContentValues.TAG;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -18,18 +15,14 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,16 +32,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.kakao.sdk.common.json.MapToQueryAdapter;
 import com.softcon.meetinguniv.main.ChatRoomRecyclerAdapter;
 import com.softcon.meetinguniv.main.ChatRoomRecyclerItem;
 import com.softcon.meetinguniv.main.ChattingScreenFragment;
-import com.softcon.meetinguniv.main.MainFragment;
 import com.softcon.meetinguniv.main.MatchChattingContentFragment;
-import com.softcon.meetinguniv.main.PersonalProfileScreenFragment;
 
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.List;
+import java.util.Map;
 
 public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnClickListener, onBackPressedListener {
 
@@ -80,7 +71,10 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
     private MatchChattingContentFragment matchChattingContentFragment;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+    private List<Map<String, Object>> contents;
+    private List<Map<String, Object>> contents_get;
+    private List<String> oldPost_get;
+    private String oldestPostId;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -130,31 +124,40 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
 //        addRecyclerItem(null, null, "채윤", "테스트 메세지입니다.2", "time", "3", 2);
 //        addRecyclerItem(null, null, "채윤2", "테스트 메세지입니다.3", "time", "3", 2);
 
-        db.collection("ChattingContents2")
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        contents = new ArrayList<java.util.Map<String, Object>>();
+        contents_get = new ArrayList<java.util.Map<String, Object>>();
+        oldPost_get = new ArrayList<String>();
+
+        db.collection("ChattingContent").limitToLast(20).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d("TAG", document.getId() + " => " + document.getData());
-                        if (document.getData().get("sender") != null) {
-                            addRecyclerItem(null, null, document.getData().get("sender").toString(),
-                                    document.getData().get("text").toString(),
-                                    document.getData().get("time").toString(),
-                                    document.getData().get("uncheck").toString(),
-                                    2
-                            );
-                        } else {
-                            addRecyclerItem(null, null, null,
-                                    document.getData().get("text").toString(),
-                                    document.getData().get("time").toString(),
-                                    document.getData().get("uncheck").toString(),
-                                    1
-                            );
-                        }
+                        contents.add(document.getData());
+                        contents_get.add(0, document.getData());
+                        oldPost_get.add(document.getId());
+                        loadChattingContent(contents);
+//                        Log.d("TAG", document.getId() + " => " + document.getData());
+//                        if (document.getData().get("sender") != null) {
+//                            addRecyclerItem(null, null, document.getData().get("sender").toString(),
+//                                    document.getData().get("text").toString(),
+//                                    document.getData().get("time").toString(),
+//                                    document.getData().get("uncheck").toString(),
+//                                    2
+//                            );
+//                        } else {
+//                            addRecyclerItem(null, null, null,
+//                                    document.getData().get("text").toString(),
+//                                    document.getData().get("time").toString(),
+//                                    document.getData().get("uncheck").toString(),
+//                                    1
+//                            );
+//                        }
 
 //                        addRecyclerItem2(3, "참가자, 참가자, 참가자, 참가자, 참가자, 참가자", 6, 10);
                     }
+                    oldestPostId = oldPost_get.get(0);
                 } else {
                     Log.d("TAG", "Error getting documents: ", task.getException());
                 }
@@ -170,6 +173,30 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
                 }
             }
         });
+
+    }
+
+    private void loadChattingContent(List<Map<String, Object>> contents) {
+        for (int i=0; i<contents.size(); i++) {
+            Map<String, Object> content = contents.get(i);
+
+            String date = null;
+            Uri profileImage = null;
+            String nickname;
+            int viewType = 0;
+            if (content.get("sender") != null) {
+                nickname = content.get("sender").toString();
+                viewType = 2;
+            } else {
+                nickname = null;
+                viewType = 1;
+            }
+            String message = content.get("text").toString();
+            String time = content.get("time").toString();
+            String uncheck = content.get("uncheck").toString();
+
+            addRecyclerItem(date, profileImage, nickname, message, time, uncheck, viewType);
+        }
 
     }
 
