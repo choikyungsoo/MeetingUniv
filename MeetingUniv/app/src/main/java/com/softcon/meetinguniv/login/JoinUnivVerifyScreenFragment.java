@@ -835,31 +835,106 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
 //            getMajorNameXmlDataforSearch();
 //        }
 
-        int perpage = 1500;
-        int repeatCount = this.totalMajorNum/perpage;
+        int perpage = 1000;
+        int repeatCount = this.totalMajorNum/perpage; // 총 페이지 수(반복해야 하는 수) ex 48
         if(this.totalMajorNum%perpage>0) {
-            repeatCount++;
+            repeatCount++;                              // 49=48+1
         }
 
-        for(int i=1; i<=repeatCount; i++) {
+        // for b tree
+
+        // example
+//        int start = 1;
+//        int end = repeatCount;
+//        int middle = -1;
+//        while(start<=end) {
+//            int middle = (start+end)/2;
+//            if(this.schoolNameForResult.compareTo(this.schoolNameOfMajor) == 0)
+//                break;
+////                return middle;
+//            else if(this.schoolNameForResult.compareTo(this.schoolNameOfMajor) < 0)
+//                end = middle-1;
+//            else
+//                start = middle+1;
+//        }
+//        System.out.println(middle);
+
+        int start = 1;
+        int end = repeatCount;
+        int middle = -1;
+        while(start<=end) {
+            if(end-start<=2){
+
+            }
+            middle = (start+end)/2;
             try {
-                System.out.println("88888888888888888888888888888888888888888888");
-                System.out.println(this.schoolNameForResult);
-                System.out.println(this.schoolNameOfMajor);
-                System.out.println("77777777777777777777777777777777777777777777");
-                getMajorNameXmlDataForSearch(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(i)+"&perPage="+String.valueOf(perpage)+"&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
-                if (this.schoolNameForResult.compareTo(this.schoolNameOfMajor) <= 0) {
-                    try {
-                        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(i-1)+"&perPage="+String.valueOf(perpage)+"&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"), i);
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    }
+                System.out.println(middle);
+                URL url = new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(middle)+"&perPage="+String.valueOf(perpage)+"&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D");
+                getMajorNameXmlDataForSearch(url);
+                if(this.schoolNameForResult.compareTo(this.schoolNameOfMajor) == 0) {
+                    getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=" + String.valueOf(middle - 1) + "&perPage=" + String.valueOf(perpage) + "&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"), middle);
                     break;
+                }
+//                return middle;
+                else if(this.schoolNameForResult.compareTo(this.schoolNameOfMajor) < 0){
+                    end = middle-1;
+                }
+                else if(this.schoolNameForResult.compareTo(this.schoolNameOfMajor) > 0) {
+                    if(getMajorNameEachXmlData(url, middle+1))
+                        break;
+                    start = middle + 1;
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
         }
+        System.out.println(middle);
+
+//        int middleIndex = repeatCount/2; // 24
+//        try {
+//            getMajorNameXmlDataForSearch(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(middleIndex)+"&perPage="+String.valueOf(perpage)+"&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+//
+//            if (this.schoolNameForResult.compareTo(this.schoolNameOfMajor) < 0) { // schooNameForResult가 더 앞에 있을 경우
+//                middleIndex = middleIndex/2; // 12
+//                getMajorNameXmlDataForSearch(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(middleIndex)+"&perPage="+String.valueOf(perpage)+"&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+//            } else if(this.schoolNameForResult.compareTo(this.schoolNameOfMajor) == 0) { // 같을 경우
+//                getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(middleIndex-1)+"&perPage="+String.valueOf(perpage)+"&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"), middleIndex);
+//            } else if(this.schoolNameForResult.compareTo(this.schoolNameOfMajor) > 0) { // schooNameForResult가 더 뒤에 있을 경우
+//                middleIndex+1+repeatCount/2
+//            }
+//
+//
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+
+
+//        while(middleIndex/2)
+
+//        for(int i=middleIndex; i<=1; i/2)
+
+        // for b tree
+
+
+//        for(int i=1; i<=repeatCount; i++) {
+//            try {
+//                System.out.println("88888888888888888888888888888888888888888888");
+//                System.out.println(this.schoolNameForResult);
+//                System.out.println(this.schoolNameOfMajor);
+//                System.out.println("77777777777777777777777777777777777777777777");
+//                getMajorNameXmlDataForSearch(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(i)+"&perPage="+String.valueOf(perpage)+"&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"));
+//                if (this.schoolNameForResult.compareTo(this.schoolNameOfMajor) <= 0) {
+//                    try {
+//                        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(i-1)+"&perPage="+String.valueOf(perpage)+"&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"), i);
+//                    } catch (MalformedURLException e) {
+//                        e.printStackTrace();
+//                    }
+//                    break;
+//                }
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
 //        for(int i=1; i<=repeatCount; i++) {
 //            if (schoolNameForResult.compareTo(schoolNameOfMajor) > 0) {
@@ -965,7 +1040,7 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
     }
 
 
-    private void getMajorNameEachXmlData(URL url, int i) {
+    private boolean getMajorNameEachXmlData(URL url, int i) {
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8)
         {
@@ -1107,16 +1182,25 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                                 else {
                                     if(this.pastSchoolName != null) {
                                         if (this.pastSchoolName.equals(this.schoolNameForResult)) {
-                                            return;
+                                            return true;
                                         }
                                     }
                                 }
                             }
                             if(parser.getName().equals("data")) {
                                 System.out.println("in data");
-                                if(this.pastSchoolName.equals(this.schoolNameForResult)) {
-                                    getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page="+String.valueOf(i)+"&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"), i+i);
-                                    return;
+                                if(this.pastSchoolName != null) {
+                                    if (this.pastSchoolName.equals(this.schoolNameForResult)) {
+                                        getMajorNameEachXmlData(new URL("https://api.odcloud.kr/api/15014632/v1/uddi:d6552229-9686-4565-a421-ab303156f076_202004101338?page=" + String.valueOf(i) + "&perPage=1000&returnType=XML&serviceKey=mmci4cpi6htFTp4xCJ7AAeYWR3C2wwWkFHLfGM68mA6iNo%2BGuIQ8dVtgzXv5GL5DTQfZb0YMMj0hV7pq4ScxlQ%3D%3D"), i + i);
+                                        return true;
+                                    } else {
+                                        return false;
+                                    }
+                                }
+                                else {
+                                    // 학과 정보를 찾지 못했을 때
+                                    this.majorNames.add("-");
+                                    System.out.println(this.majorNames.size());
                                 }
                             }
 
@@ -1153,6 +1237,7 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                 e.printStackTrace();
             }
         }
+        return false;
     }
 
 //    public void takePicture() {
