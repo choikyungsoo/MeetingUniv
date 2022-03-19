@@ -352,14 +352,18 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                     }
                 });
 
-//                try {
-//                    Field popup = Spinner.class.getDeclaredField("mPopup");
-//                    popup.setAccessible(true);
-//                    ListPopupWindow window = (ListPopupWindow)popup.get(join_univSpinner);
-//                    window.setHeight(10);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
+                try {
+                    Field popup = Spinner.class.getDeclaredField("mPopup");
+                    popup.setAccessible(true);
+                    ListPopupWindow window = (ListPopupWindow)popup.get(join_univSpinner);
+                    System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                    System.out.println(window.getHeight());
+                    window.setHeight(1000);
+                    System.out.println(window.getHeight());
+                    univAdapter.notifyDataSetChanged();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 getProvinceNameXmlData();
 //                getMajorNameXmlData();
@@ -415,13 +419,13 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
                 join_univSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        schoolNameForResult = schoolNames.get(position);
-                        System.out.println(schoolNameForResult);
-                        majorNames.clear();
-                        System.out.println("///////////////////////////////////////////////////");
-
-                        getMajorNameXmlData();
-                        majorAdapter.notifyDataSetChanged();
+//                        schoolNameForResult = schoolNames.get(position);
+//                        System.out.println(schoolNameForResult);
+//                        majorNames.clear();
+//                        System.out.println("///////////////////////////////////////////////////");
+//
+//                        getMajorNameXmlData();
+//                        majorAdapter.notifyDataSetChanged();
                     }
 
                     @Override
