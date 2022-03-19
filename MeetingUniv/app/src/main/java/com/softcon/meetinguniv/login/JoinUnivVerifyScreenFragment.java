@@ -356,7 +356,7 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
 //                    Field popup = Spinner.class.getDeclaredField("mPopup");
 //                    popup.setAccessible(true);
 //                    ListPopupWindow window = (ListPopupWindow)popup.get(join_univSpinner);
-//                    window.setHeight(100);
+//                    window.setHeight(10);
 //                } catch (Exception e) {
 //                    e.printStackTrace();
 //                }
@@ -365,15 +365,15 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
 //                getMajorNameXmlData();
 
                 provinceAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, provinceNames);
-                provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 join_provinceSpinner.setAdapter(provinceAdapter);
 
                 univAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, schoolNames);
-                univAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                univAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 join_univSpinner.setAdapter(univAdapter);
 
                 majorAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, majorNames);
-                majorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                majorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 join_majorSpinner.setAdapter(majorAdapter);
 
 

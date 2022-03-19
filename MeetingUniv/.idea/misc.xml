@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../../../layout/custom_preview.xml" value="0.9277777777777778" />
+        <entry key="../../../../../Library/Android/sdk/platforms/android-30/data/res/layout/simple_spinner_dropdown_item.xml" value="0.2520263424518744" />
         <entry key="../../../../../Library/Android/sdk/platforms/android-30/data/res/layout/simple_spinner_item.xml" value="0.3072916666666667" />
         <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/activity_main.xml" value="0.3619791666666667" />
         <entry key="..\:/AndroidStudio_gitHub/MeetingUniv/MeetingUniv/app/src/main/res/layout/fragment_add_team_element.xml" value="0.30416666666666664" />
@@ -104,8 +105,10 @@
         <entry key="..\:/softcongithub/MeetingUniv/MeetingUniv/app/src/main/res/layout/recycleritem_otherchat.xml" value="0.4466666666666667" />
         <entry key="..\:/softcongithub/MeetingUniv/MeetingUniv/app/src/main/res/xml/fragment_my_information_content.xml" value="0.28940217391304346" />
         <entry key="..\:/softcongithub/MeetingUniv/MeetingUniv/app/src/main/res/xml/fragment_settings_content.xml" value="0.3541666666666667" />
+        <entry key="app/src/main/res/layout/custom_spinner_dropdown_item.xml" value="0.2520263424518744" />
         <entry key="app/src/main/res/layout/fragment_join_select_univ_dialog.xml" value="0.3072916666666667" />
         <entry key="app/src/main/res/layout/fragment_kakao_login.xml" value="0.5177083333333333" />
+        <entry key="app/src/main/res/layout/popup_match.xml" value="0.24848024316109424" />
       </map>
     </option>
   </component>
