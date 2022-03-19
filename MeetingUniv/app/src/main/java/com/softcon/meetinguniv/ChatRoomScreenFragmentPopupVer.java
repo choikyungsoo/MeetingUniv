@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.softcon.meetinguniv.main.ChatRoomRecyclerAdapter;
@@ -129,7 +130,7 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
         contents_get = new ArrayList<java.util.Map<String, Object>>();
         oldPost_get = new ArrayList<String>();
 
-        db.collection("ChattingContent").limitToLast(20).orderBy(FieldPath.documentId()).get()
+        db.collection("ChattingContent").orderBy(FieldPath.documentId()).limit(20).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -137,8 +138,10 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         contents.add(document.getData());
                         contents_get.add(0, document.getData());
+                        Log.d("TAG", document.getId() + " => " + document.getData());
+//                        Log.d("TAG", "********" + contents.toString());
+
                         oldPost_get.add(document.getId());
-                        loadChattingContent(contents);
 //                        Log.d("TAG", document.getId() + " => " + document.getData());
 //                        if (document.getData().get("sender") != null) {
 //                            addRecyclerItem(null, null, document.getData().get("sender").toString(),
@@ -158,7 +161,11 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
 
 //                        addRecyclerItem2(3, "참가자, 참가자, 참가자, 참가자, 참가자, 참가자", 6, 10);
                     }
+                    loadChattingContent(contents);
+
                     oldestPostId = oldPost_get.get(0);
+                    Log.d("TAG", "oldestPostId : " + oldestPostId);
+
                 } else {
                     Log.d("TAG", "Error getting documents: ", task.getException());
                 }
@@ -172,6 +179,31 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
                 if (!recyclerView.canScrollVertically(-1)) {
                     Toast.makeText(getContext(), "스크롤 올라감", Toast.LENGTH_SHORT).show();
                 }
+
+//                db.collection("ChattingContent").orderBy(FieldPath.documentId())
+//                        .endAt(oldestPostId).limit(20).get()
+//                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        contents_get.clear(); //임시저장 위치
+//                        oldPost_get.clear();
+//
+//                        for (QueryDocumentSnapshot document : task.getResult()) {
+//                            contents_get.add(0, document.getData());
+//                            oldPost_get.add(document.getId());
+//                        }
+//                        //불러오는 중인지, 전부 불러왔는지 if문
+//                        if (contents_get.size() > 1) {//1개라도 있으면 불러옴
+//                            //마지막 중복되는 부분 삭제
+//                            contents_get.remove(0);
+//                            //contents 뒤에 추가
+//                            contents.addAll(contents_get);
+//                            oldestPostId = oldPost_get.get(0);
+//                            //메시지 갱신 위치
+//                            loadChattingContent(contents);
+//                        }
+//                    }
+//                });
             }
         });
 
