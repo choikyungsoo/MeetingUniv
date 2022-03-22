@@ -118,7 +118,7 @@ public class chooseteamElementFragment extends Fragment {
                         .replace(R.id.Framecontainer, fragment1)
                         .commit();
                 imm.hideSoftInputFromWindow(editSearch.getWindowToken(),0);
-                GiveChooseTeamData(pos, fragment1);
+                GiveChooseTeamData(pos);
             }
         });
 
@@ -143,10 +143,11 @@ public class chooseteamElementFragment extends Fragment {
         this.ATEfragment = new AddTeamElementFragment(clickHandler);
     }
 
-    private void GiveChooseTeamData(int pos, MatchingContentFragment fragment1) {
+    private void GiveChooseTeamData(int pos) {
+        MatchingContentFragment fragment2 = new MatchingContentFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("TeamNum", pos);
-        fragment1.setArguments(bundle);
+        fragment2.setArguments(bundle);
     }
 
     private void Test2() {

@@ -1,5 +1,6 @@
 package com.softcon.meetinguniv.main;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.net.Uri;
@@ -145,6 +146,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
 
     private void TakeDataFromFirebaseDatabase(int teamNum) {
+        System.out.println("2");
         this.TeamMember = new ArrayList<String>();
         this.TeamPersonalMember = new ArrayList<String>();
         //현재 로그인 한 사용자의 팀 번호를 가져오는 것
@@ -152,6 +154,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.getValue() != null) {
+                        System.out.println("2.1");
                         TeamMember.addAll((Collection<? extends String>) snapshot.getValue());
                         T_databaseReference.child(String.valueOf(TeamMember.get(teamNum))).child("팀 이름").addValueEventListener(new ValueEventListener() {
                             @Override
@@ -361,6 +364,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         dialog.show();
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onValueChange(@NonNull @NotNull RangeSlider slider, float value, boolean fromUser) {
         this.ageRange = (ArrayList<Float>) this.rangeSlider.getValues();
