@@ -110,15 +110,8 @@ public class chooseteamElementFragment extends Fragment {
         this.recyclerItemAdapter.setOnItemClickListener(new chooseteamAdapterRecyleritem.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
-                MatchingContentFragment fragment1 = new MatchingContentFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("userID", userID);
-                fragment1.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.Framecontainer, fragment1)
-                        .commit();
-                imm.hideSoftInputFromWindow(editSearch.getWindowToken(),0);
-                GiveChooseTeamData(pos);
+                GiveChooseTeamData_String();
+                GiveChooseTeamData_Integer(pos);
             }
         });
 
@@ -143,11 +136,23 @@ public class chooseteamElementFragment extends Fragment {
         this.ATEfragment = new AddTeamElementFragment(clickHandler);
     }
 
-    private void GiveChooseTeamData(int pos) {
-        MatchingContentFragment fragment2 = new MatchingContentFragment();
+    private void GiveChooseTeamData_String() {
+        MatchingContentFragment fragment1 = new MatchingContentFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("TeamNum", pos);
-        fragment2.setArguments(bundle);
+        bundle.putString("userID", userID);
+        fragment1.setArguments(bundle);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.Framecontainer, fragment1)
+                .commit();
+        imm.hideSoftInputFromWindow(editSearch.getWindowToken(),0);
+    }
+
+    private void GiveChooseTeamData_Integer(int pos) {
+        MatchingContentFragment fragment2 = new MatchingContentFragment();
+        System.out.println("chooseTeamElementFragment 팀 번호 " + pos);
+        Bundle bundle2 = new Bundle();
+        bundle2.putInt("TeamNum", pos);
+        fragment2.setArguments(bundle2);
     }
 
     private void Test2() {

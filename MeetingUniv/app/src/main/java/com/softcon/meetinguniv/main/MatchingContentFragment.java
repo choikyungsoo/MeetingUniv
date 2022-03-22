@@ -75,7 +75,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
     private String schoolName;
     private String userID;
-    private int TeamNum = 0;
+//    private int TeamNum;
 
     private ArrayList<String> schoolNames = new ArrayList<String>();
     private boolean inSchoolName = false;
@@ -112,10 +112,10 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         this.CTEfragment = new chooseteamElementFragment();
         this.settingposition = 0;
         this.userID = getArguments().getString("userID");
-        this.TeamNum = getArguments().getInt("TeamNum");
+        final int TeamNum = getArguments().getInt("TeamNum");
         this.textView = view.findViewById(R.id.M_TeamName);
 
-        System.out.println("팀 번호 매칭 프래그 먼트 : " + this.TeamNum);
+        System.out.println("팀 번호 매칭 프래그 먼트 : " + TeamNum);
         Bundle bundle = new Bundle();
         bundle.putString("userID", this.userID);
         this.ETMfragment.setArguments(bundle);
@@ -124,10 +124,8 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        System.out.println("1");
         //파이어베이스에서 팀정보 데이터 가져오기
         TakeDataFromFirebaseDatabase(TeamNum);
-        System.out.println("3");
         this.recyclerItemAdapter.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
@@ -146,7 +144,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
 
     private void TakeDataFromFirebaseDatabase(int teamNum) {
-        System.out.println("2");
         this.TeamMember = new ArrayList<String>();
         this.TeamPersonalMember = new ArrayList<String>();
         //현재 로그인 한 사용자의 팀 번호를 가져오는 것
@@ -154,7 +151,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.getValue() != null) {
-                        System.out.println("2.1");
                         TeamMember.addAll((Collection<? extends String>) snapshot.getValue());
                         T_databaseReference.child(String.valueOf(TeamMember.get(teamNum))).child("팀 이름").addValueEventListener(new ValueEventListener() {
                             @Override
@@ -216,7 +212,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         recyclerItem.setMemProfile(profile);
         list.add(recyclerItem);
         if(verfiycode == 0){
-//            this.settingposition++;
             this.ImageSource.add(profile);
         }
     }
