@@ -8,9 +8,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.fonts.Font;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -27,6 +30,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListPopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -369,6 +373,23 @@ public class JoinUnivVerifyScreenFragment extends Fragment implements AutoPermis
 //                getMajorNameXmlData();
 
                 provinceAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, provinceNames);
+//                provinceAdapter.get
+//                {
+//                    @Override
+//                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+//                        if (position == 0) {
+//                            parent.setLayoutParams(new LinearLayout.LayoutParams(-1, 500));
+//                        }
+//                        View v = super.getDropDownView(position, convertView, parent);
+//                        TextView textView = (TextView) v;
+//                        textView.setTextSize(Font.getSize() + 2);
+//                        textView.setWidth(nativeSpinner.getWidth());
+//                        textView.setGravity(alignment);
+//                        return v;
+//
+////                        return super.getDropDownView(position, convertView, parent);
+//                    }
+//                };
                 provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 join_provinceSpinner.setAdapter(provinceAdapter);
 
