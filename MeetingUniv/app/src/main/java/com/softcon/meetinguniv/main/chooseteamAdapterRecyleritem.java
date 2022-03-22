@@ -25,6 +25,15 @@ public class chooseteamAdapterRecyleritem extends RecyclerView.Adapter<choosetea
     private ArrayList<chooseteamRecycleritem> arrayList;
 
     private Context context;
+    public interface OnItemClickListener{
+        void onItemClick(View v, int pos);
+    }
+
+    private OnItemClickListener mListener = null;
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.mListener = listener;
+    }
 
     public chooseteamAdapterRecyleritem(Context context, List<chooseteamRecycleritem> items) {
         this.context = context;
@@ -58,6 +67,18 @@ public class chooseteamAdapterRecyleritem extends RecyclerView.Adapter<choosetea
             super(itemView);
             name = itemView.findViewById(R.id.teamname);
             member = itemView.findViewById(R.id.teammember);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        if(mListener != null){
+                            mListener.onItemClick(view, pos);
+                        }
+                    }
+                }
+            });
 
         }
     }

@@ -107,6 +107,21 @@ public class chooseteamElementFragment extends Fragment {
             }
         });
 
+        this.recyclerItemAdapter.setOnItemClickListener(new chooseteamAdapterRecyleritem.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+                MatchingContentFragment fragment1 = new MatchingContentFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("userID", userID);
+                fragment1.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.Framecontainer, fragment1)
+                        .commit();
+                imm.hideSoftInputFromWindow(editSearch.getWindowToken(),0);
+                GiveChooseTeamData(pos, fragment1);
+            }
+        });
+
         editSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
@@ -126,6 +141,12 @@ public class chooseteamElementFragment extends Fragment {
         });
         ClickHandler clickHandler = new ClickHandler();
         this.ATEfragment = new AddTeamElementFragment(clickHandler);
+    }
+
+    private void GiveChooseTeamData(int pos, MatchingContentFragment fragment1) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("TeamNum", pos);
+        fragment1.setArguments(bundle);
     }
 
     private void Test2() {
