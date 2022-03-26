@@ -75,7 +75,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
 
     private String schoolName;
     private String userID;
-//    private int TeamNum;
+    private int TeamNum;
 
     private ArrayList<String> schoolNames = new ArrayList<String>();
     private boolean inSchoolName = false;
@@ -112,9 +112,9 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         this.CTEfragment = new chooseteamElementFragment();
         this.settingposition = 0;
         this.userID = getArguments().getString("userID");
-        final int TeamNum = getArguments().getInt("TeamNum");
+        this.TeamNum = getArguments().getInt("TeamNum");
         this.textView = view.findViewById(R.id.M_TeamName);
-
+        System.out.println("1 : " + TeamNum);
         System.out.println("팀 번호 매칭 프래그 먼트 : " + TeamNum);
         Bundle bundle = new Bundle();
         bundle.putString("userID", this.userID);
@@ -155,9 +155,9 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                         T_databaseReference.child(String.valueOf(TeamMember.get(teamNum))).child("팀 이름").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if(snapshot.getValue() != null)
+                                if(snapshot.getValue() != null) {
                                     textView.setText((CharSequence) snapshot.getValue());
-
+                                }
                                 else
                                     textView.setText("팀을 결성하세요");
 
@@ -197,6 +197,8 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                             }
                         });
                     }
+                    else
+                        System.out.println("존재 X");
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -205,8 +207,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         });
     }
 
-
-    // -> 여기부터는 int를 URI로 바꾸기
     private void addRecyclerItem(Uri profile, int verfiycode){
         TeamMemberRecyclerItem recyclerItem = new TeamMemberRecyclerItem();
         recyclerItem.setMemProfile(profile);
@@ -324,9 +324,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                 this.ageTo = this.dialogView.findViewById(R.id.valueTo);
                 this.rangeSlider = this.dialogView.findViewById(R.id.rangeSlider);
                 this.univSpinner = this.dialogView.findViewById(R.id.join_univSpinner);
-
                 this.rangeSlider.addOnChangeListener(this);
-
                 //using API
                 getSchoolNameXmlData();
                 new Thread(new Runnable() {

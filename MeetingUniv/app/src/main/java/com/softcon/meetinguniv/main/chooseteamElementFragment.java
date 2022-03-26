@@ -50,7 +50,6 @@ public class chooseteamElementFragment extends Fragment {
     private ImageButton backbtn;
     private EditText editSearch;
     private InputMethodManager imm;
-//    private ArrayList<chooseteamRecycleritem> list = new ArrayList<chooseteamRecycleritem>();
     private List<chooseteamRecycleritem> list;
     private chooseteamAdapterRecyleritem recyclerItemAdapter;
     private LinearLayout addTeamLinear;
@@ -139,12 +138,10 @@ public class chooseteamElementFragment extends Fragment {
     private void GiveChooseTeamData_String() {
         MatchingContentFragment fragment1 = new MatchingContentFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("userID", userID);
+        bundle.putString("userID", this.userID);
+        System.out.println("chooseTeam UserID : " + this.userID);
         fragment1.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.Framecontainer, fragment1)
-                .commit();
-        imm.hideSoftInputFromWindow(editSearch.getWindowToken(),0);
+
     }
 
     private void GiveChooseTeamData_Integer(int pos) {
@@ -153,6 +150,12 @@ public class chooseteamElementFragment extends Fragment {
         Bundle bundle2 = new Bundle();
         bundle2.putInt("TeamNum", pos);
         fragment2.setArguments(bundle2);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.Framecontainer, fragment2)
+                .commit();
+        //키보드 자동으로 닫히게 하는 코드
+        imm.hideSoftInputFromWindow(editSearch.getWindowToken(),0);
+
     }
 
     private void Test2() {
@@ -289,7 +292,6 @@ public class chooseteamElementFragment extends Fragment {
                     cteamDataModel.setTeamMember(teamMember);
                     System.out.println("#################### 팀 멤버 : " + cteamDataModel.getTeamMember());
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 

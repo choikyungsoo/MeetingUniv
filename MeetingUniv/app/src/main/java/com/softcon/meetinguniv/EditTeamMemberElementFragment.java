@@ -77,7 +77,13 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         super.onViewCreated(view, savedInstanceState);
         this.userID = getArguments().getString("userID");
         System.out.println("ETM : " + this.userID);
+        //추가 혹은 삭제할 팀원들에 대한 정보를 가져오는 것
         Current_TakeDataFromFirebase();
+        //추가할 모든 팀원들에 대한 정보를 가져오는 것
+
+
+
+
         All_TakeDataFromFirebase();
     }
 
@@ -94,6 +100,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 //
 //            }
 //        });
+
     }
 
     private void Current_TakeDataFromFirebase() {
@@ -122,12 +129,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 
                     }
                     @Override
-
-
-
-
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
             }
@@ -166,7 +168,6 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
 //                addRecyclerItem(takeData.get(i));
 //            }
 //        }
-
         recyclerItemAdapter.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
@@ -221,8 +222,6 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
             }
         });
         /////////////////////////////////////////////////////////////////////////////////////////
-
-
         recyclerItemAdapter.notifyDataSetChanged();
         recyclerItemAdapter2.notifyDataSetChanged();
         return view;
