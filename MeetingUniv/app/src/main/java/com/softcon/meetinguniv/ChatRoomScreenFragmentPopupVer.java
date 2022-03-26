@@ -142,24 +142,6 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
 //                        Log.d("TAG", "********" + contents.toString());
 
                         oldPost_get.add(document.getId());
-//                        Log.d("TAG", document.getId() + " => " + document.getData());
-//                        if (document.getData().get("sender") != null) {
-//                            addRecyclerItem(null, null, document.getData().get("sender").toString(),
-//                                    document.getData().get("text").toString(),
-//                                    document.getData().get("time").toString(),
-//                                    document.getData().get("uncheck").toString(),
-//                                    2
-//                            );
-//                        } else {
-//                            addRecyclerItem(null, null, null,
-//                                    document.getData().get("text").toString(),
-//                                    document.getData().get("time").toString(),
-//                                    document.getData().get("uncheck").toString(),
-//                                    1
-//                            );
-//                        }
-
-//                        addRecyclerItem2(3, "참가자, 참가자, 참가자, 참가자, 참가자, 참가자", 6, 10);
                     }
                     loadChattingContent(contents);
 
@@ -171,14 +153,16 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
                 }
             }
         });
-
         this.chatRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (!recyclerView.canScrollVertically(-1)) {
-                    Toast.makeText(getContext(), "스크롤 올라감", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), "스크롤 올라감", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
 
 //                db.collection("ChattingContent").orderBy(FieldPath.documentId())
 //                        .endAt(oldestPostId).limit(20).get()
@@ -204,8 +188,7 @@ public class ChatRoomScreenFragmentPopupVer extends Fragment implements View.OnC
 //                        }
 //                    }
 //                });
-            }
-        });
+
 
     }
 
