@@ -57,6 +57,7 @@ public class chooseteamElementFragment extends Fragment {
     private ConstraintLayout chooseteamConstraint;
 
     private AddTeamElementFragment ATEfragment;
+    private MatchingContentFragment MCF;
     private chooseteamDataModel cteamDataModel;
     private ArrayList<Integer> ImageSource = new ArrayList<Integer>();
 
@@ -81,7 +82,7 @@ public class chooseteamElementFragment extends Fragment {
         this.recyclerView = view.findViewById(R.id.teamrecycler) ;
         this.list = new ArrayList<chooseteamRecycleritem>();
         this.userID = getArguments().getString("userID");
-
+        this.MCF = new MatchingContentFragment();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 //
@@ -110,7 +111,9 @@ public class chooseteamElementFragment extends Fragment {
             @Override
             public void onItemClick(View v, int pos) {
                 GiveChooseTeamData_String();
-                GiveChooseTeamData_Integer(pos);
+                M_databaseReference.child(userID).child("선택 팀").setValue(pos);
+                //선택된 팀에 대한 정보를 MacthingContentFragment에 Bundle로 넘기는 것
+//                GiveChooseTeamData_Integer(pos);
             }
         });
 
@@ -136,27 +139,31 @@ public class chooseteamElementFragment extends Fragment {
     }
 
     private void GiveChooseTeamData_String() {
-        MatchingContentFragment fragment1 = new MatchingContentFragment();
         Bundle bundle = new Bundle();
+        System.out.println("chooseteamEl UserId : "+ this.userID);
         bundle.putString("userID", this.userID);
-        System.out.println("chooseTeam UserID : " + this.userID);
-        fragment1.setArguments(bundle);
-
-    }
-
-    private void GiveChooseTeamData_Integer(int pos) {
-        MatchingContentFragment fragment2 = new MatchingContentFragment();
-        System.out.println("chooseTeamElementFragment 팀 번호 " + pos);
-        Bundle bundle2 = new Bundle();
-        bundle2.putInt("TeamNum", pos);
-        fragment2.setArguments(bundle2);
+        this.MCF.setArguments(bundle);
         getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.Framecontainer, fragment2)
+                .replace(R.id.Framecontainer, this.MCF)
                 .commit();
         //키보드 자동으로 닫히게 하는 코드
         imm.hideSoftInputFromWindow(editSearch.getWindowToken(),0);
-
     }
+
+//    private void GiveChooseTeamData_Integer(int pos) {
+//        MatchingContentFragment fragment2 = new MatchingContentFragment();
+//        M_databaseReference.child(this.userID).child("선택 팀").setValue(pos);
+//        System.out.println("chooseTeamElementFragment 팀 번호 " + pos);
+//        Bundle bundle2 = new Bundle();
+//        bundle2.putInt("TeamNum", pos);
+//        fragment2.setArguments(bundle2);
+//        getActivity().getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.Framecontainer, fragment2)
+//                .commit();
+//        //키보드 자동으로 닫히게 하는 코드
+//        imm.hideSoftInputFromWindow(editSearch.getWindowToken(),0);
+//
+//    }
 
     private void Test2() {
         this.cteamDataModel = new chooseteamDataModel();

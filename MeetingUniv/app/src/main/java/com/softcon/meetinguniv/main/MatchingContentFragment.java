@@ -112,10 +112,25 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         this.CTEfragment = new chooseteamElementFragment();
         this.settingposition = 0;
         this.userID = getArguments().getString("userID");
-        this.TeamNum = getArguments().getInt("TeamNum");
+        // 선택된 팀의 정보를 Bundle을 통해 받는 것
+//        this.TeamNum = getArguments().getInt("TeamNum");
+        M_databaseReference.child(this.userID).child("선택 팀").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                TeamNum = Integer.parseInt(String.valueOf(snapshot.getValue().toString()));
+                System.out.println("현재 선택 팀 : " + TeamNum);
+                TakeDataFromFirebaseDatabase(TeamNum);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         this.textView = view.findViewById(R.id.M_TeamName);
-        System.out.println("1 : " + TeamNum);
-        System.out.println("팀 번호 매칭 프래그 먼트 : " + TeamNum);
+        System.out.println("팀 번호 매칭 프래그 먼트 : " + this.userID);
+        // UserID에 대한 정보를 넘김
         Bundle bundle = new Bundle();
         bundle.putString("userID", this.userID);
         this.ETMfragment.setArguments(bundle);
@@ -125,7 +140,7 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         //파이어베이스에서 팀정보 데이터 가져오기
-        TakeDataFromFirebaseDatabase(TeamNum);
+
         this.recyclerItemAdapter.setOnItemClickListener(new TeamMemberAdapterRecycleritem.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {

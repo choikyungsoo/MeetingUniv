@@ -156,6 +156,7 @@ public class JoinProfileFragment extends Fragment {
                     });
                     databaseReference.child(userInfo.getUserID()).child("팀").child("0").setValue("");
                     databaseReference.child(userInfo.getUserID()).child("친구목록").child("0").setValue("");
+                    databaseReference.child(userInfo.getUserID()).child("선택 팀").setValue(0);
                     databaseReference.child(userInfo.getUserID()).child("닉네임").setValue(userInfo.getNickname());
                     databaseReference.child(userInfo.getUserID()).child("추천인코드").setValue(userInfo.getInviteCode());
 
