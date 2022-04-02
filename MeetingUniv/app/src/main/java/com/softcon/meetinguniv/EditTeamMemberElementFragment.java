@@ -44,6 +44,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
     private SearchView editsearch;
     private InputMethodManager imm;
     private String userID;
+    private int TeamNum;
 
     private ArrayList<EditTeamRecycleritem1> alllist = new ArrayList<EditTeamRecycleritem1>();
     private ArrayList<EditTeamRecycleritem> currentlist = new ArrayList<EditTeamRecycleritem>();
@@ -78,7 +79,18 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
         this.userID = getArguments().getString("userID");
         System.out.println("ETM : " + this.userID);
         //추가 혹은 삭제할 팀원들에 대한 정보를 가져오는 것
-        Current_TakeDataFromFirebase();
+        M_databaseReference.child(this.userID).child("선택 팀").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                TeamNum = Integer.parseInt(String.valueOf(snapshot.getValue().toString()));
+                Current_TakeDataFromFirebase();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         //추가할 모든 팀원들에 대한 정보를 가져오는 것
 
 
@@ -108,7 +120,7 @@ public class EditTeamMemberElementFragment extends Fragment implements View.OnCl
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 TeamMember.addAll((Collection<? extends String>) snapshot.getValue());
-                T_databaseReference.child(String.valueOf(TeamMember.get(0))).child("팀원").addValueEventListener(new ValueEventListener() {
+                T_databaseReference.child(String.valueOf(TeamMember.get(TeamNum))).child("팀원").addValueEventListener(new ValueEventListener() {
                     //팀번호에 대한 팀원 정보를 가져오는 것
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

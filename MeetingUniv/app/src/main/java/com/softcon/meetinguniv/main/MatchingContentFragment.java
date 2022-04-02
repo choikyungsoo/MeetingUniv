@@ -118,10 +118,8 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 TeamNum = Integer.parseInt(String.valueOf(snapshot.getValue().toString()));
-                System.out.println("현재 선택 팀 : " + TeamNum);
                 TakeDataFromFirebaseDatabase(TeamNum);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -330,7 +328,6 @@ public class MatchingContentFragment extends Fragment implements View.OnClickLis
                         .setCustomAnimations(R.anim.translate_up,R.anim.translate_up)
                         .replace(R.id.Framecontainer, this.CTEfragment)
                         .commit();
-
                 break;
             case R.id.matchbtn:
                 //매칭하기 버튼
